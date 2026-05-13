@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "liara-engine",
+  "compatibility_date": "2026-05-13",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "liara-interfaces"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
