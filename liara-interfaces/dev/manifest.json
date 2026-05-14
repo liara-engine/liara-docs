@@ -1,0 +1,15 @@
+{
+  "$schema": "https://liara-engine.github.io/liara/schemas/module-manifest.schema.json",
+  "metadata": {
+    "name": "Liara Engine C ABI",
+    "description": "The C ABI contracts shared by every module.",
+    "latest": "dev"
+  },
+  "versions": {
+    "dev": {
+      "abi_compatibility": [
+        "dev"
+      ]
+    }
+  }
+}
