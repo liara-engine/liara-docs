@@ -6,7 +6,7 @@
     "enabled": true
   },
   "assets": {
-    "directory": "liara-interfaces"
+    "directory": "site"
   },
   "compatibility_flags": [
     "nodejs_compat"
