@@ -8,7 +8,10 @@
   "resources": {
     "unspecified": {
       "README": "README.md",
-      "LICENSE": "LICENSE"
+      "LICENSE": {
+        "path": "LICENSE",
+        "copy-name": "LICENSE.md"
+      }
     }
   }
 }
