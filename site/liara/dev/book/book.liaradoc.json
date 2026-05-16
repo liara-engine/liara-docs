@@ -1,0 +1,14 @@
+{
+  "$schema": "https://liara-engine.github.io/liara/schemas/documentation-module.schema.json",
+  "metadata": {
+    "name": "Liara Meta Repo",
+    "description": "Documentation about the meta-informations of the Liara project."
+  },
+
+  "resources": {
+    "unspecified": {
+      "README": "README.md",
+      "TOOLING": "TOOLING.md"
+    }
+  }
+}
