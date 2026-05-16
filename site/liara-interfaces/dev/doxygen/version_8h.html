@@ -1,0 +1,692 @@
+<!--
+    Liara Engine — Doxygen header template
+    This template replaces Doxygen's default <head> + opening of <body>.
+    Doxygen substitutes special tokens like include/liara/version.h File Reference, , <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+    when generating each page; do not remove or rename these.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+    <meta name="generator" content="Doxygen 1.16.1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>liara-interfaces: include/liara/version.h File Reference</title>
+    <!-- Fonts: Inter for sans, JetBrains Mono for code, OpenDyslexic for a11y -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/open-dyslexic">
+    <!-- jQuery (required by Doxygen scripts) -->
+    <script src="jquery.js"></script>
+    <!-- Doxygen's own stylesheets, kept for layout fundamentals we override below -->
+    <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+    <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+    <link href="tabs.css" rel="stylesheet" type="text/css"/>
+    <link href="doxygen.css" rel="stylesheet" type="text/css"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!-- Liara design system, applied AFTER Doxygen's own CSS so we can override -->
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="doxygen-custom.css">
+    <link href="design-tokens.css" rel="stylesheet" type="text/css"/>
+<link href="navbar.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-custom.css" rel="stylesheet" type="text/css"/>
+    <!-- Apply theme/a11y prefs synchronously to prevent flash -->
+    <script>
+        (function () {
+            try {
+                const t = localStorage.getItem("liara-theme");
+                if (t === "light" || t === "dark") {
+                    document.documentElement.setAttribute("data-liara-theme", t);
+                }
+                if (localStorage.getItem("liara-a11y-dyslexia") === "true") {
+                    document.documentElement.setAttribute("data-liara-a11y-dyslexia", "true");
+                }
+            } catch (e) { /* localStorage unavailable, fall back to defaults */ }
+        })();
+    </script>
+    <script src="js/navbar.config.js"></script>
+    <script defer src="js/navbar.js"></script>
+</head>
+<body>
+<!--
+    Shared navbar. The fragment below mirrors docs-shared/navbar/navbar.html.
+-->
+<!--
+    Liara Engine — Shared Navbar (v2)
+    Static HTML fragment to be embedded in every documentation page
+    (Doxygen, mdBook, the central hub) via the {{{NAVBAR}}} placeholder
+    handled by the docs-shared replacement processor.
+    Structure:
+        1. Main navbar (always visible): brand, modules, actions
+        2. Sub-nav (revealed by JS only on module pages): module
+           breadcrumb + view tabs (Developer guide / API reference)
+    Module pills are populated dynamically by navbar.js from the
+    registry and per-module manifests. The <ul.liara-navbar__modules>
+    starts empty and is filled at runtime.
+    Required external resources in the consuming page's <head>:
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/opendyslexic@1.0.4/opendyslexic-regular.css">
+        <link rel="stylesheet" href="<DOCS_SHARED_BASE>/tokens/design-tokens.css">
+        <link rel="stylesheet" href="<DOCS_SHARED_BASE>/navbar/navbar.css">
+        <script src="<DOCS_SHARED_BASE>/navbar/navbar.config.js"></script>
+        <script defer src="<DOCS_SHARED_BASE>/navbar/navbar.js"></script>
+    The order matters: navbar.config.js must load BEFORE navbar.js, and
+    both must come AFTER the <link>s for the styles to apply before JS
+    runs.
+-->
+<nav id="liara-navbar" class="liara-navbar" aria-label="Documentation navigation">
+    <div class="liara-navbar__inner">
+        <!-- Brand: logo + name, always links to the hub root -->
+        <a class="liara-navbar__brand" data-liara-brand href="/" aria-label="Liara Engine home">
+            <img class="liara-navbar__logo" src="../favicon.svg" alt="" aria-hidden="true" width="24" height="24"/>
+            <span class="liara-navbar__brand-name">Liara Engine</span>
+        </a>
+        <!--
+            Modules list. Populated by navbar.js from the registry.
+            Each <li> is a pill with two interactive areas: a link (the
+            module name + current version) and a button (chevron to open
+            the dropdown of versions).
+        -->
+        <ul class="liara-navbar__modules" data-liara-modules role="list">
+            <!-- Filled in by JS. See navbar.js#renderModulePill. -->
+        </ul>
+        <!-- Pushes the actions to the right edge -->
+        <div class="liara-navbar__spacer"></div>
+        <!-- Action buttons: theme cycle, dyslexia toggle, GitHub link -->
+        <div class="liara-navbar__actions">
+            <button class="liara-navbar__action" type="button"
+                    data-liara-theme-toggle
+                    aria-label="Toggle color theme"
+                    title="Toggle color theme">
+                <svg class="liara-navbar__icon liara-navbar__icon--system" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.6" fill="none"/>
+                    <path d="M8 21h8M12 18v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+                <svg class="liara-navbar__icon liara-navbar__icon--light" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6" fill="none"/>
+                    <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4l1.4-1.4M17 7l1.4-1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+                <svg class="liara-navbar__icon liara-navbar__icon--dark" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <button class="liara-navbar__action liara-navbar__action--text" type="button"
+                    data-liara-a11y-toggle
+                    aria-label="Toggle dyslexia-friendly mode"
+                    aria-pressed="false"
+                    title="Dyslexia-friendly mode">
+                <span aria-hidden="true">Aa</span>
+            </button>
+            <a class="liara-navbar__action" data-liara-github
+               href="https://github.com/liara-engine"
+               aria-label="View on GitHub" title="View on GitHub"
+               target="_blank" rel="noopener">
+                <svg class="liara-navbar__icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.66-.22.66-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85V21c0 .27.16.58.67.48A10 10 0 0 0 22 12 10 10 0 0 0 12 2z"/>
+                </svg>
+            </a>
+        </div>
+        <!-- Mobile menu toggle. Visible only below 768px via CSS. -->
+        <button class="liara-navbar__menu-toggle" type="button"
+                data-liara-menu-toggle
+                aria-label="Open menu" aria-expanded="false">
+            <span class="liara-navbar__menu-toggle-bar"></span>
+            <span class="liara-navbar__menu-toggle-bar"></span>
+            <span class="liara-navbar__menu-toggle-bar"></span>
+        </button>
+    </div>
+</nav>
+<!--
+    Sub-nav (contextual). Hidden by default; navbar.js reveals it on
+    URLs that match a module page and highlights the active view tab
+    (book = developer guide, doxygen = API reference). On the hub,
+    user guide, or any other non-module page, this stays hidden.
+-->
+<div class="liara-navbar-subnav" id="liara-navbar-subnav"
+     data-liara-subnav hidden aria-label="Documentation view">
+    <div class="liara-navbar-subnav__inner">
+        <div class="liara-navbar-subnav__breadcrumb">
+            <span class="liara-navbar-subnav__module" data-liara-subnav-module></span>
+            <span class="liara-navbar-subnav__sep" aria-hidden="true">/</span>
+            <span class="liara-navbar-subnav__version" data-liara-subnav-version></span>
+        </div>
+        <div class="liara-navbar-subnav__tabs" role="tablist">
+            <a class="liara-navbar-subnav__tab" data-liara-subnav-tab="book"
+               role="tab" aria-selected="false" href="#">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+                <span>Developer guide</span>
+            </a>
+            <a class="liara-navbar-subnav__tab" data-liara-subnav-tab="doxygen"
+               role="tab" aria-selected="false" href="#">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="16 18 22 12 16 6"/>
+                    <polyline points="8 6 2 12 8 18"/>
+                </svg>
+                <span>API reference</span>
+            </a>
+        </div>
+    </div>
+</div>
+<!--
+    Doxygen-generated content begins here. The wrapper div lets us scope our
+    custom CSS without touching Doxygen's own structure.
+-->
+<div id="top" class="liara-doxygen">
+    <!-- Generated by -->
+<!-- Generated by Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('version_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">version.h File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Liara interface version definitions.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
+</div>
+<p><a href="version_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a18a41c12177f6912453296efdcce31e5" id="r_a18a41c12177f6912453296efdcce31e5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a18a41c12177f6912453296efdcce31e5">LIARA_MAKE_VERSION</a>(major,  minor,  patch)</td></tr>
+<tr class="memdesc:a18a41c12177f6912453296efdcce31e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a version number from major, minor, and patch components.  <br /></td></tr>
+<tr class="memitem:a84ee12d0b17960a5ce651e7b4578d8f9" id="r_a84ee12d0b17960a5ce651e7b4578d8f9"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a84ee12d0b17960a5ce651e7b4578d8f9">LIARA_VERSION_MAJOR</a>(v)</td></tr>
+<tr class="memdesc:a84ee12d0b17960a5ce651e7b4578d8f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract the major version component from a combined version number.  <br /></td></tr>
+<tr class="memitem:abf3dccbc75ccc9cdf462ce799ad4b10c" id="r_abf3dccbc75ccc9cdf462ce799ad4b10c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#abf3dccbc75ccc9cdf462ce799ad4b10c">LIARA_VERSION_MINOR</a>(v)</td></tr>
+<tr class="memdesc:abf3dccbc75ccc9cdf462ce799ad4b10c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract the minor version component from a combined version number.  <br /></td></tr>
+<tr class="memitem:a667dbd4947915aa5b2169e7c6c809869" id="r_a667dbd4947915aa5b2169e7c6c809869"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a667dbd4947915aa5b2169e7c6c809869">LIARA_VERSION_PATCH</a>(v)</td></tr>
+<tr class="memdesc:a667dbd4947915aa5b2169e7c6c809869"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract the patch version component from a combined version number.  <br /></td></tr>
+<tr class="memitem:a46227cd58d447b660e126c48dd357f34" id="r_a46227cd58d447b660e126c48dd357f34"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a46227cd58d447b660e126c48dd357f34">LIARA_INTERFACE_VERSION</a></td></tr>
+<tr class="memdesc:a46227cd58d447b660e126c48dd357f34"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current version of the Liara interface.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a67db7dea32af233e3ed355130f529a63" id="r_a67db7dea32af233e3ed355130f529a63"><td class="memItemLeft">enum &#160;</td><td class="memItemRight">{ <a class="el" href="#a67db7dea32af233e3ed355130f529a63a0b976c95a8649fc70fd89c4ba5af5aea">LIARA_INTERFACE_VERSION_MAJOR</a> = 0
+, <a class="el" href="#a67db7dea32af233e3ed355130f529a63ace553b1f8c483b61e5606d96d8d9f28d">LIARA_INTERFACE_VERSION_MINOR</a> = 0
+, <a class="el" href="#a67db7dea32af233e3ed355130f529a63a264aee64e3165a205e0656679623466e">LIARA_INTERFACE_VERSION_PATCH</a> = 0
+ }</td></tr>
+<tr class="memdesc:a67db7dea32af233e3ed355130f529a63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Liara interface version components.  <a href="#a67db7dea32af233e3ed355130f529a63">More...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:af158eb4b184f50e64168b27c83325d49" id="r_af158eb4b184f50e64168b27c83325d49"><td class="memItemLeft">static uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#af158eb4b184f50e64168b27c83325d49">liara_make_version</a> (uint32_t major, uint32_t minor, uint32_t patch)</td></tr>
+<tr class="memdesc:af158eb4b184f50e64168b27c83325d49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline function to create a version number from major, minor, and patch components.  <br /></td></tr>
+<tr class="memitem:a0b81fe65ae6f507745ec6f593df13c02" id="r_a0b81fe65ae6f507745ec6f593df13c02"><td class="memItemLeft">static uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a0b81fe65ae6f507745ec6f593df13c02">liara_version_major</a> (uint32_t v)</td></tr>
+<tr class="memdesc:a0b81fe65ae6f507745ec6f593df13c02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline function to extract the major version component from a combined version number.  <br /></td></tr>
+<tr class="memitem:a21022700fa739f59b0242e3a10234586" id="r_a21022700fa739f59b0242e3a10234586"><td class="memItemLeft">static uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a21022700fa739f59b0242e3a10234586">liara_version_minor</a> (uint32_t v)</td></tr>
+<tr class="memdesc:a21022700fa739f59b0242e3a10234586"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline function to extract the minor version component from a combined version number.  <br /></td></tr>
+<tr class="memitem:a83cc9330f9634d19aeffd69c0a9108dd" id="r_a83cc9330f9634d19aeffd69c0a9108dd"><td class="memItemLeft">static uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a83cc9330f9634d19aeffd69c0a9108dd">liara_version_patch</a> (uint32_t v)</td></tr>
+<tr class="memdesc:a83cc9330f9634d19aeffd69c0a9108dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline function to extract the patch version component from a combined version number.  <br /></td></tr>
+<tr class="memitem:a2de37ea455a9151f5e99b5aeeaeb02f0" id="r_a2de37ea455a9151f5e99b5aeeaeb02f0"><td class="memItemLeft">static uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a2de37ea455a9151f5e99b5aeeaeb02f0">liara_interface_version</a> (void)</td></tr>
+<tr class="memdesc:a2de37ea455a9151f5e99b5aeeaeb02f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline function to get the current version of the Liara interface.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Liara interface version definitions. </p>
+<p>This header defines the versioning scheme for the Liara interface, including macros and inline functions for creating and extracting version numbers.</p>
+<p>The version is represented as a 32-bit unsigned integer, where:</p><ul>
+<li>The major version occupies bits 22-31 (10 bits).</li>
+<li>The minor version occupies bits 12-21 (10 bits).</li>
+<li>The patch version occupies bits 0-11 (12 bits).</li>
+</ul>
+<p>This allows for a maximum major version of 1023, a maximum minor version of 1023, and a maximum patch version of 4095. </p>
+</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="a46227cd58d447b660e126c48dd357f34" name="a46227cd58d447b660e126c48dd357f34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46227cd58d447b660e126c48dd357f34">&#9670;&#160;</a></span>LIARA_INTERFACE_VERSION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LIARA_INTERFACE_VERSION</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#a18a41c12177f6912453296efdcce31e5">LIARA_MAKE_VERSION</a>( \</div>
+<div class="line">    <a class="code hl_enumvalue" href="#a67db7dea32af233e3ed355130f529a63a0b976c95a8649fc70fd89c4ba5af5aea">LIARA_INTERFACE_VERSION_MAJOR</a>, \</div>
+<div class="line">    <a class="code hl_enumvalue" href="#a67db7dea32af233e3ed355130f529a63ace553b1f8c483b61e5606d96d8d9f28d">LIARA_INTERFACE_VERSION_MINOR</a>, \</div>
+<div class="line">    <a class="code hl_enumvalue" href="#a67db7dea32af233e3ed355130f529a63a264aee64e3165a205e0656679623466e">LIARA_INTERFACE_VERSION_PATCH</a>)</div>
+<div class="ttc" id="aversion_8h_html_a18a41c12177f6912453296efdcce31e5"><div class="ttname"><a href="#a18a41c12177f6912453296efdcce31e5">LIARA_MAKE_VERSION</a></div><div class="ttdeci">#define LIARA_MAKE_VERSION(major, minor, patch)</div><div class="ttdoc">Create a version number from major, minor, and patch components.</div><div class="ttdef"><b>Definition</b> version.h:51</div></div>
+<div class="ttc" id="aversion_8h_html_a67db7dea32af233e3ed355130f529a63a0b976c95a8649fc70fd89c4ba5af5aea"><div class="ttname"><a href="#a67db7dea32af233e3ed355130f529a63a0b976c95a8649fc70fd89c4ba5af5aea">LIARA_INTERFACE_VERSION_MAJOR</a></div><div class="ttdeci">@ LIARA_INTERFACE_VERSION_MAJOR</div><div class="ttdef"><b>Definition</b> version.h:32</div></div>
+<div class="ttc" id="aversion_8h_html_a67db7dea32af233e3ed355130f529a63a264aee64e3165a205e0656679623466e"><div class="ttname"><a href="#a67db7dea32af233e3ed355130f529a63a264aee64e3165a205e0656679623466e">LIARA_INTERFACE_VERSION_PATCH</a></div><div class="ttdeci">@ LIARA_INTERFACE_VERSION_PATCH</div><div class="ttdef"><b>Definition</b> version.h:36</div></div>
+<div class="ttc" id="aversion_8h_html_a67db7dea32af233e3ed355130f529a63ace553b1f8c483b61e5606d96d8d9f28d"><div class="ttname"><a href="#a67db7dea32af233e3ed355130f529a63ace553b1f8c483b61e5606d96d8d9f28d">LIARA_INTERFACE_VERSION_MINOR</a></div><div class="ttdeci">@ LIARA_INTERFACE_VERSION_MINOR</div><div class="ttdef"><b>Definition</b> version.h:34</div></div>
+</div><!-- fragment -->
+<p>The current version of the Liara interface. </p>
+<p>This macro defines the current version of the Liara interface by combining the major, minor, and patch version numbers defined above. It can be used to check for compatibility with specific versions of the interface.</p>
+<p>@threadsafety This macro is thread-safe as it does not modify any shared state. </p>
+
+</div>
+</div>
+<a id="a18a41c12177f6912453296efdcce31e5" name="a18a41c12177f6912453296efdcce31e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18a41c12177f6912453296efdcce31e5">&#9670;&#160;</a></span>LIARA_MAKE_VERSION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LIARA_MAKE_VERSION</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>major</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>minor</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>patch</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">(((uint32_t)(major) &lt;&lt; 22) | ((uint32_t)(minor) &lt;&lt; 12) | (uint32_t)(patch))</div>
+</div><!-- fragment -->
+<p>Create a version number from major, minor, and patch components. </p>
+<p>This macro combines the major, minor, and patch version numbers into a single 32-bit unsigned integer.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">major</td><td>The major version number (0-1023). </td></tr>
+    <tr><td class="paramname">minor</td><td>The minor version number (0-1023). </td></tr>
+    <tr><td class="paramname">patch</td><td>The patch version number (0-4095). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A 32-bit unsigned integer representing the combined version.</dd></dl>
+<p>@threadsafety This macro is thread-safe as it does not modify any shared state. </p>
+
+</div>
+</div>
+<a id="a84ee12d0b17960a5ce651e7b4578d8f9" name="a84ee12d0b17960a5ce651e7b4578d8f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84ee12d0b17960a5ce651e7b4578d8f9">&#9670;&#160;</a></span>LIARA_VERSION_MAJOR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LIARA_VERSION_MAJOR</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">(((uint32_t)(v) &gt;&gt; 22) &amp; 0x3FFu)</div>
+</div><!-- fragment -->
+<p>Extract the major version component from a combined version number. </p>
+<p>This macro extracts the major version number from a combined version number by shifting and masking.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>The combined version number from which to extract the major version. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The major version number (0-1023).</dd></dl>
+<p>@threadsafety This macro is thread-safe as it does not modify any shared state. </p>
+
+</div>
+</div>
+<a id="abf3dccbc75ccc9cdf462ce799ad4b10c" name="abf3dccbc75ccc9cdf462ce799ad4b10c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf3dccbc75ccc9cdf462ce799ad4b10c">&#9670;&#160;</a></span>LIARA_VERSION_MINOR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LIARA_VERSION_MINOR</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">(((uint32_t)(v) &gt;&gt; 12) &amp; 0x3FFu)</div>
+</div><!-- fragment -->
+<p>Extract the minor version component from a combined version number. </p>
+<p>This macro extracts the minor version number from a combined version number by shifting and masking.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>The combined version number from which to extract the minor version. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The minor version number (0-1023).</dd></dl>
+<p>@threadsafety This macro is thread-safe as it does not modify any shared state. </p>
+
+</div>
+</div>
+<a id="a667dbd4947915aa5b2169e7c6c809869" name="a667dbd4947915aa5b2169e7c6c809869"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a667dbd4947915aa5b2169e7c6c809869">&#9670;&#160;</a></span>LIARA_VERSION_PATCH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LIARA_VERSION_PATCH</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">((uint32_t)(v) &amp; 0xFFFu)</div>
+</div><!-- fragment -->
+<p>Extract the patch version component from a combined version number. </p>
+<p>This macro extracts the patch version number from a combined version number by masking.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>The combined version number from which to extract the patch version. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The patch version number (0-4095).</dd></dl>
+<p>@threadsafety This macro is thread-safe as it does not modify any shared state. </p>
+
+</div>
+</div>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
+<a id="a67db7dea32af233e3ed355130f529a63" name="a67db7dea32af233e3ed355130f529a63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67db7dea32af233e3ed355130f529a63">&#9670;&#160;</a></span>anonymous enum</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">anonymous enum</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Liara interface version components. </p>
+<p>These constants define the major, minor, and patch version numbers for the Liara interface. They can be updated as needed to reflect changes in the interface. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a67db7dea32af233e3ed355130f529a63a0b976c95a8649fc70fd89c4ba5af5aea" name="a67db7dea32af233e3ed355130f529a63a0b976c95a8649fc70fd89c4ba5af5aea"></a>LIARA_INTERFACE_VERSION_MAJOR&#160;</td><td class="fielddoc"><p>Liara interface major version number. Update this when making incompatible API changes. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a67db7dea32af233e3ed355130f529a63ace553b1f8c483b61e5606d96d8d9f28d" name="a67db7dea32af233e3ed355130f529a63ace553b1f8c483b61e5606d96d8d9f28d"></a>LIARA_INTERFACE_VERSION_MINOR&#160;</td><td class="fielddoc"><p>Liara interface minor version number. Update this when adding functionality in a backward-compatible manner. If there is any doubt on the backward compatibility of a change, you must update the major version instead. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a67db7dea32af233e3ed355130f529a63a264aee64e3165a205e0656679623466e" name="a67db7dea32af233e3ed355130f529a63a264aee64e3165a205e0656679623466e"></a>LIARA_INTERFACE_VERSION_PATCH&#160;</td><td class="fielddoc"><p>Liara interface patch version number. Update this when adding documentation, comments, whitespace, or other non-functional changes. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a2de37ea455a9151f5e99b5aeeaeb02f0" name="a2de37ea455a9151f5e99b5aeeaeb02f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2de37ea455a9151f5e99b5aeeaeb02f0">&#9670;&#160;</a></span>liara_interface_version()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t liara_interface_version </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inline function to get the current version of the Liara interface. </p>
+<p>This function is a wrapper around the LIARA_INTERFACE_VERSION macro for other languages that may not support macros or for better type safety in C. It returns the current version of the Liara interface by combining the major, minor, and patch version numbers defined above.</p>
+<dl class="section return"><dt>Returns</dt><dd>A 32-bit unsigned integer representing the current version of the Liara interface.</dd></dl>
+<p>@threadsafety This function is thread-safe as it does not modify any shared state. </p>
+
+</div>
+</div>
+<a id="af158eb4b184f50e64168b27c83325d49" name="af158eb4b184f50e64168b27c83325d49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af158eb4b184f50e64168b27c83325d49">&#9670;&#160;</a></span>liara_make_version()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t liara_make_version </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>major</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>minor</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>patch</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inline function to create a version number from major, minor, and patch components. </p>
+<p>This function is a wrapper around the LIARA_MAKE_VERSION macro for other languages that may not support macros or for better type safety in C. It combines the major, minor, and patch version numbers into a single 32-bit unsigned integer.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">major</td><td>The major version number (0-1023). </td></tr>
+    <tr><td class="paramname">minor</td><td>The minor version number (0-1023). </td></tr>
+    <tr><td class="paramname">patch</td><td>The patch version number (0-4095). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A 32-bit unsigned integer representing the combined version.</dd></dl>
+<p>@threadsafety This function is thread-safe as it does not modify any shared state. </p>
+
+</div>
+</div>
+<a id="a0b81fe65ae6f507745ec6f593df13c02" name="a0b81fe65ae6f507745ec6f593df13c02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b81fe65ae6f507745ec6f593df13c02">&#9670;&#160;</a></span>liara_version_major()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t liara_version_major </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inline function to extract the major version component from a combined version number. </p>
+<p>This function is a wrapper around the LIARA_VERSION_MAJOR macro for other languages that may not support macros or for better type safety in C. It extracts the major version number from a combined version number by shifting and masking.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>The combined version number from which to extract the major version. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The major version number (0-1023).</dd></dl>
+<p>@threadsafety This function is thread-safe as it does not modify any shared state. </p>
+
+</div>
+</div>
+<a id="a21022700fa739f59b0242e3a10234586" name="a21022700fa739f59b0242e3a10234586"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21022700fa739f59b0242e3a10234586">&#9670;&#160;</a></span>liara_version_minor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t liara_version_minor </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inline function to extract the minor version component from a combined version number. </p>
+<p>This function is a wrapper around the LIARA_VERSION_MINOR macro for other languages that may not support macros or for better type safety in C. It extracts the minor version number from a combined version number by shifting and masking.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>The combined version number from which to extract the minor version. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The minor version number (0-1023).</dd></dl>
+<p>@threadsafety This function is thread-safe as it does not modify any shared state. </p>
+
+</div>
+</div>
+<a id="a83cc9330f9634d19aeffd69c0a9108dd" name="a83cc9330f9634d19aeffd69c0a9108dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83cc9330f9634d19aeffd69c0a9108dd">&#9670;&#160;</a></span>liara_version_patch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t liara_version_patch </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inline function to extract the patch version component from a combined version number. </p>
+<p>This function is a wrapper around the LIARA_VERSION_PATCH macro for other languages that may not support macros or for better type safety in C. It extracts the patch version number from a combined version number by masking.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>The combined version number from which to extract the patch version. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The patch version number (0-4095).</dd></dl>
+<p>@threadsafety This function is thread-safe as it does not modify any shared state. </p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!--
+    Liara Engine — Doxygen footer template
+    Closes the wrapper started in header.html and adds a discreet footer
+    line. Doxygen substitutes Generated by and <span class="datetime"></span> for the
+    "Generated on ... by Doxygen" line.
+-->
+</div><!-- /#top.liara-doxygen -->
+<footer class="liara-doxygen-footer">
+    <div class="liara-doxygen-footer__inner">
+        <p class="liara-doxygen-footer__line">
+            Liara Engine documentation &middot;
+            <a href="https://github.com/liara-engine">GitHub</a> &middot;
+            <a href="https://liara-engine.github.io/">All modules</a>
+        </p>
+        <p class="liara-doxygen-footer__generated">
+            Generated by &nbsp;Doxygen 1.16.1
+        </p>
+    </div>
+</footer>
+</body>
+</html>
