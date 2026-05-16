@@ -8,7 +8,7 @@
   "resources": {
     "unspecified": {
       "README": "README.md",
-      "TOOLING": "TOOLING.md"
+      "LICENSE": "LICENSE"
     }
   }
 }
