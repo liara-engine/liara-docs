@@ -20,7 +20,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
     <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/open-dyslexic">
-    <!-- jQuery (required by Doxygen scripts) -->
+    <!--BEGIN HTML_DYNAMIC_SECTIONS-->
+    <script type="text/javascript" src="dynsections.js"></script>
+    <!--END HTML_DYNAMIC_SECTIONS-->
+    <!--BEGIN HTML_CODE_FOLDING-->
+    <script type="text/javascript" src="codefolding.js"></script>
+    <!--END HTML_CODE_FOLDING-->
+    <script type="text/javascript" src="clipboard.js"></script>
     <script src="jquery.js"></script>
     <!-- Doxygen's own stylesheets, kept for layout fundamentals we override below -->
     <link href="navtree.css" rel="stylesheet" type="text/css"/>
@@ -34,8 +40,8 @@
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <!-- Liara design system, applied AFTER Doxygen's own CSS so we can override -->
-    <link rel="stylesheet" href="css/design-tokens.css">
-    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="design-tokens.css">
+    <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="doxygen-custom.css">
     <link href="design-tokens.css" rel="stylesheet" type="text/css"/>
 <link href="navbar.css" rel="stylesheet" type="text/css"/>
@@ -54,8 +60,8 @@
             } catch (e) { /* localStorage unavailable, fall back to defaults */ }
         })();
     </script>
-    <script src="js/navbar.config.js"></script>
-    <script defer src="js/navbar.js"></script>
+    <script src="navbar.config.js"></script>
+    <script defer src="navbar.js"></script>
 </head>
 <body>
 <!--
