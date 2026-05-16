@@ -682,7 +682,7 @@ can still navigate to them deliberately.</p>
 the <code>module-manifest.schema.json</code> schema. Its location after
 deployment must be <code>{docsBaseUrl}/{repo}/manifest.json</code>. The build’s
 reusable workflow takes care of publishing it from each module’s
-build.</p>
+build. Eventually, you can specify <code>only_mdbook</code> or <code>only_doxygen</code> if the module only has one kind of documentation, to avoid showing the sub-nav and redirecting users to a 404 page if they click the missing tab.</p>
 </li>
 <li>
 <p><strong>(Optional)</strong> Add a corresponding card in <code>hub/index.html</code>’s modules
