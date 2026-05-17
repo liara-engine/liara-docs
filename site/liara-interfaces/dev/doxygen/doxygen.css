@@ -2131,9 +2131,9 @@ details[open]>summary::before {
 
 
 html {
---datetime: 'Sun May 17 2026 17:20:13';
+--datetime: 'Sun May 17 2026 19:47:46';
 --date: 'Sun May 17 2026';
---time: '17:20:13';
+--time: '19:47:46';
 --year: '2026';
 }
 span.datetime { content: ' '; }
@@ -2147,4 +2147,23 @@ span.time:before { content: var(--time); }
 
 span.year { content: ' '; }
 span.year:before { content: var(--year); }
+
+:root {
+    scrollbar-width: thin;
+    scrollbar-color: #C4CFE5 #F9FAFC;
+}
+
+::-webkit-scrollbar {
+        background-color: #F9FAFC;
+        height: 12px;
+        width: 12px;
+}
+::-webkit-scrollbar-thumb {
+        border-radius: 6px;
+        box-shadow: inset 0 0 12px 12px #C4CFE5;
+        border: solid 2px transparent;
+}
+::-webkit-scrollbar-corner {
+        background-color: #F9FAFC;
+}
 
