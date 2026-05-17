@@ -2,7 +2,7 @@
 
 :root {
     /* Browser default font-size is 16px, this way 1 rem = 10px */
-    font-size: 62.5%;
+    /* font-size: 62.5%; *//* Desactivated to match with other modules of Liara Engine */
     color-scheme: var(--color-scheme);
 }
 
@@ -371,23 +371,23 @@ dd > p {
     border-inline-start-color: var(--blockquote-caution-color);
 }
 
-.blockquote-tag-note .blockquote-tag-title {
+.blockquote-tag-note > .blockquote-tag-title {
     color: var(--blockquote-note-color);
 }
 
-.blockquote-tag-tip .blockquote-tag-title {
+.blockquote-tag-tip > .blockquote-tag-title {
     color: var(--blockquote-tip-color);
 }
 
-.blockquote-tag-important .blockquote-tag-title {
+.blockquote-tag-important > .blockquote-tag-title {
     color: var(--blockquote-important-color);
 }
 
-.blockquote-tag-warning .blockquote-tag-title {
+.blockquote-tag-warning > .blockquote-tag-title {
     color: var(--blockquote-warning-color);
 }
 
-.blockquote-tag-caution .blockquote-tag-title {
+.blockquote-tag-caution > .blockquote-tag-title {
     color: var(--blockquote-caution-color);
 }
 
