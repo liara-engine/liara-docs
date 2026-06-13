@@ -90,7 +90,7 @@
 
 <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
     <div class="sidebar-scrollbox">
-        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="Doxygen.html"><strong aria-hidden="true">1.</strong> Doxygen</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html"><strong aria-hidden="true">2.</strong> Docs</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="mdBook.html"><strong aria-hidden="true">3.</strong> MdBook</a></span></li></ol>
+        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html"><strong aria-hidden="true">1.</strong> Docs</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="Doxygen.html"><strong aria-hidden="true">2.</strong> Doxygen</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="mdBook.html"><strong aria-hidden="true">3.</strong> MdBook</a></span></li></ol>
     </div>
     <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
         <div class="sidebar-resize-indicator"></div>
@@ -178,130 +178,7 @@
 
         <div id="content" class="content">
             <main>
-                <h1 id="doxygen-integration"><a class="header" href="#doxygen-integration">Doxygen integration</a></h1>
-<p>This directory contains the Liara-themed Doxygen templates. They are
-consumed automatically by the Liara documentation pipeline; the
-instructions below describe how a module’s <code>Doxyfile</code> should reference
-them.</p>
-<h2 id="files"><a class="header" href="#files">Files</a></h2>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>File</th><th>Role</th></tr>
-</thead>
-<tbody>
-<tr><td><code>header.html</code></td><td>Replaces Doxygen’s default <code>&lt;head&gt;</code> and opens <code>&lt;body&gt;</code> with the shared navbar inlined.</td></tr>
-<tr><td><code>footer.html</code></td><td>Closes <code>&lt;body&gt;</code> with a discreet footer line.</td></tr>
-<tr><td><code>doxygen-custom.css</code></td><td>Restyles every Doxygen output element to match the Liara design system.</td></tr>
-<tr><td><code>doxygen.liaradoc.json</code></td><td>Declares the <code>{{{NAVBAR}}}</code> and <code>{{{LOGO}}}</code> placeholder substitutions in <code>header.html</code>, plus favicon resources. Read automatically by the build processor — modules do not need their own liaradoc to handle these.</td></tr>
-</tbody>
-</table>
-</div>
-<p>These files depend on assets from the parent <code>docs-shared</code> repo
-(<code>tokens/design-tokens.css</code>, <code>navbar/navbar.css</code>, <code>navbar/navbar.js</code>,
-<code>navbar/navbar.config.js</code>). The documentation pipeline takes care of
-making them available alongside the generated output.</p>
-<h2 id="how-docs-shared-reaches-the-build"><a class="header" href="#how-docs-shared-reaches-the-build">How docs-shared reaches the build</a></h2>
-<p>When a module’s docs build runs inside the Liara Docker image, the
-build script copies <code>/opt/docs-shared</code> (mounted from the image) into
-<code>${SRC_DIR}/docs-shared/</code>. From the module’s point of view, every
-docs-shared file is reachable at a <code>docs-shared/...</code> path relative to
-the source directory. The <code>Doxyfile</code> therefore references them with
-plain relative paths — no environment variables, no symlinks.</p>
-<h2 id="doxyfile-configuration"><a class="header" href="#doxyfile-configuration">Doxyfile configuration</a></h2>
-<p>Add the following to the module’s <code>Doxyfile</code>:</p>
-<pre><code class="language-doxyfile"># --- Liara templates -------------------------------------------------------
-HTML_HEADER            = docs-shared/doxygen/header.html
-HTML_FOOTER            = docs-shared/doxygen/footer.html
-
-# Sidebar layout the Liara CSS is tuned for
-GENERATE_TREEVIEW      = YES
-DISABLE_INDEX          = NO
-FULL_SIDEBAR           = NO
-
-# Let the Liara design tokens manage dark mode; Doxygen's own
-# dark-mode toggle would compete with ours.
-HTML_COLORSTYLE        = LIGHT
-HTML_DYNAMIC_MENUS     = YES
-</code></pre>
-<p>No other Doxygen options need to change. The rest of the <code>Doxyfile</code>
-(input directories, <code>PROJECT_NAME</code>, etc.) stays as you would otherwise
-configure it.</p>
-<h2 id="local-preview"><a class="header" href="#local-preview">Local preview</a></h2>
-<p>To preview the styled output without spinning up the full Docker
-pipeline, you need to make a local copy of <code>docs-shared</code> reachable
-from your build directory at the path the <code>Doxyfile</code> expects.
-A minimal one-liner from a module’s repository root:</p>
-<pre><code class="language-bash">ln -s /path/to/docs-shared/ docs-shared
-doxygen Doxyfile
-xdg-open build/docs/html/index.html
-</code></pre>
-<p>The symlink stays only for local previews; in CI, the Docker build
-handles the copy.</p>
-<h2 id="things-to-verify-after-a-deployment"><a class="header" href="#things-to-verify-after-a-deployment">Things to verify after a deployment</a></h2>
-<p>After the first published build, open a generated page and check:</p>
-<ul>
-<li><input disabled="" type="checkbox"> The shared navbar appears at the top with the per-module pills
-populated from the registry.</li>
-<li><input disabled="" type="checkbox"> The current module’s pill shows the “current” badge.</li>
-<li><input disabled="" type="checkbox"> Each module’s dropdown shows versions with compatibility badges
-(compatible / mismatch / current).</li>
-<li><input disabled="" type="checkbox"> The contextual sub-nav under the navbar shows “Module / version”
-on the left and the <code>[Developer guide] [API reference]</code> tabs on
-the right, with <strong>API reference</strong> active (since you’re viewing
-Doxygen).</li>
-<li><input disabled="" type="checkbox"> Theme toggle and dyslexia toggle persist across page navigation.</li>
-<li><input disabled="" type="checkbox"> Code blocks (<code>.fragment</code>) render with the pastel syntax coloring.</li>
-<li><input disabled="" type="checkbox"> Member documentation blocks (the rounded <code>.memitem</code> cards) render
-cleanly with the lavender signature header.</li>
-<li><input disabled="" type="checkbox"> Admonitions from <code>@note</code>, <code>@warning</code>, <code>@bug</code>, <code>@todo</code> show their
-respective semantic colors.</li>
-<li><input disabled="" type="checkbox"> The side-nav tree highlights the current page in primary-soft pink.</li>
-<li><input disabled="" type="checkbox"> On screens narrower than 768px, the navbar collapses to a
-hamburger drawer.</li>
-</ul>
-<h2 id="customizing-per-module"><a class="header" href="#customizing-per-module">Customizing per module</a></h2>
-<p>If a specific module needs to override a token (rare, but possible):
-add a per-module CSS file to <code>HTML_EXTRA_STYLESHEET</code> <em>after</em>
-<code>doxygen-custom.css</code>, and redefine the relevant <code>--liara-*</code> variables
-on <code>:root</code> in that file. Do <strong>not</strong> edit <code>doxygen-custom.css</code> itself —
-that file is shared across all modules and updates flow from the
-<code>docs-shared</code> repo.</p>
-<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
-<p><strong>The page renders without the Liara navbar.</strong>
-Either <code>header.html</code> is not being picked up (check the <code>HTML_HEADER</code>
-path in the <code>Doxyfile</code>), or <code>docs-shared</code> was not copied alongside
-the Doxygen build. Inspect the generated <code>index.html</code>: the
-<code>&lt;nav id="liara-navbar"&gt;</code> element should be present in the raw HTML
-(it’s emitted statically by the header template).</p>
-<p><strong>The page renders with the navbar but no styling.</strong>
-The <code>HTML_EXTRA_STYLESHEET</code> paths are wrong, or the order is broken
-(<code>design-tokens.css</code> must come first). Open browser DevTools, check
-the Network tab for 404s on the CSS files, and verify they all load
-in the order declared.</p>
-<p><strong>The module dropdowns are empty.</strong>
-<code>navbar.js</code> could not fetch the registry. Common causes:</p>
-<ul>
-<li><code>docs-shared/navbar/navbar.config.js</code> is missing from
-<code>HTML_EXTRA_FILES</code>, so <code>window.LIARA_NAVBAR_CONFIG</code> is undefined.</li>
-<li>The <code>docsBaseUrl</code> configured in <code>navbar.config.js</code> is wrong (e.g.,
-points to a stale deployment URL).</li>
-<li>The hub’s <code>modules-registry.json</code> is not deployed yet at the
-expected location.</li>
-</ul>
-<p>Check the browser console — <code>navbar.js</code> logs a warning when a fetch
-fails.</p>
-<p><strong>The theme toggle has no effect.</strong>
-The browser cached an old version of <code>navbar.js</code>. Hard-refresh
-(Ctrl+Shift+R). If the issue persists, verify that <code>navbar.js</code>
-actually loaded by inspecting the page source.</p>
-<p><strong>Validation errors in Doxygen’s HTML output.</strong>
-Doxygen’s substitution tokens (<code>$projectname</code>, <code>$relpath^</code>, etc.) must
-not be removed from <code>header.html</code> and <code>footer.html</code>. If you edit
-these templates, preserve every <code>$...</code> token unless you understand
-its role.</p>
-<div style="break-before: page; page-break-before: always;"></div>
-<h1 id="docs-shared"><a class="header" href="#docs-shared">docs-shared</a></h1>
+                <h1 id="docs-shared"><a class="header" href="#docs-shared">docs-shared</a></h1>
 <blockquote>
 <p>Shared design system, navbar, and templates consumed by every Liara
 Engine documentation site.</p>
@@ -586,6 +463,129 @@ the meta repository’s GitHub Pages:</p>
 <code>.json</code> file referencing one of these schemas.</p>
 <h2 id="license"><a class="header" href="#license">License</a></h2>
 <p>MIT. See <code>LICENSE</code> at the root of this repository.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="doxygen-integration"><a class="header" href="#doxygen-integration">Doxygen integration</a></h1>
+<p>This directory contains the Liara-themed Doxygen templates. They are
+consumed automatically by the Liara documentation pipeline; the
+instructions below describe how a module’s <code>Doxyfile</code> should reference
+them.</p>
+<h2 id="files"><a class="header" href="#files">Files</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>File</th><th>Role</th></tr>
+</thead>
+<tbody>
+<tr><td><code>header.html</code></td><td>Replaces Doxygen’s default <code>&lt;head&gt;</code> and opens <code>&lt;body&gt;</code> with the shared navbar inlined.</td></tr>
+<tr><td><code>footer.html</code></td><td>Closes <code>&lt;body&gt;</code> with a discreet footer line.</td></tr>
+<tr><td><code>doxygen-custom.css</code></td><td>Restyles every Doxygen output element to match the Liara design system.</td></tr>
+<tr><td><code>doxygen.liaradoc.json</code></td><td>Declares the <code>{{{NAVBAR}}}</code> and <code>{{{LOGO}}}</code> placeholder substitutions in <code>header.html</code>, plus favicon resources. Read automatically by the build processor — modules do not need their own liaradoc to handle these.</td></tr>
+</tbody>
+</table>
+</div>
+<p>These files depend on assets from the parent <code>docs-shared</code> repo
+(<code>tokens/design-tokens.css</code>, <code>navbar/navbar.css</code>, <code>navbar/navbar.js</code>,
+<code>navbar/navbar.config.js</code>). The documentation pipeline takes care of
+making them available alongside the generated output.</p>
+<h2 id="how-docs-shared-reaches-the-build"><a class="header" href="#how-docs-shared-reaches-the-build">How docs-shared reaches the build</a></h2>
+<p>When a module’s docs build runs inside the Liara Docker image, the
+build script copies <code>/opt/docs-shared</code> (mounted from the image) into
+<code>${SRC_DIR}/docs-shared/</code>. From the module’s point of view, every
+docs-shared file is reachable at a <code>docs-shared/...</code> path relative to
+the source directory. The <code>Doxyfile</code> therefore references them with
+plain relative paths — no environment variables, no symlinks.</p>
+<h2 id="doxyfile-configuration"><a class="header" href="#doxyfile-configuration">Doxyfile configuration</a></h2>
+<p>Add the following to the module’s <code>Doxyfile</code>:</p>
+<pre><code class="language-doxyfile"># --- Liara templates -------------------------------------------------------
+HTML_HEADER            = docs-shared/doxygen/header.html
+HTML_FOOTER            = docs-shared/doxygen/footer.html
+
+# Sidebar layout the Liara CSS is tuned for
+GENERATE_TREEVIEW      = YES
+DISABLE_INDEX          = NO
+FULL_SIDEBAR           = NO
+
+# Let the Liara design tokens manage dark mode; Doxygen's own
+# dark-mode toggle would compete with ours.
+HTML_COLORSTYLE        = LIGHT
+HTML_DYNAMIC_MENUS     = YES
+</code></pre>
+<p>No other Doxygen options need to change. The rest of the <code>Doxyfile</code>
+(input directories, <code>PROJECT_NAME</code>, etc.) stays as you would otherwise
+configure it.</p>
+<h2 id="local-preview"><a class="header" href="#local-preview">Local preview</a></h2>
+<p>To preview the styled output without spinning up the full Docker
+pipeline, you need to make a local copy of <code>docs-shared</code> reachable
+from your build directory at the path the <code>Doxyfile</code> expects.
+A minimal one-liner from a module’s repository root:</p>
+<pre><code class="language-bash">ln -s /path/to/docs-shared/ docs-shared
+doxygen Doxyfile
+xdg-open build/docs/html/index.html
+</code></pre>
+<p>The symlink stays only for local previews; in CI, the Docker build
+handles the copy.</p>
+<h2 id="things-to-verify-after-a-deployment"><a class="header" href="#things-to-verify-after-a-deployment">Things to verify after a deployment</a></h2>
+<p>After the first published build, open a generated page and check:</p>
+<ul>
+<li><input disabled="" type="checkbox"> The shared navbar appears at the top with the per-module pills
+populated from the registry.</li>
+<li><input disabled="" type="checkbox"> The current module’s pill shows the “current” badge.</li>
+<li><input disabled="" type="checkbox"> Each module’s dropdown shows versions with compatibility badges
+(compatible / mismatch / current).</li>
+<li><input disabled="" type="checkbox"> The contextual sub-nav under the navbar shows “Module / version”
+on the left and the <code>[Developer guide] [API reference]</code> tabs on
+the right, with <strong>API reference</strong> active (since you’re viewing
+Doxygen).</li>
+<li><input disabled="" type="checkbox"> Theme toggle and dyslexia toggle persist across page navigation.</li>
+<li><input disabled="" type="checkbox"> Code blocks (<code>.fragment</code>) render with the pastel syntax coloring.</li>
+<li><input disabled="" type="checkbox"> Member documentation blocks (the rounded <code>.memitem</code> cards) render
+cleanly with the lavender signature header.</li>
+<li><input disabled="" type="checkbox"> Admonitions from <code>@note</code>, <code>@warning</code>, <code>@bug</code>, <code>@todo</code> show their
+respective semantic colors.</li>
+<li><input disabled="" type="checkbox"> The side-nav tree highlights the current page in primary-soft pink.</li>
+<li><input disabled="" type="checkbox"> On screens narrower than 768px, the navbar collapses to a
+hamburger drawer.</li>
+</ul>
+<h2 id="customizing-per-module"><a class="header" href="#customizing-per-module">Customizing per module</a></h2>
+<p>If a specific module needs to override a token (rare, but possible):
+add a per-module CSS file to <code>HTML_EXTRA_STYLESHEET</code> <em>after</em>
+<code>doxygen-custom.css</code>, and redefine the relevant <code>--liara-*</code> variables
+on <code>:root</code> in that file. Do <strong>not</strong> edit <code>doxygen-custom.css</code> itself —
+that file is shared across all modules and updates flow from the
+<code>docs-shared</code> repo.</p>
+<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
+<p><strong>The page renders without the Liara navbar.</strong>
+Either <code>header.html</code> is not being picked up (check the <code>HTML_HEADER</code>
+path in the <code>Doxyfile</code>), or <code>docs-shared</code> was not copied alongside
+the Doxygen build. Inspect the generated <code>index.html</code>: the
+<code>&lt;nav id="liara-navbar"&gt;</code> element should be present in the raw HTML
+(it’s emitted statically by the header template).</p>
+<p><strong>The page renders with the navbar but no styling.</strong>
+The <code>HTML_EXTRA_STYLESHEET</code> paths are wrong, or the order is broken
+(<code>design-tokens.css</code> must come first). Open browser DevTools, check
+the Network tab for 404s on the CSS files, and verify they all load
+in the order declared.</p>
+<p><strong>The module dropdowns are empty.</strong>
+<code>navbar.js</code> could not fetch the registry. Common causes:</p>
+<ul>
+<li><code>docs-shared/navbar/navbar.config.js</code> is missing from
+<code>HTML_EXTRA_FILES</code>, so <code>window.LIARA_NAVBAR_CONFIG</code> is undefined.</li>
+<li>The <code>docsBaseUrl</code> configured in <code>navbar.config.js</code> is wrong (e.g.,
+points to a stale deployment URL).</li>
+<li>The hub’s <code>modules-registry.json</code> is not deployed yet at the
+expected location.</li>
+</ul>
+<p>Check the browser console — <code>navbar.js</code> logs a warning when a fetch
+fails.</p>
+<p><strong>The theme toggle has no effect.</strong>
+The browser cached an old version of <code>navbar.js</code>. Hard-refresh
+(Ctrl+Shift+R). If the issue persists, verify that <code>navbar.js</code>
+actually loaded by inspecting the page source.</p>
+<p><strong>Validation errors in Doxygen’s HTML output.</strong>
+Doxygen’s substitution tokens (<code>$projectname</code>, <code>$relpath^</code>, etc.) must
+not be removed from <code>header.html</code> and <code>footer.html</code>. If you edit
+these templates, preserve every <code>$...</code> token unless you understand
+its role.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="mdbook-integration"><a class="header" href="#mdbook-integration">mdBook integration</a></h1>
 <p>This directory contains the Liara-themed mdBook templates. They are
