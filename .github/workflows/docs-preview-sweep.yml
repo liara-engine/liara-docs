@@ -60,6 +60,8 @@ jobs:
             if [ "$remove" = true ]; then
               git rm -r --quiet "$dir"
               removed=$((removed + 1))
+            else
+              echo "::notice::${repo}#${pr} open and fresh -> keep"
             fi
           done
 
