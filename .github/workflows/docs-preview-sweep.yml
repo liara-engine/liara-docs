@@ -1,0 +1,79 @@
+name: docs-preview-sweep
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # every Sunday at midnight UTC
+  workflow_dispatch:
+    inputs:
+      max-age-days:
+        description: Remove previews for open PRs not updated in this many days.
+        default: '30'
+
+permissions:
+  contents: write
+
+jobs:
+  sweep:
+    runs-on: ubuntu-24.04
+
+    env:
+      ORG: liara-engine
+      OUTPUT_BRANCH: cloudflare-pages
+      MAX_AGE_DAYS: ${{ github.event.inputs.max-age-days || '30' }}
+      GH_TOKEN: ${{ secrets.ORG_READ_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: cloudflare-pages
+          token: ${{ secrets.DOCS_PUSH_TOKEN }}
+          fetch-depth: '0'
+
+      - name: Prune closed / stale previews
+        run: |
+          set -euo pipefail
+          now=$(date -u +%s)
+          removed=0
+
+          shopt -s nullglob
+          for dir in site/*/pr-*; do
+            [ -d "$dir" ] || continue
+            repo=$(basename "$(dirname "$dir")")
+            pr=$(basename "$dir" | sed 's/^pr-//')
+
+            state=$(gh api "repos/${ORG}/${repo}/pulls/${pr}" --jq '.state'      2>/dev/null || echo "missing")
+            updated=$(gh api "repos/${ORG}/${repo}/pulls/${pr}" --jq '.updated_at' 2>/dev/null || echo "")
+
+            remove=false
+            if [ "$state" != "open" ]; then
+              echo "::notice::${repo}#${pr} state=${state} -> remove"
+              remove=true
+            elif [ -n "$updated" ]; then
+              upd=$(date -u -d "$updated" +%s)
+              age=$(( (now - upd) / 86400 ))
+              if [ "$age" -gt "$MAX_AGE_DAYS" ]; then
+                echo "::notice::${repo}#${pr} open but stale (${age}d) -> remove"
+                remove=true
+              fi
+            fi
+
+            if [ "$remove" = true ]; then
+              git rm -r --quiet "$dir"
+              removed=$((removed + 1))
+            fi
+          done
+
+          echo "Removed ${removed} preview(s)."
+
+      - name: Commit
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --cached --quiet; then
+            echo "Nothing to prune."
+            exit 0
+          fi
+          git commit -m "Sweep closed/stale docs previews"
+          git pull --rebase origin "${OUTPUT_BRANCH}" || echo "Nothing to rebase"
+          git push origin HEAD:"${OUTPUT_BRANCH}"
