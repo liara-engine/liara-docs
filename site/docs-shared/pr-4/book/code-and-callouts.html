@@ -225,6 +225,35 @@ ENTRYPOINT ["build-docs"]
 </code></pre>
 <pre><code class="language-json">{ "metadata": { "latest": "dev" }, "versions": { "dev": { "abi_compatibility": ["dev"] } } }
 </code></pre>
+<h2 id="mermaid"><a class="header" href="#mermaid">Mermaid</a></h2>
+<p>Since v0.1.1, docs-shared supports Mermaid diagrams. The following should render as a flowchart, not a code block:</p>
+<pre class="mermaid">flowchart TD
+    A[Start] --&gt; B{Is it working?}
+    B -- Yes --&gt; C[Great!]
+    B -- No --&gt; D[Check the logs]
+    D --&gt; E[Fix the issue]
+</pre>
+
+<p>Also, a sequence diagram:</p>
+<pre class="mermaid">sequenceDiagram
+    participant A as Alice
+    participant B as Bob
+    A-&gt;&gt;B: Hello Bob, how are you?
+    B--&gt;&gt;A: I am good thanks!
+</pre>
+
+<p>And a Gantt chart:</p>
+<pre class="mermaid">gantt
+    title A Gantt Diagram
+    dateFormat  YYYY-MM-DD
+    section Section
+    A task           :a1, 2024-01-01, 30d
+    Another task     :after a1  , 20d
+    section Another
+    Task in sec      :2024-01-12  , 12d
+    another task     : 24d
+</pre>
+
 <h2 id="callouts"><a class="header" href="#callouts">Callouts</a></h2>
 <p>If docs-shared defines a callout convention (the semantic tokens cover
 success / warning / danger / info), add one example of each here so a styling
