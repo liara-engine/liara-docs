@@ -89,7 +89,7 @@
 
 <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
     <div class="sidebar-scrollbox">
-        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html"><strong aria-hidden="true">1.</strong> Docs</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="documentation-pipeline.html"><strong aria-hidden="true">2.</strong> Documentation Pipeline</a></span></li></ol>
+        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html"><strong aria-hidden="true">1.</strong> Docs</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="authoring-a-module.html"><strong aria-hidden="true">2.</strong> Authoring A Module</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="documentation-pipeline.html"><strong aria-hidden="true">3.</strong> Documentation Pipeline</a></span></li></ol>
     </div>
     <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
         <div class="sidebar-resize-indicator"></div>
@@ -186,33 +186,62 @@ If you are touching templates, CI, or the hosting layer, start here.</p>
 <h2 id="1-the-big-picture"><a class="header" href="#1-the-big-picture">1. The big picture</a></h2>
 <p>The documentation is <strong>not</strong> built in one place.
 Shared look-and-feel lives in one repository, the build logic lives in a container image, each module builds its own docs from its own sources, and everything is published to a single hosting repository served at the edge.</p>
-<pre><code> docs-shared                      liara (meta)
- ┌───────────────────┐            ┌────────────────────────────┐
- │ templates + assets │  cloned   │ docker/…/Dockerfile         │
- │ (theme, navbar,    │ ───at─────▶ scripts/ (build-docs.py…)   │
- │  tokens, doxygen)  │  build    │ schemas/                    │
- └───────────────────┘            └─────────────┬──────────────┘
-                                                 │ builds &amp; publishes
-                                                 ▼
-                                   ghcr.io/liara-engine/
-                                   liara-documentation-builder:latest
-                                                 │
-        ┌────────────────────────────────────────┼───────────────────────────┐
-        │ used by every repo's CI                 │                           │
-        ▼                                         ▼                           ▼
-  liara-interfaces                          liara-core                  docs-shared
-  (a "classic" module)                      (a "classic" module)        (special: builds
-        │ build-docs                              │ build-docs           test fixtures)
-        ▼                                         ▼                           │
-        └──────────────── push generated HTML ────┴───────────────────────────┘
-                                   ▼
-                         liara-docs  (branch: cloudflare-pages)
-                         site/&lt;repo&gt;/&lt;version&gt;/{book,doxygen}/…
-                                   │ Git integration -&gt; wrangler deploy
-                                   ▼
-                    Cloudflare Worker (Static Assets + edge router)
-        https://liara-engine.liara-engine-documentation.workers.dev/
-</code></pre>
+<pre class="mermaid">flowchart TB
+
+    subgraph Shared["Shared Documentation Assets"]
+        DS["docs-shared&lt;br/&gt;templates + assets&lt;br/&gt;(theme, navbar, tokens, doxygen)"]
+    end
+
+    subgraph Builder["Documentation Builder Infrastructure"]
+        LM["liara (meta)&lt;br/&gt;docker/.../Dockerfile&lt;br/&gt;scripts/ (build-docs.py...)&lt;br/&gt;schemas/"]
+        IMG["ghcr.io/liara-engine/&lt;br/&gt;liara-documentation-builder:latest"]
+
+        LM --&gt;|"builds &amp; publishes"| IMG
+    end
+
+    DS --&gt;|"cloned at build"| LM
+
+    subgraph Repos["Repositories generating documentation"]
+        LI["liara-interfaces&lt;br/&gt;(classic module)"]
+        LC["liara-core&lt;br/&gt;(classic module)"]
+        DST["docs-shared&lt;br/&gt;(builds test fixtures)"]
+
+        HTML["Generated HTML"]
+
+        LI --&gt;|"build-docs"| HTML
+        LC --&gt;|"build-docs"| HTML
+        DST --&gt; HTML
+    end
+
+    IMG --&gt;|"used by CI"| LI
+    IMG --&gt;|"used by CI"| LC
+    IMG --&gt;|"used by CI"| DST
+
+    subgraph Publishing["Documentation Publishing"]
+        DOCS["liara-docs&lt;br/&gt;(branch: cloudflare-pages)&lt;br/&gt;site/&amp;lt;repo&amp;gt;/&amp;lt;version&amp;gt;/{book,doxygen}/..."]
+    end
+
+    HTML --&gt;|"push generated HTML"| DOCS
+
+    subgraph Delivery["Public Delivery"]
+        CF["Cloudflare Worker&lt;br/&gt;(Static Assets + edge router)"]
+        URL["liara-engine.liara-engine-documentation.workers.dev"]
+    end
+
+    DOCS --&gt;|"Git integration → wrangler deploy"| CF
+    CF --&gt; URL
+
+    classDef repo fill:#e8f5e9,stroke:#2e7d32;
+    classDef infra fill:#e3f2fd,stroke:#1565c0;
+    classDef publish fill:#fff3e0,stroke:#ef6c00;
+    classDef delivery fill:#f3e5f5,stroke:#7b1fa2;
+
+    class LI,LC,DST repo;
+    class LM,IMG,DS infra;
+    class DOCS publish;
+    class CF,URL delivery;
+</pre>
+
 <p>The mental model that makes everything else click: <strong>docs-shared content is split in two.</strong> Some of it is <em>baked</em> into the builder image and used at build time; the rest is <em>served at runtime</em> from a central <code>/shared-content/</code> path.
 Knowing which is which explains the whole repository layout (see §3).</p>
 <h2 id="2-the-repositories-and-their-roles"><a class="header" href="#2-the-repositories-and-their-roles">2. The repositories and their roles</a></h2>
@@ -434,7 +463,7 @@ URL.</p>
             </main>
 
             <nav class="nav-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="authoring-a-module.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
@@ -445,7 +474,7 @@ URL.</p>
     </div>
 
     <nav class="nav-wide-wrapper" aria-label="Page navigation">
-            <a rel="prev" href="index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+            <a rel="prev" href="authoring-a-module.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
             </a>
 

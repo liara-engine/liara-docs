@@ -4,7 +4,7 @@
 <html lang="en" class="sidebar-visible no-js light">
 <head>
 <meta charset="UTF-8">
-<title>Docs - Liara Docs-Shared — Developer Guide</title>
+<title>Authoring A Module - Liara Docs-Shared — Developer Guide</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="theme-color" content="#FFFAFC">
@@ -177,24 +177,197 @@
 
         <div id="content" class="content">
             <main>
-                <h1 id="docs-shared"><a class="header" href="#docs-shared">docs-shared</a></h1>
-<blockquote>
-<p>Shared design system, navbar, and templates consumed by every Liara
-Engine documentation site.</p>
-</blockquote>
-<p><code>docs-shared</code> is the visual and structural backbone of every documentation
-property in the Liara Engine project. It contains the design tokens, the
-shared navbar, the Doxygen and mdBook templates, and the source of the
-central hub page. Every module’s documentation pulls from this repository
-at build time so all sites look and behave consistently.</p>
-<h2 id="license"><a class="header" href="#license">License</a></h2>
-<p>MIT. See <code>LICENSE</code> at the root of this repository.</p>
+                <h1 id="authoring-a-modules-documentation"><a class="header" href="#authoring-a-modules-documentation">Authoring a module’s documentation</a></h1>
+<p>This is the practical companion to <a href="./documentation-pipeline.html">The documentation pipeline</a>:
+how to wire up documentation for a module so the shared toolchain picks it up.
+A module can ship a user guide (mdBook), an API reference (Doxygen), or both.</p>
+<h2 id="what-the-builder-looks-for"><a class="header" href="#what-the-builder-looks-for">What the builder looks for</a></h2>
+<p>When the builder image runs against your repository, it reacts to a handful of
+files at the repo root:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>File</th><th>Purpose</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td><code>manifest.json</code></td><td>Declares the module, its versions, and <code>latest</code></td><td><strong>Yes</strong></td></tr>
+<tr><td><code>book.toml</code> + <code>docs/</code></td><td>mdBook user guide</td><td>Optional</td></tr>
+<tr><td><code>Doxyfile</code> + headers</td><td>Doxygen API reference</td><td>Optional</td></tr>
+<tr><td><code>*.liaradoc.json</code></td><td>Extra resources / placeholder replacements</td><td>Optional</td></tr>
+</tbody>
+</table>
+</div>
+<p>Most modules ship both a book and a Doxygen reference; the hosting layer
+tolerates a module that has only one of the two.</p>
+<h2 id="1-the-manifest-required"><a class="header" href="#1-the-manifest-required">1. The manifest (required)</a></h2>
+<p><code>manifest.json</code> is validated against <code>module-manifest.schema.json</code> and drives
+the version selector and the <code>/&lt;repo&gt;/latest/</code> redirect. It is small and strict
+(<code>additionalProperties</code> is off everywhere):</p>
+<pre><code class="language-json">{
+  "$schema": "https://liara-engine.github.io/liara/schemas/module-manifest.schema.json",
+  "metadata": {
+    "name": "Liara Interfaces",
+    "description": "The C ABI contracts shared by every module.",
+    "latest": "1.0.0"
+  },
+  "versions": {
+    "dev":   { "abi_compatibility": ["dev"] },
+    "1.0.0": { "abi_compatibility": ["dev"] }
+  }
+}
+</code></pre>
+<ul>
+<li><code>metadata.latest</code> is the version the <code>latest</code> alias resolves to. Update it
+when you cut a release.</li>
+<li>Each key in <code>versions</code> must be <code>dev</code> or a <code>x.y.z</code> string, and lists the ABI
+versions it is compatible with — the navbar uses this to show compatibility
+badges across modules.</li>
+</ul>
+<h2 id="2-the-user-guide-mdbook"><a class="header" href="#2-the-user-guide-mdbook">2. The user guide (mdBook)</a></h2>
+<p>Add a <code>book.toml</code> and a <code>docs/</code> folder. The standard configuration — point the
+theme at the shared one and leave the rest as below:</p>
+<pre><code class="language-toml">[book]
+title = "Liara Interfaces"
+authors = ["Liara Engine contributors"]
+language = "en"
+src = "docs"
+
+[output.html]
+hash-files = false
+default-theme = "light"
+preferred-dark-theme = "navy"
+git-repository-url = "https://github.com/liara-engine/liara-interfaces"
+git-repository-icon = "fa-github"
+
+theme = "docs-shared/mdbook/theme"
+
+[output.html.fold]
+enable = true
+level = 1
+
+[output.html.search]
+enable = true
+limit-results = 30
+use-boolean-and = true
+boost-title = 2
+boost-hierarchy = 2
+boost-paragraph = 1
+expand = true
+heading-split-level = 2
+
+# Optional: if you want to use Mermaid diagrams, add the preprocessor
+[preprocessor.mermaid]
+command = "mdbook-mermaid"
+</code></pre>
+<p>The <code>theme = "docs-shared/mdbook/theme"</code> line is the important one: the builder
+stages the shared theme there before running mdBook, so your pages get the
+Liara navbar, design tokens, and syntax highlighting automatically.</p>
+<h3 id="pages-and-the-table-of-contents"><a class="header" href="#pages-and-the-table-of-contents">Pages and the table of contents</a></h3>
+<p>You do <strong>not</strong> need to write a <code>SUMMARY.md</code>. If one is absent, the builder
+generates it from your <code>docs/</code> tree: <code>README.md</code> becomes the section landing
+page, and the remaining files follow. So a minimal guide is just:</p>
+<pre><code>docs/
+├── README.md          # the section's front page
+├── getting-started.md
+└── concepts/
+    ├── README.md      # "Concepts" landing page
+    └── ecs.md
+</code></pre>
+<p>If you want full control over ordering, commit your own <code>SUMMARY.md</code> and it will
+be used as-is.</p>
+<h3 id="what-you-can-write"><a class="header" href="#what-you-can-write">What you can write</a></h3>
+<p>Standard CommonMark plus mdBook extensions: headings, tables, footnotes, task
+lists, callouts via blockquotes, and fenced code blocks. The theme bundles
+custom Highlight.js grammars, so <strong>C++</strong>, <strong>GLSL</strong>, and <strong>Dockerfile</strong> all
+colour correctly — prefer them over plain blocks.</p>
+<p>Diagrams are available through the Mermaid preprocessor: use a fenced block with
+the <code>mermaid</code> language and it renders as an SVG that follows the light/dark
+theme. Prefer this over ASCII art for anything non-trivial.</p>
+<pre><code class="language-markdown">```mermaid
+flowchart LR
+    A[Source] --&gt; B[Builder image]
+    B --&gt; C[liara-docs]
+    C --&gt; D((Edge))
+```
+</code></pre>
+<h2 id="3-the-api-reference-doxygen"><a class="header" href="#3-the-api-reference-doxygen">3. The API reference (Doxygen)</a></h2>
+<p>Add a <code>Doxyfile</code> and point <code>INPUT</code> at your headers. The standard configuration
+wires the shared Doxygen template via <code>HTML_HEADER</code> / <code>HTML_FOOTER</code>:</p>
+<pre><code class="language-ini">PROJECT_NAME           = "Liara Interfaces"
+PROJECT_BRIEF          = "The C ABI contracts shared by every module"
+PROJECT_ICON           = docs-shared/shared-content/assets/logo.svg
+OUTPUT_DIRECTORY       = build/doxygen
+
+INPUT                  = include
+RECURSIVE              = YES
+
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+BUILTIN_STL_SUPPORT    = YES
+MARKDOWN_SUPPORT       = YES
+
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+GENERATE_TREEVIEW      = YES
+FULL_SIDEBAR           = YES
+
+HTML_HEADER            = docs-shared/doxygen/header.html
+HTML_FOOTER            = docs-shared/doxygen/footer.html
+
+# Project-specific aliases live here. For example, a thread-safety section:
+ALIASES               += "threadsafety=&lt;dl class='section threadsafety'&gt;&lt;dt&gt;Thread Safety&lt;/dt&gt;&lt;dd&gt;"
+ALIASES               += "endthreadsafety=&lt;/dd&gt;&lt;/dl&gt;"
+</code></pre>
+<p><code>OUTPUT_DIRECTORY</code> is overridden by the builder at runtime, and the generated
+HTML is published under <code>/&lt;repo&gt;/&lt;version&gt;/doxygen/</code>. Keep <code>HTML_HEADER</code> and
+<code>HTML_FOOTER</code> pointed at <code>docs-shared/doxygen/</code> — that is what injects the shared
+navbar and styling into every API page.</p>
+<h3 id="documenting-headers"><a class="header" href="#documenting-headers">Documenting headers</a></h3>
+<p>Use Javadoc-style comments. The template renders groups, classes, templates,
+enums, parameter tables, and the standard admonitions (<code>@note</code>, <code>@warning</code>,
+<code>@deprecated</code>). A small example:</p>
+<pre><code class="language-cpp">/**
+ * @brief Appends an element, overwriting the oldest if full.
+ * @param value The element to store.
+ * @return @c true if an element was overwritten.
+ * @threadsafety Not safe for concurrent writers.@endthreadsafety
+ */
+bool push(const T&amp; value) noexcept;
+</code></pre>
+<p>Custom aliases like <code>@threadsafety</code> (defined in your <code>Doxyfile</code>) let you add
+project-specific sections without touching the shared template.</p>
+<h2 id="4-extra-resources-and-replacements-optional"><a class="header" href="#4-extra-resources-and-replacements-optional">4. Extra resources and replacements (optional)</a></h2>
+<p>If a page needs extra CSS/JS, a favicon, or build-time text substitutions,
+declare a <code>*.liaradoc.json</code> (validated against <code>documentation-module.schema.json</code>).
+Each entry either copies a <strong>resource</strong> into the output or performs a
+<strong>replacement</strong> of a placeholder in the generated HTML. Most modules never need
+this — it exists for the hub and the shared content themselves.</p>
+<h2 id="5-testing-before-you-merge"><a class="header" href="#5-testing-before-you-merge">5. Testing before you merge</a></h2>
+<p>There is no separate local build to babysit. Open a pull request and, when your
+documentation files change, a preview is published to a hidden URL
+(<code>/&lt;repo&gt;/pr-&lt;n&gt;/</code>) and posted as a comment on the PR. Add the <code>docs-preview</code>
+label to force a build if the path filter didn’t catch your change. The preview
+is rebuilt on every push and removed when the PR closes — see
+<a href="./documentation-pipeline.html#8-pr-previews">The documentation pipeline</a>.</p>
+<h2 id="checklist-for-a-new-module"><a class="header" href="#checklist-for-a-new-module">Checklist for a new module</a></h2>
+<ol>
+<li>Add <code>manifest.json</code> with <code>metadata.latest</code> and at least a <code>dev</code> version.</li>
+<li>Add <code>book.toml</code> + <code>docs/README.md</code> for the guide (theme pointed at
+<code>docs-shared/mdbook/theme</code>).</li>
+<li>Optionally add <code>Doxyfile</code> + <code>include/</code> for the API reference.</li>
+<li>Add the module to the central <code>modules-registry.json</code> so the navbar lists it.</li>
+<li>Open a PR and check the preview.</li>
+</ol>
 
             </main>
 
             <nav class="nav-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
 
-                    <a rel="next prefetch" href="authoring-a-module.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="documentation-pipeline.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
 
@@ -204,8 +377,11 @@ at build time so all sites look and behave consistently.</p>
     </div>
 
     <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            <a rel="prev" href="index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+            </a>
 
-            <a rel="next prefetch" href="authoring-a-module.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+            <a rel="next prefetch" href="documentation-pipeline.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
             </a>
     </nav>
