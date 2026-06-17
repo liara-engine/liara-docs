@@ -26,6 +26,10 @@
 <link rel="stylesheet" href="/shared-content/mdbook/css/custom.css">
 
 
+
+<script src="/shared-content/mdbook/js/mermaid.min.js"></script>
+<script src="/shared-content/mdbook/js/mermaid-init.js"></script>
+
 </head>
 <body class="sidebar-visible">
 <div id="mdbook-body-container">
@@ -59,6 +63,9 @@
 <script src="/shared-content/navbar/navbar.config.js"></script>
 <script src="/shared-content/mdbook/shared-navbar.js"></script>
 <script defer src="/shared-content/navbar/navbar.js"></script>
+
+<link rel="stylesheet" href="/shared-content/navbar/version-banner.css">
+<script defer src="/shared-content/navbar/version-banner.js"></script>
 
 
 <input type="hidden" id="MDBOOK_OUTPUT" value="">
@@ -589,27 +596,31 @@ discipline as <code>docs-shared</code>, applied to CI.</p>
 <hr>
 <h2 id="9-dependency-graph"><a class="header" href="#9-dependency-graph">9. Dependency Graph</a></h2>
 <p>The static dependency graph between repositories is:</p>
-<pre><code>                         ┌─────────────────────┐
-                         │   liara-interfaces  │
-                         │  (C headers only)   │
-                         └──────────┬──────────┘
-                                    │
-                  ┌─────────────────┼─────────────────┐
-                  │                 │                 │
-                  ▼                 ▼                 ▼
-           ┌────────────┐    ┌──────────────┐  ┌──────────────┐
-           │ liara-core │    │liara-renderer│  │liara-physics │
-           │            │    │              │  │  (post-v1)   │
-           └─────┬──────┘    └──────────────┘  └──────────────┘
-                 │                  │                  │
-                 └────────┬─────────┴────────┬─────────┘
-                          │                  │
-                          ▼                  ▼
-                   ┌────────────┐     ┌──────────────┐
-                   │   liara    │     │ liara-editor │
-                   │ (launcher) │     │  (post-v1)   │
-                   └────────────┘     └──────────────┘
-</code></pre>
+<pre class="mermaid">flowchart TB
+
+    interfaces["liara-interfaces&lt;br/&gt;(C headers only)"]
+
+    core["liara-core"]
+    renderer["liara-renderer"]
+    physics["liara-physics&lt;br/&gt;(post-v1)"]
+
+    launcher["liara&lt;br/&gt;(launcher)"]
+    editor["liara-editor&lt;br/&gt;(post-v1)"]
+
+    interfaces --&gt; core
+    interfaces --&gt; renderer
+    interfaces --&gt; physics
+
+    merge1((.))
+
+    core --&gt; merge1
+    renderer --&gt; merge1
+    physics --&gt; merge1
+
+    merge1 --&gt; launcher
+    merge1 --&gt; editor
+</pre>
+
 <p>Reading the graph:</p>
 <ul>
 <li><code>liara-interfaces</code> depends on nothing.</li>

@@ -26,6 +26,10 @@
 <link rel="stylesheet" href="/shared-content/mdbook/css/custom.css">
 
 
+
+<script src="/shared-content/mdbook/js/mermaid.min.js"></script>
+<script src="/shared-content/mdbook/js/mermaid-init.js"></script>
+
 </head>
 <body class="sidebar-visible">
 <div id="mdbook-body-container">
@@ -59,6 +63,9 @@
 <script src="/shared-content/navbar/navbar.config.js"></script>
 <script src="/shared-content/mdbook/shared-navbar.js"></script>
 <script defer src="/shared-content/navbar/navbar.js"></script>
+
+<link rel="stylesheet" href="/shared-content/navbar/version-banner.css">
+<script defer src="/shared-content/navbar/version-banner.js"></script>
 
 
 <input type="hidden" id="MDBOOK_OUTPUT" value="">
@@ -227,7 +234,7 @@ reference, not the only possibility.</p>
 organization. This meta repository orchestrates the lot.</p>
 <hr>
 <h2 id="why-another-engine"><a class="header" href="#why-another-engine">Why Another Engine?</a></h2>
-<p>Three honest reasons:</p>
+<p>Three reasons:</p>
 <ol>
 <li><strong>Learning.</strong> Modern graphics programming, Vulkan, modern C++,
 large-scale software architecture, build systems, CI/CD. Building
@@ -253,7 +260,7 @@ cmake --build --preset=linux-release-clang
 ./build/linux-release-clang/launcher/liara_launcher
 </code></pre>
 <p>For Windows, or for the full setup procedure, see
-<a href="./docs/BOOTSTRAP.html"><code>docs/BOOTSTRAP.md</code></a>.</p>
+<a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/BOOTSTRAP"><code>docs/BOOTSTRAP.md</code></a>.</p>
 <hr>
 <h2 id="documentation"><a class="header" href="#documentation">Documentation</a></h2>
 <p>The project documentation is structured as separate documents, each
@@ -264,22 +271,21 @@ focused on one aspect:</p>
 <tr><th>Document</th><th>Purpose</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="./docs/ARCHITECTURE.html"><code>ARCHITECTURE.md</code></a></td><td>Foundational design, philosophy, principles</td></tr>
-<tr><td><a href="./docs/MODULES.html"><code>MODULES.md</code></a></td><td>Concrete module decomposition and boundaries</td></tr>
-<tr><td><a href="./docs/ROADMAP.html"><code>ROADMAP.md</code></a></td><td>Phase 0 → v2.0 milestones with exit criteria</td></tr>
-<tr><td><a href="./docs/CONTRIBUTING.html"><code>CONTRIBUTING.md</code></a></td><td>Daily workflow: branches, PRs, reviews</td></tr>
-<tr><td><a href="./docs/CODE_STYLE.html"><code>CODE_STYLE.md</code></a></td><td>C++ conventions, clang-format, clang-tidy</td></tr>
-<tr><td><a href="./docs/TOOLING.html"><code>TOOLING.md</code></a></td><td>CI/CD, build, vcpkg, releases, docs</td></tr>
-<tr><td><a href="./docs/BOOTSTRAP.html"><code>BOOTSTRAP.md</code></a></td><td>Setting up Arch and Windows for development</td></tr>
+<tr><td><a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/ARCHITECTURE"><code>ARCHITECTURE.md</code></a></td><td>Foundational design, philosophy, principles</td></tr>
+<tr><td><a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/MODULES"><code>MODULES.md</code></a></td><td>Concrete module decomposition and boundaries</td></tr>
+<tr><td><a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/ROADMAP"><code>ROADMAP.md</code></a></td><td>Phase 0 → v2.0 milestones with exit criteria</td></tr>
+<tr><td><a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/CONTRIBUTING"><code>CONTRIBUTING.md</code></a></td><td>Daily workflow: branches, PRs, reviews</td></tr>
+<tr><td><a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/CODE_STYLE"><code>CODE_STYLE.md</code></a></td><td>C++ conventions, clang-format, clang-tidy</td></tr>
+<tr><td><a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/TOOLING"><code>TOOLING.md</code></a></td><td>CI/CD, build, vcpkg, releases, docs</td></tr>
+<tr><td><a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/BOOTSTRAP"><code>BOOTSTRAP.md</code></a></td><td>Setting up Arch and Windows for development</td></tr>
 </tbody>
 </table>
 </div>
 <p>Interface design rules live in their own document, in the
 <code>liara-interfaces</code> repository:
-<a href="https://github.com/liara-engine/liara-interfaces/blob/main/INTERFACES.md"><code>INTERFACES.md</code></a>.</p>
+<a href="https://liara-engine.liara-engine-documentation.workers.dev/liara-interfaces/latest/book/INTERFACES"><code>INTERFACES.md</code></a>.</p>
 <p>User-facing documentation (tutorials, guides) is hosted at
-<a href="https://liara-engine.github.io">liara-engine.github.io</a> once Phase 0
-is complete.</p>
+<a href="https://liara-engine.liara-engine-documentation.workers.dev/">liara-engine.liara-engine-documentation.workers.dev</a>.</p>
 <p>For newcomers, the recommended reading order is the sequence above,
 top to bottom.</p>
 <hr>
@@ -297,12 +303,12 @@ top to bottom.</p>
 └── .github                # Organization-level workflows and templates.
 </code></pre>
 <p>The interfaces repository is the contract; everything else
-implements or consumes it. See <a href="./docs/MODULES.html"><code>MODULES.md</code></a> for
-the full picture.</p>
+implements or consumes it. See <a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/MODULES"><code>MODULES.md</code></a>
+for the full picture.</p>
 <hr>
 <h2 id="roadmap-at-a-glance"><a class="header" href="#roadmap-at-a-glance">Roadmap at a Glance</a></h2>
-<p>The full roadmap is in <a href="./docs/ROADMAP.html"><code>ROADMAP.md</code></a>. The
-high-level shape:</p>
+<p>The full roadmap is in <a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/ROADMAP"><code>ROADMAP.md</code></a>.
+The high-level shape:</p>
 <ul>
 <li><strong>Phase 0</strong> — Infrastructure, repositories, CI, documentation.</li>
 <li><strong>v0.1</strong> — “Hello Triangle” through the modular pipeline.</li>
@@ -321,8 +327,9 @@ Pauses happen and are not failures.</p>
 <hr>
 <h2 id="technical-overview"><a class="header" href="#technical-overview">Technical Overview</a></h2>
 <p>A condensed summary of the choices documented in
-<a href="./docs/ARCHITECTURE.html"><code>ARCHITECTURE.md</code></a> and
-<a href="./docs/TOOLING.html"><code>TOOLING.md</code></a>:</p>
+<a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/ARCHITECTURE"><code>ARCHITECTURE.md</code></a>
+and
+<a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/TOOLING"><code>TOOLING.md</code></a>:</p>
 <div class="table-wrapper">
 <table>
 <thead>
@@ -358,14 +365,14 @@ Pauses happen and are not failures.</p>
 solo development, and the workflow reflects that. If you would like
 to contribute:</p>
 <ul>
-<li>Read <a href="./docs/CONTRIBUTING.html"><code>CONTRIBUTING.md</code></a> for the workflow.</li>
+<li>Read <a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/CONTRIBUTING"><code>CONTRIBUTING.md</code></a> for the workflow.</li>
 <li>Open an issue before a substantial PR, so the change can be
 discussed before code is written.</li>
 <li>Small PRs (typo fixes, doc clarifications, obvious bug fixes) can
 be opened directly without prior discussion.</li>
 </ul>
 <p>The project follows the <a href="https://www.contributor-covenant.org/">Contributor Covenant</a>
-code of conduct (a copy lives in <code>CODE_OF_CONDUCT.md</code>).</p>
+code of conduct (a copy lives in <code>CODE_OF_CONDUCT.md</code>) [TODO].</p>
 <hr>
 <h2 id="license"><a class="header" href="#license">License</a></h2>
 <p>Liara is released under the <strong>MIT License</strong>. See
@@ -407,7 +414,7 @@ differently.</li>
 <ul>
 <li><strong>Issues</strong>: per repository on GitHub.</li>
 <li><strong>Discussions</strong>: on this meta repository.</li>
-<li><strong>Documentation</strong>: <a href="https://liara-engine.github.io">liara-engine.github.io</a>.</li>
+<li><strong>Documentation</strong>: <a href="https://liara-engine.liara-engine-documentation.workers.dev/">liara-engine.liara-engine-documentation.workers.dev</a></li>
 </ul>
 <hr>
 <div align="center">

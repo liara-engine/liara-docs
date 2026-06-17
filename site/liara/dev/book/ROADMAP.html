@@ -26,6 +26,10 @@
 <link rel="stylesheet" href="/shared-content/mdbook/css/custom.css">
 
 
+
+<script src="/shared-content/mdbook/js/mermaid.min.js"></script>
+<script src="/shared-content/mdbook/js/mermaid-init.js"></script>
+
 </head>
 <body class="sidebar-visible">
 <div id="mdbook-body-container">
@@ -59,6 +63,9 @@
 <script src="/shared-content/navbar/navbar.config.js"></script>
 <script src="/shared-content/mdbook/shared-navbar.js"></script>
 <script defer src="/shared-content/navbar/navbar.js"></script>
+
+<link rel="stylesheet" href="/shared-content/navbar/version-banner.css">
+<script defer src="/shared-content/navbar/version-banner.js"></script>
 
 
 <input type="hidden" id="MDBOOK_OUTPUT" value="">
@@ -317,8 +324,7 @@ push and pull request:</p>
 <li>Run clang-tidy.</li>
 <li>Run the test suite (even if it is just one placeholder test).</li>
 <li><del>Generate Doxygen and Mdbook documentation.</del></li>
-<li><del>On pushes to main, deploy the documentation to that module’s
-<code>gh-pages</code> branch under a <code>/dev/</code> subdirectory.</del></li>
+<li><del>On pushes to main, deploy the documentation to Cloudflare Pages.</del></li>
 </ul>
 <p>The reusable workflows that implement these steps live in the
 <code>.github</code> organization-level repository and are invoked from each
