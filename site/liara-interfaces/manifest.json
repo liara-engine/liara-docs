@@ -10,6 +10,11 @@
       "abi_compatibility": [
         "dev"
       ]
+    },
+    "0.0.1": {
+      "abi_compatibility": [
+        "dev"
+      ]
     }
   }
 }
