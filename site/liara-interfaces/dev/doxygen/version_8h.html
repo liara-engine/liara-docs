@@ -152,6 +152,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('version_8h.htm
 <p>Liara interface version definitions.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;liara/version_config.h&gt;</code><br />
 </div>
 <p><a href="version_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -170,9 +171,9 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a67db7dea32af233e3ed355130f529a63" id="r_a67db7dea32af233e3ed355130f529a63"><td class="memItemLeft">enum &#160;</td><td class="memItemRight">{ <a class="el" href="#a67db7dea32af233e3ed355130f529a63a0b976c95a8649fc70fd89c4ba5af5aea">LIARA_INTERFACE_VERSION_MAJOR</a> = 0
-, <a class="el" href="#a67db7dea32af233e3ed355130f529a63ace553b1f8c483b61e5606d96d8d9f28d">LIARA_INTERFACE_VERSION_MINOR</a> = 0
-, <a class="el" href="#a67db7dea32af233e3ed355130f529a63a264aee64e3165a205e0656679623466e">LIARA_INTERFACE_VERSION_PATCH</a> = 0
+<tr class="memitem:a67db7dea32af233e3ed355130f529a63" id="r_a67db7dea32af233e3ed355130f529a63"><td class="memItemLeft">enum &#160;</td><td class="memItemRight">{ <a class="el" href="#a67db7dea32af233e3ed355130f529a63a0b976c95a8649fc70fd89c4ba5af5aea">LIARA_INTERFACE_VERSION_MAJOR</a> = DONT_USE_LIARA_INTERFACE_VERSION_MAJOR
+, <a class="el" href="#a67db7dea32af233e3ed355130f529a63ace553b1f8c483b61e5606d96d8d9f28d">LIARA_INTERFACE_VERSION_MINOR</a> = DONT_USE_LIARA_INTERFACE_VERSION_MINOR
+, <a class="el" href="#a67db7dea32af233e3ed355130f529a63a264aee64e3165a205e0656679623466e">LIARA_INTERFACE_VERSION_PATCH</a> = DONT_USE_LIARA_INTERFACE_VERSION_PATCH
  }</td></tr>
 <tr class="memdesc:a67db7dea32af233e3ed355130f529a63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Liara interface version components.  <a href="#a67db7dea32af233e3ed355130f529a63">More...</a><br /></td></tr>
 </table><table class="memberdecls">
@@ -214,10 +215,10 @@ Functions</h2></td></tr>
 <div class="line">    <a class="code hl_enumvalue" href="#a67db7dea32af233e3ed355130f529a63a0b976c95a8649fc70fd89c4ba5af5aea">LIARA_INTERFACE_VERSION_MAJOR</a>, \</div>
 <div class="line">    <a class="code hl_enumvalue" href="#a67db7dea32af233e3ed355130f529a63ace553b1f8c483b61e5606d96d8d9f28d">LIARA_INTERFACE_VERSION_MINOR</a>, \</div>
 <div class="line">    <a class="code hl_enumvalue" href="#a67db7dea32af233e3ed355130f529a63a264aee64e3165a205e0656679623466e">LIARA_INTERFACE_VERSION_PATCH</a>)</div>
-<div class="ttc" id="aversion_8h_html_a18a41c12177f6912453296efdcce31e5"><div class="ttname"><a href="#a18a41c12177f6912453296efdcce31e5">LIARA_MAKE_VERSION</a></div><div class="ttdeci">#define LIARA_MAKE_VERSION(major, minor, patch)</div><div class="ttdoc">Create a version number from major, minor, and patch components.</div><div class="ttdef"><b>Definition</b> version.h:51</div></div>
-<div class="ttc" id="aversion_8h_html_a67db7dea32af233e3ed355130f529a63a0b976c95a8649fc70fd89c4ba5af5aea"><div class="ttname"><a href="#a67db7dea32af233e3ed355130f529a63a0b976c95a8649fc70fd89c4ba5af5aea">LIARA_INTERFACE_VERSION_MAJOR</a></div><div class="ttdeci">@ LIARA_INTERFACE_VERSION_MAJOR</div><div class="ttdef"><b>Definition</b> version.h:32</div></div>
-<div class="ttc" id="aversion_8h_html_a67db7dea32af233e3ed355130f529a63a264aee64e3165a205e0656679623466e"><div class="ttname"><a href="#a67db7dea32af233e3ed355130f529a63a264aee64e3165a205e0656679623466e">LIARA_INTERFACE_VERSION_PATCH</a></div><div class="ttdeci">@ LIARA_INTERFACE_VERSION_PATCH</div><div class="ttdef"><b>Definition</b> version.h:36</div></div>
-<div class="ttc" id="aversion_8h_html_a67db7dea32af233e3ed355130f529a63ace553b1f8c483b61e5606d96d8d9f28d"><div class="ttname"><a href="#a67db7dea32af233e3ed355130f529a63ace553b1f8c483b61e5606d96d8d9f28d">LIARA_INTERFACE_VERSION_MINOR</a></div><div class="ttdeci">@ LIARA_INTERFACE_VERSION_MINOR</div><div class="ttdef"><b>Definition</b> version.h:34</div></div>
+<div class="ttc" id="aversion_8h_html_a18a41c12177f6912453296efdcce31e5"><div class="ttname"><a href="#a18a41c12177f6912453296efdcce31e5">LIARA_MAKE_VERSION</a></div><div class="ttdeci">#define LIARA_MAKE_VERSION(major, minor, patch)</div><div class="ttdoc">Create a version number from major, minor, and patch components.</div><div class="ttdef"><b>Definition</b> version.h:52</div></div>
+<div class="ttc" id="aversion_8h_html_a67db7dea32af233e3ed355130f529a63a0b976c95a8649fc70fd89c4ba5af5aea"><div class="ttname"><a href="#a67db7dea32af233e3ed355130f529a63a0b976c95a8649fc70fd89c4ba5af5aea">LIARA_INTERFACE_VERSION_MAJOR</a></div><div class="ttdeci">@ LIARA_INTERFACE_VERSION_MAJOR</div><div class="ttdef"><b>Definition</b> version.h:33</div></div>
+<div class="ttc" id="aversion_8h_html_a67db7dea32af233e3ed355130f529a63a264aee64e3165a205e0656679623466e"><div class="ttname"><a href="#a67db7dea32af233e3ed355130f529a63a264aee64e3165a205e0656679623466e">LIARA_INTERFACE_VERSION_PATCH</a></div><div class="ttdeci">@ LIARA_INTERFACE_VERSION_PATCH</div><div class="ttdef"><b>Definition</b> version.h:37</div></div>
+<div class="ttc" id="aversion_8h_html_a67db7dea32af233e3ed355130f529a63ace553b1f8c483b61e5606d96d8d9f28d"><div class="ttname"><a href="#a67db7dea32af233e3ed355130f529a63ace553b1f8c483b61e5606d96d8d9f28d">LIARA_INTERFACE_VERSION_MINOR</a></div><div class="ttdeci">@ LIARA_INTERFACE_VERSION_MINOR</div><div class="ttdef"><b>Definition</b> version.h:35</div></div>
 </div><!-- fragment -->
 <p>The current version of the Liara interface. </p>
 <p>This macro defines the current version of the Liara interface by combining the major, minor, and patch version numbers defined above. It can be used to check for compatibility with specific versions of the interface.</p>
