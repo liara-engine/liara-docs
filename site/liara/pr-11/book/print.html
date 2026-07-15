@@ -1641,8 +1641,8 @@ expected versions of each module. In Phase 0, all modules are at
 <li><input disabled="" type="checkbox"> All listed documents are written.</li>
 <li><input disabled="" type="checkbox"> CI is green on every repository (even if testing only stubs).</li>
 <li><input disabled="" type="checkbox" checked=""> Documentation is generated and deployed to cloudflare pages.</li>
-<li><input disabled="" type="checkbox" checked=""> The hub at <code>liara-engine.github.io</code> is accessible and renders
-with the navbar.</li>
+<li><input disabled="" type="checkbox" checked=""> The hub at <code>liara-engine.liara-engine-documentation.workers.dev</code>
+is accessible and renders with the navbar.</li>
 <li><input disabled="" type="checkbox"> The workspace bootstrap script runs successfully on a clean
 Arch Linux machine.</li>
 <li><input disabled="" type="checkbox"> The workspace bootstrap script runs successfully on a clean
@@ -2203,7 +2203,7 @@ instructions for other distributions are welcome.</p>
 <p><strong>On Arch Linux:</strong></p>
 <pre><code class="language-bash"># 1. Install system dependencies
 sudo pacman -S --needed base-devel cmake ninja git vulkan-devel \
-    vulkan-validation-layers shaderc clang gcc mold
+    vulkan-validation-layers shaderc clang gcc mold python
 
 # 2. Install vcpkg
 git clone https://github.com/microsoft/vcpkg.git ~/.vcpkg
@@ -2272,12 +2272,14 @@ detail and lists known issues.</p>
 <tr><td><code>gcc</code></td><td>GCC toolchain (also tested)</td></tr>
 <tr><td><code>mold</code></td><td>Fast linker (recommended)</td></tr>
 <tr><td><code>clang-tools-extra</code></td><td>clang-format, clang-tidy</td></tr>
+<tr><td><code>python</code></td><td>Python interpreter</td></tr>
 </tbody>
 </table>
 </div>
 <p>Installation:</p>
 <pre><code class="language-bash">sudo pacman -S --needed base-devel cmake ninja git vulkan-devel \
-    vulkan-validation-layers shaderc clang gcc mold clang-tools-extra
+     vulkan-validation-layers shaderc clang gcc mold \
+     clang-tools-extra python
 </code></pre>
 <p>Verify the toolchain versions meet the project’s requirements:</p>
 <pre><code class="language-bash">cmake --version    # Must be 3.29 or newer
@@ -2304,10 +2306,6 @@ sudo pacman -S renderdoc                 # GPU debugger (optional)
 <p>The output should list at least one GPU with Vulkan 1.3 support. If
 no GPU is listed, the issue is GPU drivers (Mesa for AMD/Intel,
 proprietary or NVK for NVIDIA), not Liara — fix the drivers first.</p>
-<p>For your specific hardware (Framework Laptop 16 with Ryzen 7 7840HS,
-desktop with Radeon RX 6800), the Mesa drivers are the right choice.
-The relevant packages are typically already pulled in by
-<code>vulkan-devel</code> and a working desktop environment.</p>
 <h3 id="23-vcpkg-installation"><a class="header" href="#23-vcpkg-installation">2.3 vcpkg Installation</a></h3>
 <p>vcpkg is installed in the user’s home directory, not system-wide.
 This is the convention for vcpkg and avoids permission issues:</p>
@@ -4720,9 +4718,13 @@ files.</li>
 <li>Include a search index.</li>
 <li>Cross-reference symbols across modules where relevant.</li>
 </ul>
-<p>The generated HTML is published to the module’s <code>gh-pages</code> branch
-under a subdirectory named after the version (<code>dev/</code>, <code>v0.1.0/</code>,
-etc.). The reusable docs workflow handles the publication.</p>
+<p>The generated HTML is built inside the
+<code>liara-documentation-builder</code> container image and pushed to the
+<code>liara-docs</code> repository (branch <code>cloudflare-pages</code>) under
+<code>site/&lt;repo&gt;/&lt;version&gt;/doxygen/</code>, where <code>&lt;version&gt;</code> is <code>dev</code> or
+<code>X.Y.Z</code>. The reusable docs workflow handles the publication. See
+<a href="https://liara-engine.liara-engine-documentation.workers.dev/docs-shared/latest/book/documentation-pipeline">documentation-pipeline.md</a>
+for the full picture</p>
 <h3 id="user-documentation-mdbook"><a class="header" href="#user-documentation-mdbook">User Documentation: mdBook</a></h3>
 <p>User-facing documentation (tutorials, guides, conceptual articles)
 lives in the meta repository under <code>docs/user/</code>, written in
@@ -4737,42 +4739,42 @@ sounds, writing a simple game.</li>
 <li>Reference: configuration options, environment variables,
 command-line flags.</li>
 </ul>
-<p>The mdBook output is published to the meta repository’s <code>gh-pages</code>
-branch under <code>user/</code>.</p>
+<p>he meta repository’s book is built and published like any other
+module’s: the mdBook output lands in the <code>liara-docs</code> repository
+under <code>site/liara/&lt;version&gt;/book/</code>.</p>
 <h3 id="the-documentation-hub"><a class="header" href="#the-documentation-hub">The Documentation Hub</a></h3>
-<p>The meta repository’s <code>gh-pages</code> branch hosts the documentation
-hub at <code>liara-engine.github.io</code>. The hub:</p>
+<p>The hub’s sources live in the <code>docs-shared</code> repository (<code>hub/</code>).
+It is deployed to the root of the documentation site — the
+<code>liara-docs</code> repository, branch <code>cloudflare-pages</code> — by the
+reusable docs workflow invoked with <code>deploy-as-hub: true</code>. The
+hub:</p>
 <ul>
 <li>Displays a landing page introducing the engine.</li>
 <li>Provides links to the user documentation (mdBook).</li>
-<li>Links to per-module API documentation, with the version dropdown
-consuming <code>version.json</code>.</li>
+<li>Links to per-module documentation, with the version dropdown
+consuming <code>version.json</code> (validated against
+<code>version.schema.json</code> from the meta repository’s <code>schemas/</code>).</li>
 <li>Links to GitHub repositories.</li>
 </ul>
 <p>The hub uses the navbar from <code>docs-shared</code>, ensuring consistency
 with the per-module docs. The navbar’s version dropdown updates
 URLs across all linked documentation simultaneously.</p>
 <h3 id="versionjson"><a class="header" href="#versionjson"><code>version.json</code></a></h3>
-<p>The <code>version.json</code> file at the root of the hub lists available
-versions and the URLs for each module’s documentation at each
-version:</p>
+<p>The <code>version.json</code> file at the root of the site lists the
+available versions. Module URLs are URI references resolved
+against the site’s base URL, not absolute URLs:</p>
 <pre><code class="language-json">{
+  "$schema": "https://liara-engine.github.io/liara/schemas/version.schema.json",
   "current_dev": "dev",
+  "latest_release": "dev",
   "versions": [
     {
       "label": "dev",
+      "note": "Current development",
       "modules": {
-        "core": "https://liara-engine.github.io/liara-core/dev/",
-        "renderer": "https://liara-engine.github.io/liara-renderer/dev/",
-        "interfaces": "https://liara-engine.github.io/liara-interfaces/dev/"
-      }
-    },
-    {
-      "label": "v1.0.0",
-      "modules": {
-        "core": "https://liara-engine.github.io/liara-core/v1.0.0/",
-        "renderer": "https://liara-engine.github.io/liara-renderer/v1.0.0/",
-        "interfaces": "https://liara-engine.github.io/liara-interfaces/v1.0.0/"
+        "abi": "liara-interfaces/dev/book/",
+        "core": "liara-core/dev/book/",
+        "renderer": "liara-renderer/dev/book/"
       }
     }
   ]
@@ -4787,32 +4789,43 @@ README via badges. The hub aggregates coverage information from all
 modules into a single page, generated by a small script that polls
 the Codecov API.</p>
 <hr>
-<h2 id="11-github-pages-deployment"><a class="header" href="#11-github-pages-deployment">11. GitHub Pages Deployment</a></h2>
-<h3 id="per-module-gh-pages-branch"><a class="header" href="#per-module-gh-pages-branch">Per-Module gh-pages Branch</a></h3>
-<p>Each module repository has a <code>gh-pages</code> branch that hosts its API
-documentation. The branch is automatically populated by the
-reusable docs workflow:</p>
-<pre><code>liara-core/gh-pages/
-├── dev/                    # Current development docs
-│   ├── index.html
-│   └── ...
-├── v0.1.0/                 # Released version docs
-│   └── ...
-├── v0.2.0/
-│   └── ...
+<h2 id="11-documentation-hosting"><a class="header" href="#11-documentation-hosting">11. Documentation Hosting</a></h2>
+<h3 id="the-liara-docs-repository"><a class="header" href="#the-liara-docs-repository">The liara-docs Repository</a></h3>
+<p>All generated documentation is hosted from a single repository,
+<code>liara-docs</code>, on its <code>cloudflare-pages</code> branch. The reusable
+deploy workflow pushes each build under <code>site/&lt;repo&gt;/&lt;version&gt;/</code>:</p>
+<pre><code>liara-docs/cloudflare-pages/site/
+├── index.html                  # The hub
+├── version.json
+├── shared-content/             # Runtime shared assets
+├── liara-interfaces/
+│   ├── manifest.json
+│   ├── dev/
+│   │   ├── book/
+│   │   └── doxygen/
+│   └── v0.1.0/
+│       └── ...
 └── ...
 </code></pre>
 <p>The deployment is non-destructive: pushing new docs to <code>dev/</code> does
-not touch <code>v0.1.0/</code>. Tagged releases produce a new versioned
-subdirectory by copying <code>dev/</code> at the time of the tag.</p>
+not touch released versions. PR previews land under
+<code>site/&lt;repo&gt;/pr-&lt;n&gt;/</code> and are removed by a scheduled cleanup job.</p>
+<h3 id="serving"><a class="header" href="#serving">Serving</a></h3>
+<p>The branch is deployed through Cloudflare’s Git integration as a
+Workers Static Assets project. Static files are served directly; a
+small Worker (<code>src/index.js</code> in <code>liara-docs</code>) handles only
+fall-through requests: resolving <code>/&lt;repo&gt;/latest/…</code> from the
+module’s <code>manifest.json</code>, redirecting <code>/&lt;repo&gt;/&lt;version&gt;/</code> to
+<code>book/</code> (or <code>doxygen/</code>), and serving the custom 404 page.</p>
 <h3 id="branch-protection"><a class="header" href="#branch-protection">Branch Protection</a></h3>
-<p>The <code>gh-pages</code> branches do not have branch protection. They are
-written to exclusively by CI; manual writes are not expected.</p>
-<h3 id="custom-domain"><a class="header" href="#custom-domain">Custom Domain</a></h3>
-<p>The hub’s URL is <code>liara-engine.github.io</code>, the default GitHub Pages
-URL for an organization. A custom domain is not configured; doing
-so would add operational burden (DNS management, certificate
-renewal) for marginal benefit.</p>
+<p>The <code>cloudflare-pages</code> branch does not have branch protection. It
+is written to exclusively by CI; manual writes are not expected.</p>
+<h3 id="domain"><a class="header" href="#domain">Domain</a></h3>
+<p>The site is served at
+<code>liara-engine.liara-engine-documentation.workers.dev</code>, the default
+domain of the Cloudflare project. A custom domain is not
+configured; doing so would add operational burden (DNS management)
+for marginal benefit.</p>
 <hr>
 <h2 id="12-branch-protection-and-required-reviews"><a class="header" href="#12-branch-protection-and-required-reviews">12. Branch Protection and Required Reviews</a></h2>
 <h3 id="main-branch"><a class="header" href="#main-branch">Main Branch</a></h3>
@@ -4846,8 +4859,16 @@ them, through its merge-the-release-PR mechanism.</p>
 <ol>
 <li>Clone the meta repository.</li>
 <li>Run <code>./scripts/setup-workspace.sh</code>. This clones every module
-repository into <code>workspace/</code>, configures vcpkg, and produces a
-superbuild CMakeLists.txt.</li>
+repository into <code>workspace/</code>, generates the superbuild
+CMakeLists.txt, a merged vcpkg manifest (union of every
+module’s dependencies and features), and workspace-level CMake
+presets, then configures CMake (<code>linux-debug-clang</code> by default;
+<code>--preset</code> to change, <code>--no-configure</code> to skip) and symlinks
+<code>compile_commands.json</code> at the workspace root. vcpkg dependency
+resolution happens during this configure step. Re-running the script is
+safe and is the standard way to refresh the workspace; existing
+clones are updated with a fast-forward pull only (<code>--no-pull</code>
+to leave them untouched, e.g. while working on a branch).</li>
 <li>Open <code>workspace/</code> in the editor of choice (CLion, VSCode, Neovim
 with clangd).</li>
 <li>Configure CMake with a preset of choice
