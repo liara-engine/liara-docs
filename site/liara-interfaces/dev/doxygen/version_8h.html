@@ -170,8 +170,6 @@ Macros</h2></td></tr>
 <tr class="memitem:a474542da7831f5d0527294e94775f72b" id="r_a474542da7831f5d0527294e94775f72b"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a474542da7831f5d0527294e94775f72b">LIARA_VERSION_PATCH_MASK</a>&#160;&#160;&#160;((1u &lt;&lt; <a class="el" href="#a47f6351c340557f03ba264dc1ac8f9a5">LIARA_VERSION_PATCH_BITS</a>) - 1u)</td></tr>
 <tr class="memitem:aaaceeaea311b58ccf606bbefa53d7f40" id="r_aaaceeaea311b58ccf606bbefa53d7f40"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aaaceeaea311b58ccf606bbefa53d7f40">LIARA_MAKE_VERSION_UNSAFE</a>(major,  minor,  patch)</td></tr>
 <tr class="memdesc:aaaceeaea311b58ccf606bbefa53d7f40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a version number from major, minor, and patch components, with NO safety checks.  <br /></td></tr>
-<tr class="memitem:a18a41c12177f6912453296efdcce31e5" id="r_a18a41c12177f6912453296efdcce31e5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a18a41c12177f6912453296efdcce31e5">LIARA_MAKE_VERSION</a>(major,  minor,  patch)</td></tr>
-<tr class="memdesc:a18a41c12177f6912453296efdcce31e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a version number from major, minor, and patch components, with NO safety checks.  <br /></td></tr>
 <tr class="memitem:a84ee12d0b17960a5ce651e7b4578d8f9" id="r_a84ee12d0b17960a5ce651e7b4578d8f9"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a84ee12d0b17960a5ce651e7b4578d8f9">LIARA_VERSION_MAJOR</a>(v)</td></tr>
 <tr class="memdesc:a84ee12d0b17960a5ce651e7b4578d8f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract the major version component from a combined version number.  <br /></td></tr>
 <tr class="memitem:abf3dccbc75ccc9cdf462ce799ad4b10c" id="r_abf3dccbc75ccc9cdf462ce799ad4b10c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#abf3dccbc75ccc9cdf462ce799ad4b10c">LIARA_VERSION_MINOR</a>(v)</td></tr>
@@ -181,8 +179,6 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9d1159d5f94edaef219882d4d18a1d09" id="r_a9d1159d5f94edaef219882d4d18a1d09"><td class="memItemLeft">static uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a9d1159d5f94edaef219882d4d18a1d09">liara_make_version</a> (const uint32_t major, const uint32_t minor, const uint32_t patch)</td></tr>
-<tr class="memdesc:a9d1159d5f94edaef219882d4d18a1d09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline function to create a version number from major, minor, and patch components.  <br /></td></tr>
 <tr class="memitem:ab4a5f8adb5c217b4c515688ffeaee352" id="r_ab4a5f8adb5c217b4c515688ffeaee352"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#ab4a5f8adb5c217b4c515688ffeaee352">liara_try_make_version</a> (const uint32_t major, const uint32_t minor, const uint32_t patch, uint32_t *out_version)</td></tr>
 <tr class="memdesc:ab4a5f8adb5c217b4c515688ffeaee352"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline function to create a version number from major, minor, and patch components, with output parameter.  <br /></td></tr>
 <tr class="memitem:a3ed7190d8840207d6a7328f37db27b32" id="r_a3ed7190d8840207d6a7328f37db27b32"><td class="memItemLeft">static uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a3ed7190d8840207d6a7328f37db27b32">liara_version_major</a> (const uint32_t v)</td></tr>
@@ -207,57 +203,6 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Generic 32-bit version encoding/decoding and utilities. </p>
 </div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
-<a id="a18a41c12177f6912453296efdcce31e5" name="a18a41c12177f6912453296efdcce31e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18a41c12177f6912453296efdcce31e5">&#9670;&#160;</a></span>LIARA_MAKE_VERSION</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define LIARA_MAKE_VERSION</td>
-          <td>(</td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>major</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>minor</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>patch</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#aaaceeaea311b58ccf606bbefa53d7f40">LIARA_MAKE_VERSION_UNSAFE</a>((major), (minor), (patch))</div>
-<div class="ttc" id="aversion_8h_html_aaaceeaea311b58ccf606bbefa53d7f40"><div class="ttname"><a href="#aaaceeaea311b58ccf606bbefa53d7f40">LIARA_MAKE_VERSION_UNSAFE</a></div><div class="ttdeci">#define LIARA_MAKE_VERSION_UNSAFE(major, minor, patch)</div><div class="ttdoc">Create a version number from major, minor, and patch components, with NO safety checks.</div><div class="ttdef"><b>Definition</b> version.h:48</div></div>
-</div><!-- fragment -->
-<p>Create a version number from major, minor, and patch components, with NO safety checks. </p>
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated</a></b></dt><dd>This macro is deprecated. Use the version of this macro with explicit name indicating that it is unsafe, or use the inline function with output parameter for better error handling. Will be removed in version 0.0.2 of the Liara interface. </dd></dl>
-<p>This macro combines the major, minor, and patch version numbers into a single 32-bit unsigned integer.</p>
-<dl class="section warning"><dt>Warning</dt><dd>This macro does not perform any safety checks on the input values. It is the caller's responsibility to ensure that the major, minor, and patch values are within their respective valid ranges:<ul>
-<li><code>major</code> must be between 0 and 1023 (inclusive)</li>
-<li><code>minor</code> must be between 0 and 1023 (inclusive)</li>
-<li><code>patch</code> must be between 0 and 4095 (inclusive)</li>
-</ul>
-</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">major</td><td>The major version number (0-1023). </td></tr>
-    <tr><td class="paramname">minor</td><td>The minor version number (0-1023). </td></tr>
-    <tr><td class="paramname">patch</td><td>The patch version number (0-4095). </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A 32-bit unsigned integer representing the combined version.</dd></dl>
-<dl class="section threadsafety">
-<dt>Thread Safety</dt>
-<dd>This macro is thread-safe as it does not modify any shared state. </dd>
-</dl>
-
-</div>
-</div>
 <a id="aaaceeaea311b58ccf606bbefa53d7f40" name="aaaceeaea311b58ccf606bbefa53d7f40"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaaceeaea311b58ccf606bbefa53d7f40">&#9670;&#160;</a></span>LIARA_MAKE_VERSION_UNSAFE</h2>
 
@@ -539,62 +484,6 @@ Functions</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a9d1159d5f94edaef219882d4d18a1d09" name="a9d1159d5f94edaef219882d4d18a1d09"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d1159d5f94edaef219882d4d18a1d09">&#9670;&#160;</a></span>liara_make_version()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t liara_make_version </td>
-          <td>(</td>
-          <td class="paramtype">const uint32_t</td>          <td class="paramname"><span class="paramname"><em>major</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint32_t</td>          <td class="paramname"><span class="paramname"><em>minor</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint32_t</td>          <td class="paramname"><span class="paramname"><em>patch</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Inline function to create a version number from major, minor, and patch components. </p>
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000002">Deprecated</a></b></dt><dd>This function is deprecated. Use the version of this function that takes an output parameter for better error handling. Will be removed in version 0.0.2 of the Liara interface.</dd></dl>
-<p>This function combines the major, minor, and patch version numbers into a single 32-bit unsigned integer. It performs safety checks to ensure that the input values are within their respective valid ranges:</p><ul>
-<li><code>major</code> must be between 0 and 1023 (inclusive)</li>
-<li><code>minor</code> must be between 0 and 1023 (inclusive)</li>
-<li><code>patch</code> must be between 0 and 4095 (inclusive)</li>
-</ul>
-<dl class="section warning"><dt>Warning</dt><dd>If any of the input values are out of range, the function will not generate an explicit error, but will return 0. It is the caller's responsibility to check the return value for validity. We strongly recommend using the version of this function that takes an output parameter for better error handling.</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">major</td><td>The major version number (0-1023). </td></tr>
-    <tr><td class="paramname">minor</td><td>The minor version number (0-1023). </td></tr>
-    <tr><td class="paramname">patch</td><td>The patch version number (0-4095). </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A 32-bit unsigned integer representing the combined version, or 0 if any of the input values are out of range.</dd></dl>
-<dl class="section threadsafety">
-<dt>Thread Safety</dt>
-<dd>This function is thread-safe as it does not modify any shared state. </dd>
-</dl>
-
-</div>
-</div>
 <a id="ab4a5f8adb5c217b4c515688ffeaee352" name="ab4a5f8adb5c217b4c515688ffeaee352"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab4a5f8adb5c217b4c515688ffeaee352">&#9670;&#160;</a></span>liara_try_make_version()</h2>
 
