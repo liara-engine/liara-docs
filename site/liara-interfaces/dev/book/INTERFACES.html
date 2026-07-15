@@ -562,16 +562,16 @@ and patch components:</p>
 1024 majors, 1024 minors, and 4096 patches. More than enough for any
 realistic timeline.</p>
 <h3 id="the-interface-version-macro"><a class="header" href="#the-interface-version-macro">The Interface Version Macro</a></h3>
-<p>The current interface version is declared in <code>liara/version.h</code>:</p>
-<pre><code class="language-c">#define LIARA_INTERFACE_VERSION_MAJOR  1
-#define LIARA_INTERFACE_VERSION_MINOR  0
-#define LIARA_INTERFACE_VERSION_PATCH  0
+<p>The current interface version is declared in <code>liara/abi_version.h</code>:</p>
+<pre><code class="language-c">#define LIARA_ABI_VERSION_MAJOR  1
+#define LIARA_ABI_VERSION_MINOR  0
+#define LIARA_ABI_VERSION_PATCH  0
 
-#define LIARA_INTERFACE_VERSION \
+#define LIARA_ABI_VERSION \
     LIARA_MAKE_VERSION( \
-        LIARA_INTERFACE_VERSION_MAJOR, \
-        LIARA_INTERFACE_VERSION_MINOR, \
-        LIARA_INTERFACE_VERSION_PATCH)
+        LIARA_ABI_VERSION_MAJOR, \
+        LIARA_ABI_VERSION_MINOR, \
+        LIARA_ABI_VERSION_PATCH)
 </code></pre>
 <p>Every module that consumes the interface compiles against a specific
 version of these macros. The version it observed at compile time is
@@ -580,20 +580,20 @@ captured in its binary.</p>
 <p>Every module exports a function that reports the interface version it
 implements:</p>
 <pre><code class="language-c">// Required entry point for every module.
-uint32_t liara_module_get_interface_version(void);
+uint32_t liara_&lt;module&gt;_get_interface_version(void);
 </code></pre>
-<p>The implementation simply returns <code>LIARA_INTERFACE_VERSION</code> as
+<p>The implementation simply returns <code>LIARA_ABI_VERSION</code> as
 captured at the module’s compile time:</p>
-<pre><code class="language-c">uint32_t liara_module_get_interface_version(void) {
-    return LIARA_INTERFACE_VERSION;
+<pre><code class="language-c">uint32_t liara_&lt;module&gt;_get_interface_version(void) {
+    return LIARA_ABI_VERSION;
 }
 </code></pre>
 <h3 id="version-negotiation-at-load"><a class="header" href="#version-negotiation-at-load">Version Negotiation at Load</a></h3>
 <p>When the core loads a module (today: at static link, by directly
 calling its entry point; tomorrow: at dynamic load, by <code>dlsym</code>), it
 checks compatibility:</p>
-<pre><code class="language-c">uint32_t module_version = liara_module_get_interface_version();
-uint32_t expected_version = LIARA_INTERFACE_VERSION;
+<pre><code class="language-c">uint32_t module_version = liara_&lt;module&gt;_get_interface_version();
+uint32_t expected_version = LIARA_ABI_VERSION;
 
 if (LIARA_VERSION_MAJOR(module_version) != LIARA_VERSION_MAJOR(expected_version)) {
     // Hard failure: refuse to load.
@@ -804,7 +804,7 @@ conservative major bump merely costs one version number.</p>
 <p>The PR includes:</p>
 <ul>
 <li>The header changes.</li>
-<li>Updates to <code>LIARA_INTERFACE_VERSION_*</code> macros in <code>version.h</code>.</li>
+<li>Updates to <code>LIARA_ABI_VERSION_*</code> macros in <code>abi_version.h</code>.</li>
 <li>New ABI layout tests for any new or modified structs.</li>
 <li>A note in the changelog.</li>
 </ul>

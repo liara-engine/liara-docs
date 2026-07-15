@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['consuming_20this_20library_0',['Consuming This Library',['../index.html#autotoc_md8',1,'']]]
+  ['building_20standalone_0',['Building Standalone',['../index.html#autotoc_md6',1,'']]]
 ];

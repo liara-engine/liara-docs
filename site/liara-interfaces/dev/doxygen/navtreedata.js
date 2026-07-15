@@ -30,6 +30,7 @@ var NAVTREE =
     [ "Building Standalone", "index.html#autotoc_md6", null ],
     [ "Consuming This Library", "index.html#autotoc_md8", null ],
     [ "License", "index.html#autotoc_md10", null ],
+    [ "Deprecated List", "deprecated.html", null ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
@@ -44,7 +45,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"dir_285aa40730b2df8f5cd48498b8604c92.html"
+"abi__version_8h.html"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';
