@@ -334,15 +334,15 @@ module’s workflows.</p>
 commits and produce release PRs automatically. The configuration is
 in <code>.release-please-manifest.json</code> and <code>release-please-config.json</code>
 at each repository’s root.</del></p>
-<h3 id="workspace-bootstrap-working"><a class="header" href="#workspace-bootstrap-working">Workspace Bootstrap Working</a></h3>
-<p>The meta repository contains a <code>scripts/setup-workspace.sh</code> script
-that:</p>
+<h3 id="workspace-bootstrap-working"><a class="header" href="#workspace-bootstrap-working"><del>Workspace Bootstrap Working</del></a></h3>
+<p><del>The meta repository contains a <code>scripts/setup-workspace.sh</code> script
+that:</del></p>
 <ul>
-<li>Clones each module repository into a <code>workspace/</code> directory.</li>
-<li>Generates a top-level <code>CMakeLists.txt</code> that uses <code>add_subdirectory</code>
-to include each module.</li>
-<li>Configures CMake with the appropriate presets.</li>
-<li>Produces a <code>compile_commands.json</code> for clangd consumers.</li>
+<li><del>Clones each module repository into a <code>workspace/</code> directory.</del></li>
+<li><del>Generates a top-level <code>CMakeLists.txt</code> that uses <code>add_subdirectory</code>
+to include each module.</del></li>
+<li><del>Configures CMake with the appropriate presets.</del></li>
+<li><del>Produces a <code>compile_commands.json</code> for clangd consumers.</del></li>
 </ul>
 <p>The script’s success criterion: starting from a fresh clone of the
 meta repository on a system with the required dependencies (Vulkan

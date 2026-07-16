@@ -1605,15 +1605,15 @@ module’s workflows.</p>
 commits and produce release PRs automatically. The configuration is
 in <code>.release-please-manifest.json</code> and <code>release-please-config.json</code>
 at each repository’s root.</del></p>
-<h3 id="workspace-bootstrap-working"><a class="header" href="#workspace-bootstrap-working">Workspace Bootstrap Working</a></h3>
-<p>The meta repository contains a <code>scripts/setup-workspace.sh</code> script
-that:</p>
+<h3 id="workspace-bootstrap-working"><a class="header" href="#workspace-bootstrap-working"><del>Workspace Bootstrap Working</del></a></h3>
+<p><del>The meta repository contains a <code>scripts/setup-workspace.sh</code> script
+that:</del></p>
 <ul>
-<li>Clones each module repository into a <code>workspace/</code> directory.</li>
-<li>Generates a top-level <code>CMakeLists.txt</code> that uses <code>add_subdirectory</code>
-to include each module.</li>
-<li>Configures CMake with the appropriate presets.</li>
-<li>Produces a <code>compile_commands.json</code> for clangd consumers.</li>
+<li><del>Clones each module repository into a <code>workspace/</code> directory.</del></li>
+<li><del>Generates a top-level <code>CMakeLists.txt</code> that uses <code>add_subdirectory</code>
+to include each module.</del></li>
+<li><del>Configures CMake with the appropriate presets.</del></li>
+<li><del>Produces a <code>compile_commands.json</code> for clangd consumers.</del></li>
 </ul>
 <p>The script’s success criterion: starting from a fresh clone of the
 meta repository on a system with the required dependencies (Vulkan
@@ -2206,24 +2206,28 @@ sudo pacman -S --needed base-devel cmake ninja git vulkan-devel \
     vulkan-validation-layers shaderc clang gcc mold python
 
 # 2. Install vcpkg
-git clone https://github.com/microsoft/vcpkg.git ~/.vcpkg
+git clone [https://github.com/microsoft/vcpkg.git](https://github.com/microsoft/vcpkg.git) ~/.vcpkg
 ~/.vcpkg/bootstrap-vcpkg.sh
 echo 'export VCPKG_ROOT="$HOME/.vcpkg"' &gt;&gt; ~/.zshrc
 echo 'export PATH="$VCPKG_ROOT:$PATH"' &gt;&gt; ~/.zshrc
 source ~/.zshrc
 
-# 3. Clone the meta repository and bootstrap the workspace
-git clone https://github.com/liara-engine/liara.git
+# 3. Clone the meta repository
+git clone [https://github.com/liara-engine/liara.git](https://github.com/liara-engine/liara.git)
 cd liara
-./scripts/setup-workspace.sh
 
-# 4. Configure and build
-cd workspace
-cmake --preset=linux-release-clang
-cmake --build --preset=linux-release-clang
+# 4. Verify the environment
+./scripts/liara.sh verify # Should succeed with no errors
 
-# 5. Run the demo
-./build/linux-release-clang/launcher/liara_launcher
+# 5. Bootstrap the workspace
+./scripts/liara.sh setup
+
+# 6. Configure, build and test
+./scripts/liara.sh build --preset linux-release-clang
+./scripts/liara.sh test --preset linux-release-clang
+
+# 7. Run the demo
+./scripts/liara.sh launch --preset linux-release-clang
 </code></pre>
 <p><strong>On Windows 11:</strong></p>
 <pre><code class="language-powershell"># 1. Install Visual Studio 2022 with the "Desktop development with
@@ -2236,18 +2240,22 @@ git clone https://github.com/microsoft/vcpkg.git C:\vcpkg
 C:\vcpkg\bootstrap-vcpkg.bat
 [Environment]::SetEnvironmentVariable("VCPKG_ROOT", "C:\vcpkg", "User")
 
-# 4. Clone the meta repository and bootstrap the workspace
+# 4. Clone the meta repository
 git clone https://github.com/liara-engine/liara.git
 cd liara
-.\scripts\setup-workspace.ps1
 
-# 5. Configure and build
-cd workspace
-cmake --preset=windows-release
-cmake --build --preset=windows-release
+# 5. Verify the environment
+.\scripts\liara.ps1 verify # Should succeed with no errors
 
-# 6. Run the demo
-.\build\windows-release\launcher\Release\liara_launcher.exe
+# 6. Bootstrap the workspace
+.\scripts\liara.ps1 setup
+
+# 7. Configure, build and test
+.\scripts\liara.ps1 build --preset windows-release
+.\scripts\liara.ps1 test --preset windows-release
+
+# 8. Run the demo
+.\scripts\liara.ps1 launch --preset windows-release
 </code></pre>
 <p>If anything fails, the rest of this document explains each step in
 detail and lists known issues.</p>
@@ -2324,18 +2332,20 @@ fish_add_path $VCPKG_ROOT
 <pre><code class="language-bash">vcpkg --version
 </code></pre>
 <h3 id="24-clone-and-bootstrap-the-workspace"><a class="header" href="#24-clone-and-bootstrap-the-workspace">2.4 Clone and Bootstrap the Workspace</a></h3>
-<p>The meta repository’s bootstrap script clones the other repositories
-and configures the workspace:</p>
+<p>The meta repository’s unified Python orchestrator clones the other repositories,
+resolves dependencies and configures the workspace:</p>
 <pre><code class="language-bash">git clone https://github.com/liara-engine/liara.git
 cd liara
-./scripts/setup-workspace.sh
+./scripts/liara.sh setup
 </code></pre>
 <p>The script performs:</p>
 <ul>
-<li>Clone of <code>liara-interfaces</code>, <code>liara-core</code>, <code>liara-renderer</code> into
+<li>Clone or fast-forward update of <code>liara-interfaces</code>, <code>liara-core</code>, <code>liara-renderer</code> into
 <code>workspace/</code>.</li>
 <li>Generation of a top-level <code>CMakeLists.txt</code> that includes each
 module via <code>add_subdirectory()</code>.</li>
+<li>Merge of all submodules’ dependencies into a single root <code>workspace/vcpkg.json</code> manifest.</li>
+<li>Generation of workspace-level <code>CMakePresets.json</code> with pre-defined presets.</li>
 <li>Initial vcpkg dependency resolution (this can take 10-30 minutes
 on first run; subsequent runs are cached).</li>
 <li>Generation of <code>compile_commands.json</code> for clangd consumers.</li>
@@ -2343,10 +2353,15 @@ on first run; subsequent runs are cached).</li>
 <p>If the script fails partway through, it can be re-run. It is
 designed to be idempotent: running it twice does not break anything.</p>
 <h3 id="25-build-and-test"><a class="header" href="#25-build-and-test">2.5 Build and Test</a></h3>
-<p>The first build:</p>
-<pre><code class="language-bash">cd workspace
-cmake --preset=linux-release-clang
-cmake --build --preset=linux-release-clang
+<p>To build and test the project using the orchestrator:</p>
+<pre><code class="language-bash"># Build the default development preset (linux-debug-clang)
+./scripts/liara.sh build
+
+# Or build with a specific preset
+./scripts/liara.sh build --preset linux-release-clang
+
+# Run the test suite for the compiled preset
+./scripts/liara.sh test --preset linux-release-clang
 </code></pre>
 <p>The <code>linux-release-clang</code> preset is the recommended default for
 development. The other available presets:</p>
@@ -2356,14 +2371,13 @@ development. The other available presets:</p>
 <li><code>linux-release-gcc</code> — release build with GCC.</li>
 <li><code>linux-release-clang</code> — release build with Clang. Default.</li>
 </ul>
-<p>After a successful build, run the test suite:</p>
-<pre><code class="language-bash">ctest --preset=linux-debug-clang --output-on-failure
-</code></pre>
-<p>If all tests pass, the setup is complete.</p>
+<p>After a successful build, run the test suite.
+If all tests pass, the setup is complete.</p>
 <h3 id="26-run-the-demo"><a class="header" href="#26-run-the-demo">2.6 Run the Demo</a></h3>
 <p>The launcher built from the meta repository runs the engine’s
 sample scene:</p>
-<pre><code class="language-bash">./build/linux-release-clang/launcher/liara_launcher
+<pre><code class="language-bash"># Run the demo with the default preset
+./scripts/liara.sh launch --preset linux-release-clang
 </code></pre>
 <p>The demo opens a window showing the version-appropriate scene. In
 v0.1, this is a single triangle. In later versions, the demo grows
@@ -2442,7 +2456,7 @@ vulkaninfo --summary
 <p>If <code>vulkaninfo</code> does not list a GPU with Vulkan 1.3, the issue is
 GPU drivers. Update from your GPU vendor’s website (NVIDIA, AMD,
 Intel) before continuing.</p>
-<h3 id="33-cmake-and-git"><a class="header" href="#33-cmake-and-git">3.3 CMake and Git</a></h3>
+<h3 id="33-cmake-git-and-python"><a class="header" href="#33-cmake-git-and-python">3.3 CMake, Git and Python</a></h3>
 <p>CMake is included with Visual Studio’s CMake tools, but a standalone
 CMake 3.29+ is recommended for command-line work:</p>
 <pre><code class="language-powershell">winget install Kitware.CMake
@@ -2454,6 +2468,12 @@ install separately:</p>
 <p>Verify:</p>
 <pre><code class="language-powershell">cmake --version    # Must be 3.29 or newer
 git --version
+</code></pre>
+<p>Python is included with Visual Studio, but a standalone Python 3.12+installation is recommended for scripts:</p>
+<pre><code class="language-powershell">winget install Python.Python.3.12
+</code></pre>
+<p>Verify:</p>
+<pre><code class="language-powershell">python --version
 </code></pre>
 <h3 id="34-vcpkg"><a class="header" href="#34-vcpkg">3.4 vcpkg</a></h3>
 <p>Install vcpkg in <code>C:\vcpkg</code>:</p>
@@ -2471,32 +2491,38 @@ C:\vcpkg\bootstrap-vcpkg.bat
 <pre><code class="language-powershell">vcpkg --version
 </code></pre>
 <h3 id="35-clone-and-bootstrap"><a class="header" href="#35-clone-and-bootstrap">3.5 Clone and Bootstrap</a></h3>
-<pre><code class="language-powershell">git clone https://github.com/liara-engine/liara.git
+<pre><code class="language-powershell">git clone [https://github.com/liara-engine/liara.git](https://github.com/liara-engine/liara.git)
 cd liara
-.\scripts\setup-workspace.ps1
+.\scripts\liara.ps1 setup
 </code></pre>
-<p>The PowerShell version of the bootstrap script does the same as the
-Linux version: clones modules into <code>workspace\</code>, generates the
-top-level <code>CMakeLists.txt</code>, and resolves vcpkg dependencies.</p>
+<p>The PowerShell wrapper runs the unified Python CLI orchestrator which performs the
+exact same workspace setup as Linux: clones modules into <code>workspace\</code>, generates the
+top-level <code>CMakeLists.txt</code>, creates the merged <code>vcpkg.json</code> manifest, generates presets,
+and runs CMake configure.</p>
 <p>If PowerShell refuses to run the script due to execution policy:</p>
 <pre><code class="language-powershell">Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 </code></pre>
 <p>Then re-run.</p>
 <h3 id="36-build-and-test"><a class="header" href="#36-build-and-test">3.6 Build and Test</a></h3>
-<pre><code class="language-powershell">cd workspace
-cmake --preset=windows-release
-cmake --build --preset=windows-release
+<pre><code class="language-powershell"># Build the default development preset (windows-release)
+.\scripts\liara.ps1 build
+
+# Or build with a specific preset
+.\scripts\liara.ps1 build --preset windows-debug
+
+# Run tests
+.\scripts\liara.ps1 test --preset windows-debug
 </code></pre>
 <p>Available Windows presets:</p>
 <ul>
 <li><code>windows-debug</code> — debug build, single configuration.</li>
 <li><code>windows-release</code> — release build. Default for development.</li>
 </ul>
-<p>Run tests:</p>
-<pre><code class="language-powershell">ctest --preset=windows-debug --output-on-failure
-</code></pre>
+<p>After a successful build, run the test suite. If all tests pass, the
+setup is complete.</p>
 <h3 id="37-run-the-demo"><a class="header" href="#37-run-the-demo">3.7 Run the Demo</a></h3>
-<pre><code class="language-powershell">.\build\windows-release\launcher\Release\liara_launcher.exe
+<pre><code class="language-powershell"># Run the demo with the default preset
+.\scripts\liara.ps1 launch --preset windows-release
 </code></pre>
 <p>The Visual Studio generator places binaries under a configuration
 subdirectory (<code>Release\</code>), unlike Ninja’s flat layout. This is a
@@ -2526,12 +2552,12 @@ extension’s <code>clangd.path</code> setting if needed.</p>
 <hr>
 <h2 id="4-verifying-the-setup"><a class="header" href="#4-verifying-the-setup">4. Verifying the Setup</a></h2>
 <p>After completing the platform-specific setup, run the verification
-script provided by the meta repository:</p>
+CLI command provided by the meta repository:</p>
 <pre><code class="language-bash"># Linux
-./scripts/verify-environment.sh
+./scripts/liara.sh verify
 
 # Windows
-.\scripts\verify-environment.ps1
+.\scripts\liara.ps1 verify
 </code></pre>
 <p>The script checks:</p>
 <ul>
@@ -2539,11 +2565,19 @@ script provided by the meta repository:</p>
 <li><code>VCPKG_ROOT</code> is set and points to a valid vcpkg installation.</li>
 <li>The Vulkan SDK is functional.</li>
 <li>A trivial CMake project configures successfully.</li>
-<li>The compile commands database is generated (Linux only).</li>
 </ul>
 <p>The script’s exit code is the source of truth. If it succeeds, the
 environment is ready. If it fails, the message indicates what is
 missing or misconfigured.</p>
+<p>o also check optional but recommended development tools (such as
+<code>clang-format</code>, <code>clang-tidy</code>, <code>ccache</code>, <code>mold</code>, etc.), add the
+<code>--optional</code> flag:</p>
+<pre><code class="language-bash"># Linux
+./scripts/liara.sh verify --optional
+
+# Windows
+.\scripts\liara.ps1 verify --optional
+</code></pre>
 <hr>
 <h2 id="5-common-issues-and-workarounds"><a class="header" href="#5-common-issues-and-workarounds">5. Common Issues and Workarounds</a></h2>
 <h3 id="vcpkg-dependency-build-fails"><a class="header" href="#vcpkg-dependency-build-fails">vcpkg Dependency Build Fails</a></h3>
@@ -2587,11 +2621,9 @@ Re-run the Vulkan SDK installer or <code>pacman -S shaderc</code>.</p>
 <p>CLion’s CMake preset support requires the project to be opened at
 the level where <code>CMakePresets.json</code> lives. For Liara, this is
 <code>workspace/</code>, not the meta repo’s root.</p>
-<p>If presets still don’t appear, regenerate the workspace:</p>
-<pre><code class="language-bash">./scripts/setup-workspace.sh --force
+<p>If presets still don’t appear, you can force-regenerate the workspace by re-running the setup step:</p>
+<pre><code class="language-bash">./scripts/liara.sh setup
 </code></pre>
-<p>The <code>--force</code> flag wipes and recreates the workspace’s
-<code>CMakeLists.txt</code> and <code>CMakePresets.json</code>.</p>
 <h3 id="slow-linker-on-linux"><a class="header" href="#slow-linker-on-linux">Slow Linker on Linux</a></h3>
 <p>The default GNU <code>ld</code> is slow for large C++ projects. The CMake
 configuration uses <code>mold</code> if it is available, but if for some reason
@@ -2695,7 +2727,8 @@ sudo pacman -Syu
 winget upgrade --all
 </code></pre>
 <p>After a major system update, re-run the verification script:</p>
-<pre><code class="language-bash">./scripts/verify-environment.sh
+<pre><code class="language-bash">./scripts/liara.sh verify --optional  # Linux
+.\scripts\liara.ps1 verify --optional  # Windows
 </code></pre>
 <h3 id="updating-vcpkg"><a class="header" href="#updating-vcpkg">Updating vcpkg</a></h3>
 <p>vcpkg’s manifest mode pins dependencies via the registry baseline.
@@ -2711,9 +2744,13 @@ git pull
 <p>When module repositories receive updates, refresh the workspace:</p>
 <pre><code class="language-bash">cd liara
 git pull
-./scripts/setup-workspace.sh
+./scripts/liara.sh setup  # Or .ps1 on Windows
 </code></pre>
-<p>The bootstrap script <code>git pull</code>s each module repository.</p>
+<p>The orchestrator will automatically pull (<code>git pull</code>) each module
+repository and update the merged files. If you want to configure
+the workspace without fetching new git changes, you can use:</p>
+<pre><code class="language-bash">./scripts/liara.sh setup --no-pull  # Or .ps1 on Windows
+</code></pre>
 <h3 id="updating-the-vulkan-sdk-windows"><a class="header" href="#updating-the-vulkan-sdk-windows">Updating the Vulkan SDK (Windows)</a></h3>
 <p>Download the new SDK installer and run it. The installer cleanly
 upgrades over the existing installation. After upgrading, regenerate
@@ -2764,7 +2801,7 @@ included; the answer is often there).</li>
 <li>Compiler version</li>
 <li>The exact command that failed</li>
 <li>The complete error output</li>
-<li>The output of <code>./scripts/verify-environment.sh</code></li>
+<li>The output of <code>./scripts/liara.sh verify --optional</code> (or <code>.ps1</code> on Windows)</li>
 </ul>
 </li>
 </ul>
@@ -3422,39 +3459,41 @@ SpacesBeforeTrailingComments: 2
 # === BRACES ===
 BreakBeforeBraces: Custom
 BraceWrapping:
-  AfterCaseLabel:        false
-  AfterClass:            true
+  AfterCaseLabel: false
+  AfterClass: true
   AfterControlStatement: Never
-  AfterEnum:             true
-  AfterFunction:         false
-  AfterNamespace:        true
-  AfterStruct:           true
-  AfterUnion:            true
-  AfterExternBlock:      false
-  BeforeCatch:           true
-  BeforeElse:            true
-  BeforeWhile:           true
-  IndentBraces:          false
-  SplitEmptyFunction:    false
-  SplitEmptyRecord:      true
-  SplitEmptyNamespace:   true
+  AfterEnum: true
+  AfterFunction: false
+  AfterNamespace: true
+  AfterStruct: true
+  AfterUnion: true
+  AfterExternBlock: false
+  BeforeCatch: true
+  BeforeElse: true
+  BeforeWhile: true
+  IndentBraces: false
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: true
 
 # === SPACING ===
-SpaceAfterCStyleCast:               false
-SpaceAfterLogicalNot:               false
-SpaceAfterTemplateKeyword:          true
-SpaceBeforeAssignmentOperators:     true
-SpaceBeforeCpp11BracedList:         false
-SpaceBeforeCtorInitializerColon:    true
-SpaceBeforeInheritanceColon:        true
-SpaceBeforeParens:                  ControlStatements
-SpaceBeforeRangeBasedForLoopColon:  true
-SpaceInEmptyParentheses:            false
-SpacesInAngles:                     false
-SpacesInContainerLiterals:          false
-SpacesInCStyleCastParentheses:      false
-SpacesInParentheses:                false
-SpacesInSquareBrackets:             false
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: true
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: true
+SpacesInAngles: Never
+SpacesInContainerLiterals: false
+SpacesInSquareBrackets: false
+
+SpacesInParens: Custom
+SpacesInParensOptions:
+  InEmptyParentheses: false
+  InCStyleCasts: false
 
 # === POINTERS &amp; REFERENCES ===
 PointerAlignment: Left      # Type* var
@@ -3498,21 +3537,24 @@ IncludeCategories:
     SortPriority: 7
 
 # === ALIGNMENT ===
-AlignAfterOpenBracket: Align
-AlignArrayOfStructures: Left
+AlignAfterOpenBracket: true
+AlignArrayOfStructures: Right
 AlignConsecutiveAssignments: false
 AlignConsecutiveBitFields: Consecutive
 AlignConsecutiveDeclarations: false
 AlignConsecutiveMacros: Consecutive
 AlignEscapedNewlines: Left
-AlignOperands: AlignAfterOperator
+AlignOperands: Align
 
 # === BREAK / WRAP ===
-AlwaysBreakAfterReturnType: None
+BreakAfterReturnType: Automatic
+PenaltyReturnTypeOnItsOwnLine: 100000
 AlwaysBreakBeforeMultilineStrings: false
 AlwaysBreakTemplateDeclarations: Yes
 BinPackArguments: false
 BinPackParameters: false
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
 BreakBeforeBinaryOperators: NonAssignment
 BreakBeforeConceptDeclarations: Always
 BreakBeforeTernaryOperators: true
@@ -3526,12 +3568,12 @@ AllowShortLambdasOnASingleLine: All
 LambdaBodyIndentation: Signature
 
 # === CONTROL FLOW ===
-AllowShortBlocksOnASingleLine: Empty
-AllowShortCaseLabelsOnASingleLine: false
-AllowShortEnumsOnASingleLine: false
-AllowShortFunctionsOnASingleLine: Empty
-AllowShortIfStatementsOnASingleLine: WithoutElse
-AllowShortLoopsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Always
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortEnumsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+AllowShortLoopsOnASingleLine: true
 
 # === EMPTY LINES ===
 EmptyLineAfterAccessModifier: Never
@@ -3583,7 +3625,6 @@ Checks: &gt;
   -bugprone-easily-swappable-parameters,
   -bugprone-narrowing-conversions,
   cert-*,
-  -cert-err58-cpp,
   clang-analyzer-*,
   concurrency-*,
   cppcoreguidelines-*,
@@ -3596,7 +3637,6 @@ Checks: &gt;
   -cppcoreguidelines-avoid-non-const-global-variables,
   misc-*,
   -misc-non-private-member-variables-in-classes,
-  -misc-no-recursion,
   modernize-*,
   -modernize-use-trailing-return-type,
   -modernize-avoid-c-arrays,
@@ -3605,9 +3645,10 @@ Checks: &gt;
   readability-*,
   -readability-magic-numbers,
   -readability-identifier-length,
-  -readability-named-parameter,
 
-WarningsAsErrors: ''
+WarningsAsErrors: &gt;
+  *,
+  -readability-identifier-naming
 
 HeaderFilterRegex: '^(src|include)/.*\.(h|hpp|tpp)$'
 
