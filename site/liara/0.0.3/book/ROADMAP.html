@@ -292,7 +292,7 @@ organization:</p>
 </ul>
 <p>Each module repository contains a minimal stub: a CMakeLists.txt
 that compiles, a README that points to the meta repository’s docs,
-LICENSE, .gitignore, .editorconfig, .clang-format, .clang-tidy,
+<del>LICENSE</del>, .gitignore, .editorconfig, .clang-format, .clang-tidy,
 and a placeholder test that passes.</p>
 <p>The <code>liara-editor</code> and <code>liara-physics</code> repositories are <strong>not</strong>
 created in Phase 0. They will be created when their first code is
@@ -329,20 +329,20 @@ push and pull request:</p>
 <p>The reusable workflows that implement these steps live in the
 <code>.github</code> organization-level repository and are invoked from each
 module’s workflows.</p>
-<h3 id="release-please-configured"><a class="header" href="#release-please-configured">Release-Please Configured</a></h3>
-<p>Each repository has <code>release-please</code> configured to track conventional
+<h3 id="release-please-configured"><a class="header" href="#release-please-configured"><del>Release-Please Configured</del></a></h3>
+<p><del>Each repository has <code>release-please</code> configured to track conventional
 commits and produce release PRs automatically. The configuration is
 in <code>.release-please-manifest.json</code> and <code>release-please-config.json</code>
-at each repository’s root.</p>
-<h3 id="workspace-bootstrap-working"><a class="header" href="#workspace-bootstrap-working">Workspace Bootstrap Working</a></h3>
-<p>The meta repository contains a <code>scripts/setup-workspace.sh</code> script
-that:</p>
+at each repository’s root.</del></p>
+<h3 id="workspace-bootstrap-working"><a class="header" href="#workspace-bootstrap-working"><del>Workspace Bootstrap Working</del></a></h3>
+<p><del>The meta repository contains a <code>scripts/setup-workspace.sh</code> script
+that:</del></p>
 <ul>
-<li>Clones each module repository into a <code>workspace/</code> directory.</li>
-<li>Generates a top-level <code>CMakeLists.txt</code> that uses <code>add_subdirectory</code>
-to include each module.</li>
-<li>Configures CMake with the appropriate presets.</li>
-<li>Produces a <code>compile_commands.json</code> for clangd consumers.</li>
+<li><del>Clones each module repository into a <code>workspace/</code> directory.</del></li>
+<li><del>Generates a top-level <code>CMakeLists.txt</code> that uses <code>add_subdirectory</code>
+to include each module.</del></li>
+<li><del>Configures CMake with the appropriate presets.</del></li>
+<li><del>Produces a <code>compile_commands.json</code> for clangd consumers.</del></li>
 </ul>
 <p>The script’s success criterion: starting from a fresh clone of the
 meta repository on a system with the required dependencies (Vulkan
@@ -370,8 +370,8 @@ expected versions of each module. In Phase 0, all modules are at
 <li><input disabled="" type="checkbox"> All listed documents are written.</li>
 <li><input disabled="" type="checkbox"> CI is green on every repository (even if testing only stubs).</li>
 <li><input disabled="" type="checkbox" checked=""> Documentation is generated and deployed to cloudflare pages.</li>
-<li><input disabled="" type="checkbox" checked=""> The hub at <code>liara-engine.github.io</code> is accessible and renders
-with the navbar.</li>
+<li><input disabled="" type="checkbox" checked=""> The hub at <code>liara-engine.liara-engine-documentation.workers.dev</code>
+is accessible and renders with the navbar.</li>
 <li><input disabled="" type="checkbox"> The workspace bootstrap script runs successfully on a clean
 Arch Linux machine.</li>
 <li><input disabled="" type="checkbox"> The workspace bootstrap script runs successfully on a clean
