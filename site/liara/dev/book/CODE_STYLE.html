@@ -277,39 +277,41 @@ SpacesBeforeTrailingComments: 2
 # === BRACES ===
 BreakBeforeBraces: Custom
 BraceWrapping:
-  AfterCaseLabel:        false
-  AfterClass:            true
+  AfterCaseLabel: false
+  AfterClass: true
   AfterControlStatement: Never
-  AfterEnum:             true
-  AfterFunction:         false
-  AfterNamespace:        true
-  AfterStruct:           true
-  AfterUnion:            true
-  AfterExternBlock:      false
-  BeforeCatch:           true
-  BeforeElse:            true
-  BeforeWhile:           true
-  IndentBraces:          false
-  SplitEmptyFunction:    false
-  SplitEmptyRecord:      true
-  SplitEmptyNamespace:   true
+  AfterEnum: true
+  AfterFunction: false
+  AfterNamespace: true
+  AfterStruct: true
+  AfterUnion: true
+  AfterExternBlock: false
+  BeforeCatch: true
+  BeforeElse: true
+  BeforeWhile: true
+  IndentBraces: false
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: true
 
 # === SPACING ===
-SpaceAfterCStyleCast:               false
-SpaceAfterLogicalNot:               false
-SpaceAfterTemplateKeyword:          true
-SpaceBeforeAssignmentOperators:     true
-SpaceBeforeCpp11BracedList:         false
-SpaceBeforeCtorInitializerColon:    true
-SpaceBeforeInheritanceColon:        true
-SpaceBeforeParens:                  ControlStatements
-SpaceBeforeRangeBasedForLoopColon:  true
-SpaceInEmptyParentheses:            false
-SpacesInAngles:                     false
-SpacesInContainerLiterals:          false
-SpacesInCStyleCastParentheses:      false
-SpacesInParentheses:                false
-SpacesInSquareBrackets:             false
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: true
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: true
+SpacesInAngles: Never
+SpacesInContainerLiterals: false
+SpacesInSquareBrackets: false
+
+SpacesInParens: Custom
+SpacesInParensOptions:
+  InEmptyParentheses: false
+  InCStyleCasts: false
 
 # === POINTERS &amp; REFERENCES ===
 PointerAlignment: Left      # Type* var
@@ -353,21 +355,24 @@ IncludeCategories:
     SortPriority: 7
 
 # === ALIGNMENT ===
-AlignAfterOpenBracket: Align
-AlignArrayOfStructures: Left
+AlignAfterOpenBracket: true
+AlignArrayOfStructures: Right
 AlignConsecutiveAssignments: false
 AlignConsecutiveBitFields: Consecutive
 AlignConsecutiveDeclarations: false
 AlignConsecutiveMacros: Consecutive
 AlignEscapedNewlines: Left
-AlignOperands: AlignAfterOperator
+AlignOperands: Align
 
 # === BREAK / WRAP ===
-AlwaysBreakAfterReturnType: None
+BreakAfterReturnType: Automatic
+PenaltyReturnTypeOnItsOwnLine: 100000
 AlwaysBreakBeforeMultilineStrings: false
 AlwaysBreakTemplateDeclarations: Yes
 BinPackArguments: false
 BinPackParameters: false
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
 BreakBeforeBinaryOperators: NonAssignment
 BreakBeforeConceptDeclarations: Always
 BreakBeforeTernaryOperators: true
@@ -381,12 +386,12 @@ AllowShortLambdasOnASingleLine: All
 LambdaBodyIndentation: Signature
 
 # === CONTROL FLOW ===
-AllowShortBlocksOnASingleLine: Empty
-AllowShortCaseLabelsOnASingleLine: false
-AllowShortEnumsOnASingleLine: false
-AllowShortFunctionsOnASingleLine: Empty
-AllowShortIfStatementsOnASingleLine: WithoutElse
-AllowShortLoopsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Always
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortEnumsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+AllowShortLoopsOnASingleLine: true
 
 # === EMPTY LINES ===
 EmptyLineAfterAccessModifier: Never
@@ -438,7 +443,6 @@ Checks: &gt;
   -bugprone-easily-swappable-parameters,
   -bugprone-narrowing-conversions,
   cert-*,
-  -cert-err58-cpp,
   clang-analyzer-*,
   concurrency-*,
   cppcoreguidelines-*,
@@ -451,7 +455,6 @@ Checks: &gt;
   -cppcoreguidelines-avoid-non-const-global-variables,
   misc-*,
   -misc-non-private-member-variables-in-classes,
-  -misc-no-recursion,
   modernize-*,
   -modernize-use-trailing-return-type,
   -modernize-avoid-c-arrays,
@@ -460,9 +463,10 @@ Checks: &gt;
   readability-*,
   -readability-magic-numbers,
   -readability-identifier-length,
-  -readability-named-parameter,
 
-WarningsAsErrors: ''
+WarningsAsErrors: &gt;
+  *,
+  -readability-identifier-naming
 
 HeaderFilterRegex: '^(src|include)/.*\.(h|hpp|tpp)$'
 
