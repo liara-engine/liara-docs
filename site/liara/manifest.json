@@ -3,7 +3,7 @@
   "metadata": {
     "name": "Liara Engine Meta Repo",
     "description": "Meta documentation about the Liara Engine project, including tooling, contribution guidelines, and other non-module-specific information.",
-    "latest": "0.0.2"
+    "latest": "0.0.3"
   },
   "versions": {
     "dev": {
@@ -17,6 +17,11 @@
       ]
     },
     "0.0.2": {
+      "abi_compatibility": [
+        "dev"
+      ]
+    },
+    "0.0.3": {
       "abi_compatibility": [
         "dev"
       ]
