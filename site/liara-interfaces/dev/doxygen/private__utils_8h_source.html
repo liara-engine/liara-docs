@@ -1,7 +1,7 @@
 <!--
     Liara Engine — Doxygen header template
     This template replaces Doxygen's default <head> + opening of <body>.
-    Doxygen substitutes special tokens like include/liara Directory Reference, , <link href="navtree.css" rel="stylesheet" type="text/css"/>
+    Doxygen substitutes special tokens like include/liara/private_utils.h Source File, , <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
@@ -14,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11"/>
     <meta name="generator" content="Doxygen 1.17.0"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>liara-interfaces: include/liara Directory Reference</title>
+    <title>liara-interfaces: include/liara/private_utils.h Source File</title>
     <!-- Fonts: Inter for sans, JetBrains Mono for code, OpenDyslexic for a11y -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 <script type="text/javascript">
-document.addEventListener('DOMContentLoaded',() => { initNavTree('dir_285aa40730b2df8f5cd48498b8604c92.html','',''); });
+document.addEventListener('DOMContentLoaded',() => { initNavTree('private__utils_8h_source.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -145,27 +145,28 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dir_285aa40730
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">liara Directory Reference</div></div>
+  <div class="headertitle"><div class="title">private_utils.h</div></div>
 </div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>
-Files</h2></td></tr>
-<tr class="memitem:abi_5Fversion_2Eh" id="r_abi_5Fversion_2Eh"><td class="memItemLeft"><a href="abi__version_8h_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight"><a class="el" href="abi__version_8h.html">abi_version.h</a></td></tr>
-<tr class="memdesc:abi__version_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Liara ABI version definition and compatibility rules. <br /></td></tr>
-<tr class="memitem:private_5Futils_2Eh" id="r_private_5Futils_2Eh"><td class="memItemLeft"><a href="private__utils_8h_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight"><a class="el" href="private__utils_8h.html">private_utils.h</a></td></tr>
-<tr class="memitem:version_2Eh" id="r_version_2Eh"><td class="memItemLeft"><a href="version_8h_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight"><a class="el" href="version_8h.html">version.h</a></td></tr>
-<tr class="memdesc:version_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic 32-bit version encoding/decoding and utilities. <br /></td></tr>
-</table>
-</div><!-- contents -->
+<a href="private__utils_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">    #define LIARA_STATIC_ASSERT(cond, msg) static_assert(cond, msg)</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#elif __STDC_VERSION__ &gt;= 202311L</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">    #define LIARA_STATIC_ASSERT(cond, msg) static_assert(cond, msg)</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="private__utils_8h.html#a9cdb694a5a39cdf603ff21875124c400">   12</a></span><span class="preprocessor">    #define LIARA_STATIC_ASSERT(cond, msg) _Static_assert(cond, msg)</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>}</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#endif</span></div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div id="page-nav" class="page-nav-panel">
-<div id="page-nav-resize-handle"></div>
-<div id="page-nav-tree">
-<div id="page-nav-contents">
-</div><!-- page-nav-contents -->
-</div><!-- page-nav-tree -->
-</div><!-- page-nav -->
 </div><!-- container -->
 <!--
     Liara Engine — Doxygen footer template
@@ -175,7 +176,7 @@ Files</h2></td></tr>
 -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
     <ul>
-        <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_285aa40730b2df8f5cd48498b8604c92.html">liara</a></li>
+        <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_285aa40730b2df8f5cd48498b8604c92.html">liara</a></li><li class="navelem"><a href="private__utils_8h.html">private_utils.h</a></li>
         <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
     </ul>
 </div>
