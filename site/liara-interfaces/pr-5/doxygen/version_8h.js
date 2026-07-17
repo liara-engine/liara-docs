@@ -14,7 +14,7 @@ var version_8h =
     [ "LIARA_VERSION_PATCH_MASK", "version_8h.html#a474542da7831f5d0527294e94775f72b", null ],
     [ "LIARA_VERSION_PATCH_SHIFT", "version_8h.html#ae91e05419e0418901b1610e6bbbe1f68", null ],
     [ "LIARA_STATIC_ASSERT", "version_8h.html#af57cf9ba2d5ca1568038ff302815954b", null ],
-    [ "liara_try_make_version", "version_8h.html#ab4a5f8adb5c217b4c515688ffeaee352", null ],
+    [ "liara_try_make_version", "version_8h.html#a79d43227c96e44d65638d87ae446c72a", null ],
     [ "liara_version_eq", "version_8h.html#a44fcd09fc099956390af1d506476d4f9", null ],
     [ "liara_version_gt", "version_8h.html#af14552fe3fb19cd895d6df5f0f7944aa", null ],
     [ "liara_version_gte", "version_8h.html#a2ab3d9638910f61c194dd2daae5ec640", null ],
