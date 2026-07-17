@@ -151,7 +151,8 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('version_8h.htm
 
 <p>Generic 32-bit version encoding/decoding and utilities.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="private__utils_8h_source.html">liara/private_utils.h</a>&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
 </div>
@@ -179,6 +180,7 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:af57cf9ba2d5ca1568038ff302815954b" id="r_af57cf9ba2d5ca1568038ff302815954b"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#af57cf9ba2d5ca1568038ff302815954b">LIARA_STATIC_ASSERT</a> (<a class="el" href="#ac41a58838efb97a050f2cc6786259fde">LIARA_VERSION_MAJOR_BITS</a>+<a class="el" href="#a4c030fe28eb7ba8d4d0127de1663a36d">LIARA_VERSION_MINOR_BITS</a>+<a class="el" href="#a47f6351c340557f03ba264dc1ac8f9a5">LIARA_VERSION_PATCH_BITS</a>&lt;=32u, &quot;Version components exceed 32 bits&quot;)</td></tr>
 <tr class="memitem:ab4a5f8adb5c217b4c515688ffeaee352" id="r_ab4a5f8adb5c217b4c515688ffeaee352"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#ab4a5f8adb5c217b4c515688ffeaee352">liara_try_make_version</a> (const uint32_t major, const uint32_t minor, const uint32_t patch, uint32_t *out_version)</td></tr>
 <tr class="memdesc:ab4a5f8adb5c217b4c515688ffeaee352"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline function to create a version number from major, minor, and patch components, with output parameter.  <br /></td></tr>
 <tr class="memitem:a3ed7190d8840207d6a7328f37db27b32" id="r_a3ed7190d8840207d6a7328f37db27b32"><td class="memItemLeft">static uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a3ed7190d8840207d6a7328f37db27b32">liara_version_major</a> (const uint32_t v)</td></tr>
@@ -228,9 +230,9 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">(uint32_t)(((uint32_t)(major) &lt;&lt; <a class="code hl_define" href="#a7dba188c54a7ecc4a0b1061e65cf0e27">LIARA_VERSION_MAJOR_SHIFT</a>) | ((uint32_t)(minor) &lt;&lt; <a class="code hl_define" href="#a9215d415f742a835e45c532f7d5e1052">LIARA_VERSION_MINOR_SHIFT</a>) \</div>
 <div class="line">           | ((uint32_t)(patch) &lt;&lt; <a class="code hl_define" href="#ae91e05419e0418901b1610e6bbbe1f68">LIARA_VERSION_PATCH_SHIFT</a>))</div>
-<div class="ttc" id="aversion_8h_html_a7dba188c54a7ecc4a0b1061e65cf0e27"><div class="ttname"><a href="#a7dba188c54a7ecc4a0b1061e65cf0e27">LIARA_VERSION_MAJOR_SHIFT</a></div><div class="ttdeci">#define LIARA_VERSION_MAJOR_SHIFT</div><div class="ttdef"><b>Definition</b> version.h:20</div></div>
-<div class="ttc" id="aversion_8h_html_a9215d415f742a835e45c532f7d5e1052"><div class="ttname"><a href="#a9215d415f742a835e45c532f7d5e1052">LIARA_VERSION_MINOR_SHIFT</a></div><div class="ttdeci">#define LIARA_VERSION_MINOR_SHIFT</div><div class="ttdef"><b>Definition</b> version.h:21</div></div>
-<div class="ttc" id="aversion_8h_html_ae91e05419e0418901b1610e6bbbe1f68"><div class="ttname"><a href="#ae91e05419e0418901b1610e6bbbe1f68">LIARA_VERSION_PATCH_SHIFT</a></div><div class="ttdeci">#define LIARA_VERSION_PATCH_SHIFT</div><div class="ttdef"><b>Definition</b> version.h:22</div></div>
+<div class="ttc" id="aversion_8h_html_a7dba188c54a7ecc4a0b1061e65cf0e27"><div class="ttname"><a href="#a7dba188c54a7ecc4a0b1061e65cf0e27">LIARA_VERSION_MAJOR_SHIFT</a></div><div class="ttdeci">#define LIARA_VERSION_MAJOR_SHIFT</div><div class="ttdef"><b>Definition</b> version.h:22</div></div>
+<div class="ttc" id="aversion_8h_html_a9215d415f742a835e45c532f7d5e1052"><div class="ttname"><a href="#a9215d415f742a835e45c532f7d5e1052">LIARA_VERSION_MINOR_SHIFT</a></div><div class="ttdeci">#define LIARA_VERSION_MINOR_SHIFT</div><div class="ttdef"><b>Definition</b> version.h:23</div></div>
+<div class="ttc" id="aversion_8h_html_ae91e05419e0418901b1610e6bbbe1f68"><div class="ttname"><a href="#ae91e05419e0418901b1610e6bbbe1f68">LIARA_VERSION_PATCH_SHIFT</a></div><div class="ttdeci">#define LIARA_VERSION_PATCH_SHIFT</div><div class="ttdef"><b>Definition</b> version.h:24</div></div>
 </div><!-- fragment -->
 <p>Create a version number from major, minor, and patch components, with NO safety checks. </p>
 <p>This macro combines the major, minor, and patch version numbers into a single 32-bit unsigned integer.</p>
@@ -242,9 +244,9 @@ Functions</h2></td></tr>
 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">major</td><td>The major version number (0-1023). </td></tr>
-    <tr><td class="paramname">minor</td><td>The minor version number (0-1023). </td></tr>
-    <tr><td class="paramname">patch</td><td>The patch version number (0-4095). </td></tr>
+    <tr><td class="paramname">major[in]</td><td>The major version number (0-1023). </td></tr>
+    <tr><td class="paramname">minor[in]</td><td>The minor version number (0-1023). </td></tr>
+    <tr><td class="paramname">patch[in]</td><td>The patch version number (0-4095). </td></tr>
   </table>
   </dd>
 </dl>
@@ -271,13 +273,13 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">(((uint32_t)(v) &gt;&gt; <a class="code hl_define" href="#a7dba188c54a7ecc4a0b1061e65cf0e27">LIARA_VERSION_MAJOR_SHIFT</a>) &amp; <a class="code hl_define" href="#a80857ca4a694ce0ca9c432a76254e01c">LIARA_VERSION_MAJOR_MASK</a>)</div>
-<div class="ttc" id="aversion_8h_html_a80857ca4a694ce0ca9c432a76254e01c"><div class="ttname"><a href="#a80857ca4a694ce0ca9c432a76254e01c">LIARA_VERSION_MAJOR_MASK</a></div><div class="ttdeci">#define LIARA_VERSION_MAJOR_MASK</div><div class="ttdef"><b>Definition</b> version.h:24</div></div>
+<div class="ttc" id="aversion_8h_html_a80857ca4a694ce0ca9c432a76254e01c"><div class="ttname"><a href="#a80857ca4a694ce0ca9c432a76254e01c">LIARA_VERSION_MAJOR_MASK</a></div><div class="ttdeci">#define LIARA_VERSION_MAJOR_MASK</div><div class="ttdef"><b>Definition</b> version.h:26</div></div>
 </div><!-- fragment -->
 <p>Extract the major version component from a combined version number. </p>
 <p>This macro extracts the major version number from a combined version number by shifting and masking.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>The combined version number from which to extract the major version. </td></tr>
+    <tr><td class="paramname">v[in]</td><td>The combined version number from which to extract the major version. </td></tr>
   </table>
   </dd>
 </dl>
@@ -346,13 +348,13 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">(((uint32_t)(v) &gt;&gt; <a class="code hl_define" href="#a9215d415f742a835e45c532f7d5e1052">LIARA_VERSION_MINOR_SHIFT</a>) &amp; <a class="code hl_define" href="#ad80a2c3254820ceb00c35ec180a49bcb">LIARA_VERSION_MINOR_MASK</a>)</div>
-<div class="ttc" id="aversion_8h_html_ad80a2c3254820ceb00c35ec180a49bcb"><div class="ttname"><a href="#ad80a2c3254820ceb00c35ec180a49bcb">LIARA_VERSION_MINOR_MASK</a></div><div class="ttdeci">#define LIARA_VERSION_MINOR_MASK</div><div class="ttdef"><b>Definition</b> version.h:25</div></div>
+<div class="ttc" id="aversion_8h_html_ad80a2c3254820ceb00c35ec180a49bcb"><div class="ttname"><a href="#ad80a2c3254820ceb00c35ec180a49bcb">LIARA_VERSION_MINOR_MASK</a></div><div class="ttdeci">#define LIARA_VERSION_MINOR_MASK</div><div class="ttdef"><b>Definition</b> version.h:27</div></div>
 </div><!-- fragment -->
 <p>Extract the minor version component from a combined version number. </p>
 <p>This macro extracts the minor version number from a combined version number by shifting and masking.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>The combined version number from which to extract the minor version. </td></tr>
+    <tr><td class="paramname">v[in]</td><td>The combined version number from which to extract the minor version. </td></tr>
   </table>
   </dd>
 </dl>
@@ -421,13 +423,13 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">(((uint32_t)(v) &gt;&gt; <a class="code hl_define" href="#ae91e05419e0418901b1610e6bbbe1f68">LIARA_VERSION_PATCH_SHIFT</a>) &amp; <a class="code hl_define" href="#a474542da7831f5d0527294e94775f72b">LIARA_VERSION_PATCH_MASK</a>)</div>
-<div class="ttc" id="aversion_8h_html_a474542da7831f5d0527294e94775f72b"><div class="ttname"><a href="#a474542da7831f5d0527294e94775f72b">LIARA_VERSION_PATCH_MASK</a></div><div class="ttdeci">#define LIARA_VERSION_PATCH_MASK</div><div class="ttdef"><b>Definition</b> version.h:26</div></div>
+<div class="ttc" id="aversion_8h_html_a474542da7831f5d0527294e94775f72b"><div class="ttname"><a href="#a474542da7831f5d0527294e94775f72b">LIARA_VERSION_PATCH_MASK</a></div><div class="ttdeci">#define LIARA_VERSION_PATCH_MASK</div><div class="ttdef"><b>Definition</b> version.h:28</div></div>
 </div><!-- fragment -->
 <p>Extract the patch version component from a combined version number. </p>
 <p>This macro extracts the patch version number from a combined version number by shifting and masking.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>The combined version number from which to extract the patch version. </td></tr>
+    <tr><td class="paramname">v[in]</td><td>The combined version number from which to extract the patch version. </td></tr>
   </table>
   </dd>
 </dl>
@@ -482,6 +484,27 @@ Functions</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="af57cf9ba2d5ca1568038ff302815954b" name="af57cf9ba2d5ca1568038ff302815954b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af57cf9ba2d5ca1568038ff302815954b">&#9670;&#160;</a></span>LIARA_STATIC_ASSERT()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LIARA_STATIC_ASSERT </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ac41a58838efb97a050f2cc6786259fde">LIARA_VERSION_MAJOR_BITS</a>+<a class="el" href="#a4c030fe28eb7ba8d4d0127de1663a36d">LIARA_VERSION_MINOR_BITS</a>+<a class="el" href="#a47f6351c340557f03ba264dc1ac8f9a5">LIARA_VERSION_PATCH_BITS</a>&lt;=</td>          <td class="paramname"><span class="paramname"><em>32u</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&quot;Version components exceed 32 bits&quot;</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ab4a5f8adb5c217b4c515688ffeaee352" name="ab4a5f8adb5c217b4c515688ffeaee352"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab4a5f8adb5c217b4c515688ffeaee352">&#9670;&#160;</a></span>liara_try_make_version()</h2>
 
@@ -529,10 +552,10 @@ Functions</h2></td></tr>
 <p>The allocation of the output parameter is the responsibility of the caller, and it must be a valid pointer to a uint32_t.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">major</td><td>The major version number (0-1023). </td></tr>
-    <tr><td class="paramname">minor</td><td>The minor version number (0-1023). *</td></tr>
-    <tr><td class="paramname">patch</td><td>The patch version number (0-4095). </td></tr>
-    <tr><td class="paramname">out_version</td><td>Pointer to a uint32_t where the combined version will be stored if successful. </td></tr>
+    <tr><td class="paramname">major[in]</td><td>The major version number (0-1023). </td></tr>
+    <tr><td class="paramname">minor[in]</td><td>The minor version number (0-1023). </td></tr>
+    <tr><td class="paramname">patch[in]</td><td>The patch version number (0-4095). </td></tr>
+    <tr><td class="paramname">out_version[out]</td><td>Pointer to a uint32_t where the combined version will be stored if successful. </td></tr>
   </table>
   </dd>
 </dl>
@@ -580,9 +603,9 @@ Functions</h2></td></tr>
 <p>This function compares two version numbers for equality. If the <span class="tt">ignore_patch</span> parameter is set to a non-zero value, the comparison will only consider the major and minor version components, ignoring the patch version.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v1</td><td>The first version number to compare. </td></tr>
-    <tr><td class="paramname">v2</td><td>The second version number to compare. </td></tr>
-    <tr><td class="paramname">ignore_patch</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
+    <tr><td class="paramname">v1[in]</td><td>The first version number to compare. </td></tr>
+    <tr><td class="paramname">v2[in]</td><td>The second version number to compare. </td></tr>
+    <tr><td class="paramname">ignore_patch[in]</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
   </table>
   </dd>
 </dl>
@@ -630,9 +653,9 @@ Functions</h2></td></tr>
 <p>This function compares two version numbers to determine if the first is greater than the second. If the <span class="tt">ignore_patch</span> parameter is set to a non-zero value, the comparison will only consider the major and minor version components, ignoring the patch version.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v1</td><td>The first version number to compare. </td></tr>
-    <tr><td class="paramname">v2</td><td>The second version number to compare. </td></tr>
-    <tr><td class="paramname">ignore_patch</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
+    <tr><td class="paramname">v1[in]</td><td>The first version number to compare. </td></tr>
+    <tr><td class="paramname">v2[in]</td><td>The second version number to compare. </td></tr>
+    <tr><td class="paramname">ignore_patch[in]</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
   </table>
   </dd>
 </dl>
@@ -680,9 +703,9 @@ Functions</h2></td></tr>
 <p>This function compares two version numbers to determine if the first is greater than or equal to the second. If the <span class="tt">ignore_patch</span> parameter is set to a non-zero value, the comparison will only consider the major and minor version components, ignoring the patch version.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v1</td><td>The first version number to compare. </td></tr>
-    <tr><td class="paramname">v2</td><td>The second version number to compare. </td></tr>
-    <tr><td class="paramname">ignore_patch</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
+    <tr><td class="paramname">v1[in]</td><td>The first version number to compare. </td></tr>
+    <tr><td class="paramname">v2[in]</td><td>The second version number to compare. </td></tr>
+    <tr><td class="paramname">ignore_patch[in]</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
   </table>
   </dd>
 </dl>
@@ -730,9 +753,9 @@ Functions</h2></td></tr>
 <p>This function compares two version numbers to determine if the first is less than the second. If the <span class="tt">ignore_patch</span> parameter is set to a non-zero value, the comparison will only consider the major and minor version components, ignoring the patch version.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v1</td><td>The first version number to compare. </td></tr>
-    <tr><td class="paramname">v2</td><td>The second version number to compare. </td></tr>
-    <tr><td class="paramname">ignore_patch</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
+    <tr><td class="paramname">v1[in]</td><td>The first version number to compare. </td></tr>
+    <tr><td class="paramname">v2[in]</td><td>The second version number to compare. </td></tr>
+    <tr><td class="paramname">ignore_patch[in]</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
   </table>
   </dd>
 </dl>
@@ -780,9 +803,9 @@ Functions</h2></td></tr>
 <p>This function compares two version numbers to determine if the first is less than or equal to the second. If the <span class="tt">ignore_patch</span> parameter is set to a non-zero value, the comparison will only consider the major and minor version components, ignoring the patch version.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v1</td><td>The first version number to compare. </td></tr>
-    <tr><td class="paramname">v2</td><td>The second version number to compare. </td></tr>
-    <tr><td class="paramname">ignore_patch</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
+    <tr><td class="paramname">v1[in]</td><td>The first version number to compare. </td></tr>
+    <tr><td class="paramname">v2[in]</td><td>The second version number to compare. </td></tr>
+    <tr><td class="paramname">ignore_patch[in]</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
   </table>
   </dd>
 </dl>
@@ -821,7 +844,7 @@ Functions</h2></td></tr>
 <p>This function is a wrapper around the LIARA_VERSION_MAJOR macro for other languages that may not support macros or for better type safety in C. It extracts the major version number from a combined version number by shifting and masking.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>The combined version number from which to extract the major version. </td></tr>
+    <tr><td class="paramname">v[in]</td><td>The combined version number from which to extract the major version. </td></tr>
   </table>
   </dd>
 </dl>
@@ -860,7 +883,7 @@ Functions</h2></td></tr>
 <p>This function is a wrapper around the LIARA_VERSION_MINOR macro for other languages that may not support macros or for better type safety in C. It extracts the minor version number from a combined version number by shifting and masking.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>The combined version number from which to extract the minor version. </td></tr>
+    <tr><td class="paramname">v[in]</td><td>The combined version number from which to extract the minor version. </td></tr>
   </table>
   </dd>
 </dl>
@@ -908,9 +931,9 @@ Functions</h2></td></tr>
 <p>This function compares two version numbers for inequality. If the <span class="tt">ignore_patch</span> parameter is set to a non-zero value, the comparison will only consider the major and minor version components, ignoring the patch version.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v1</td><td>The first version number to compare. </td></tr>
-    <tr><td class="paramname">v2</td><td>The second version number to compare. </td></tr>
-    <tr><td class="paramname">ignore_patch</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
+    <tr><td class="paramname">v1[in]</td><td>The first version number to compare. </td></tr>
+    <tr><td class="paramname">v2[in]</td><td>The second version number to compare. </td></tr>
+    <tr><td class="paramname">ignore_patch[in]</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
   </table>
   </dd>
 </dl>
@@ -949,7 +972,7 @@ Functions</h2></td></tr>
 <p>This function is a wrapper around the LIARA_VERSION_PATCH macro for other languages that may not support macros or for better type safety in C. It extracts the patch version number from a combined version number by shifting and masking.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>The combined version number from which to extract the patch version. </td></tr>
+    <tr><td class="paramname">v[in]</td><td>The combined version number from which to extract the patch version. </td></tr>
   </table>
   </dd>
 </dl>
