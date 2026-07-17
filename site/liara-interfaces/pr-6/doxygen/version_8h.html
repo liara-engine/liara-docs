@@ -244,9 +244,9 @@ Functions</h2></td></tr>
 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">major</td><td>The major version number (0-1023). </td></tr>
-    <tr><td class="paramname">minor</td><td>The minor version number (0-1023). </td></tr>
-    <tr><td class="paramname">patch</td><td>The patch version number (0-4095). </td></tr>
+    <tr><td class="paramname">major[in]</td><td>The major version number (0-1023). </td></tr>
+    <tr><td class="paramname">minor[in]</td><td>The minor version number (0-1023). </td></tr>
+    <tr><td class="paramname">patch[in]</td><td>The patch version number (0-4095). </td></tr>
   </table>
   </dd>
 </dl>
@@ -279,7 +279,7 @@ Functions</h2></td></tr>
 <p>This macro extracts the major version number from a combined version number by shifting and masking.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>The combined version number from which to extract the major version. </td></tr>
+    <tr><td class="paramname">v[in]</td><td>The combined version number from which to extract the major version. </td></tr>
   </table>
   </dd>
 </dl>
@@ -354,7 +354,7 @@ Functions</h2></td></tr>
 <p>This macro extracts the minor version number from a combined version number by shifting and masking.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>The combined version number from which to extract the minor version. </td></tr>
+    <tr><td class="paramname">v[in]</td><td>The combined version number from which to extract the minor version. </td></tr>
   </table>
   </dd>
 </dl>
@@ -429,7 +429,7 @@ Functions</h2></td></tr>
 <p>This macro extracts the patch version number from a combined version number by shifting and masking.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>The combined version number from which to extract the patch version. </td></tr>
+    <tr><td class="paramname">v[in]</td><td>The combined version number from which to extract the patch version. </td></tr>
   </table>
   </dd>
 </dl>
@@ -552,10 +552,10 @@ Functions</h2></td></tr>
 <p>The allocation of the output parameter is the responsibility of the caller, and it must be a valid pointer to a uint32_t.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">major</td><td>The major version number (0-1023). </td></tr>
-    <tr><td class="paramname">minor</td><td>The minor version number (0-1023). *</td></tr>
-    <tr><td class="paramname">patch</td><td>The patch version number (0-4095). </td></tr>
-    <tr><td class="paramname">out_version</td><td>Pointer to a uint32_t where the combined version will be stored if successful. </td></tr>
+    <tr><td class="paramname">major[in]</td><td>The major version number (0-1023). </td></tr>
+    <tr><td class="paramname">minor[in]</td><td>The minor version number (0-1023). </td></tr>
+    <tr><td class="paramname">patch[in]</td><td>The patch version number (0-4095). </td></tr>
+    <tr><td class="paramname">out_version[out]</td><td>Pointer to a uint32_t where the combined version will be stored if successful. </td></tr>
   </table>
   </dd>
 </dl>
@@ -603,9 +603,9 @@ Functions</h2></td></tr>
 <p>This function compares two version numbers for equality. If the <span class="tt">ignore_patch</span> parameter is set to a non-zero value, the comparison will only consider the major and minor version components, ignoring the patch version.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v1</td><td>The first version number to compare. </td></tr>
-    <tr><td class="paramname">v2</td><td>The second version number to compare. </td></tr>
-    <tr><td class="paramname">ignore_patch</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
+    <tr><td class="paramname">v1[in]</td><td>The first version number to compare. </td></tr>
+    <tr><td class="paramname">v2[in]</td><td>The second version number to compare. </td></tr>
+    <tr><td class="paramname">ignore_patch[in]</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
   </table>
   </dd>
 </dl>
@@ -653,9 +653,9 @@ Functions</h2></td></tr>
 <p>This function compares two version numbers to determine if the first is greater than the second. If the <span class="tt">ignore_patch</span> parameter is set to a non-zero value, the comparison will only consider the major and minor version components, ignoring the patch version.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v1</td><td>The first version number to compare. </td></tr>
-    <tr><td class="paramname">v2</td><td>The second version number to compare. </td></tr>
-    <tr><td class="paramname">ignore_patch</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
+    <tr><td class="paramname">v1[in]</td><td>The first version number to compare. </td></tr>
+    <tr><td class="paramname">v2[in]</td><td>The second version number to compare. </td></tr>
+    <tr><td class="paramname">ignore_patch[in]</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
   </table>
   </dd>
 </dl>
@@ -703,9 +703,9 @@ Functions</h2></td></tr>
 <p>This function compares two version numbers to determine if the first is greater than or equal to the second. If the <span class="tt">ignore_patch</span> parameter is set to a non-zero value, the comparison will only consider the major and minor version components, ignoring the patch version.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v1</td><td>The first version number to compare. </td></tr>
-    <tr><td class="paramname">v2</td><td>The second version number to compare. </td></tr>
-    <tr><td class="paramname">ignore_patch</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
+    <tr><td class="paramname">v1[in]</td><td>The first version number to compare. </td></tr>
+    <tr><td class="paramname">v2[in]</td><td>The second version number to compare. </td></tr>
+    <tr><td class="paramname">ignore_patch[in]</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
   </table>
   </dd>
 </dl>
@@ -753,9 +753,9 @@ Functions</h2></td></tr>
 <p>This function compares two version numbers to determine if the first is less than the second. If the <span class="tt">ignore_patch</span> parameter is set to a non-zero value, the comparison will only consider the major and minor version components, ignoring the patch version.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v1</td><td>The first version number to compare. </td></tr>
-    <tr><td class="paramname">v2</td><td>The second version number to compare. </td></tr>
-    <tr><td class="paramname">ignore_patch</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
+    <tr><td class="paramname">v1[in]</td><td>The first version number to compare. </td></tr>
+    <tr><td class="paramname">v2[in]</td><td>The second version number to compare. </td></tr>
+    <tr><td class="paramname">ignore_patch[in]</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
   </table>
   </dd>
 </dl>
@@ -803,9 +803,9 @@ Functions</h2></td></tr>
 <p>This function compares two version numbers to determine if the first is less than or equal to the second. If the <span class="tt">ignore_patch</span> parameter is set to a non-zero value, the comparison will only consider the major and minor version components, ignoring the patch version.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v1</td><td>The first version number to compare. </td></tr>
-    <tr><td class="paramname">v2</td><td>The second version number to compare. </td></tr>
-    <tr><td class="paramname">ignore_patch</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
+    <tr><td class="paramname">v1[in]</td><td>The first version number to compare. </td></tr>
+    <tr><td class="paramname">v2[in]</td><td>The second version number to compare. </td></tr>
+    <tr><td class="paramname">ignore_patch[in]</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
   </table>
   </dd>
 </dl>
@@ -844,7 +844,7 @@ Functions</h2></td></tr>
 <p>This function is a wrapper around the LIARA_VERSION_MAJOR macro for other languages that may not support macros or for better type safety in C. It extracts the major version number from a combined version number by shifting and masking.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>The combined version number from which to extract the major version. </td></tr>
+    <tr><td class="paramname">v[in]</td><td>The combined version number from which to extract the major version. </td></tr>
   </table>
   </dd>
 </dl>
@@ -883,7 +883,7 @@ Functions</h2></td></tr>
 <p>This function is a wrapper around the LIARA_VERSION_MINOR macro for other languages that may not support macros or for better type safety in C. It extracts the minor version number from a combined version number by shifting and masking.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>The combined version number from which to extract the minor version. </td></tr>
+    <tr><td class="paramname">v[in]</td><td>The combined version number from which to extract the minor version. </td></tr>
   </table>
   </dd>
 </dl>
@@ -931,9 +931,9 @@ Functions</h2></td></tr>
 <p>This function compares two version numbers for inequality. If the <span class="tt">ignore_patch</span> parameter is set to a non-zero value, the comparison will only consider the major and minor version components, ignoring the patch version.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v1</td><td>The first version number to compare. </td></tr>
-    <tr><td class="paramname">v2</td><td>The second version number to compare. </td></tr>
-    <tr><td class="paramname">ignore_patch</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
+    <tr><td class="paramname">v1[in]</td><td>The first version number to compare. </td></tr>
+    <tr><td class="paramname">v2[in]</td><td>The second version number to compare. </td></tr>
+    <tr><td class="paramname">ignore_patch[in]</td><td>If non-zero, ignore the patch version in the comparison. </td></tr>
   </table>
   </dd>
 </dl>
@@ -972,7 +972,7 @@ Functions</h2></td></tr>
 <p>This function is a wrapper around the LIARA_VERSION_PATCH macro for other languages that may not support macros or for better type safety in C. It extracts the patch version number from a combined version number by shifting and masking.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>The combined version number from which to extract the patch version. </td></tr>
+    <tr><td class="paramname">v[in]</td><td>The combined version number from which to extract the patch version. </td></tr>
   </table>
   </dd>
 </dl>
