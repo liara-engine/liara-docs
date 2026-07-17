@@ -5,7 +5,8 @@ var indexSectionsWithContent =
   2: "l",
   3: "l",
   4: "l",
-  5: "bcdilst"
+  5: "l",
+  6: "bcdilst"
 };
 
 var indexSectionNames =
@@ -13,9 +14,10 @@ var indexSectionNames =
   0: "all",
   1: "files",
   2: "functions",
-  3: "enumvalues",
-  4: "defines",
-  5: "pages"
+  3: "typedefs",
+  4: "enumvalues",
+  5: "defines",
+  6: "pages"
 };
 
 var indexSectionLabels =
@@ -23,8 +25,9 @@ var indexSectionLabels =
   0: "All",
   1: "Files",
   2: "Functions",
-  3: "Enumerator",
-  4: "Macros",
-  5: "Pages"
+  3: "Typedefs",
+  4: "Enumerator",
+  5: "Macros",
+  6: "Pages"
 };
 
