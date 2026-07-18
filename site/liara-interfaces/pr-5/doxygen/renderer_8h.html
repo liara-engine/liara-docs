@@ -156,8 +156,8 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('renderer_8h.ht
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a6932a6199ee82ecfd20218885c14235e" id="r_a6932a6199ee82ecfd20218885c14235e"><td class="memItemLeft">typedef struct <a class="el" href="#a6932a6199ee82ecfd20218885c14235e">liara_renderer_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6932a6199ee82ecfd20218885c14235e">liara_renderer_t</a></td></tr>
-<tr class="memdesc:a6932a6199ee82ecfd20218885c14235e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opaque structure representing a Liara renderer instance.  <br /></td></tr>
+<tr class="memitem:a1f3605b83e2676e0db8179d19876e7b9" id="r_a1f3605b83e2676e0db8179d19876e7b9"><td class="memItemLeft">typedef struct liara_renderer_t&#160;</td><td class="memItemRight"><a class="el" href="#a1f3605b83e2676e0db8179d19876e7b9">liara_renderer_handle_t</a></td></tr>
+<tr class="memdesc:a1f3605b83e2676e0db8179d19876e7b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opaque structure representing a Liara renderer instance.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -165,28 +165,28 @@ Functions</h2></td></tr>
 <tr class="memdesc:a2b258cc7040ad1721113b226084363a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current version of the Liara renderer ABI interface.  <br /></td></tr>
 <tr class="memitem:a0d9a50c017c8764c14436a48fd0a2dc5" id="r_a0d9a50c017c8764c14436a48fd0a2dc5"><td class="memItemLeft">uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a0d9a50c017c8764c14436a48fd0a2dc5">liara_renderer_version</a> (void)</td></tr>
 <tr class="memdesc:a0d9a50c017c8764c14436a48fd0a2dc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current version of the Liara renderer.  <br /></td></tr>
-<tr class="memitem:ae206fb167b1e87e7a029f93cae709935" id="r_ae206fb167b1e87e7a029f93cae709935"><td class="memItemLeft"><a class="el" href="result_8h.html#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae206fb167b1e87e7a029f93cae709935">liara_renderer_create</a> (<a class="el" href="#a6932a6199ee82ecfd20218885c14235e">liara_renderer_t</a> **out_renderer)</td></tr>
-<tr class="memdesc:ae206fb167b1e87e7a029f93cae709935"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new Liara renderer instance.  <br /></td></tr>
-<tr class="memitem:a83b1c0a5ad84dafba132bee66e8bafd9" id="r_a83b1c0a5ad84dafba132bee66e8bafd9"><td class="memItemLeft"><a class="el" href="result_8h.html#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a>&#160;</td><td class="memItemRight"><a class="el" href="#a83b1c0a5ad84dafba132bee66e8bafd9">liara_renderer_destroy</a> (const <a class="el" href="#a6932a6199ee82ecfd20218885c14235e">liara_renderer_t</a> *renderer)</td></tr>
-<tr class="memdesc:a83b1c0a5ad84dafba132bee66e8bafd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys a Liara renderer instance.  <br /></td></tr>
-<tr class="memitem:a537268c45d94b8e32e601ceec11ff018" id="r_a537268c45d94b8e32e601ceec11ff018"><td class="memItemLeft"><a class="el" href="result_8h.html#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a>&#160;</td><td class="memItemRight"><a class="el" href="#a537268c45d94b8e32e601ceec11ff018">liara_renderer_print</a> (const <a class="el" href="#a6932a6199ee82ecfd20218885c14235e">liara_renderer_t</a> *renderer, const char *message, size_t message_length)</td></tr>
-<tr class="memdesc:a537268c45d94b8e32e601ceec11ff018"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a message using the Liara renderer.  <br /></td></tr>
-<tr class="memitem:a0c0b23712251845ab0e664208fd2ed32" id="r_a0c0b23712251845ab0e664208fd2ed32"><td class="memItemLeft"><a class="el" href="result_8h.html#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0c0b23712251845ab0e664208fd2ed32">liara_renderer_println</a> (const <a class="el" href="#a6932a6199ee82ecfd20218885c14235e">liara_renderer_t</a> *renderer, const char *message, size_t message_length)</td></tr>
-<tr class="memdesc:a0c0b23712251845ab0e664208fd2ed32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a message with a newline using the Liara renderer.  <br /></td></tr>
-<tr class="memitem:a2c257c6ad810e495677bec7e148b0819" id="r_a2c257c6ad810e495677bec7e148b0819"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2c257c6ad810e495677bec7e148b0819">liara_renderer_set_text_color</a> (const <a class="el" href="#a6932a6199ee82ecfd20218885c14235e">liara_renderer_t</a> *renderer, uint32_t color)</td></tr>
-<tr class="memdesc:a2c257c6ad810e495677bec7e148b0819"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the text color for the Liara renderer.  <br /></td></tr>
-<tr class="memitem:a85185b6696dd2aa8991ec3490ab11a96" id="r_a85185b6696dd2aa8991ec3490ab11a96"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a85185b6696dd2aa8991ec3490ab11a96">liara_renderer_set_background_color</a> (const <a class="el" href="#a6932a6199ee82ecfd20218885c14235e">liara_renderer_t</a> *renderer, uint32_t color)</td></tr>
-<tr class="memdesc:a85185b6696dd2aa8991ec3490ab11a96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the background color for the Liara renderer.  <br /></td></tr>
+<tr class="memitem:a9d6a2cf987f87f877ffd9bab2619a694" id="r_a9d6a2cf987f87f877ffd9bab2619a694"><td class="memItemLeft"><a class="el" href="result_8h.html#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9d6a2cf987f87f877ffd9bab2619a694">liara_renderer_create</a> (<a class="el" href="#a1f3605b83e2676e0db8179d19876e7b9">liara_renderer_handle_t</a> **out_renderer)</td></tr>
+<tr class="memdesc:a9d6a2cf987f87f877ffd9bab2619a694"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new Liara renderer instance.  <br /></td></tr>
+<tr class="memitem:ab8ba19f922956ec6f3c90185520f62e9" id="r_ab8ba19f922956ec6f3c90185520f62e9"><td class="memItemLeft"><a class="el" href="result_8h.html#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab8ba19f922956ec6f3c90185520f62e9">liara_renderer_destroy</a> (const <a class="el" href="#a1f3605b83e2676e0db8179d19876e7b9">liara_renderer_handle_t</a> *renderer)</td></tr>
+<tr class="memdesc:ab8ba19f922956ec6f3c90185520f62e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys a Liara renderer instance.  <br /></td></tr>
+<tr class="memitem:a9e5f49a804206d310a9eb5697faac336" id="r_a9e5f49a804206d310a9eb5697faac336"><td class="memItemLeft"><a class="el" href="result_8h.html#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9e5f49a804206d310a9eb5697faac336">liara_renderer_print</a> (const <a class="el" href="#a1f3605b83e2676e0db8179d19876e7b9">liara_renderer_handle_t</a> *renderer, const char *message, size_t message_length)</td></tr>
+<tr class="memdesc:a9e5f49a804206d310a9eb5697faac336"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a message using the Liara renderer.  <br /></td></tr>
+<tr class="memitem:a987e24bd616ec133e6335ad94fef2809" id="r_a987e24bd616ec133e6335ad94fef2809"><td class="memItemLeft"><a class="el" href="result_8h.html#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a>&#160;</td><td class="memItemRight"><a class="el" href="#a987e24bd616ec133e6335ad94fef2809">liara_renderer_println</a> (const <a class="el" href="#a1f3605b83e2676e0db8179d19876e7b9">liara_renderer_handle_t</a> *renderer, const char *message, size_t message_length)</td></tr>
+<tr class="memdesc:a987e24bd616ec133e6335ad94fef2809"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a message with a newline using the Liara renderer.  <br /></td></tr>
+<tr class="memitem:a7863b6e87800c6dd9668f3a6e0ef6597" id="r_a7863b6e87800c6dd9668f3a6e0ef6597"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7863b6e87800c6dd9668f3a6e0ef6597">liara_renderer_set_text_color</a> (const <a class="el" href="#a1f3605b83e2676e0db8179d19876e7b9">liara_renderer_handle_t</a> *renderer, uint32_t color)</td></tr>
+<tr class="memdesc:a7863b6e87800c6dd9668f3a6e0ef6597"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the text color for the Liara renderer.  <br /></td></tr>
+<tr class="memitem:a6086c5fa48681855409e5b34a4b6ce63" id="r_a6086c5fa48681855409e5b34a4b6ce63"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6086c5fa48681855409e5b34a4b6ce63">liara_renderer_set_background_color</a> (const <a class="el" href="#a1f3605b83e2676e0db8179d19876e7b9">liara_renderer_handle_t</a> *renderer, uint32_t color)</td></tr>
+<tr class="memdesc:a6086c5fa48681855409e5b34a4b6ce63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the background color for the Liara renderer.  <br /></td></tr>
 </table>
 <a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
-<a id="a6932a6199ee82ecfd20218885c14235e" name="a6932a6199ee82ecfd20218885c14235e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6932a6199ee82ecfd20218885c14235e">&#9670;&#160;</a></span>liara_renderer_t</h2>
+<a id="a1f3605b83e2676e0db8179d19876e7b9" name="a1f3605b83e2676e0db8179d19876e7b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f3605b83e2676e0db8179d19876e7b9">&#9670;&#160;</a></span>liara_renderer_handle_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef struct <a class="el" href="#a6932a6199ee82ecfd20218885c14235e">liara_renderer_t</a> <a class="el" href="#a6932a6199ee82ecfd20218885c14235e">liara_renderer_t</a></td>
+          <td class="memname">typedef struct liara_renderer_t <a class="el" href="#a1f3605b83e2676e0db8179d19876e7b9">liara_renderer_handle_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -222,8 +222,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ae206fb167b1e87e7a029f93cae709935" name="ae206fb167b1e87e7a029f93cae709935"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae206fb167b1e87e7a029f93cae709935">&#9670;&#160;</a></span>liara_renderer_create()</h2>
+<a id="a9d6a2cf987f87f877ffd9bab2619a694" name="a9d6a2cf987f87f877ffd9bab2619a694"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d6a2cf987f87f877ffd9bab2619a694">&#9670;&#160;</a></span>liara_renderer_create()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -231,14 +231,14 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="result_8h.html#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a> liara_renderer_create </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a6932a6199ee82ecfd20218885c14235e">liara_renderer_t</a> **</td>          <td class="paramname"><span class="paramname"><em>out_renderer</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a1f3605b83e2676e0db8179d19876e7b9">liara_renderer_handle_t</a> **</td>          <td class="paramname"><span class="paramname"><em>out_renderer</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Creates a new Liara renderer instance. </p>
-<p>This function allocates and initializes a new Liara renderer instance. The created renderer is returned through the <span class="tt">out_renderer</span> parameter. The caller is responsible for destroying the renderer using <span class="tt"><a class="el" href="#a83b1c0a5ad84dafba132bee66e8bafd9" title="Destroys a Liara renderer instance.">liara_renderer_destroy</a></span>.</p>
+<p>This function allocates and initializes a new Liara renderer instance. The created renderer is returned through the <span class="tt">out_renderer</span> parameter. The caller is responsible for destroying the renderer using <span class="tt"><a class="el" href="#ab8ba19f922956ec6f3c90185520f62e9" title="Destroys a Liara renderer instance.">liara_renderer_destroy</a></span>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">out_renderer</td><td>A pointer to a pointer that will receive the newly created renderer instance.</td></tr>
@@ -252,13 +252,13 @@ Functions</h2></td></tr>
 </dd></dl>
 <dl class="section threadsafety">
 <dt>Thread Safety</dt>
-<dd>This function is thread-safe as long as it is not called concurrently with <span class="tt"><a class="el" href="#a83b1c0a5ad84dafba132bee66e8bafd9" title="Destroys a Liara renderer instance.">liara_renderer_destroy</a></span> on the same renderer instance. </dd>
+<dd>This function is thread-safe as long as it is not called concurrently with <span class="tt"><a class="el" href="#ab8ba19f922956ec6f3c90185520f62e9" title="Destroys a Liara renderer instance.">liara_renderer_destroy</a></span> on the same renderer instance. </dd>
 </dl>
 
 </div>
 </div>
-<a id="a83b1c0a5ad84dafba132bee66e8bafd9" name="a83b1c0a5ad84dafba132bee66e8bafd9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a83b1c0a5ad84dafba132bee66e8bafd9">&#9670;&#160;</a></span>liara_renderer_destroy()</h2>
+<a id="ab8ba19f922956ec6f3c90185520f62e9" name="ab8ba19f922956ec6f3c90185520f62e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8ba19f922956ec6f3c90185520f62e9">&#9670;&#160;</a></span>liara_renderer_destroy()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -266,7 +266,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="result_8h.html#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a> liara_renderer_destroy </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a6932a6199ee82ecfd20218885c14235e">liara_renderer_t</a> *</td>          <td class="paramname"><span class="paramname"><em>renderer</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#a1f3605b83e2676e0db8179d19876e7b9">liara_renderer_handle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>renderer</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -288,13 +288,13 @@ Functions</h2></td></tr>
 </dd></dl>
 <dl class="section threadsafety">
 <dt>Thread Safety</dt>
-<dd>This function is thread-safe as long as it is not called concurrently with <span class="tt"><a class="el" href="#ae206fb167b1e87e7a029f93cae709935" title="Creates a new Liara renderer instance.">liara_renderer_create</a></span> on the same renderer instance. </dd>
+<dd>This function is thread-safe as long as it is not called concurrently with <span class="tt"><a class="el" href="#a9d6a2cf987f87f877ffd9bab2619a694" title="Creates a new Liara renderer instance.">liara_renderer_create</a></span> on the same renderer instance. </dd>
 </dl>
 
 </div>
 </div>
-<a id="a537268c45d94b8e32e601ceec11ff018" name="a537268c45d94b8e32e601ceec11ff018"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a537268c45d94b8e32e601ceec11ff018">&#9670;&#160;</a></span>liara_renderer_print()</h2>
+<a id="a9e5f49a804206d310a9eb5697faac336" name="a9e5f49a804206d310a9eb5697faac336"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e5f49a804206d310a9eb5697faac336">&#9670;&#160;</a></span>liara_renderer_print()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -302,7 +302,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="result_8h.html#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a> liara_renderer_print </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a6932a6199ee82ecfd20218885c14235e">liara_renderer_t</a> *</td>          <td class="paramname"><span class="paramname"><em>renderer</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="#a1f3605b83e2676e0db8179d19876e7b9">liara_renderer_handle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>renderer</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -338,8 +338,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a0c0b23712251845ab0e664208fd2ed32" name="a0c0b23712251845ab0e664208fd2ed32"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c0b23712251845ab0e664208fd2ed32">&#9670;&#160;</a></span>liara_renderer_println()</h2>
+<a id="a987e24bd616ec133e6335ad94fef2809" name="a987e24bd616ec133e6335ad94fef2809"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a987e24bd616ec133e6335ad94fef2809">&#9670;&#160;</a></span>liara_renderer_println()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -347,7 +347,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="result_8h.html#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a> liara_renderer_println </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a6932a6199ee82ecfd20218885c14235e">liara_renderer_t</a> *</td>          <td class="paramname"><span class="paramname"><em>renderer</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="#a1f3605b83e2676e0db8179d19876e7b9">liara_renderer_handle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>renderer</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -383,8 +383,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a85185b6696dd2aa8991ec3490ab11a96" name="a85185b6696dd2aa8991ec3490ab11a96"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85185b6696dd2aa8991ec3490ab11a96">&#9670;&#160;</a></span>liara_renderer_set_background_color()</h2>
+<a id="a6086c5fa48681855409e5b34a4b6ce63" name="a6086c5fa48681855409e5b34a4b6ce63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6086c5fa48681855409e5b34a4b6ce63">&#9670;&#160;</a></span>liara_renderer_set_background_color()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -392,7 +392,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void liara_renderer_set_background_color </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a6932a6199ee82ecfd20218885c14235e">liara_renderer_t</a> *</td>          <td class="paramname"><span class="paramname"><em>renderer</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="#a1f3605b83e2676e0db8179d19876e7b9">liara_renderer_handle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>renderer</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -415,8 +415,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2c257c6ad810e495677bec7e148b0819" name="a2c257c6ad810e495677bec7e148b0819"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c257c6ad810e495677bec7e148b0819">&#9670;&#160;</a></span>liara_renderer_set_text_color()</h2>
+<a id="a7863b6e87800c6dd9668f3a6e0ef6597" name="a7863b6e87800c6dd9668f3a6e0ef6597"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7863b6e87800c6dd9668f3a6e0ef6597">&#9670;&#160;</a></span>liara_renderer_set_text_color()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -424,7 +424,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void liara_renderer_set_text_color </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a6932a6199ee82ecfd20218885c14235e">liara_renderer_t</a> *</td>          <td class="paramname"><span class="paramname"><em>renderer</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="#a1f3605b83e2676e0db8179d19876e7b9">liara_renderer_handle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>renderer</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
