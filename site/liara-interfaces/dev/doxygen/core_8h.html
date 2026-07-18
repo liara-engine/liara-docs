@@ -156,8 +156,8 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('core_8h.html',
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:af3a31ae756fff69904d5b754be170e29" id="r_af3a31ae756fff69904d5b754be170e29"><td class="memItemLeft">typedef struct <a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a></td></tr>
-<tr class="memdesc:af3a31ae756fff69904d5b754be170e29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opaque structure representing a Liara core instance.  <br /></td></tr>
+<tr class="memitem:a7db4bef9500d7f4149c30b068767938d" id="r_a7db4bef9500d7f4149c30b068767938d"><td class="memItemLeft">typedef struct liara_core_t&#160;</td><td class="memItemRight"><a class="el" href="#a7db4bef9500d7f4149c30b068767938d">liara_core_handle_t</a></td></tr>
+<tr class="memdesc:a7db4bef9500d7f4149c30b068767938d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opaque structure representing a Liara core instance.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -173,30 +173,30 @@ Functions</h2></td></tr>
 <tr class="memdesc:ad9ac5294613e036a1b3ce6ac9b2d8836"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current version of the Liara core ABI interface.  <br /></td></tr>
 <tr class="memitem:aa7b8ec957f6c1bfdff9e026f44501331" id="r_aa7b8ec957f6c1bfdff9e026f44501331"><td class="memItemLeft">uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#aa7b8ec957f6c1bfdff9e026f44501331">liara_core_version</a> (void)</td></tr>
 <tr class="memdesc:aa7b8ec957f6c1bfdff9e026f44501331"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current version of the Liara core.  <br /></td></tr>
-<tr class="memitem:a8d2fb3693c79e418a96b0dd64fecc927" id="r_a8d2fb3693c79e418a96b0dd64fecc927"><td class="memItemLeft"><a class="el" href="result_8h.html#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8d2fb3693c79e418a96b0dd64fecc927">liara_core_create</a> (<a class="el" href="renderer_8h.html#a6932a6199ee82ecfd20218885c14235e">liara_renderer_t</a> *renderer_handle, <a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a> **out_core)</td></tr>
-<tr class="memdesc:a8d2fb3693c79e418a96b0dd64fecc927"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new Liara core instance.  <br /></td></tr>
-<tr class="memitem:a5a91e90acf4eebb92cc678dece046bf5" id="r_a5a91e90acf4eebb92cc678dece046bf5"><td class="memItemLeft"><a class="el" href="result_8h.html#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5a91e90acf4eebb92cc678dece046bf5">liara_core_destroy</a> (const <a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a> *core_handle)</td></tr>
-<tr class="memdesc:a5a91e90acf4eebb92cc678dece046bf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys a Liara core instance.  <br /></td></tr>
-<tr class="memitem:acdbe1a690e77a41f0ad8779f65edfb5b" id="r_acdbe1a690e77a41f0ad8779f65edfb5b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#acdbe1a690e77a41f0ad8779f65edfb5b">liara_core_set_run_mode</a> (<a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a> *core_handle, enum <a class="el" href="#a8f1e0f3cdb765f7aee541a005ff414b6">liara_core_run_mode</a> run_mode, float fixed_time_step)</td></tr>
-<tr class="memdesc:acdbe1a690e77a41f0ad8779f65edfb5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the run mode of the Liara core.  <br /></td></tr>
-<tr class="memitem:ae1651ef6769f2b5a5fa469f8bb000932" id="r_ae1651ef6769f2b5a5fa469f8bb000932"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae1651ef6769f2b5a5fa469f8bb000932">liara_core_run</a> (<a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a> *core_handle)</td></tr>
-<tr class="memdesc:ae1651ef6769f2b5a5fa469f8bb000932"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the Liara core's update loop.  <br /></td></tr>
-<tr class="memitem:a7bbb6952552b1ca6418b89066f69b7ee" id="r_a7bbb6952552b1ca6418b89066f69b7ee"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7bbb6952552b1ca6418b89066f69b7ee">liara_core_stop</a> (<a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a> *core_handle)</td></tr>
-<tr class="memdesc:a7bbb6952552b1ca6418b89066f69b7ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the Liara core's update loop.  <br /></td></tr>
-<tr class="memitem:a8804a1258f511c21aa2d63ba22a8c996" id="r_a8804a1258f511c21aa2d63ba22a8c996"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8804a1258f511c21aa2d63ba22a8c996">liara_core_update</a> (<a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a> *core_handle, float delta_time)</td></tr>
-<tr class="memdesc:a8804a1258f511c21aa2d63ba22a8c996"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the Liara core in manual run mode.  <br /></td></tr>
-<tr class="memitem:a0e8ee712d111d6877783ee3cdc88b6cc" id="r_a0e8ee712d111d6877783ee3cdc88b6cc"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0e8ee712d111d6877783ee3cdc88b6cc">liara_core_set_late_update_callback</a> (<a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a> *core_handle, void(*callback)(<a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a> *core, float delta_time))</td></tr>
-<tr class="memdesc:a0e8ee712d111d6877783ee3cdc88b6cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the late update callback for the Liara core.  <br /></td></tr>
+<tr class="memitem:a5abcbe1e7054d5c516b0df0c5984945e" id="r_a5abcbe1e7054d5c516b0df0c5984945e"><td class="memItemLeft"><a class="el" href="result_8h.html#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5abcbe1e7054d5c516b0df0c5984945e">liara_core_create</a> (<a class="el" href="renderer_8h.html#a1f3605b83e2676e0db8179d19876e7b9">liara_renderer_handle_t</a> *renderer_handle, <a class="el" href="#a7db4bef9500d7f4149c30b068767938d">liara_core_handle_t</a> **out_core)</td></tr>
+<tr class="memdesc:a5abcbe1e7054d5c516b0df0c5984945e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new Liara core instance.  <br /></td></tr>
+<tr class="memitem:a0b08225cea3aa20dbb75ffb700274292" id="r_a0b08225cea3aa20dbb75ffb700274292"><td class="memItemLeft"><a class="el" href="result_8h.html#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0b08225cea3aa20dbb75ffb700274292">liara_core_destroy</a> (const <a class="el" href="#a7db4bef9500d7f4149c30b068767938d">liara_core_handle_t</a> *core_handle)</td></tr>
+<tr class="memdesc:a0b08225cea3aa20dbb75ffb700274292"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys a Liara core instance.  <br /></td></tr>
+<tr class="memitem:abfffc2a6a317b50d46f41aa0b03020f8" id="r_abfffc2a6a317b50d46f41aa0b03020f8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abfffc2a6a317b50d46f41aa0b03020f8">liara_core_set_run_mode</a> (<a class="el" href="#a7db4bef9500d7f4149c30b068767938d">liara_core_handle_t</a> *core_handle, enum <a class="el" href="#a8f1e0f3cdb765f7aee541a005ff414b6">liara_core_run_mode</a> run_mode, float fixed_time_step)</td></tr>
+<tr class="memdesc:abfffc2a6a317b50d46f41aa0b03020f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the run mode of the Liara core.  <br /></td></tr>
+<tr class="memitem:a2ca17963786d71986482316cd1780daa" id="r_a2ca17963786d71986482316cd1780daa"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2ca17963786d71986482316cd1780daa">liara_core_run</a> (<a class="el" href="#a7db4bef9500d7f4149c30b068767938d">liara_core_handle_t</a> *core_handle)</td></tr>
+<tr class="memdesc:a2ca17963786d71986482316cd1780daa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the Liara core's update loop.  <br /></td></tr>
+<tr class="memitem:ae8192d17fdc7e0ac04cbc3eb3aa7d40d" id="r_ae8192d17fdc7e0ac04cbc3eb3aa7d40d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae8192d17fdc7e0ac04cbc3eb3aa7d40d">liara_core_stop</a> (<a class="el" href="#a7db4bef9500d7f4149c30b068767938d">liara_core_handle_t</a> *core_handle)</td></tr>
+<tr class="memdesc:ae8192d17fdc7e0ac04cbc3eb3aa7d40d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the Liara core's update loop.  <br /></td></tr>
+<tr class="memitem:ac5d3e4c41085293343d7b330af891351" id="r_ac5d3e4c41085293343d7b330af891351"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac5d3e4c41085293343d7b330af891351">liara_core_update</a> (<a class="el" href="#a7db4bef9500d7f4149c30b068767938d">liara_core_handle_t</a> *core_handle, float delta_time)</td></tr>
+<tr class="memdesc:ac5d3e4c41085293343d7b330af891351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the Liara core in manual run mode.  <br /></td></tr>
+<tr class="memitem:ab892cf0277f5655c9f94b5655c0199dd" id="r_ab892cf0277f5655c9f94b5655c0199dd"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab892cf0277f5655c9f94b5655c0199dd">liara_core_set_late_update_callback</a> (<a class="el" href="#a7db4bef9500d7f4149c30b068767938d">liara_core_handle_t</a> *core_handle, void(*callback)(<a class="el" href="#a7db4bef9500d7f4149c30b068767938d">liara_core_handle_t</a> *core, float delta_time))</td></tr>
+<tr class="memdesc:ab892cf0277f5655c9f94b5655c0199dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the late update callback for the Liara core.  <br /></td></tr>
 </table>
 <a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
-<a id="af3a31ae756fff69904d5b754be170e29" name="af3a31ae756fff69904d5b754be170e29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3a31ae756fff69904d5b754be170e29">&#9670;&#160;</a></span>liara_core_t</h2>
+<a id="a7db4bef9500d7f4149c30b068767938d" name="a7db4bef9500d7f4149c30b068767938d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7db4bef9500d7f4149c30b068767938d">&#9670;&#160;</a></span>liara_core_handle_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef struct <a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a> <a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a></td>
+          <td class="memname">typedef struct liara_core_t <a class="el" href="#a7db4bef9500d7f4149c30b068767938d">liara_core_handle_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -261,8 +261,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8d2fb3693c79e418a96b0dd64fecc927" name="a8d2fb3693c79e418a96b0dd64fecc927"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d2fb3693c79e418a96b0dd64fecc927">&#9670;&#160;</a></span>liara_core_create()</h2>
+<a id="a5abcbe1e7054d5c516b0df0c5984945e" name="a5abcbe1e7054d5c516b0df0c5984945e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5abcbe1e7054d5c516b0df0c5984945e">&#9670;&#160;</a></span>liara_core_create()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -270,18 +270,18 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="result_8h.html#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a> liara_core_create </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="renderer_8h.html#a6932a6199ee82ecfd20218885c14235e">liara_renderer_t</a> *</td>          <td class="paramname"><span class="paramname"><em>renderer_handle</em></span>, </td>
+          <td class="paramtype"><a class="el" href="renderer_8h.html#a1f3605b83e2676e0db8179d19876e7b9">liara_renderer_handle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>renderer_handle</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a> **</td>          <td class="paramname"><span class="paramname"><em>out_core</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#a7db4bef9500d7f4149c30b068767938d">liara_core_handle_t</a> **</td>          <td class="paramname"><span class="paramname"><em>out_core</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Creates a new Liara core instance. </p>
-<p>This function allocates and initializes a new Liara core instance. The created core is returned through the <span class="tt">out_core</span> parameter. The caller is responsible for destroying the core using <span class="tt"><a class="el" href="#a5a91e90acf4eebb92cc678dece046bf5" title="Destroys a Liara core instance.">liara_core_destroy</a></span>.</p>
+<p>This function allocates and initializes a new Liara core instance. The created core is returned through the <span class="tt">out_core</span> parameter. The caller is responsible for destroying the core using <span class="tt"><a class="el" href="#a0b08225cea3aa20dbb75ffb700274292" title="Destroys a Liara core instance.">liara_core_destroy</a></span>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">renderer_handle</td><td>A pointer to the renderer instance to be used by the core. </td></tr>
@@ -296,13 +296,13 @@ Functions</h2></td></tr>
 </dd></dl>
 <dl class="section threadsafety">
 <dt>Thread Safety</dt>
-<dd>This function is thread-safe as long as it is not called concurrently with <span class="tt"><a class="el" href="#a5a91e90acf4eebb92cc678dece046bf5" title="Destroys a Liara core instance.">liara_core_destroy</a></span> on the same core instance. </dd>
+<dd>This function is thread-safe as long as it is not called concurrently with <span class="tt"><a class="el" href="#a0b08225cea3aa20dbb75ffb700274292" title="Destroys a Liara core instance.">liara_core_destroy</a></span> on the same core instance. </dd>
 </dl>
 
 </div>
 </div>
-<a id="a5a91e90acf4eebb92cc678dece046bf5" name="a5a91e90acf4eebb92cc678dece046bf5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a91e90acf4eebb92cc678dece046bf5">&#9670;&#160;</a></span>liara_core_destroy()</h2>
+<a id="a0b08225cea3aa20dbb75ffb700274292" name="a0b08225cea3aa20dbb75ffb700274292"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b08225cea3aa20dbb75ffb700274292">&#9670;&#160;</a></span>liara_core_destroy()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -310,7 +310,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="result_8h.html#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a> liara_core_destroy </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a> *</td>          <td class="paramname"><span class="paramname"><em>core_handle</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#a7db4bef9500d7f4149c30b068767938d">liara_core_handle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>core_handle</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -332,8 +332,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ae1651ef6769f2b5a5fa469f8bb000932" name="ae1651ef6769f2b5a5fa469f8bb000932"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1651ef6769f2b5a5fa469f8bb000932">&#9670;&#160;</a></span>liara_core_run()</h2>
+<a id="a2ca17963786d71986482316cd1780daa" name="a2ca17963786d71986482316cd1780daa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ca17963786d71986482316cd1780daa">&#9670;&#160;</a></span>liara_core_run()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -341,7 +341,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void liara_core_run </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a> *</td>          <td class="paramname"><span class="paramname"><em>core_handle</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a7db4bef9500d7f4149c30b068767938d">liara_core_handle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>core_handle</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -362,8 +362,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a0e8ee712d111d6877783ee3cdc88b6cc" name="a0e8ee712d111d6877783ee3cdc88b6cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e8ee712d111d6877783ee3cdc88b6cc">&#9670;&#160;</a></span>liara_core_set_late_update_callback()</h2>
+<a id="ab892cf0277f5655c9f94b5655c0199dd" name="ab892cf0277f5655c9f94b5655c0199dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab892cf0277f5655c9f94b5655c0199dd">&#9670;&#160;</a></span>liara_core_set_late_update_callback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -371,12 +371,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void liara_core_set_late_update_callback </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a> *</td>          <td class="paramname"><span class="paramname"><em>core_handle</em></span>, </td>
+          <td class="paramtype"><a class="el" href="#a7db4bef9500d7f4149c30b068767938d">liara_core_handle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>core_handle</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void(*</td>          <td class="paramname"><span class="paramname"><em>callback&#160;</em></span>)(<a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a> *core, float delta_time)&#160;)</td>
+          <td class="paramtype">void(*</td>          <td class="paramname"><span class="paramname"><em>callback&#160;</em></span>)(<a class="el" href="#a7db4bef9500d7f4149c30b068767938d">liara_core_handle_t</a> *core, float delta_time)&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -397,8 +397,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="acdbe1a690e77a41f0ad8779f65edfb5b" name="acdbe1a690e77a41f0ad8779f65edfb5b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acdbe1a690e77a41f0ad8779f65edfb5b">&#9670;&#160;</a></span>liara_core_set_run_mode()</h2>
+<a id="abfffc2a6a317b50d46f41aa0b03020f8" name="abfffc2a6a317b50d46f41aa0b03020f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfffc2a6a317b50d46f41aa0b03020f8">&#9670;&#160;</a></span>liara_core_set_run_mode()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -406,7 +406,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void liara_core_set_run_mode </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a> *</td>          <td class="paramname"><span class="paramname"><em>core_handle</em></span>, </td>
+          <td class="paramtype"><a class="el" href="#a7db4bef9500d7f4149c30b068767938d">liara_core_handle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>core_handle</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -438,8 +438,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7bbb6952552b1ca6418b89066f69b7ee" name="a7bbb6952552b1ca6418b89066f69b7ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7bbb6952552b1ca6418b89066f69b7ee">&#9670;&#160;</a></span>liara_core_stop()</h2>
+<a id="ae8192d17fdc7e0ac04cbc3eb3aa7d40d" name="ae8192d17fdc7e0ac04cbc3eb3aa7d40d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8192d17fdc7e0ac04cbc3eb3aa7d40d">&#9670;&#160;</a></span>liara_core_stop()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -447,7 +447,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void liara_core_stop </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a> *</td>          <td class="paramname"><span class="paramname"><em>core_handle</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a7db4bef9500d7f4149c30b068767938d">liara_core_handle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>core_handle</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -468,8 +468,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8804a1258f511c21aa2d63ba22a8c996" name="a8804a1258f511c21aa2d63ba22a8c996"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8804a1258f511c21aa2d63ba22a8c996">&#9670;&#160;</a></span>liara_core_update()</h2>
+<a id="ac5d3e4c41085293343d7b330af891351" name="ac5d3e4c41085293343d7b330af891351"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5d3e4c41085293343d7b330af891351">&#9670;&#160;</a></span>liara_core_update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -477,7 +477,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void liara_core_update </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#af3a31ae756fff69904d5b754be170e29">liara_core_t</a> *</td>          <td class="paramname"><span class="paramname"><em>core_handle</em></span>, </td>
+          <td class="paramtype"><a class="el" href="#a7db4bef9500d7f4149c30b068767938d">liara_core_handle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>core_handle</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
