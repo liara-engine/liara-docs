@@ -335,7 +335,7 @@ commits and produce release PRs automatically. The configuration is
 in <code>.release-please-manifest.json</code> and <code>release-please-config.json</code>
 at each repository’s root.</del></p>
 <h3 id="workspace-bootstrap-working"><a class="header" href="#workspace-bootstrap-working"><del>Workspace Bootstrap Working</del></a></h3>
-<p><del>The meta repository contains a <code>scripts/setup-workspace.sh</code> script
+<p><del>The meta repository contains a <code>scripts/liara.py</code> script
 that:</del></p>
 <ul>
 <li><del>Clones each module repository into a <code>workspace/</code> directory.</del></li>
@@ -346,7 +346,7 @@ to include each module.</del></li>
 </ul>
 <p>The script’s success criterion: starting from a fresh clone of the
 meta repository on a system with the required dependencies (Vulkan
-SDK, CMake, vcpkg, compilers), running <code>./scripts/setup-workspace.sh</code>
+SDK, CMake, vcpkg, compilers), running <code>./scripts/liara.py</code>
 produces a buildable workspace in under five minutes.</p>
 <h3 id="documentation-hub-live"><a class="header" href="#documentation-hub-live"><del>Documentation Hub Live</del></a></h3>
 <p>The hub:</p>

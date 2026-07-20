@@ -1606,7 +1606,7 @@ commits and produce release PRs automatically. The configuration is
 in <code>.release-please-manifest.json</code> and <code>release-please-config.json</code>
 at each repository’s root.</del></p>
 <h3 id="workspace-bootstrap-working"><a class="header" href="#workspace-bootstrap-working"><del>Workspace Bootstrap Working</del></a></h3>
-<p><del>The meta repository contains a <code>scripts/setup-workspace.sh</code> script
+<p><del>The meta repository contains a <code>scripts/liara.py</code> script
 that:</del></p>
 <ul>
 <li><del>Clones each module repository into a <code>workspace/</code> directory.</del></li>
@@ -1617,7 +1617,7 @@ to include each module.</del></li>
 </ul>
 <p>The script’s success criterion: starting from a fresh clone of the
 meta repository on a system with the required dependencies (Vulkan
-SDK, CMake, vcpkg, compilers), running <code>./scripts/setup-workspace.sh</code>
+SDK, CMake, vcpkg, compilers), running <code>./scripts/liara.py</code>
 produces a buildable workspace in under five minutes.</p>
 <h3 id="documentation-hub-live"><a class="header" href="#documentation-hub-live"><del>Documentation Hub Live</del></a></h3>
 <p>The hub:</p>
@@ -2206,14 +2206,14 @@ sudo pacman -S --needed base-devel cmake ninja git vulkan-devel \
     vulkan-validation-layers shaderc clang gcc mold python
 
 # 2. Install vcpkg
-git clone [https://github.com/microsoft/vcpkg.git](https://github.com/microsoft/vcpkg.git) ~/.vcpkg
+git clone https://github.com/microsoft/vcpkg.git ~/.vcpkg
 ~/.vcpkg/bootstrap-vcpkg.sh
 echo 'export VCPKG_ROOT="$HOME/.vcpkg"' &gt;&gt; ~/.zshrc
 echo 'export PATH="$VCPKG_ROOT:$PATH"' &gt;&gt; ~/.zshrc
 source ~/.zshrc
 
 # 3. Clone the meta repository
-git clone [https://github.com/liara-engine/liara.git](https://github.com/liara-engine/liara.git)
+git clone https://github.com/liara-engine/liara.git
 cd liara
 
 # 4. Verify the environment
@@ -2491,7 +2491,7 @@ C:\vcpkg\bootstrap-vcpkg.bat
 <pre><code class="language-powershell">vcpkg --version
 </code></pre>
 <h3 id="35-clone-and-bootstrap"><a class="header" href="#35-clone-and-bootstrap">3.5 Clone and Bootstrap</a></h3>
-<pre><code class="language-powershell">git clone [https://github.com/liara-engine/liara.git](https://github.com/liara-engine/liara.git)
+<pre><code class="language-powershell">git clone https://github.com/liara-engine/liara.git
 cd liara
 .\scripts\liara.ps1 setup
 </code></pre>
@@ -2945,7 +2945,7 @@ process in section 11.)</li>
 Each one becomes its own branch, opened in a coordinated sequence.</p>
 <h3 id="stage-3-open-a-branch-and-code"><a class="header" href="#stage-3-open-a-branch-and-code">Stage 3: Open a Branch and Code</a></h3>
 <p>The contributor creates a branch from <code>main</code>, makes the changes,
-and runs <code>./scripts/check.sh</code> locally before pushing. The script
+and runs <code>./scripts/liara.py check</code> locally before pushing. The script
 runs the same checks the CI runs (clang-format, clang-tidy, tests,
 build) and fails fast on the same issues.</p>
 <p>A branch is pushed early and often. Pushing to a not-yet-PRed
@@ -3141,18 +3141,40 @@ away at merge time. The discipline is on the merged history, not on
 the in-progress history.</p>
 <hr>
 <h2 id="10-testing-your-changes"><a class="header" href="#10-testing-your-changes">10. Testing Your Changes</a></h2>
-<h3 id="the-local-check-script"><a class="header" href="#the-local-check-script">The Local Check Script</a></h3>
-<p><code>./scripts/check.sh</code> is the canonical pre-push check. It runs:</p>
+<h3 id="the-local-cli"><a class="header" href="#the-local-cli">The Local CLI</a></h3>
+<p>The project provides a unified command-line interface through the platform wrappers:</p>
 <ul>
-<li><code>clang-format --dry-run</code> on all source files.</li>
-<li><code>clang-tidy</code> on changed files.</li>
-<li>The <code>[unit]</code> test suite.</li>
-<li>A debug build of all modules.</li>
+<li><code>./liara.sh &lt;command&gt;</code> on Linux/macOS</li>
+<li><code>./liara.ps1 &lt;command&gt;</code> on Windows</li>
 </ul>
-<p>The script’s exit code is the source of truth: zero means the CI
-will probably pass; non-zero means the CI will probably fail.</p>
-<p>Running this script before pushing is recommended but not enforced.
-The CI is the actual gatekeeper.</p>
+<p>These wrappers invoke the common Python orchestration tool and provide a consistent developer workflow across platforms.</p>
+<p>For pre-push validation, use:</p>
+<pre><code class="language-bash"># On Linux
+./liara.sh check
+
+# On Windows
+./liara.ps1 check
+</code></pre>
+<p>By default, the <code>check</code> command performs the following steps:</p>
+<ul>
+<li>Runs <code>clang-format</code> in verification mode on all tracked C/C++ source files.</li>
+<li>Runs <code>clang-tidy</code> using the workspace compilation database.</li>
+<li>Builds the workspace using the selected CMake preset.</li>
+<li>Executes the complete CTest test suite.</li>
+</ul>
+<p>The command supports several options to customize its behavior:</p>
+<ul>
+<li><code>--fix</code> automatically applies clang-format changes instead of only reporting them.</li>
+<li><code>--no-format</code> skips the formatting check.</li>
+<li><code>--no-tidy</code> skips the clang-tidy analysis.</li>
+<li><code>--no-build</code> skips the build step.</li>
+<li><code>--no-tests</code> skips the test suite.</li>
+<li><code>--preset &lt;name&gt;</code> overrides the default CMake preset.</li>
+</ul>
+<p>The command exits with status code <code>0</code> only if every enabled step succeeds. A non-zero exit code indicates that at least
+one check failed.</p>
+<p>Running <code>liara.sh</code> check before pushing is recommended but not enforced. The CI remains the authoritative gatekeeper
+for validating contributions.</p>
 <h3 id="what-to-test"><a class="header" href="#what-to-test">What to Test</a></h3>
 <p>A change is tested at the level appropriate to its scope:</p>
 <ul>

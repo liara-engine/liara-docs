@@ -208,14 +208,14 @@ sudo pacman -S --needed base-devel cmake ninja git vulkan-devel \
     vulkan-validation-layers shaderc clang gcc mold python
 
 # 2. Install vcpkg
-git clone [https://github.com/microsoft/vcpkg.git](https://github.com/microsoft/vcpkg.git) ~/.vcpkg
+git clone https://github.com/microsoft/vcpkg.git ~/.vcpkg
 ~/.vcpkg/bootstrap-vcpkg.sh
 echo 'export VCPKG_ROOT="$HOME/.vcpkg"' &gt;&gt; ~/.zshrc
 echo 'export PATH="$VCPKG_ROOT:$PATH"' &gt;&gt; ~/.zshrc
 source ~/.zshrc
 
 # 3. Clone the meta repository
-git clone [https://github.com/liara-engine/liara.git](https://github.com/liara-engine/liara.git)
+git clone https://github.com/liara-engine/liara.git
 cd liara
 
 # 4. Verify the environment
@@ -493,7 +493,7 @@ C:\vcpkg\bootstrap-vcpkg.bat
 <pre><code class="language-powershell">vcpkg --version
 </code></pre>
 <h3 id="35-clone-and-bootstrap"><a class="header" href="#35-clone-and-bootstrap">3.5 Clone and Bootstrap</a></h3>
-<pre><code class="language-powershell">git clone [https://github.com/liara-engine/liara.git](https://github.com/liara-engine/liara.git)
+<pre><code class="language-powershell">git clone https://github.com/liara-engine/liara.git
 cd liara
 .\scripts\liara.ps1 setup
 </code></pre>
