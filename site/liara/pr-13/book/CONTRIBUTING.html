@@ -243,8 +243,7 @@ in <a href="BOOTSTRAP.html"><code>BOOTSTRAP.md</code></a>. The summary:</p>
 <li>Install the system dependencies (Vulkan SDK, CMake 3.29+,
 compilers, vcpkg).</li>
 <li>Clone the meta repository.</li>
-<li>Run <code>./scripts/setup-workspace.sh</code>.</li>
-<li>Configure CMake with a preset.</li>
+<li>Run <code>./scripts/liara.sh setup</code> (Linux) or <code>./scripts/liara.ps1 setup</code> (Windows) to bootstrap the workspace.</li>
 </ol>
 <p>A successful setup ends with a built engine and passing tests. If
 any step fails, the contribution starts there: fix the setup, then
@@ -399,10 +398,8 @@ solo maintenance.</p>
 <p>Issues are triaged with labels:</p>
 <ul>
 <li><code>priority:critical</code> — blocks the current milestone.</li>
-<li><code>priority:high</code> — should be addressed in the current minor
-version.</li>
-<li><code>priority:medium</code> — should be addressed in the current major
-version line.</li>
+<li><code>priority:high</code> — should be addressed in the current milestone.</li>
+<li><code>priority:medium</code> — should be addressed eventually.</li>
 <li><code>priority:low</code> — nice to have.</li>
 <li><code>status:needs-info</code> — waiting for the reporter to provide more
 details.</li>
