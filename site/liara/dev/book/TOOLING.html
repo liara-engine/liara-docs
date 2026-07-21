@@ -226,6 +226,7 @@ day-to-day <strong>workflow</strong>, see <a href="CONTRIBUTING.html"><code>CONT
 <tr><td>Conventional commits</td><td>commitlint (Husky-free, in CI)</td></tr>
 <tr><td>CI</td><td>GitHub Actions</td></tr>
 <tr><td>Container registry</td><td>GitHub Container Registry (for build images)</td></tr>
+<tr><td>Scripts</td><td>Bash, Python</td></tr>
 </tbody>
 </table>
 </div>
@@ -402,8 +403,8 @@ files.</p>
 repository name, source directories to scan. Fails if formatting is
 incorrect or if clang-tidy reports new warnings.</p>
 <p><strong><code>reusable-docs.yml</code></strong>: Doxygen generation, integration with
-<code>docs-shared</code> navbar, and gh-pages deployment. Inputs: repository
-name, target directory in gh-pages (<code>dev</code>, <code>vX.Y.Z</code>).</p>
+<code>docs-shared</code> navbar, and cloudflare-pages deployment. Inputs: repository
+name, target directory in cloudflare-pages (<code>dev</code>, <code>vX.Y.Z</code>).</p>
 <p><strong><code>reusable-release.yml</code></strong>: release-please integration. Inputs:
 repository name, release-type (one of <code>cmake-cpp</code>, <code>simple</code>).
 Produces release PRs and, when merged, tags releases.</p>
