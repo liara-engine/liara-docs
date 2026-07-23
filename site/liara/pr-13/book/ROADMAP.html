@@ -278,6 +278,25 @@ will happen. Phase 0 produces no engine code; it produces an
 environment in which engine code can be productively written.</p>
 <p>Phase 0 is treated as a single, atomic unit. It is “complete” only
 when <strong>every</strong> item below is in place.</p>
+<h3 id="the-phase-0-exemption"><a class="header" href="#the-phase-0-exemption">The Phase 0 Exemption</a></h3>
+<p>The processes described in <a href="CONTRIBUTING.html">CONTRIBUTING.md</a>, <a href="TOOLING.html">TOOLING.md</a>
+and <a href="https://liara-engine.liara-engine-documentation.workers.dev/liara-interfaces/latest/book/INTERFACES">INTERFACES.md</a>
+are the target processes: they describe how the project operates once its infrastructure exists. During Phase 0, that
+infrastructure is the work, and subjecting its own construction to it would be circular and needlessly heavy.</p>
+<p>Concretely, until Phase 0 is closed:</p>
+<ul>
+<li>Replacing a planned tool or mechanism with a better one discovered during implementation, or dropping one that turned
+out to be unrealistic, does not require an ADR. It requires updating the document that described it.</li>
+<li>The documents written before implementation are drafts, not contracts. Where implementation and document disagree,
+the implementation is presumed right and the document is corrected — unless review concludes the opposite.</li>
+<li>Interfaces, workflows, scripts and schemas may change shape without the version ceremony described in INTERFACES.md.</li>
+<li>The ADRs written at the end of Phase 0 record the decisions as they ended up, not the sequence of intermediate
+positions that produced them.</li>
+</ul>
+<p>This is what the zero in “Phase 0” means: nothing is fixed yet. Phase 0 is where the plan meets the tools, and the tools
+sometimes win.</p>
+<p>What the exemption does not cover is the Definition of Done. Its items may be reworded as understanding improves, but
+they are not waived. The permissiveness is about how an item is reached, not whether it is.</p>
 <h3 id="repositories-created"><a class="header" href="#repositories-created"><del>Repositories Created</del></a></h3>
 <p><del>The following repositories exist on the <code>liara-engine</code> GitHub
 organization:</del></p>
