@@ -96,7 +96,7 @@
 
 <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
     <div class="sidebar-scrollbox">
-        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html"><strong aria-hidden="true">1.</strong> Liara Engine</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ARCHITECTURE.html"><strong aria-hidden="true">2.</strong> Architecture</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="MODULES.html"><strong aria-hidden="true">3.</strong> Modules</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ROADMAP.html"><strong aria-hidden="true">4.</strong> Roadmap</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="BOOTSTRAP.html"><strong aria-hidden="true">5.</strong> Bootstrap</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="CONTRIBUTING.html"><strong aria-hidden="true">6.</strong> Contributing</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="CODE_STYLE.html"><strong aria-hidden="true">7.</strong> Code Style</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="TOOLING.html"><strong aria-hidden="true">8.</strong> Tooling</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="LICENSE.html"><strong aria-hidden="true">9.</strong> License</a></span></li></ol>
+        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html"><strong aria-hidden="true">1.</strong> Liara Engine</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ARCHITECTURE.html"><strong aria-hidden="true">2.</strong> Architecture</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="MODULES.html"><strong aria-hidden="true">3.</strong> Modules</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ROADMAP.html"><strong aria-hidden="true">4.</strong> Roadmap</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="BOOTSTRAP.html"><strong aria-hidden="true">5.</strong> Bootstrap</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="CONTRIBUTING.html"><strong aria-hidden="true">6.</strong> Contributing</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="CODE_STYLE.html"><strong aria-hidden="true">7.</strong> Code Style</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="TOOLING.html"><strong aria-hidden="true">8.</strong> Tooling</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="DOCUMENTATION_PIPELINE.html"><strong aria-hidden="true">9.</strong> Documentation Pipeline</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="LICENSE.html"><strong aria-hidden="true">10.</strong> License</a></span></li></ol>
     </div>
     <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
         <div class="sidebar-resize-indicator"></div>
@@ -690,128 +690,10 @@ rolled into a meta repository release. A patch release of
 and the human is the right judge of that.</p>
 <hr>
 <h2 id="10-documentation-generation"><a class="header" href="#10-documentation-generation">10. Documentation Generation</a></h2>
-<h3 id="per-module-api-documentation-doxygen"><a class="header" href="#per-module-api-documentation-doxygen">Per-Module API Documentation: Doxygen</a></h3>
-<p>Each module repository generates API documentation with Doxygen. The
-configuration lives in <code>Doxyfile</code> at the repo root, customized to:</p>
-<ul>
-<li>Process only public headers and intentionally documented source
-files.</li>
-<li>Use the templates from <code>docs-shared</code> for consistent navigation
-(the navbar described in <code>MODULES.md</code> section 8).</li>
-<li>Generate HTML to <code>build/docs/</code>.</li>
-<li>Include a search index.</li>
-<li>Cross-reference symbols across modules where relevant.</li>
-</ul>
-<p>The generated HTML is built inside the
-<code>liara-documentation-builder</code> container image and pushed to the
-<code>liara-docs</code> repository (branch <code>cloudflare-pages</code>) under
-<code>site/&lt;repo&gt;/&lt;version&gt;/doxygen/</code>, where <code>&lt;version&gt;</code> is <code>dev</code> or
-<code>X.Y.Z</code>. The reusable docs workflow handles the publication. See
-<a href="https://liara-engine.liara-engine-documentation.workers.dev/docs-shared/latest/book/documentation-pipeline">documentation-pipeline.md</a>
-for the full picture</p>
-<h3 id="user-documentation-mdbook"><a class="header" href="#user-documentation-mdbook">User Documentation: mdBook</a></h3>
-<p>User-facing documentation (tutorials, guides, conceptual articles)
-lives in the meta repository under <code>docs/user/</code>, written in
-Markdown and built with mdBook.</p>
-<p>User documentation covers:</p>
-<ul>
-<li>Getting started: install, build, run the sample game.</li>
-<li>Concepts: ECS, render packets, asset management, settings,
-modularity.</li>
-<li>Tutorials: building a small scene, handling input, playing
-sounds, writing a simple game.</li>
-<li>Reference: configuration options, environment variables,
-command-line flags.</li>
-</ul>
-<p>he meta repository’s book is built and published like any other
-module’s: the mdBook output lands in the <code>liara-docs</code> repository
-under <code>site/liara/&lt;version&gt;/book/</code>.</p>
-<h3 id="the-documentation-hub"><a class="header" href="#the-documentation-hub">The Documentation Hub</a></h3>
-<p>The hub’s sources live in the <code>docs-shared</code> repository (<code>hub/</code>).
-It is deployed to the root of the documentation site — the
-<code>liara-docs</code> repository, branch <code>cloudflare-pages</code> — by the
-reusable docs workflow invoked with <code>deploy-as-hub: true</code>. The
-hub:</p>
-<ul>
-<li>Displays a landing page introducing the engine.</li>
-<li>Provides links to the user documentation (mdBook).</li>
-<li>Links to per-module documentation, with the version dropdown
-consuming <code>version.json</code> (validated against
-<code>version.schema.json</code> from the meta repository’s <code>schemas/</code>).</li>
-<li>Links to GitHub repositories.</li>
-</ul>
-<p>The hub uses the navbar from <code>docs-shared</code>, ensuring consistency
-with the per-module docs. The navbar’s version dropdown updates
-URLs across all linked documentation simultaneously.</p>
-<h3 id="versionjson"><a class="header" href="#versionjson"><code>version.json</code></a></h3>
-<p>The <code>version.json</code> file at the root of the site lists the
-available versions. Module URLs are URI references resolved
-against the site’s base URL, not absolute URLs:</p>
-<pre><code class="language-json">{
-  "$schema": "https://liara-engine.github.io/liara/schemas/version.schema.json",
-  "current_dev": "dev",
-  "latest_release": "dev",
-  "versions": [
-    {
-      "label": "dev",
-      "note": "Current development",
-      "modules": {
-        "abi": "liara-interfaces/dev/book/",
-        "core": "liara-core/dev/book/",
-        "renderer": "liara-renderer/dev/book/"
-      }
-    }
-  ]
-}
-</code></pre>
-<p>This file is updated by the release process: when a meta release
-happens, the <code>version.json</code> gains a new entry. The previous <code>dev</code>
-entry continues to point to the latest development docs.</p>
-<h3 id="coverage-badges-and-reports"><a class="header" href="#coverage-badges-and-reports">Coverage Badges and Reports</a></h3>
-<p>Coverage reports from Codecov are accessible from each module’s
-README via badges. The hub aggregates coverage information from all
-modules into a single page, generated by a small script that polls
-the Codecov API.</p>
+<p>See <a href="DOCUMENTATION_PIPELINE.html"><code>DOCUMENTATION_PIPELINE.md</code></a> for the
+full documentation generation and deployment pipeline.</p>
 <hr>
-<h2 id="11-documentation-hosting"><a class="header" href="#11-documentation-hosting">11. Documentation Hosting</a></h2>
-<h3 id="the-liara-docs-repository"><a class="header" href="#the-liara-docs-repository">The liara-docs Repository</a></h3>
-<p>All generated documentation is hosted from a single repository,
-<code>liara-docs</code>, on its <code>cloudflare-pages</code> branch. The reusable
-deploy workflow pushes each build under <code>site/&lt;repo&gt;/&lt;version&gt;/</code>:</p>
-<pre><code>liara-docs/cloudflare-pages/site/
-├── index.html                  # The hub
-├── version.json
-├── shared-content/             # Runtime shared assets
-├── liara-interfaces/
-│   ├── manifest.json
-│   ├── dev/
-│   │   ├── book/
-│   │   └── doxygen/
-│   └── v0.1.0/
-│       └── ...
-└── ...
-</code></pre>
-<p>The deployment is non-destructive: pushing new docs to <code>dev/</code> does
-not touch released versions. PR previews land under
-<code>site/&lt;repo&gt;/pr-&lt;n&gt;/</code> and are removed by a scheduled cleanup job.</p>
-<h3 id="serving"><a class="header" href="#serving">Serving</a></h3>
-<p>The branch is deployed through Cloudflare’s Git integration as a
-Workers Static Assets project. Static files are served directly; a
-small Worker (<code>src/index.js</code> in <code>liara-docs</code>) handles only
-fall-through requests: resolving <code>/&lt;repo&gt;/latest/…</code> from the
-module’s <code>manifest.json</code>, redirecting <code>/&lt;repo&gt;/&lt;version&gt;/</code> to
-<code>book/</code> (or <code>doxygen/</code>), and serving the custom 404 page.</p>
-<h3 id="branch-protection"><a class="header" href="#branch-protection">Branch Protection</a></h3>
-<p>The <code>cloudflare-pages</code> branch does not have branch protection. It
-is written to exclusively by CI; manual writes are not expected.</p>
-<h3 id="domain"><a class="header" href="#domain">Domain</a></h3>
-<p>The site is served at
-<code>liara-engine.liara-engine-documentation.workers.dev</code>, the default
-domain of the Cloudflare project. A custom domain is not
-configured; doing so would add operational burden (DNS management)
-for marginal benefit.</p>
-<hr>
-<h2 id="12-branch-protection-and-required-reviews"><a class="header" href="#12-branch-protection-and-required-reviews">12. Branch Protection and Required Reviews</a></h2>
+<h2 id="11-branch-protection-and-required-reviews"><a class="header" href="#11-branch-protection-and-required-reviews">11. Branch Protection and Required Reviews</a></h2>
 <h3 id="main-branch"><a class="header" href="#main-branch">Main Branch</a></h3>
 <p>Each module repository’s <code>main</code> branch is protected:</p>
 <ul>
@@ -930,7 +812,7 @@ the relevant section of this document and explain what changed.</p>
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="LICENSE.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="DOCUMENTATION_PIPELINE.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
 
@@ -944,7 +826,7 @@ the relevant section of this document and explain what changed.</p>
                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
             </a>
 
-            <a rel="next prefetch" href="LICENSE.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+            <a rel="next prefetch" href="DOCUMENTATION_PIPELINE.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
             </a>
     </nav>
