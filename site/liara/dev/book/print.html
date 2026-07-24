@@ -951,7 +951,7 @@ meta repository, which versions of which modules are bundled together.</li>
 packaging script, and any other distribution artifacts.</li>
 <li>A <code>schemas/</code> directory containing JSON schemas for any file formats defined
 at the meta level.</li>
-<li>A <code>docker/</code> directory containing any Dockerfiles for development or CI.</li>
+<li>A <code>docker/</code> directory containing any Dockerfiles (and associated scripts) used for development or CI.</li>
 </ul>
 <h3 id="what-it-does-not-contain"><a class="header" href="#what-it-does-not-contain">What It Does Not Contain</a></h3>
 <p>The meta repository does not contain engine logic, rendering code, ECS
@@ -979,7 +979,8 @@ the project may communicate across a module boundary without going through
 a header defined here. Modules that internally use richer C++ types
 must wrap them at their public surface to expose only the C interface.</p>
 <h3 id="contents-1"><a class="header" href="#contents-1">Contents</a></h3>
-<p>The repository contains exclusively C headers, organized by module:</p>
+<p>The repository contains exclusively C headers, organized by module.</p>
+<p>A possible layout of the headers is (the real layout may differ):</p>
 <pre><code>include/liara/
 ├── version.h           # Version macros and ABI version negotiation
 ├── types.h             # Common POD types (vec3, mat4, handles, etc.)
@@ -1083,7 +1084,8 @@ abstraction is in core, but the actual SDL3 calls happen in a small
 platform layer that is private to core). No editor-specific code. No
 gameplay code. No tools.</p>
 <h3 id="internal-organization"><a class="header" href="#internal-organization">Internal Organization</a></h3>
-<p>The core’s internal directory layout follows the categories above:</p>
+<p>The core’s internal directory layout follows the categories above.</p>
+<p>A possible layout is (the real layout may differ):</p>
 <pre><code>src/
 ├── ecs/
 ├── math/
@@ -1150,6 +1152,7 @@ created by the core’s platform layer; the renderer receives a native
 handle). No asset loading from disk (the renderer receives prepared
 asset data from the core’s asset manager). No input handling.</p>
 <h3 id="internal-organization-1"><a class="header" href="#internal-organization-1">Internal Organization</a></h3>
+<p>A possible layout of the renderer’s internal source tree is (the real layout may differ):</p>
 <pre><code>src/
 ├── device/
 ├── swapchain/
@@ -4724,7 +4727,8 @@ used much because clang-format makes most of these unnecessary).</li>
 </ul>
 <h3 id="scopes"><a class="header" href="#scopes">Scopes</a></h3>
 <p>Scopes identify the area of the project a commit affects. In a
-multi-repo layout, scopes correspond to subsystems within a module:</p>
+multi-repo layout, scopes correspond to subsystems within a module.</p>
+<p>Some examples of possible scopes (not exhaustive):</p>
 <p>In <code>liara-core</code>:</p>
 <ul>
 <li><code>ecs</code>, <code>math</code>, <code>assets</code>, <code>logger</code>, <code>settings</code>, <code>events</code>, <code>loop</code>,
