@@ -833,10 +833,9 @@ about minor mismatch noted in section 8).</li>
 <p>Across major versions, no compatibility is guaranteed. A module
 compiled against version 2.0 of the interface cannot be loaded by a
 core compiled against version 1.x, and vice versa.</p>
-<p>The compatibility matrix in the meta repository
-(<code>compatibility.toml</code>) records which exact combinations of module
-versions are tested together. Combinations not listed there are not
-guaranteed to work, even if the major versions match.</p>
+<p>The <code>manifest.json</code> file in each module’s contains a list of all
+released versions of this module, along with the list of interface
+versions it supports.</p>
 <hr>
 <h2 id="14-anti-patterns-to-avoid"><a class="header" href="#14-anti-patterns-to-avoid">14. Anti-Patterns to Avoid</a></h2>
 <p>The following patterns have appeared in early drafts of interfaces in
