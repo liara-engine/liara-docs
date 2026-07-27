@@ -410,8 +410,8 @@ interface versions for compatibility, and composes them: it drives
 the core’s per-tick step and mediates the render packets the core
 produces to the renderer, which renders a single hardcoded triangle
 to a window and presents it. The window has a standard close button
-that triggers a graceful shutdown propagated through the core to the</p>
-<p>enderer.</p>
+that triggers a graceful shutdown propagated through the core to the
+renderer.</p>
 <p>The triangle is hardcoded in the launcher: three vertices, a vertex
 shader, a fragment shader. There is no ECS yet, no asset loader, no
 math library beyond what the renderer needs internally.</p>
