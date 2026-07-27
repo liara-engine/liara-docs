@@ -945,13 +945,11 @@ loop. This is the executable that ships in the AUR package.</li>
 <li>A <code>scripts/</code> directory containing the workspace bootstrap script,
 release coordination scripts, and any other tooling that operates
 across repositories.</li>
-<li>A <code>compatibility.toml</code> file that lists, for each release of the
-meta repository, which versions of which modules are bundled together.</li>
 <li>A <code>packaging/</code> directory containing the Linux <code>PKGBUILD</code>, the Windows
 packaging script, and any other distribution artifacts.</li>
 <li>A <code>schemas/</code> directory containing JSON schemas for any file formats defined
 at the meta level.</li>
-<li>A <code>docker/</code> directory containing any Dockerfiles for development or CI.</li>
+<li>A <code>docker/</code> directory containing any Dockerfiles (and associated scripts) used for development or CI.</li>
 </ul>
 <h3 id="what-it-does-not-contain"><a class="header" href="#what-it-does-not-contain">What It Does Not Contain</a></h3>
 <p>The meta repository does not contain engine logic, rendering code, ECS
@@ -962,9 +960,8 @@ in the <code>liara-docs</code> repository.</p>
 <h3 id="versioning-policy"><a class="header" href="#versioning-policy">Versioning Policy</a></h3>
 <p>The meta repository uses its own version number, distinct from the
 versions of the modules it bundles. A release of <code>liara</code> 1.0.0 corresponds
-to a specific combination of <code>liara-core</code>, <code>liara-renderer</code>, etc.,
-specified in <code>compatibility.toml</code>. The user-visible “Liara Engine 1.0.0”
-refers to a release of this repository.</p>
+to a specific combination of <code>liara-core</code>, <code>liara-renderer</code>, etc.
+The user-visible “Liara Engine 1.0.0” refers to a release of this repository.</p>
 <p>The meta repository’s versioning follows the engine’s milestone roadmap.
 Module repositories version independently, on their own cadence.</p>
 <hr>
@@ -979,7 +976,8 @@ the project may communicate across a module boundary without going through
 a header defined here. Modules that internally use richer C++ types
 must wrap them at their public surface to expose only the C interface.</p>
 <h3 id="contents-1"><a class="header" href="#contents-1">Contents</a></h3>
-<p>The repository contains exclusively C headers, organized by module:</p>
+<p>The repository contains exclusively C headers, organized by module.</p>
+<p>A possible layout of the headers is (the real layout may differ):</p>
 <pre><code>include/liara/
 ├── version.h           # Version macros and ABI version negotiation
 ├── types.h             # Common POD types (vec3, mat4, handles, etc.)
@@ -1083,7 +1081,8 @@ abstraction is in core, but the actual SDL3 calls happen in a small
 platform layer that is private to core). No editor-specific code. No
 gameplay code. No tools.</p>
 <h3 id="internal-organization"><a class="header" href="#internal-organization">Internal Organization</a></h3>
-<p>The core’s internal directory layout follows the categories above:</p>
+<p>The core’s internal directory layout follows the categories above.</p>
+<p>A possible layout is (the real layout may differ):</p>
 <pre><code>src/
 ├── ecs/
 ├── math/
@@ -1150,6 +1149,7 @@ created by the core’s platform layer; the renderer receives a native
 handle). No asset loading from disk (the renderer receives prepared
 asset data from the core’s asset manager). No input handling.</p>
 <h3 id="internal-organization-1"><a class="header" href="#internal-organization-1">Internal Organization</a></h3>
+<p>A possible layout of the renderer’s internal source tree is (the real layout may differ):</p>
 <pre><code>src/
 ├── device/
 ├── swapchain/
@@ -1440,10 +1440,6 @@ map (section 1), the dependency graph (section 9), and the
 cross-reference (section 11).</p>
 </li>
 <li>
-<p><strong>Update the compatibility matrix.</strong> The meta repository’s
-<code>compatibility.toml</code> learns about the new module.</p>
-</li>
-<li>
 <p><strong>Update the launcher (if applicable).</strong> If the new module is part
 of the standalone runtime, the launcher composes it into the loop.</p>
 </li>
@@ -1652,9 +1648,6 @@ produces a buildable workspace in under five minutes.</p>
 </ul>
 <p>In Phase 0, the linked module documentation pages may be empty
 placeholders. The point is that the navigation infrastructure works.</p>
-<h3 id="compatibility-matrix-initialized"><a class="header" href="#compatibility-matrix-initialized">Compatibility Matrix Initialized</a></h3>
-<p>The meta repository contains <code>compatibility.toml</code> listing the
-expected versions of each module.</p>
 <h3 id="definition-of-done-for-phase-0"><a class="header" href="#definition-of-done-for-phase-0">Definition of Done for Phase 0</a></h3>
 <p>Phase 0 is complete when:</p>
 <ul>
@@ -1664,7 +1657,7 @@ expected versions of each module.</p>
 <li><input disabled="" type="checkbox" checked=""> Documentation is generated and deployed to cloudflare pages.</li>
 <li><input disabled="" type="checkbox" checked=""> The hub at <code>liara-engine.liara-engine-documentation.workers.dev</code>
 is accessible and renders with the navbar.</li>
-<li><input disabled="" type="checkbox"> The workspace bootstrap script runs successfully on a clean
+<li><input disabled="" type="checkbox" checked=""> The workspace bootstrap script runs successfully on a clean
 Arch Linux machine.</li>
 <li><input disabled="" type="checkbox"> The workspace bootstrap script runs successfully on a clean
 Windows 11 machine with Visual Studio 2022.</li>
@@ -1718,6 +1711,52 @@ clear error and refuses to load.</li>
 <li><input disabled="" type="checkbox"> User-facing documentation includes a “Build Hello Triangle”
 page.</li>
 <li><input disabled="" type="checkbox"> Compatibility matrix updated.</li>
+</ul>
+<hr>
+<h2 id="v01x--the-composition-tool-experimental"><a class="header" href="#v01x--the-composition-tool-experimental">v0.1.x — The Composition Tool (Experimental)</a></h2>
+<p>This is not a numbered milestone of its own; it is a developer tool that
+becomes useful the moment more than one module has independently moving
+versions, which is as soon as v0.1 ships. It is introduced here, early,
+in a deliberately minimal form.</p>
+<h3 id="rationale"><a class="header" href="#rationale">Rationale</a></h3>
+<p>Modules version independently. Very quickly, the question “does core 0.2
+still work against renderer 0.1?” stops being answerable by reading and
+starts needing to be run. Rebuilding every combination from source to
+answer it is slow; the whole point of publishing shared-library artifacts
+(<code>TOOLING.md</code> §9) is that a combination can instead be assembled from
+precompiled binaries in seconds.</p>
+<h3 id="scope-experimental-form"><a class="header" href="#scope-experimental-form">Scope (experimental form)</a></h3>
+<p>A script — living in the meta repository’s <code>scripts/</code> — that, given a
+set of module versions, downloads the matching released artifacts,
+validates the combination against each module’s <code>manifest.json</code>
+(<code>abi_compatibility</code>), assembles them into a runnable layout next
+to the launcher, and reports whether the combination is ABI-consistent
+before anything is run.</p>
+<p>This form is for the developer. It is allowed to be rough: a command-line
+tool, minimal error prettiness, Linux-first. It reads the same manifests
+the documentation navbar already consumes, which makes those manifests
+the single machine-readable source of truth for compatibility — and is
+the reason the project does not maintain a separate <code>compatibility.toml</code>.</p>
+<h3 id="out-of-scope-deferred-to-the-complete-form"><a class="header" href="#out-of-scope-deferred-to-the-complete-form">Out of Scope (deferred to the complete form)</a></h3>
+<ul>
+<li>
+<p>Any user-facing polish: interactive selection, friendly diagnostics, a
+curated “known-good” catalog.</p>
+</li>
+<li>
+<p>Producing a distributable package from a composed set (that is packaging, v0.6).</p>
+</li>
+<li>
+<p>Windows parity beyond “it runs”.</p>
+</li>
+</ul>
+<h3 id="definition-of-done-experimental"><a class="header" href="#definition-of-done-experimental">Definition of Done (experimental)</a></h3>
+<ul>
+<li><input disabled="" type="checkbox"> Given explicit module versions, the tool fetches the matching release artifacts
+and their manifests.</li>
+<li><input disabled="" type="checkbox"> It rejects an ABI-incompatible combination with a clear message, before assembly.</li>
+<li><input disabled="" type="checkbox"> It assembles a compatible combination into a layout the launcher can run against.</li>
+<li><input disabled="" type="checkbox"> It works on Linux for the developer’s own workflow.</li>
 </ul>
 <hr>
 <h2 id="6-v02--ecs-and-math"><a class="header" href="#6-v02--ecs-and-math">6. v0.2 — ECS and Math</a></h2>
@@ -1996,6 +2035,16 @@ with Liara.</p>
 3D scene where the player walks around and triggers sounds. This is
 the first end-to-end test of “user can build and ship a game with
 Liara”.</p>
+<p>The composition tool introduced experimentally after v0.1 reaches its
+complete, user-facing form here. Building on the experimental script,
+it gains: interactive selection of module versions from what is actually
+published, human-readable diagnostics when a combination is rejected,
+a curated set of known-good combinations, and Windows parity. This is
+what lets a user with a specific need — an older renderer for a specific
+GPU, a pinned core for reproducibility — assemble a working engine without
+building from source. It reuses the release artifacts (<code>TOOLING.md</code> §9)
+and the same manifest-based validation as the experimental form; the
+difference is polish and reach, not mechanism.</p>
 <h3 id="internal-developer-tools-4"><a class="header" href="#internal-developer-tools-4">Internal Developer Tools</a></h3>
 <p>This version is where the developer tools’ release-build behavior is
 verified. All tools introduced in v0.2 through v0.5 (stats overlay,
@@ -2034,6 +2083,8 @@ explicit toggle that is off by default.</li>
 <li><input disabled="" type="checkbox"> Release diagnostics panel works and is reachable through the
 documented key combination.</li>
 <li><input disabled="" type="checkbox"> User documentation includes “Distributing Your Game”.</li>
+<li><input disabled="" type="checkbox"> The composition tool assembles a user-selected combination
+on both Linux and Windows, with clear diagnostics for rejected combinations.</li>
 </ul>
 <hr>
 <h2 id="11-v07-through-v09--dogfooding"><a class="header" href="#11-v07-through-v09--dogfooding">11. v0.7 through v0.9 — Dogfooding</a></h2>
@@ -4495,27 +4546,81 @@ consuming repos with parameters. The right tool for this scale.</li>
 </ul>
 <h3 id="workflow-catalog"><a class="header" href="#workflow-catalog">Workflow Catalog</a></h3>
 <p>The <code>.github</code> repo contains workflows under
-<code>.github/workflows/reusable-*.yml</code>. The current catalog:</p>
-<p><strong><code>reusable-build-and-test.yml</code></strong>: the canonical build-and-test
-matrix. Inputs: which repository to build (the caller passes its
-own name), CMake preset to use, whether to run tests, whether to
-collect coverage. Outputs: build artifacts, test results, coverage
-files.</p>
-<p><strong><code>reusable-lint.yml</code></strong>: clang-format and clang-tidy checks. Inputs:
-repository name, source directories to scan. Fails if formatting is
-incorrect or if clang-tidy reports new warnings.</p>
-<p><strong><code>reusable-docs.yml</code></strong>: Doxygen generation, integration with
-<code>docs-shared</code> navbar, and cloudflare-pages deployment. Inputs: repository
-name, target directory in cloudflare-pages (<code>dev</code>, <code>vX.Y.Z</code>).</p>
-<p><strong><code>reusable-release.yml</code></strong>: release-please integration. Inputs:
-repository name, release-type (one of <code>cmake-cpp</code>, <code>simple</code>).
-Produces release PRs and, when merged, tags releases.</p>
-<p><strong><code>reusable-sonarcloud.yml</code></strong>: SonarCloud analysis. Inputs:
-repository name, SonarCloud project key. Requires a token configured
-as an organization secret.</p>
-<p>Each consuming repository has a small workflow file
-(<code>.github/workflows/ci.yml</code>) that calls these reusable workflows.
-The consuming workflows are short, typically under 30 lines.</p>
+<code>.github/workflows/reusable-*.yml</code>. The current catalog, grouped by concern:</p>
+<h4 id="build-and-quality"><a class="header" href="#build-and-quality">Build and quality</a></h4>
+<ul>
+<li>
+<p><code>reusable-build-and-test.yml</code> — the canonical build-and-test
+matrix. Inputs: the calling repository’s name, the CMake preset,
+whether to run tests, whether to collect coverage. Builds each module
+and the workspace, runs the test suite, uploads artifacts.</p>
+</li>
+<li>
+<p><code>reusable-lint.yml</code> — clang-format (diff check) and clang-tidy.
+Inputs: repository name, source directories. Fails on any formatting
+diff or new clang-tidy warning.</p>
+</li>
+<li>
+<p><code>reusable-shared-dynamic.yml</code> — builds the modules as shared
+libraries and links the launcher against them, proving the “designed
+for dynamic, implemented as static” property is not silently violated.</p>
+</li>
+</ul>
+<h4 id="interface-integrity-liara-interfaces-only"><a class="header" href="#interface-integrity-liara-interfaces-only">Interface integrity (<code>liara-interfaces</code> only)</a></h4>
+<ul>
+<li>
+<p><code>reusable-abi-header-portability.yml</code> — every public header compiles standalone,
+warning-free, as C and C++ across several language standards.</p>
+</li>
+<li>
+<p><code>reusable-abi-interface-rules.yml</code> — enforces the naming and shape rules from INTERFACES.md.</p>
+</li>
+<li>
+<p><code>reusable-abi-layout-freeze.yml</code> — freezes struct layouts against a generated golden
+header, catching accidental ABI-breaking layout changes.</p>
+</li>
+<li>
+<p><code>reusable-abi-snapshot.yml</code> — snapshots the ABI surface and diffs it against the PR base
+to compute the required version bump.</p>
+</li>
+<li>
+<p><code>reusable-abi-report.yml</code> — aggregates the four ABI checks into a single sticky PR comment.</p>
+</li>
+</ul>
+<h4 id="documentation-1"><a class="header" href="#documentation-1">Documentation</a></h4>
+<ul>
+<li>
+<p><code>reusable-build-docs.yml</code> / <code>reusable-deploy-docs.yml</code> — build the docs in
+the builder image and publish them to <code>liara-docs</code>. Composed by <code>reusable-docs.yml.</code></p>
+</li>
+<li>
+<p><code>reusable-docs-preview.yml</code> — builds a per-PR documentation preview and
+posts its URL as a sticky comment.</p>
+</li>
+</ul>
+<h4 id="release-and-housekeeping"><a class="header" href="#release-and-housekeeping">Release and housekeeping</a></h4>
+<ul>
+<li>
+<p><code>reusable-commitlint.yml</code> — validates conventional-commit format on every PR.</p>
+</li>
+<li>
+<p><code>reusable-validate-manifest.yml</code> — validates each module’s <code>manifest.json</code> against
+its schema and checks that the release-please target version exists in it.</p>
+</li>
+<li>
+<p><code>reusable-generate-docker.yml</code> — builds and pushes a Docker image (used for the
+documentation builder).</p>
+</li>
+<li>
+<p><code>clean-ghcr</code> / preview-tag workflows — prune untagged container images and stale preview tags.</p>
+</li>
+</ul>
+<p>Release automation itself (release-please) is invoked directly from each repository
+rather than through a reusable workflow; see §9.</p>
+<p>[Planned additions, general-purpose, targeted for Phase 0 completion: an automated
+dependency-update workflow (Renovate or Dependabot) to keep GitHub Action pins and
+the vcpkg baseline current, and a CodeQL security scan. A SonarCloud analysis workflow
+is also planned but deferred; see §7.]</p>
 <h3 id="versioning-the-reusable-workflows"><a class="header" href="#versioning-the-reusable-workflows">Versioning the Reusable Workflows</a></h3>
 <p>The reusable workflows are versioned. Consuming workflows reference
 them by tag (e.g., <code>liara-engine/.github/.github/workflows/reusable-build-and-test.yml@v1</code>).
@@ -4525,9 +4630,9 @@ update their reference at their own pace.</p>
 silently breaks every module’s CI on every push.</p>
 <hr>
 <h2 id="5-ci-pipelines"><a class="header" href="#5-ci-pipelines">5. CI Pipelines</a></h2>
-<p>Each module repository has its own CI pipeline in
-<code>.github/workflows/ci.yml</code>. The pipeline calls the reusable workflows
-for the actual work; the per-module file just configures the inputs.</p>
+<p>Each module repository has its own CI in <code>.github/workflows/</code>, split into
+small workflow files (build, lint, docs, commitlint, release) that call
+the reusable workflows. The per-module files just configure inputs.</p>
 <h3 id="triggers"><a class="header" href="#triggers">Triggers</a></h3>
 <p>The CI runs on:</p>
 <ul>
@@ -4585,8 +4690,9 @@ under 10 minutes.</p>
 <li>clang-format produces no diff.</li>
 <li>clang-tidy produces no new warnings.</li>
 <li>doctest tests all pass.</li>
+<li>The ABI checks pass (<code>liara-interfaces</code> only)</li>
 <li>Coverage does not decrease (with a configurable tolerance).</li>
-<li>SonarCloud quality gate passes.</li>
+<li>SonarCloud quality gate passes. [When <code>reusable-sonarcloud.yml</code> is implemented.]</li>
 </ul>
 <p>Documentation generation is not a required check (a doc-only failure
 should not block code merges); it runs but only reports.</p>
@@ -4724,7 +4830,8 @@ used much because clang-format makes most of these unnecessary).</li>
 </ul>
 <h3 id="scopes"><a class="header" href="#scopes">Scopes</a></h3>
 <p>Scopes identify the area of the project a commit affects. In a
-multi-repo layout, scopes correspond to subsystems within a module:</p>
+multi-repo layout, scopes correspond to subsystems within a module.</p>
+<p>Some examples of possible scopes (not exhaustive):</p>
 <p>In <code>liara-core</code>:</p>
 <ul>
 <li><code>ecs</code>, <code>math</code>, <code>assets</code>, <code>logger</code>, <code>settings</code>, <code>events</code>, <code>loop</code>,
@@ -4779,15 +4886,52 @@ grouped by scope.</p>
 merging. Manual edits are possible but rare; the discipline of
 writing good commit messages produces good changelog entries
 automatically.</p>
-<h3 id="compatibility-matrix-updates"><a class="header" href="#compatibility-matrix-updates">Compatibility Matrix Updates</a></h3>
-<p>When a release happens in any module, the meta repository’s
-<code>compatibility.toml</code> may need updating. This is <strong>not</strong> automated;
-the developer manually adds an entry when promoting a combination of
-module versions to “tested together”.</p>
-<p>This explicit step exists because not every release is meant to be
-rolled into a meta repository release. A patch release of
-<code>liara-renderer</code> may or may not warrant a new entry in the matrix,
-and the human is the right judge of that.</p>
+<h3 id="release-artifacts"><a class="header" href="#release-artifacts">Release Artifacts</a></h3>
+<p>When release-please merges a release PR and creates a GitHub Release
+for a module, a follow-up workflow builds that module’s binaries and
+attaches them to the release. This turns every module release into a
+set of consumable, precompiled artifacts rather than a source-only tag.</p>
+<h4 id="what-is-published-per-module-release"><a class="header" href="#what-is-published-per-module-release">What is published, per module release:</a></h4>
+<ul>
+<li>
+<p>The compiled library, for each supported platform and toolchain: Linux/GCC,
+Linux/Clang, Windows/MSVC.</p>
+</li>
+<li>
+<p>Both the static and the shared build of the library, so that a consumer can
+choose to link statically or to compose a runtime from shared modules.</p>
+</li>
+<li>
+<p>The module’s public headers.</p>
+</li>
+<li>
+<p>The module’s <code>manifest.json</code> for the released version, which records its ABI
+compatibility. This is the machine-readable record a composition step reads
+to validate a combination (see below and ROADMAP.md).</p>
+</li>
+<li>
+<p>A checksum file (SHA-256) covering every artifact in the release.</p>
+</li>
+</ul>
+<h4 id="what-triggers-it"><a class="header" href="#what-triggers-it">What triggers it:</a></h4>
+<p>The workflow runs on the release published event, keyed to the tag
+release-please created. It does not run on every push: only tagged
+releases produce artifacts, which keeps storage bounded and makes
+“a released version” and “a set of downloadable binaries” the same thing.</p>
+<h4 id="naming"><a class="header" href="#naming">Naming:</a></h4>
+<p>Artifacts follow a stable, parseable convention:
+<code>liara-&lt;module&gt;-&lt;version&gt;-&lt;platform&gt;-&lt;toolchain&gt;-&lt;linkage&gt;.&lt;ext&gt;</code>
+(for example <code>liara-core-0.3.1-linux-clang-shared.tar.zst</code>,
+<code>liara-renderer-0.3.0-windows-msvc-static.zip</code>). The convention
+is stable because the composition tooling parses it; a change to
+it is a breaking change to that tooling.</p>
+<h4 id="what-is-deliberately-not-here"><a class="header" href="#what-is-deliberately-not-here">What is deliberately not here:</a></h4>
+<p>These are per-module artifacts, not a bundled engine. Assembling a
+specific set of module versions into a runnable engine — for compatibility
+testing, or for a user with a specific need — is the job of the composition
+script, which consumes these artifacts rather than producing them. It is
+described in <code>ROADMAP.md</code>, not here, because it is a developer/user tool
+rather than CI infrastructure.</p>
 <hr>
 <h2 id="10-documentation-generation"><a class="header" href="#10-documentation-generation">10. Documentation Generation</a></h2>
 <p>See <a href="#the-documentation-pipeline"><code>DOCUMENTATION_PIPELINE.md</code></a> for the

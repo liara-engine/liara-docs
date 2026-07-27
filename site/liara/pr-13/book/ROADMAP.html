@@ -377,9 +377,6 @@ produces a buildable workspace in under five minutes.</p>
 </ul>
 <p>In Phase 0, the linked module documentation pages may be empty
 placeholders. The point is that the navigation infrastructure works.</p>
-<h3 id="compatibility-matrix-initialized"><a class="header" href="#compatibility-matrix-initialized">Compatibility Matrix Initialized</a></h3>
-<p>The meta repository contains <code>compatibility.toml</code> listing the
-expected versions of each module.</p>
 <h3 id="definition-of-done-for-phase-0"><a class="header" href="#definition-of-done-for-phase-0">Definition of Done for Phase 0</a></h3>
 <p>Phase 0 is complete when:</p>
 <ul>
@@ -389,7 +386,7 @@ expected versions of each module.</p>
 <li><input disabled="" type="checkbox" checked=""> Documentation is generated and deployed to cloudflare pages.</li>
 <li><input disabled="" type="checkbox" checked=""> The hub at <code>liara-engine.liara-engine-documentation.workers.dev</code>
 is accessible and renders with the navbar.</li>
-<li><input disabled="" type="checkbox"> The workspace bootstrap script runs successfully on a clean
+<li><input disabled="" type="checkbox" checked=""> The workspace bootstrap script runs successfully on a clean
 Arch Linux machine.</li>
 <li><input disabled="" type="checkbox"> The workspace bootstrap script runs successfully on a clean
 Windows 11 machine with Visual Studio 2022.</li>
@@ -443,6 +440,52 @@ clear error and refuses to load.</li>
 <li><input disabled="" type="checkbox"> User-facing documentation includes a “Build Hello Triangle”
 page.</li>
 <li><input disabled="" type="checkbox"> Compatibility matrix updated.</li>
+</ul>
+<hr>
+<h2 id="v01x--the-composition-tool-experimental"><a class="header" href="#v01x--the-composition-tool-experimental">v0.1.x — The Composition Tool (Experimental)</a></h2>
+<p>This is not a numbered milestone of its own; it is a developer tool that
+becomes useful the moment more than one module has independently moving
+versions, which is as soon as v0.1 ships. It is introduced here, early,
+in a deliberately minimal form.</p>
+<h3 id="rationale"><a class="header" href="#rationale">Rationale</a></h3>
+<p>Modules version independently. Very quickly, the question “does core 0.2
+still work against renderer 0.1?” stops being answerable by reading and
+starts needing to be run. Rebuilding every combination from source to
+answer it is slow; the whole point of publishing shared-library artifacts
+(<code>TOOLING.md</code> §9) is that a combination can instead be assembled from
+precompiled binaries in seconds.</p>
+<h3 id="scope-experimental-form"><a class="header" href="#scope-experimental-form">Scope (experimental form)</a></h3>
+<p>A script — living in the meta repository’s <code>scripts/</code> — that, given a
+set of module versions, downloads the matching released artifacts,
+validates the combination against each module’s <code>manifest.json</code>
+(<code>abi_compatibility</code>), assembles them into a runnable layout next
+to the launcher, and reports whether the combination is ABI-consistent
+before anything is run.</p>
+<p>This form is for the developer. It is allowed to be rough: a command-line
+tool, minimal error prettiness, Linux-first. It reads the same manifests
+the documentation navbar already consumes, which makes those manifests
+the single machine-readable source of truth for compatibility — and is
+the reason the project does not maintain a separate <code>compatibility.toml</code>.</p>
+<h3 id="out-of-scope-deferred-to-the-complete-form"><a class="header" href="#out-of-scope-deferred-to-the-complete-form">Out of Scope (deferred to the complete form)</a></h3>
+<ul>
+<li>
+<p>Any user-facing polish: interactive selection, friendly diagnostics, a
+curated “known-good” catalog.</p>
+</li>
+<li>
+<p>Producing a distributable package from a composed set (that is packaging, v0.6).</p>
+</li>
+<li>
+<p>Windows parity beyond “it runs”.</p>
+</li>
+</ul>
+<h3 id="definition-of-done-experimental"><a class="header" href="#definition-of-done-experimental">Definition of Done (experimental)</a></h3>
+<ul>
+<li><input disabled="" type="checkbox"> Given explicit module versions, the tool fetches the matching release artifacts
+and their manifests.</li>
+<li><input disabled="" type="checkbox"> It rejects an ABI-incompatible combination with a clear message, before assembly.</li>
+<li><input disabled="" type="checkbox"> It assembles a compatible combination into a layout the launcher can run against.</li>
+<li><input disabled="" type="checkbox"> It works on Linux for the developer’s own workflow.</li>
 </ul>
 <hr>
 <h2 id="6-v02--ecs-and-math"><a class="header" href="#6-v02--ecs-and-math">6. v0.2 — ECS and Math</a></h2>
@@ -721,6 +764,16 @@ with Liara.</p>
 3D scene where the player walks around and triggers sounds. This is
 the first end-to-end test of “user can build and ship a game with
 Liara”.</p>
+<p>The composition tool introduced experimentally after v0.1 reaches its
+complete, user-facing form here. Building on the experimental script,
+it gains: interactive selection of module versions from what is actually
+published, human-readable diagnostics when a combination is rejected,
+a curated set of known-good combinations, and Windows parity. This is
+what lets a user with a specific need — an older renderer for a specific
+GPU, a pinned core for reproducibility — assemble a working engine without
+building from source. It reuses the release artifacts (<code>TOOLING.md</code> §9)
+and the same manifest-based validation as the experimental form; the
+difference is polish and reach, not mechanism.</p>
 <h3 id="internal-developer-tools-4"><a class="header" href="#internal-developer-tools-4">Internal Developer Tools</a></h3>
 <p>This version is where the developer tools’ release-build behavior is
 verified. All tools introduced in v0.2 through v0.5 (stats overlay,
@@ -759,6 +812,8 @@ explicit toggle that is off by default.</li>
 <li><input disabled="" type="checkbox"> Release diagnostics panel works and is reachable through the
 documented key combination.</li>
 <li><input disabled="" type="checkbox"> User documentation includes “Distributing Your Game”.</li>
+<li><input disabled="" type="checkbox"> The composition tool assembles a user-selected combination
+on both Linux and Windows, with clear diagnostics for rejected combinations.</li>
 </ul>
 <hr>
 <h2 id="11-v07-through-v09--dogfooding"><a class="header" href="#11-v07-through-v09--dogfooding">11. v0.7 through v0.9 — Dogfooding</a></h2>
