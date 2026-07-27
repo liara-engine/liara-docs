@@ -529,10 +529,12 @@ more than local cleverness.</p>
 <hr>
 <h2 id="4-modularity-model"><a class="header" href="#4-modularity-model">4. Modularity Model</a></h2>
 <p>The engine is structured as a <strong>collection of separately versioned libraries
-linked together at build time</strong>. There is no plugin loader, no dynamic
-discovery, no configuration file that lists which modules to load. Module
-selection is made by the build system, frozen at compile time, and does not
-change at runtime.</p>
+linked together at build time</strong>. Module selection is made by the build system:
+the shipped engine is a single executable with its modules linked in, with no
+plugin discovery mechanism to debug. An experimental runtime-loading path
+exists (see “Designed for Dynamic” below), used to validate the interface
+boundary — but it is a development and testing facility, not how a Liara
+game is (currently) distributed.</p>
 <h3 id="why-build-time-selection"><a class="header" href="#why-build-time-selection">Why Build-Time Selection</a></h3>
 <p>Three models were considered for module composition. The first, used by
 projects like Bevy, selects modules at build time via build system options;
@@ -563,6 +565,15 @@ write the renderer in Rust against OpenGL, or the physics module in Zig,
 could do so by implementing the same C interface. Whether this ever happens
 in practice is a separate question; what matters is that nothing in the
 architecture forbids it.</p>
+<p>A CI leg builds every module as a shared library and links the launcher
+against them (<code>TOOLING.md</code> §4, <code>reusable-shared-dynamic.yml</code>); if a module
+silently acquired a link-time dependency on another module’s symbols, or
+leaked C++ across its boundary, that build fails. The static/dynamic choice
+is thus a build-time flag (<code>BUILD_SHARED_LIBS</code>), not an architectural fork.
+A further, optional step exercises actual runtime loading
+(<code>dlopen</code>/<code>LoadLibrary</code> + symbol resolution through each module’s
+<code>liara_&lt;module&gt;_info</code> entry point), giving the version-negotiation machinery
+its first real workout instead of leaving it a design that nothing runs.</p>
 <h3 id="multi-repository-layout"><a class="header" href="#multi-repository-layout">Multi-Repository Layout</a></h3>
 <p>The codebase is split across multiple Git repositories, one per module, all
 hosted under the <code>liara-engine</code> GitHub organization. This is a deliberate
@@ -1669,15 +1680,18 @@ Arch Linux machine.</li>
 Windows 11 machine with Visual Studio 2022.</li>
 <li><input disabled="" type="checkbox"> An ADR exists for each major decision: multi-repo layout, C
 ABI interfaces, ECS-from-scratch, Vulkan-Hpp, etc.</li>
+<li><input disabled="" type="checkbox"> Every module builds as a shared library (<code>BUILD_SHARED_LIBS=ON</code>)
+with hidden default visibility and an explicit export macro,
+and the launcher links and runs against the shared build.</li>
 </ul>
 <hr>
 <h2 id="5-v01--hello-triangle"><a class="header" href="#5-v01--hello-triangle">5. v0.1 — Hello Triangle</a></h2>
 <p>The first real version of the engine. The goal is not to render
 something impressive; the goal is to <strong>prove that the modular pipeline
 works end to end</strong>. Every architectural decision is exercised: the C
-interfaces, the module loader, the renderer module’s Vulkan
-initialization, the launcher’s composition of core and renderer, the
-cross-platform build.</p>
+interfaces, the host’s composition and version negotiation of the
+modules, the renderer module’s Vulkan initialization, the launcher’s
+composition of core and renderer, the cross-platform build.</p>
 <p>If v0.1 ships, the project’s hardest architectural risk is behind it.
 Every subsequent version is “just” adding features.</p>
 <h3 id="scope"><a class="header" href="#scope">Scope</a></h3>
@@ -1713,9 +1727,10 @@ management.</p>
 <li><input disabled="" type="checkbox"> A window appears with a triangle rendered in it.</li>
 <li><input disabled="" type="checkbox"> The window is closable and the application shuts down cleanly.</li>
 <li><input disabled="" type="checkbox"> No Vulkan validation errors are reported in debug builds.</li>
-<li><input disabled="" type="checkbox"> The interface version negotiation between core and renderer
-is exercised: a contrived major-version mismatch produces a
-clear error and refuses to load.</li>
+<li><input disabled="" type="checkbox"> The interface version negotiation between core and renderer is
+exercised through the runtime-loading path: a contrived major-version
+mismatch is detected at load time, produces a clear error, and
+refuses to load — no crash, no silent mismatch.</li>
 <li><input disabled="" type="checkbox"> Tests pass on all platforms.</li>
 <li><input disabled="" type="checkbox"> User-facing documentation includes a “Build Hello Triangle”
 page.</li>
