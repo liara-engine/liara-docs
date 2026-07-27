@@ -895,22 +895,22 @@ which are not.</li>
 <pre><code class="language-c">/**
  * @brief Creates a new renderer instance.
  *
- * @param create_info Configuration for the renderer. Must not be NULL.
- *                    Read-only; not retained beyond the call.
- * @param allocator   Optional custom allocator. May be NULL to use
- *                    the module's default allocator. If non-NULL, the
- *                    pointed-to allocator must remain valid for the
- *                    lifetime of the returned handle.
- * @param out_handle  Output: the created renderer handle. Must not be
- *                    NULL. On success, *out_handle is set to a valid
- *                    handle that the caller must eventually pass to
- *                    liara_renderer_destroy. On failure, *out_handle
- *                    is set to NULL.
+ * @param[in] create_info Configuration for the renderer. Must not be NULL.
+ *                        Read-only; not retained beyond the call.
+ * @param[in] allocator   Optional custom allocator. May be NULL to use
+ *                        the module's default allocator. If non-NULL, the
+ *                        pointed-to allocator must remain valid for the
+ *                        lifetime of the returned handle.
+ * @param[out] out_handle  Output: the created renderer handle. Must not be
+ *                         NULL. On success, *out_handle is set to a valid
+ *                         handle that the caller must eventually pass to
+ *                         liara_renderer_destroy. On failure, *out_handle
+ *                         is set to NULL.
  * @return LIARA_RESULT_SUCCESS, LIARA_RESULT_OUT_OF_MEMORY, or
  *         LIARA_RESULT_INVALID_ARGUMENT.
  *
  * @threadsafety This function is not thread-safe; only one thread
- *               may call it at a time.
+ *               may call it at a time. @endthreadsafety
  */
 liara_result liara_renderer_create(
     const liara_renderer_create_info_t* create_info,

@@ -1,12 +1,12 @@
 var renderer_8h =
 [
-    [ "liara_renderer_handle_t", "renderer_8h.html#a1f3605b83e2676e0db8179d19876e7b9", null ],
-    [ "liara_renderer_abi_version", "renderer_8h.html#a2b258cc7040ad1721113b226084363a4", null ],
-    [ "liara_renderer_create", "renderer_8h.html#a9d6a2cf987f87f877ffd9bab2619a694", null ],
-    [ "liara_renderer_destroy", "renderer_8h.html#ab8ba19f922956ec6f3c90185520f62e9", null ],
-    [ "liara_renderer_print", "renderer_8h.html#a9e5f49a804206d310a9eb5697faac336", null ],
-    [ "liara_renderer_println", "renderer_8h.html#a987e24bd616ec133e6335ad94fef2809", null ],
-    [ "liara_renderer_set_background_color", "renderer_8h.html#a6086c5fa48681855409e5b34a4b6ce63", null ],
-    [ "liara_renderer_set_text_color", "renderer_8h.html#a7863b6e87800c6dd9668f3a6e0ef6597", null ],
-    [ "liara_renderer_version", "renderer_8h.html#a0d9a50c017c8764c14436a48fd0a2dc5", null ]
+    [ "LIARA_API_DEPRECATED", "renderer_8h.html#a2354a30d8b088ec24b095f8fcceb7575", null ],
+    [ "liara_renderer_abi_version", "renderer_8h.html#aa2c2a93604de920ba22b3c09cfc306c1", null ],
+    [ "liara_renderer_create", "renderer_8h.html#a7e0f6a73b8024a8f7bebab53ff3a6b65", null ],
+    [ "liara_renderer_destroy", "renderer_8h.html#af8d79fbd147f5661f3bc4d29ce4aa495", null ],
+    [ "liara_renderer_info", "renderer_8h.html#ab315f874a76c3cbc6dcefa3e96d4b645", null ],
+    [ "liara_renderer_print", "renderer_8h.html#ada3bf5a3ec68b5112532721e094d2a39", null ],
+    [ "liara_renderer_println", "renderer_8h.html#a1fdb9df5852ec58e730ce614c8b21507", null ],
+    [ "liara_renderer_set_background_color", "renderer_8h.html#a43873a6fb967a32d061a819349ac903a", null ],
+    [ "liara_renderer_set_text_color", "renderer_8h.html#a26f0022f2c2a7f7e70dea5fab0407171", null ]
 ];

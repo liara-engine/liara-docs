@@ -1,6 +1,8 @@
 var version_8h =
 [
     [ "LIARA_MAKE_VERSION_UNSAFE", "version_8h.html#aaaceeaea311b58ccf606bbefa53d7f40", null ],
+    [ "LIARA_STRINGIFY", "version_8h.html#ad087294b6f5f6b27142cd8dfd2596007", null ],
+    [ "LIARA_TOSTRING", "version_8h.html#aa1994be2e5876fea174d76fff0fc3b76", null ],
     [ "LIARA_VERSION_MAJOR", "version_8h.html#a84ee12d0b17960a5ce651e7b4578d8f9", null ],
     [ "LIARA_VERSION_MAJOR_BITS", "version_8h.html#ac41a58838efb97a050f2cc6786259fde", null ],
     [ "LIARA_VERSION_MAJOR_MASK", "version_8h.html#a80857ca4a694ce0ca9c432a76254e01c", null ],
@@ -13,7 +15,7 @@ var version_8h =
     [ "LIARA_VERSION_PATCH_BITS", "version_8h.html#a47f6351c340557f03ba264dc1ac8f9a5", null ],
     [ "LIARA_VERSION_PATCH_MASK", "version_8h.html#a474542da7831f5d0527294e94775f72b", null ],
     [ "LIARA_VERSION_PATCH_SHIFT", "version_8h.html#ae91e05419e0418901b1610e6bbbe1f68", null ],
-    [ "LIARA_STATIC_ASSERT", "version_8h.html#af57cf9ba2d5ca1568038ff302815954b", null ],
+    [ "LIARA_STATIC_ASSERT", "version_8h.html#ab8bf328df4ec2c6a76bfc8627f29a4b1", null ],
     [ "liara_try_make_version", "version_8h.html#a79d43227c96e44d65638d87ae446c72a", null ],
     [ "liara_version_eq", "version_8h.html#a44fcd09fc099956390af1d506476d4f9", null ],
     [ "liara_version_gt", "version_8h.html#af14552fe3fb19cd895d6df5f0f7944aa", null ],
