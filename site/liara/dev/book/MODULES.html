@@ -253,8 +253,6 @@ loop. This is the executable that ships in the AUR package.</li>
 <li>A <code>scripts/</code> directory containing the workspace bootstrap script,
 release coordination scripts, and any other tooling that operates
 across repositories.</li>
-<li>A <code>compatibility.toml</code> file that lists, for each release of the
-meta repository, which versions of which modules are bundled together.</li>
 <li>A <code>packaging/</code> directory containing the Linux <code>PKGBUILD</code>, the Windows
 packaging script, and any other distribution artifacts.</li>
 <li>A <code>schemas/</code> directory containing JSON schemas for any file formats defined
@@ -270,9 +268,8 @@ in the <code>liara-docs</code> repository.</p>
 <h3 id="versioning-policy"><a class="header" href="#versioning-policy">Versioning Policy</a></h3>
 <p>The meta repository uses its own version number, distinct from the
 versions of the modules it bundles. A release of <code>liara</code> 1.0.0 corresponds
-to a specific combination of <code>liara-core</code>, <code>liara-renderer</code>, etc.,
-specified in <code>compatibility.toml</code>. The user-visible “Liara Engine 1.0.0”
-refers to a release of this repository.</p>
+to a specific combination of <code>liara-core</code>, <code>liara-renderer</code>, etc.
+The user-visible “Liara Engine 1.0.0” refers to a release of this repository.</p>
 <p>The meta repository’s versioning follows the engine’s milestone roadmap.
 Module repositories version independently, on their own cadence.</p>
 <hr>
@@ -749,10 +746,6 @@ repository setup (see <code>CONTRIBUTING.md</code>).</p>
 <p><strong>Update this document.</strong> The new module appears in the repository
 map (section 1), the dependency graph (section 9), and the
 cross-reference (section 11).</p>
-</li>
-<li>
-<p><strong>Update the compatibility matrix.</strong> The meta repository’s
-<code>compatibility.toml</code> learns about the new module.</p>
 </li>
 <li>
 <p><strong>Update the launcher (if applicable).</strong> If the new module is part
