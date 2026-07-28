@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['patch_0',['patch',['../version_8h.html#aec1cc0a9f820f1748f98d8b1da9cb784',1,'version.h']]]
+  ['ignore_5fpatch_0',['ignore_patch',['../version_8h.html#a076e939c5adda3f779ed87ccbb7174df',1,'version.h']]]
 ];

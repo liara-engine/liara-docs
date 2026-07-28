@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['patch_0',['patch',['../version_8h.html#aec1cc0a9f820f1748f98d8b1da9cb784',1,'version.h']]],
-  ['private_5futils_2eh_1',['private_utils.h',['../private__utils_8h.html',1,'']]]
+  ['out_5fcore_0',['out_core',['../core_8h.html#a7bf4b5555d259c3863db6b49292ef4b8',1,'core.h']]],
+  ['out_5fversion_1',['out_version',['../version_8h.html#af54783d9ac77f74eb96ce02623bcb217',1,'version.h']]]
 ];
