@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('result_8h.html
   <div class="headertitle"><div class="title">result.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="private__utils_8h_source.html">liara/private_utils.h</a>&gt;</code><br />
 </div>
 <p><a href="result_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -158,18 +158,16 @@ Macros</h2></td></tr>
 <tr class="memitem:a353dee5b8ea5563bed580367803b460d" id="r_a353dee5b8ea5563bed580367803b460d"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a353dee5b8ea5563bed580367803b460d">LIARA_X</a>(name,  value)</td></tr>
 <tr class="memitem:a9148a93a3de106efe48f382a47222553" id="r_a9148a93a3de106efe48f382a47222553"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a9148a93a3de106efe48f382a47222553">LIARA_X</a>(name,  value)</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a483c50e67c0928cdbc611b70a0ca92de" id="r_a483c50e67c0928cdbc611b70a0ca92de"><td class="memItemLeft">typedef int32_t&#160;</td><td class="memItemRight"><a class="el" href="#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a></td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:acf4e28c0c173706f235360ca8eb237ca" id="r_acf4e28c0c173706f235360ca8eb237ca"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#acf4e28c0c173706f235360ca8eb237ca">liara_result_codes</a> </td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a52a1450f4a812a1e905994a57a0a2fc1" id="r_a52a1450f4a812a1e905994a57a0a2fc1"><td class="memItemLeft">static const char *&#160;</td><td class="memItemRight"><a class="el" href="#a52a1450f4a812a1e905994a57a0a2fc1">liara_result_to_string</a> (const <a class="el" href="#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a> result)</td></tr>
-<tr class="memdesc:a52a1450f4a812a1e905994a57a0a2fc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a <a class="el" href="#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a> code to a human-readable string.  <br /></td></tr>
+<tr class="memitem:adf98d7538173cf9b23fc38e055d46f0c" id="r_adf98d7538173cf9b23fc38e055d46f0c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#adf98d7538173cf9b23fc38e055d46f0c">LIARA_TYPEDEF_DEPRECATED</a> (int32_t, liara_result, &quot;This type is deprecated and will be removed in future versions. Use `liara_result_t` instead.&quot;)</td></tr>
+<tr class="memitem:aeaf434d651ad23873b655bfb369e2dae" id="r_aeaf434d651ad23873b655bfb369e2dae"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aeaf434d651ad23873b655bfb369e2dae">LIARA_TYPEDEF</a> (int32_t, liara_result_t)</td></tr>
+<tr class="memitem:a7aaf9cb4d651f97a7b2d4ee50df2df72" id="r_a7aaf9cb4d651f97a7b2d4ee50df2df72"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a7aaf9cb4d651f97a7b2d4ee50df2df72">LIARA_API_DEPRECATED</a> (&quot;This function is deprecated and its signature will use liara_result_t instead of liara_result in &quot; &quot;v0.2.0. Please update your code accordingly.&quot;) static inline const char *liara_result_to_string(const liara_result result)</td></tr>
+<tr class="memdesc:a7aaf9cb4d651f97a7b2d4ee50df2df72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a liara_result code to a human-readable string.  <br /></td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
 <a id="a3abe06dc5277a2c971c2e78c4d9a2199" name="a3abe06dc5277a2c971c2e78c4d9a2199"></a>
@@ -187,7 +185,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><span class="comment">/* 0 : Success */</span>                                                             \</div>
-<div class="line">X(LIARA_RESULT_SUCCESS, 0)                                                    \</div>
+<div class="line">X(<a class="code hl_variable" href="version_8h.html#ac527b464c38ea93d2bfc08215c30dec7">LIARA_RESULT_SUCCESS</a>, 0)                                                    \</div>
 <div class="line"><span class="comment">/* -1 : Basic failure, please prefer more specific error codes if possible */</span> \</div>
 <div class="line">X(LIARA_RESULT_FAILED, -1)                                                    \</div>
 <div class="line"><span class="comment">/* -2 to -99 : General errors */</span>                                              \</div>
@@ -215,6 +213,7 @@ Functions</h2></td></tr>
 <div class="line">X(LIARA_RESULT_FILE_NOT_FOUND, -301)                                          \</div>
 <div class="line">X(LIARA_RESULT_FILE_ALREADY_EXISTS, -302)                                     \</div>
 <div class="line">X(LIARA_RESULT_FILE_ACCESS_DENIED, -303)</div>
+<div class="ttc" id="aversion_8h_html_ac527b464c38ea93d2bfc08215c30dec7"><div class="ttname"><a href="version_8h.html#ac527b464c38ea93d2bfc08215c30dec7">LIARA_RESULT_SUCCESS</a></div><div class="ttdeci">return LIARA_RESULT_SUCCESS</div><div class="ttdef"><b>Definition</b> version.h:131</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -262,21 +261,6 @@ Functions</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
-<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
-<a id="a483c50e67c0928cdbc611b70a0ca92de" name="a483c50e67c0928cdbc611b70a0ca92de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a483c50e67c0928cdbc611b70a0ca92de">&#9670;&#160;</a></span>liara_result</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef int32_t <a class="el" href="#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
 <a id="acf4e28c0c173706f235360ca8eb237ca" name="acf4e28c0c173706f235360ca8eb237ca"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acf4e28c0c173706f235360ca8eb237ca">&#9670;&#160;</a></span>liara_result_codes</h2>
@@ -293,42 +277,83 @@ Functions</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a52a1450f4a812a1e905994a57a0a2fc1" name="a52a1450f4a812a1e905994a57a0a2fc1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52a1450f4a812a1e905994a57a0a2fc1">&#9670;&#160;</a></span>liara_result_to_string()</h2>
+<a id="a7aaf9cb4d651f97a7b2d4ee50df2df72" name="a7aaf9cb4d651f97a7b2d4ee50df2df72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7aaf9cb4d651f97a7b2d4ee50df2df72">&#9670;&#160;</a></span>LIARA_API_DEPRECATED()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char * liara_result_to_string </td>
+          <td class="memname">LIARA_API_DEPRECATED </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a></td>          <td class="paramname"><span class="paramname"><em>result</em></span></td><td>)</td>
-          <td></td>
+          <td class="paramtype">&quot;This function is deprecated and its signature will use liara_result_t instead of liara_result in &quot; &quot;v0.2.0. Please update your code accordingly.&quot;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Convert a <a class="el" href="#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a> code to a human-readable string. </p>
-<p>This function takes a <a class="el" href="#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a> code and returns a string representation of the code. If the code is not recognized, it returns "Unknown liara_result code".</p>
+<p>Convert a liara_result code to a human-readable string. </p>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000006">Deprecated</a></b></dt><dd>This function is deprecated and its signature will use <span class="tt">liara_result_t</span> instead of <span class="tt">liara_result</span> in v0.2.0. Please update your code accordingly. </dd></dl>
+<p>This function takes a liara_result code and returns a string representation of the code. If the code is not recognized, it returns "Unknown liara_result code".</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">result[in]</td><td>The <a class="el" href="#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a> code to convert. </td></tr>
+    <tr><td class="paramname">result[in]</td><td>The liara_result code to convert. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A string representation of the <a class="el" href="#a483c50e67c0928cdbc611b70a0ca92de">liara_result</a> code.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A string representation of the liara_result code.</dd></dl>
 <dl class="section threadsafety">
 <dt>Thread Safety</dt>
 <dd>This function is thread-safe as it does not modify any shared state. </dd>
 </dl>
+
+</div>
+</div>
+<a id="aeaf434d651ad23873b655bfb369e2dae" name="aeaf434d651ad23873b655bfb369e2dae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaf434d651ad23873b655bfb369e2dae">&#9670;&#160;</a></span>LIARA_TYPEDEF()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LIARA_TYPEDEF </td>
+          <td>(</td>
+          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">liara_result_t</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adf98d7538173cf9b23fc38e055d46f0c" name="adf98d7538173cf9b23fc38e055d46f0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf98d7538173cf9b23fc38e055d46f0c">&#9670;&#160;</a></span>LIARA_TYPEDEF_DEPRECATED()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LIARA_TYPEDEF_DEPRECATED </td>
+          <td>(</td>
+          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">liara_result</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&quot;This type is deprecated and will be removed in future versions. Use `liara_result_t` instead.&quot;</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000005">Deprecated</a></b></dt><dd>: This type is deprecated and will be removed in future versions. Use <span class="tt">liara_result_t</span> instead. \ </dd></dl>
 
 </div>
 </div>
