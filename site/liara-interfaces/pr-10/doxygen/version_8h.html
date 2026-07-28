@@ -239,11 +239,11 @@ Variables</h2></td></tr>
 <div class="line">                    | (<a class="code hl_define" href="private__utils_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a>(uint32_t, <a class="code hl_variable" href="#ae7a139b29d268aba8683a4b75572f10a">minor</a>) &lt;&lt; <a class="code hl_define" href="#a9215d415f742a835e45c532f7d5e1052">LIARA_VERSION_MINOR_SHIFT</a>) \</div>
 <div class="line">                    | (<a class="code hl_define" href="private__utils_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a>(uint32_t, <a class="code hl_variable" href="#aec1cc0a9f820f1748f98d8b1da9cb784">patch</a>) &lt;&lt; <a class="code hl_define" href="#ae91e05419e0418901b1610e6bbbe1f68">LIARA_VERSION_PATCH_SHIFT</a>))))</div>
 <div class="ttc" id="aprivate__utils_8h_html_a54036a9ac6d747dd291773cdda6a79b1"><div class="ttname"><a href="private__utils_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a></div><div class="ttdeci">#define LIARA_STATIC_CAST(type, value)</div><div class="ttdef"><b>Definition</b> private_utils.h:48</div></div>
-<div class="ttc" id="aversion_8h_html_a7dba188c54a7ecc4a0b1061e65cf0e27"><div class="ttname"><a href="#a7dba188c54a7ecc4a0b1061e65cf0e27">LIARA_VERSION_MAJOR_SHIFT</a></div><div class="ttdeci">#define LIARA_VERSION_MAJOR_SHIFT</div><div class="ttdef"><b>Definition</b> version.h:29</div></div>
-<div class="ttc" id="aversion_8h_html_a9215d415f742a835e45c532f7d5e1052"><div class="ttname"><a href="#a9215d415f742a835e45c532f7d5e1052">LIARA_VERSION_MINOR_SHIFT</a></div><div class="ttdeci">#define LIARA_VERSION_MINOR_SHIFT</div><div class="ttdef"><b>Definition</b> version.h:30</div></div>
-<div class="ttc" id="aversion_8h_html_ae7a139b29d268aba8683a4b75572f10a"><div class="ttname"><a href="#ae7a139b29d268aba8683a4b75572f10a">minor</a></div><div class="ttdeci">const uint32_t minor</div><div class="ttdef"><b>Definition</b> version.h:127</div></div>
-<div class="ttc" id="aversion_8h_html_ae91e05419e0418901b1610e6bbbe1f68"><div class="ttname"><a href="#ae91e05419e0418901b1610e6bbbe1f68">LIARA_VERSION_PATCH_SHIFT</a></div><div class="ttdeci">#define LIARA_VERSION_PATCH_SHIFT</div><div class="ttdef"><b>Definition</b> version.h:31</div></div>
-<div class="ttc" id="aversion_8h_html_aec1cc0a9f820f1748f98d8b1da9cb784"><div class="ttname"><a href="#aec1cc0a9f820f1748f98d8b1da9cb784">patch</a></div><div class="ttdeci">const uint32_t const uint32_t patch</div><div class="ttdef"><b>Definition</b> version.h:128</div></div>
+<div class="ttc" id="aversion_8h_html_a7dba188c54a7ecc4a0b1061e65cf0e27"><div class="ttname"><a href="#a7dba188c54a7ecc4a0b1061e65cf0e27">LIARA_VERSION_MAJOR_SHIFT</a></div><div class="ttdeci">#define LIARA_VERSION_MAJOR_SHIFT</div><div class="ttdef"><b>Definition</b> version.h:27</div></div>
+<div class="ttc" id="aversion_8h_html_a9215d415f742a835e45c532f7d5e1052"><div class="ttname"><a href="#a9215d415f742a835e45c532f7d5e1052">LIARA_VERSION_MINOR_SHIFT</a></div><div class="ttdeci">#define LIARA_VERSION_MINOR_SHIFT</div><div class="ttdef"><b>Definition</b> version.h:28</div></div>
+<div class="ttc" id="aversion_8h_html_ae7a139b29d268aba8683a4b75572f10a"><div class="ttname"><a href="#ae7a139b29d268aba8683a4b75572f10a">minor</a></div><div class="ttdeci">const uint32_t minor</div><div class="ttdef"><b>Definition</b> version.h:125</div></div>
+<div class="ttc" id="aversion_8h_html_ae91e05419e0418901b1610e6bbbe1f68"><div class="ttname"><a href="#ae91e05419e0418901b1610e6bbbe1f68">LIARA_VERSION_PATCH_SHIFT</a></div><div class="ttdeci">#define LIARA_VERSION_PATCH_SHIFT</div><div class="ttdef"><b>Definition</b> version.h:29</div></div>
+<div class="ttc" id="aversion_8h_html_aec1cc0a9f820f1748f98d8b1da9cb784"><div class="ttname"><a href="#aec1cc0a9f820f1748f98d8b1da9cb784">patch</a></div><div class="ttdeci">const uint32_t const uint32_t patch</div><div class="ttdef"><b>Definition</b> version.h:126</div></div>
 </div><!-- fragment -->
 <p>Create a version number from major, minor, and patch components, with NO safety checks. </p>
 <p>This macro combines the major, minor, and patch version numbers into a single 32-bit unsigned integer.</p>
@@ -316,7 +316,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#ad087294b6f5f6b27142cd8dfd2596007">LIARA_STRINGIFY</a>(x)</div>
-<div class="ttc" id="aversion_8h_html_ad087294b6f5f6b27142cd8dfd2596007"><div class="ttname"><a href="#ad087294b6f5f6b27142cd8dfd2596007">LIARA_STRINGIFY</a></div><div class="ttdeci">#define LIARA_STRINGIFY(x)</div><div class="ttdoc">Macro to stringify a value.</div><div class="ttdef"><b>Definition</b> version.h:52</div></div>
+<div class="ttc" id="aversion_8h_html_ad087294b6f5f6b27142cd8dfd2596007"><div class="ttname"><a href="#ad087294b6f5f6b27142cd8dfd2596007">LIARA_STRINGIFY</a></div><div class="ttdeci">#define LIARA_STRINGIFY(x)</div><div class="ttdoc">Macro to stringify a value.</div><div class="ttdef"><b>Definition</b> version.h:50</div></div>
 </div><!-- fragment -->
 <p>Macro to convert a value into a string literal. </p>
 <p>This macro is a wrapper around the LIARA_STRINGIFY macro. It is provided for convenience and can be used to generate string representations of version numbers or other constants.</p>
@@ -349,7 +349,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">((<a class="code hl_define" href="private__utils_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a>(uint32_t, v) &gt;&gt; <a class="code hl_define" href="#a7dba188c54a7ecc4a0b1061e65cf0e27">LIARA_VERSION_MAJOR_SHIFT</a>) &amp; <a class="code hl_define" href="#a80857ca4a694ce0ca9c432a76254e01c">LIARA_VERSION_MAJOR_MASK</a>)</div>
-<div class="ttc" id="aversion_8h_html_a80857ca4a694ce0ca9c432a76254e01c"><div class="ttname"><a href="#a80857ca4a694ce0ca9c432a76254e01c">LIARA_VERSION_MAJOR_MASK</a></div><div class="ttdeci">#define LIARA_VERSION_MAJOR_MASK</div><div class="ttdef"><b>Definition</b> version.h:33</div></div>
+<div class="ttc" id="aversion_8h_html_a80857ca4a694ce0ca9c432a76254e01c"><div class="ttname"><a href="#a80857ca4a694ce0ca9c432a76254e01c">LIARA_VERSION_MAJOR_MASK</a></div><div class="ttdeci">#define LIARA_VERSION_MAJOR_MASK</div><div class="ttdef"><b>Definition</b> version.h:31</div></div>
 </div><!-- fragment -->
 <p>Extract the major version component from a combined version number. </p>
 <p>This macro extracts the major version number from a combined version number by shifting and masking.</p>
@@ -424,7 +424,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">((<a class="code hl_define" href="private__utils_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a>(uint32_t, v) &gt;&gt; <a class="code hl_define" href="#a9215d415f742a835e45c532f7d5e1052">LIARA_VERSION_MINOR_SHIFT</a>) &amp; <a class="code hl_define" href="#ad80a2c3254820ceb00c35ec180a49bcb">LIARA_VERSION_MINOR_MASK</a>)</div>
-<div class="ttc" id="aversion_8h_html_ad80a2c3254820ceb00c35ec180a49bcb"><div class="ttname"><a href="#ad80a2c3254820ceb00c35ec180a49bcb">LIARA_VERSION_MINOR_MASK</a></div><div class="ttdeci">#define LIARA_VERSION_MINOR_MASK</div><div class="ttdef"><b>Definition</b> version.h:34</div></div>
+<div class="ttc" id="aversion_8h_html_ad80a2c3254820ceb00c35ec180a49bcb"><div class="ttname"><a href="#ad80a2c3254820ceb00c35ec180a49bcb">LIARA_VERSION_MINOR_MASK</a></div><div class="ttdeci">#define LIARA_VERSION_MINOR_MASK</div><div class="ttdef"><b>Definition</b> version.h:32</div></div>
 </div><!-- fragment -->
 <p>Extract the minor version component from a combined version number. </p>
 <p>This macro extracts the minor version number from a combined version number by shifting and masking.</p>
@@ -499,7 +499,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">((<a class="code hl_define" href="private__utils_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a>(uint32_t, v) &gt;&gt; <a class="code hl_define" href="#ae91e05419e0418901b1610e6bbbe1f68">LIARA_VERSION_PATCH_SHIFT</a>) &amp; <a class="code hl_define" href="#a474542da7831f5d0527294e94775f72b">LIARA_VERSION_PATCH_MASK</a>)</div>
-<div class="ttc" id="aversion_8h_html_a474542da7831f5d0527294e94775f72b"><div class="ttname"><a href="#a474542da7831f5d0527294e94775f72b">LIARA_VERSION_PATCH_MASK</a></div><div class="ttdeci">#define LIARA_VERSION_PATCH_MASK</div><div class="ttdef"><b>Definition</b> version.h:35</div></div>
+<div class="ttc" id="aversion_8h_html_a474542da7831f5d0527294e94775f72b"><div class="ttname"><a href="#a474542da7831f5d0527294e94775f72b">LIARA_VERSION_PATCH_MASK</a></div><div class="ttdeci">#define LIARA_VERSION_PATCH_MASK</div><div class="ttdef"><b>Definition</b> version.h:33</div></div>
 </div><!-- fragment -->
 <p>Extract the patch version component from a combined version number. </p>
 <p>This macro extracts the patch version number from a combined version number by shifting and masking.</p>
@@ -925,10 +925,10 @@ Variables</h2></td></tr>
 <div class="line">        <span class="keywordflow">return</span> <a class="code hl_define" href="#a84ee12d0b17960a5ce651e7b4578d8f9">LIARA_VERSION_MAJOR</a>(v1) == <a class="code hl_define" href="#a84ee12d0b17960a5ce651e7b4578d8f9">LIARA_VERSION_MAJOR</a>(<a class="code hl_variable" href="#a5c8f04df7802f089b3fb2b1abbcbf932">v2</a>) &amp;&amp; <a class="code hl_define" href="#abf3dccbc75ccc9cdf462ce799ad4b10c">LIARA_VERSION_MINOR</a>(v1) == <a class="code hl_define" href="#abf3dccbc75ccc9cdf462ce799ad4b10c">LIARA_VERSION_MINOR</a>(<a class="code hl_variable" href="#a5c8f04df7802f089b3fb2b1abbcbf932">v2</a>);</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">return</span> v1 == <a class="code hl_variable" href="#a5c8f04df7802f089b3fb2b1abbcbf932">v2</a></div>
-<div class="ttc" id="aversion_8h_html_a076e939c5adda3f779ed87ccbb7174df"><div class="ttname"><a href="#a076e939c5adda3f779ed87ccbb7174df">ignore_patch</a></div><div class="ttdeci">const uint32_t const bool ignore_patch</div><div class="ttdef"><b>Definition</b> version.h:236</div></div>
-<div class="ttc" id="aversion_8h_html_a5c8f04df7802f089b3fb2b1abbcbf932"><div class="ttname"><a href="#a5c8f04df7802f089b3fb2b1abbcbf932">v2</a></div><div class="ttdeci">const uint32_t v2</div><div class="ttdef"><b>Definition</b> version.h:236</div></div>
-<div class="ttc" id="aversion_8h_html_a84ee12d0b17960a5ce651e7b4578d8f9"><div class="ttname"><a href="#a84ee12d0b17960a5ce651e7b4578d8f9">LIARA_VERSION_MAJOR</a></div><div class="ttdeci">#define LIARA_VERSION_MAJOR(v)</div><div class="ttdoc">Extract the major version component from a combined version number.</div><div class="ttdef"><b>Definition</b> version.h:148</div></div>
-<div class="ttc" id="aversion_8h_html_abf3dccbc75ccc9cdf462ce799ad4b10c"><div class="ttname"><a href="#abf3dccbc75ccc9cdf462ce799ad4b10c">LIARA_VERSION_MINOR</a></div><div class="ttdeci">#define LIARA_VERSION_MINOR(v)</div><div class="ttdoc">Extract the minor version component from a combined version number.</div><div class="ttdef"><b>Definition</b> version.h:161</div></div>
+<div class="ttc" id="aversion_8h_html_a076e939c5adda3f779ed87ccbb7174df"><div class="ttname"><a href="#a076e939c5adda3f779ed87ccbb7174df">ignore_patch</a></div><div class="ttdeci">const uint32_t const bool ignore_patch</div><div class="ttdef"><b>Definition</b> version.h:234</div></div>
+<div class="ttc" id="aversion_8h_html_a5c8f04df7802f089b3fb2b1abbcbf932"><div class="ttname"><a href="#a5c8f04df7802f089b3fb2b1abbcbf932">v2</a></div><div class="ttdeci">const uint32_t v2</div><div class="ttdef"><b>Definition</b> version.h:234</div></div>
+<div class="ttc" id="aversion_8h_html_a84ee12d0b17960a5ce651e7b4578d8f9"><div class="ttname"><a href="#a84ee12d0b17960a5ce651e7b4578d8f9">LIARA_VERSION_MAJOR</a></div><div class="ttdeci">#define LIARA_VERSION_MAJOR(v)</div><div class="ttdoc">Extract the major version component from a combined version number.</div><div class="ttdef"><b>Definition</b> version.h:146</div></div>
+<div class="ttc" id="aversion_8h_html_abf3dccbc75ccc9cdf462ce799ad4b10c"><div class="ttname"><a href="#abf3dccbc75ccc9cdf462ce799ad4b10c">LIARA_VERSION_MINOR</a></div><div class="ttdeci">#define LIARA_VERSION_MINOR(v)</div><div class="ttdoc">Extract the minor version component from a combined version number.</div><div class="ttdef"><b>Definition</b> version.h:159</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -978,8 +978,8 @@ Variables</h2></td></tr>
 <div class="line">    <span class="keywordflow">if</span> (<a class="code hl_variable" href="#aec1cc0a9f820f1748f98d8b1da9cb784">patch</a> &gt; <a class="code hl_define" href="#a474542da7831f5d0527294e94775f72b">LIARA_VERSION_PATCH_MASK</a>) { <span class="keywordflow">return</span> LIARA_RESULT_OUT_OF_RANGE; }</div>
 <div class="line">    *<a class="code hl_variable" href="#af54783d9ac77f74eb96ce02623bcb217">out_version</a> = <a class="code hl_define" href="#aaaceeaea311b58ccf606bbefa53d7f40">LIARA_MAKE_VERSION_UNSAFE</a>(major, <a class="code hl_variable" href="#ae7a139b29d268aba8683a4b75572f10a">minor</a>, <a class="code hl_variable" href="#aec1cc0a9f820f1748f98d8b1da9cb784">patch</a>)</div>
 <div class="ttc" id="aprivate__utils_8h_html_abfe7cae477b1cc6e2c732a71371991c7"><div class="ttname"><a href="private__utils_8h.html#abfe7cae477b1cc6e2c732a71371991c7">LIARA_NULL</a></div><div class="ttdeci">#define LIARA_NULL</div><div class="ttdef"><b>Definition</b> private_utils.h:54</div></div>
-<div class="ttc" id="aversion_8h_html_aaaceeaea311b58ccf606bbefa53d7f40"><div class="ttname"><a href="#aaaceeaea311b58ccf606bbefa53d7f40">LIARA_MAKE_VERSION_UNSAFE</a></div><div class="ttdeci">#define LIARA_MAKE_VERSION_UNSAFE(major, minor, patch)</div><div class="ttdoc">Create a version number from major, minor, and patch components, with NO safety checks.</div><div class="ttdef"><b>Definition</b> version.h:88</div></div>
-<div class="ttc" id="aversion_8h_html_af54783d9ac77f74eb96ce02623bcb217"><div class="ttname"><a href="#af54783d9ac77f74eb96ce02623bcb217">out_version</a></div><div class="ttdeci">const uint32_t const uint32_t uint32_t * out_version</div><div class="ttdef"><b>Definition</b> version.h:129</div></div>
+<div class="ttc" id="aversion_8h_html_aaaceeaea311b58ccf606bbefa53d7f40"><div class="ttname"><a href="#aaaceeaea311b58ccf606bbefa53d7f40">LIARA_MAKE_VERSION_UNSAFE</a></div><div class="ttdeci">#define LIARA_MAKE_VERSION_UNSAFE(major, minor, patch)</div><div class="ttdoc">Create a version number from major, minor, and patch components, with NO safety checks.</div><div class="ttdef"><b>Definition</b> version.h:86</div></div>
+<div class="ttc" id="aversion_8h_html_af54783d9ac77f74eb96ce02623bcb217"><div class="ttname"><a href="#af54783d9ac77f74eb96ce02623bcb217">out_version</a></div><div class="ttdeci">const uint32_t const uint32_t uint32_t * out_version</div><div class="ttdef"><b>Definition</b> version.h:127</div></div>
 </div><!-- fragment -->
 </div>
 </div>
