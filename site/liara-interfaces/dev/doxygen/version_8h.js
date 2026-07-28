@@ -15,17 +15,10 @@ var version_8h =
     [ "LIARA_VERSION_PATCH_BITS", "version_8h.html#a47f6351c340557f03ba264dc1ac8f9a5", null ],
     [ "LIARA_VERSION_PATCH_MASK", "version_8h.html#a474542da7831f5d0527294e94775f72b", null ],
     [ "LIARA_VERSION_PATCH_SHIFT", "version_8h.html#ae91e05419e0418901b1610e6bbbe1f68", null ],
-    [ "LIARA_API_DEPRECATED", "version_8h.html#ad1101929b51d44507e7708b7c0c4eb66", null ],
-    [ "LIARA_API_DEPRECATED", "version_8h.html#a9039fd23bc1059b7f7f10f268eeaaa20", null ],
     [ "LIARA_STATIC_ASSERT", "version_8h.html#ab8bf328df4ec2c6a76bfc8627f29a4b1", null ],
+    [ "liara_try_make_version", "version_8h.html#a84fa657663ed01664e638e07bc64550a", null ],
     [ "liara_version_compare", "version_8h.html#a38031dee7d64ee342c23ca57eaa0635a", null ],
     [ "liara_version_major", "version_8h.html#a3ed7190d8840207d6a7328f37db27b32", null ],
     [ "liara_version_minor", "version_8h.html#a5360c555aa6c87b5cd7186e196f0f095", null ],
-    [ "liara_version_patch", "version_8h.html#a8520dd93cfa2392e3b0526280ac1596f", null ],
-    [ "ignore_patch", "version_8h.html#a076e939c5adda3f779ed87ccbb7174df", null ],
-    [ "LIARA_RESULT_SUCCESS", "version_8h.html#ac527b464c38ea93d2bfc08215c30dec7", null ],
-    [ "minor", "version_8h.html#ae7a139b29d268aba8683a4b75572f10a", null ],
-    [ "out_version", "version_8h.html#af54783d9ac77f74eb96ce02623bcb217", null ],
-    [ "patch", "version_8h.html#aec1cc0a9f820f1748f98d8b1da9cb784", null ],
-    [ "v2", "version_8h.html#a5c8f04df7802f089b3fb2b1abbcbf932", null ]
+    [ "liara_version_patch", "version_8h.html#a8520dd93cfa2392e3b0526280ac1596f", null ]
 ];

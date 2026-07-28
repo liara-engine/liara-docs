@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['readme_2emd_0',['README.md',['../README_8md.html',1,'']]],
-  ['renderer_2eh_1',['renderer.h',['../renderer_8h.html',1,'']]],
-  ['renderer_5fexport_2eh_2',['renderer_export.h',['../renderer__export_8h.html',1,'']]],
-  ['reserved_3',['reserved',['../structliara__module__info__t.html#a8f3c5b90318c83e1e8369fe0b0072c44',1,'liara_module_info_t']]],
-  ['result_2eh_4',['result.h',['../result_8h.html',1,'']]]
+  ['standalone_0',['Building Standalone',['../index.html#autotoc_md6',1,'']]],
+  ['status_1',['Status',['../index.html#autotoc_md2',1,'']]],
+  ['struct_5fversion_2',['struct_version',['../structliara__module__info__t.html#a4372695e4aa356f7e19a8cf3a7c4c286',1,'liara_module_info_t::struct_version'],['../structliara__render__packet__t.html#a1c4f85421ffd60d6da53d6cecf51bbe7',1,'liara_render_packet_t::struct_version']]]
 ];

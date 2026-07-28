@@ -4,7 +4,6 @@ var result_8h =
     [ "LIARA_X", "result_8h.html#a9148a93a3de106efe48f382a47222553", null ],
     [ "LIARA_X", "result_8h.html#a353dee5b8ea5563bed580367803b460d", null ],
     [ "liara_result_codes", "result_8h.html#acf4e28c0c173706f235360ca8eb237ca", null ],
-    [ "LIARA_API_DEPRECATED", "result_8h.html#a7aaf9cb4d651f97a7b2d4ee50df2df72", null ],
-    [ "LIARA_TYPEDEF", "result_8h.html#aeaf434d651ad23873b655bfb369e2dae", null ],
-    [ "LIARA_TYPEDEF_DEPRECATED", "result_8h.html#adf98d7538173cf9b23fc38e055d46f0c", null ]
+    [ "liara_result_to_string", "result_8h.html#a3d2a67c2979f1eec41f340fc53656463", null ],
+    [ "LIARA_TYPEDEF", "result_8h.html#aeaf434d651ad23873b655bfb369e2dae", null ]
 ];
