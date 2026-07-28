@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ignore_5fpatch_0',['ignore_patch',['../version_8h.html#a076e939c5adda3f779ed87ccbb7174df',1,'version.h']]]
+  ['background_5fcolor_0',['background_color',['../structliara__render__packet__t.html#a2ec93c2bd7a893037b8a8e99bf5e9bd1',1,'liara_render_packet_t']]]
 ];
