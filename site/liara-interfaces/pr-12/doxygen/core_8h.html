@@ -150,7 +150,6 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('core_8h.html',
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="core__export_8h_source.html">liara/core/core_export.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="private__utils_8h_source.html">liara/private_utils.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="packet_8h_source.html">liara/renderer/packet.h</a>&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
 </div>
 <p><a href="core_8h_source.html">Go to the source code of this file.</a></p>
@@ -165,12 +164,12 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2fb43f55b62eb514d65f3ca07b799079" id="r_a2fb43f55b62eb514d65f3ca07b799079"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a2fb43f55b62eb514d65f3ca07b799079">LIARA_TYPEDEF</a> (struct <a class="el" href="structliara__module__info__t.html">liara_module_info_t</a>, <a class="el" href="structliara__module__info__t.html">liara_module_info_t</a>)</td></tr>
-<tr class="memitem:a545609dd432736eafa2c0c10be12d6c0" id="r_a545609dd432736eafa2c0c10be12d6c0"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a545609dd432736eafa2c0c10be12d6c0">LIARA_TYPEDEF</a> (struct liara_renderer_t, liara_renderer_handle_t)</td></tr>
+<tr class="memitem:a2fb43f55b62eb514d65f3ca07b799079" id="r_a2fb43f55b62eb514d65f3ca07b799079"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a2fb43f55b62eb514d65f3ca07b799079">LIARA_TYPEDEF</a> (struct liara_module_info_t, liara_module_info_t)</td></tr>
+<tr class="memitem:a2addc54894973b870d7ddd2f452d1935" id="r_a2addc54894973b870d7ddd2f452d1935"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a2addc54894973b870d7ddd2f452d1935">LIARA_TYPEDEF</a> (struct liara_render_packet_t, liara_render_packet_t)</td></tr>
 <tr class="memitem:aeaf434d651ad23873b655bfb369e2dae" id="r_aeaf434d651ad23873b655bfb369e2dae"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aeaf434d651ad23873b655bfb369e2dae">LIARA_TYPEDEF</a> (int32_t, liara_result_t)</td></tr>
 <tr class="memitem:a196e35e95b6caebd01ed5b8b25db21d5" id="r_a196e35e95b6caebd01ed5b8b25db21d5"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a196e35e95b6caebd01ed5b8b25db21d5">LIARA_TYPEDEF</a> (struct liara_core_t, liara_core_handle_t)</td></tr>
 <tr class="memdesc:a196e35e95b6caebd01ed5b8b25db21d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opaque structure representing a Liara core instance.  <br /></td></tr>
-<tr class="memitem:a5531e97f920e8a676562c2da445a6976" id="r_a5531e97f920e8a676562c2da445a6976"><td class="memItemLeft"><a class="el" href="core__export_8h.html#aeb64388a6e26f9279a68ac4b646df625">LIARA_CORE_API</a> const <a class="el" href="structliara__module__info__t.html">liara_module_info_t</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a5531e97f920e8a676562c2da445a6976">liara_core_info</a> (void)</td></tr>
+<tr class="memitem:a5531e97f920e8a676562c2da445a6976" id="r_a5531e97f920e8a676562c2da445a6976"><td class="memItemLeft"><a class="el" href="core__export_8h.html#aeb64388a6e26f9279a68ac4b646df625">LIARA_CORE_API</a> const liara_module_info_t *&#160;</td><td class="memItemRight"><a class="el" href="#a5531e97f920e8a676562c2da445a6976">liara_core_info</a> (void)</td></tr>
 <tr class="memdesc:a5531e97f920e8a676562c2da445a6976"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns information about the Liara core module.  <br /></td></tr>
 <tr class="memitem:a7a40738cb9dcd3fb67112b0efb835c94" id="r_a7a40738cb9dcd3fb67112b0efb835c94"><td class="memItemLeft"><a class="el" href="core__export_8h.html#aeb64388a6e26f9279a68ac4b646df625">LIARA_CORE_API</a> uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a7a40738cb9dcd3fb67112b0efb835c94">liara_core_abi_version</a> (void)</td></tr>
 <tr class="memdesc:a7a40738cb9dcd3fb67112b0efb835c94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current version of the Liara core ABI interface.  <br /></td></tr>
@@ -188,7 +187,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a0e3f215626804dddd6a1c569792207d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the Liara core in manual run mode.  <br /></td></tr>
 <tr class="memitem:a81085317e23299bf440fe49a506e2a6e" id="r_a81085317e23299bf440fe49a506e2a6e"><td class="memItemLeft"><a class="el" href="core__export_8h.html#aeb64388a6e26f9279a68ac4b646df625">LIARA_CORE_API</a> void&#160;</td><td class="memItemRight"><a class="el" href="#a81085317e23299bf440fe49a506e2a6e">liara_core_set_late_update_callback</a> (liara_core_handle_t *core_handle, void(*callback)(liara_core_handle_t *core, float delta_time))</td></tr>
 <tr class="memdesc:a81085317e23299bf440fe49a506e2a6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the late update callback for the Liara core.  <br /></td></tr>
-<tr class="memitem:aaf191d6943ac707a56c574df038d2dd7" id="r_aaf191d6943ac707a56c574df038d2dd7"><td class="memItemLeft"><a class="el" href="core__export_8h.html#aeb64388a6e26f9279a68ac4b646df625">LIARA_CORE_API</a> liara_result_t&#160;</td><td class="memItemRight"><a class="el" href="#aaf191d6943ac707a56c574df038d2dd7">liara_core_get_render_packet</a> (const liara_core_handle_t *core_handle, <a class="el" href="structliara__render__packet__t.html">liara_render_packet_t</a> *out_packet)</td></tr>
+<tr class="memitem:aaf191d6943ac707a56c574df038d2dd7" id="r_aaf191d6943ac707a56c574df038d2dd7"><td class="memItemLeft"><a class="el" href="core__export_8h.html#aeb64388a6e26f9279a68ac4b646df625">LIARA_CORE_API</a> liara_result_t&#160;</td><td class="memItemRight"><a class="el" href="#aaf191d6943ac707a56c574df038d2dd7">liara_core_get_render_packet</a> (const liara_core_handle_t *core_handle, liara_render_packet_t *out_packet)</td></tr>
 <tr class="memdesc:aaf191d6943ac707a56c574df038d2dd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the render packet built during the core's most recent update.  <br /></td></tr>
 </table>
 <a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
@@ -326,7 +325,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structliara__render__packet__t.html">liara_render_packet_t</a> *</td>          <td class="paramname"><span class="paramname"><em>out_packet</em></span>&#160;)</td>
+          <td class="paramtype">liara_render_packet_t *</td>          <td class="paramname"><span class="paramname"><em>out_packet</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -336,7 +335,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">core_handle</td><td>A pointer to the core instance whose render packet is to be retrieved. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_packet</td><td>A pointer to a <span class="tt"><a class="el" href="structliara__render__packet__t.html" title="One frame&#39;s worth of drawable data, extracted by the core and submitted to the renderer.">liara_render_packet_t</a></span> that will receive a copy of the packet.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_packet</td><td>A pointer to a <span class="tt">liara_render_packet_t</span> that will receive a copy of the packet.</td></tr>
   </table>
   </dd>
 </dl>
@@ -361,7 +360,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="core__export_8h.html#aeb64388a6e26f9279a68ac4b646df625">LIARA_CORE_API</a> const <a class="el" href="structliara__module__info__t.html">liara_module_info_t</a> * liara_core_info </td>
+          <td class="memname"><a class="el" href="core__export_8h.html#aeb64388a6e26f9279a68ac4b646df625">LIARA_CORE_API</a> const liara_module_info_t * liara_core_info </td>
           <td>(</td>
           <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -370,8 +369,8 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns information about the Liara core module. </p>
-<p>This function returns a pointer to a <span class="tt"><a class="el" href="structliara__module__info__t.html" title="Structure representing information about a Liara module.">liara_module_info_t</a></span> structure containing information about the Liara core module, including its version, ABI version, and name. The returned pointer is valid for the lifetime of the program and should not be modified or freed by the caller.</p>
-<dl class="section return"><dt>Returns</dt><dd>A pointer to a <span class="tt"><a class="el" href="structliara__module__info__t.html" title="Structure representing information about a Liara module.">liara_module_info_t</a></span> structure containing information about the Liara core module.</dd></dl>
+<p>This function returns a pointer to a <span class="tt">liara_module_info_t</span> structure containing information about the Liara core module, including its version, ABI version, and name. The returned pointer is valid for the lifetime of the program and should not be modified or freed by the caller.</p>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to a <span class="tt">liara_module_info_t</span> structure containing information about the Liara core module.</dd></dl>
 <dl class="section threadsafety">
 <dt>Thread Safety</dt>
 <dd>This function is thread-safe as it does not modify any shared state. </dd>
@@ -604,20 +603,20 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">LIARA_TYPEDEF </td>
           <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structliara__module__info__t.html">liara_module_info_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="paramtype">struct liara_module_info_t</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structliara__module__info__t.html">liara_module_info_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+          <td class="paramtype">liara_module_info_t</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a545609dd432736eafa2c0c10be12d6c0" name="a545609dd432736eafa2c0c10be12d6c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a545609dd432736eafa2c0c10be12d6c0">&#9670;&#160;</a></span>LIARA_TYPEDEF() <span class="overload">[4/4]</span></h2>
+<a id="a2addc54894973b870d7ddd2f452d1935" name="a2addc54894973b870d7ddd2f452d1935"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2addc54894973b870d7ddd2f452d1935">&#9670;&#160;</a></span>LIARA_TYPEDEF() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -625,12 +624,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">LIARA_TYPEDEF </td>
           <td>(</td>
-          <td class="paramtype">struct liara_renderer_t</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="paramtype">struct liara_render_packet_t</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">liara_renderer_handle_t</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+          <td class="paramtype">liara_render_packet_t</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">

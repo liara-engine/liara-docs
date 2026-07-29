@@ -152,51 +152,34 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('packet_8h_sour
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;<a class="code" href="private__utils_8h.html">liara/private_utils.h</a>&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
-<div class="foldopen" id="foldopen00022" data-start="{" data-end="};">
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structliara__render__drawable__t.html">   22</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="structliara__render__drawable__t.html">liara_render_drawable_t</a> {</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="structliara__render__drawable__t.html#ab7ed93d4b4222e22e88d238672987f6a">   23</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="structliara__render__drawable__t.html#ab7ed93d4b4222e22e88d238672987f6a">x</a>;        </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="structliara__render__drawable__t.html#a12e358d6e3ce415e81645967122b21e7">   24</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="structliara__render__drawable__t.html#a12e358d6e3ce415e81645967122b21e7">y</a>;        </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="structliara__render__drawable__t.html#a74e782996e48bcb6ac908a4170f58e17">   25</a></span>    uint32_t <a class="code hl_variable" href="structliara__render__drawable__t.html#a74e782996e48bcb6ac908a4170f58e17">color</a>; </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="packet_8h.html#a4b447fa04b0a95894c63d266c57d2524">   26</a></span>} <a class="code hl_struct" href="structliara__render__drawable__t.html">liara_render_drawable_t</a>;</div>
-</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
-<div class="foldopen" id="foldopen00035" data-start="{" data-end="};">
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="structliara__render__packet__t.html">   35</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="structliara__render__packet__t.html">liara_render_packet_t</a> {</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="structliara__render__packet__t.html#a1c4f85421ffd60d6da53d6cecf51bbe7">   36</a></span>    uint32_t <a class="code hl_variable" href="structliara__render__packet__t.html#a1c4f85421ffd60d6da53d6cecf51bbe7">struct_version</a>;                  </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="structliara__render__packet__t.html#a1c40a8c185b86b196b6cf16fc7d92414">   37</a></span>    uint16_t <a class="code hl_variable" href="structliara__render__packet__t.html#a1c40a8c185b86b196b6cf16fc7d92414">grid_width</a>;                      </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="structliara__render__packet__t.html#a3986f3844e62273d3970290258f8c78f">   38</a></span>    uint16_t <a class="code hl_variable" href="structliara__render__packet__t.html#a3986f3844e62273d3970290258f8c78f">grid_height</a>;                     </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="structliara__render__packet__t.html#a2ec93c2bd7a893037b8a8e99bf5e9bd1">   39</a></span>    uint32_t <a class="code hl_variable" href="structliara__render__packet__t.html#a2ec93c2bd7a893037b8a8e99bf5e9bd1">background_color</a>;                </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="structliara__render__packet__t.html#a04be6fffb2c09a329c9b25d53dc93221">   40</a></span>    <span class="keyword">const</span> <a class="code hl_struct" href="structliara__render__drawable__t.html">liara_render_drawable_t</a>* <a class="code hl_variable" href="structliara__render__packet__t.html#a04be6fffb2c09a329c9b25d53dc93221">drawables</a>; </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="structliara__render__packet__t.html#a20a9b57aa920bc1a90928b597547edae">   41</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_variable" href="structliara__render__packet__t.html#a20a9b57aa920bc1a90928b597547edae">drawable_count</a>;                    </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="packet_8h.html#a93449459d68aea9151ae8a6cb553dbf5">   42</a></span>} <a class="code hl_struct" href="structliara__render__packet__t.html">liara_render_packet_t</a>;</div>
-</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="packet_8h.html#a4e673ff6a0841214a5b1a2600b45d919">   45</a></span><span class="preprocessor">#define LIARA_RENDER_PACKET_VERSION 1U</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aprivate__utils_8h_html"><div class="ttname"><a href="private__utils_8h.html">private_utils.h</a></div></div>
-<div class="ttc" id="astructliara__render__drawable__t_html"><div class="ttname"><a href="structliara__render__drawable__t.html">liara_render_drawable_t</a></div><div class="ttdoc">A single drawable submitted to the renderer as part of a render packet.</div><div class="ttdef"><b>Definition</b> packet.h:22</div></div>
-<div class="ttc" id="astructliara__render__drawable__t_html_a12e358d6e3ce415e81645967122b21e7"><div class="ttname"><a href="structliara__render__drawable__t.html#a12e358d6e3ce415e81645967122b21e7">liara_render_drawable_t::y</a></div><div class="ttdeci">float y</div><div class="ttdef"><b>Definition</b> packet.h:24</div></div>
-<div class="ttc" id="astructliara__render__drawable__t_html_a74e782996e48bcb6ac908a4170f58e17"><div class="ttname"><a href="structliara__render__drawable__t.html#a74e782996e48bcb6ac908a4170f58e17">liara_render_drawable_t::color</a></div><div class="ttdeci">uint32_t color</div><div class="ttdef"><b>Definition</b> packet.h:25</div></div>
-<div class="ttc" id="astructliara__render__drawable__t_html_ab7ed93d4b4222e22e88d238672987f6a"><div class="ttname"><a href="structliara__render__drawable__t.html#ab7ed93d4b4222e22e88d238672987f6a">liara_render_drawable_t::x</a></div><div class="ttdeci">float x</div><div class="ttdef"><b>Definition</b> packet.h:23</div></div>
-<div class="ttc" id="astructliara__render__packet__t_html"><div class="ttname"><a href="structliara__render__packet__t.html">liara_render_packet_t</a></div><div class="ttdoc">One frame&#39;s worth of drawable data, extracted by the core and submitted to the renderer.</div><div class="ttdef"><b>Definition</b> packet.h:35</div></div>
-<div class="ttc" id="astructliara__render__packet__t_html_a04be6fffb2c09a329c9b25d53dc93221"><div class="ttname"><a href="structliara__render__packet__t.html#a04be6fffb2c09a329c9b25d53dc93221">liara_render_packet_t::drawables</a></div><div class="ttdeci">const liara_render_drawable_t * drawables</div><div class="ttdef"><b>Definition</b> packet.h:40</div></div>
-<div class="ttc" id="astructliara__render__packet__t_html_a1c40a8c185b86b196b6cf16fc7d92414"><div class="ttname"><a href="structliara__render__packet__t.html#a1c40a8c185b86b196b6cf16fc7d92414">liara_render_packet_t::grid_width</a></div><div class="ttdeci">uint16_t grid_width</div><div class="ttdef"><b>Definition</b> packet.h:37</div></div>
-<div class="ttc" id="astructliara__render__packet__t_html_a1c4f85421ffd60d6da53d6cecf51bbe7"><div class="ttname"><a href="structliara__render__packet__t.html#a1c4f85421ffd60d6da53d6cecf51bbe7">liara_render_packet_t::struct_version</a></div><div class="ttdeci">uint32_t struct_version</div><div class="ttdef"><b>Definition</b> packet.h:36</div></div>
-<div class="ttc" id="astructliara__render__packet__t_html_a20a9b57aa920bc1a90928b597547edae"><div class="ttname"><a href="structliara__render__packet__t.html#a20a9b57aa920bc1a90928b597547edae">liara_render_packet_t::drawable_count</a></div><div class="ttdeci">size_t drawable_count</div><div class="ttdef"><b>Definition</b> packet.h:41</div></div>
-<div class="ttc" id="astructliara__render__packet__t_html_a2ec93c2bd7a893037b8a8e99bf5e9bd1"><div class="ttname"><a href="structliara__render__packet__t.html#a2ec93c2bd7a893037b8a8e99bf5e9bd1">liara_render_packet_t::background_color</a></div><div class="ttdeci">uint32_t background_color</div><div class="ttdef"><b>Definition</b> packet.h:39</div></div>
-<div class="ttc" id="astructliara__render__packet__t_html_a3986f3844e62273d3970290258f8c78f"><div class="ttname"><a href="structliara__render__packet__t.html#a3986f3844e62273d3970290258f8c78f">liara_render_packet_t::grid_height</a></div><div class="ttdeci">uint16_t grid_height</div><div class="ttdef"><b>Definition</b> packet.h:38</div></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="packet_8h.html#ab4228a66056b50049cdc4f5677a248ab">   20</a></span><a class="code hl_define" href="private__utils_8h.html#a68d31677e7fc762ba2b23efa1079e783">LIARA_TYPEDEF_STRUCT</a>(liara_render_drawable_t,</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">float</span> x;        </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">float</span> y;        </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    uint32_t color; </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="packet_8h.html#ac51dfe2356c70779d121b1b2a0686435">   33</a></span><a class="code hl_define" href="private__utils_8h.html#a68d31677e7fc762ba2b23efa1079e783">LIARA_TYPEDEF_STRUCT</a>(liara_render_packet_t,</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    uint32_t struct_version;                  </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    uint16_t grid_width;                      </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    uint16_t grid_height;                     </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    uint32_t background_color;                </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">const</span> liara_render_drawable_t* drawables; </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">size_t</span> drawable_count;                    </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="packet_8h.html#a4e673ff6a0841214a5b1a2600b45d919">   43</a></span><span class="preprocessor">#define LIARA_RENDER_PACKET_VERSION 1U</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>}</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aprivate__utils_8h_html_a68d31677e7fc762ba2b23efa1079e783"><div class="ttname"><a href="private__utils_8h.html#a68d31677e7fc762ba2b23efa1079e783">LIARA_TYPEDEF_STRUCT</a></div><div class="ttdeci">#define LIARA_TYPEDEF_STRUCT(name,...)</div><div class="ttdef"><b>Definition</b> private_utils.h:64</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

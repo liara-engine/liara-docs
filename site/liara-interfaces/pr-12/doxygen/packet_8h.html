@@ -151,29 +151,21 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('packet_8h.html
 
 <p>Render packet structures: the plain-old-data snapshot the core hands to the renderer each frame.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="private__utils_8h_source.html">liara/private_utils.h</a>&gt;</code><br />
-<code>#include &lt;stddef.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
 </div>
 <p><a href="packet_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:liara_5Frender_5Fdrawable_5Ft" id="r_liara_5Frender_5Fdrawable_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structliara__render__drawable__t.html">liara_render_drawable_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A single drawable submitted to the renderer as part of a render packet.  <a href="structliara__render__drawable__t.html#details">More...</a><br /></td></tr>
-<tr class="memitem:liara_5Frender_5Fpacket_5Ft" id="r_liara_5Frender_5Fpacket_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structliara__render__packet__t.html">liara_render_packet_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">One frame's worth of drawable data, extracted by the core and submitted to the renderer.  <a href="structliara__render__packet__t.html#details">More...</a><br /></td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a4e673ff6a0841214a5b1a2600b45d919" id="r_a4e673ff6a0841214a5b1a2600b45d919"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a4e673ff6a0841214a5b1a2600b45d919">LIARA_RENDER_PACKET_VERSION</a>&#160;&#160;&#160;1U</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a4b447fa04b0a95894c63d266c57d2524" id="r_a4b447fa04b0a95894c63d266c57d2524"><td class="memItemLeft">typedef struct liara_render_drawable_t&#160;</td><td class="memItemRight"><a class="el" href="#a4b447fa04b0a95894c63d266c57d2524">liara_render_drawable_t</a></td></tr>
-<tr class="memdesc:a4b447fa04b0a95894c63d266c57d2524"><td class="mdescLeft">&#160;</td><td class="mdescRight">A single drawable submitted to the renderer as part of a render packet.  <br /></td></tr>
-<tr class="memitem:a93449459d68aea9151ae8a6cb553dbf5" id="r_a93449459d68aea9151ae8a6cb553dbf5"><td class="memItemLeft">typedef struct liara_render_packet_t&#160;</td><td class="memItemRight"><a class="el" href="#a93449459d68aea9151ae8a6cb553dbf5">liara_render_packet_t</a></td></tr>
-<tr class="memdesc:a93449459d68aea9151ae8a6cb553dbf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">One frame's worth of drawable data, extracted by the core and submitted to the renderer.  <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ab4228a66056b50049cdc4f5677a248ab" id="r_ab4228a66056b50049cdc4f5677a248ab"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab4228a66056b50049cdc4f5677a248ab">LIARA_TYPEDEF_STRUCT</a> (liara_render_drawable_t, float x;float y;uint32_t color;)</td></tr>
+<tr class="memdesc:ab4228a66056b50049cdc4f5677a248ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">A single drawable submitted to the renderer as part of a render packet.  <br /></td></tr>
+<tr class="memitem:ac51dfe2356c70779d121b1b2a0686435" id="r_ac51dfe2356c70779d121b1b2a0686435"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ac51dfe2356c70779d121b1b2a0686435">LIARA_TYPEDEF_STRUCT</a> (liara_render_packet_t, uint32_t struct_version;uint16_t grid_width;uint16_t grid_height;uint32_t background_color;const liara_render_drawable_t *drawables;size_t drawable_count;)</td></tr>
+<tr class="memdesc:ac51dfe2356c70779d121b1b2a0686435"><td class="mdescLeft">&#160;</td><td class="mdescRight">One frame's worth of drawable data, extracted by the core and submitted to the renderer.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Render packet structures: the plain-old-data snapshot the core hands to the renderer each frame. </p>
@@ -189,19 +181,26 @@ Typedefs</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Current version of the <a class="el" href="structliara__render__packet__t.html" title="One frame&#39;s worth of drawable data, extracted by the core and submitted to the renderer.">liara_render_packet_t</a> structure. </p>
+<p>Current version of the liara_render_packet_t structure. </p>
 
 </div>
 </div>
-<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
-<a id="a4b447fa04b0a95894c63d266c57d2524" name="a4b447fa04b0a95894c63d266c57d2524"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4b447fa04b0a95894c63d266c57d2524">&#9670;&#160;</a></span>liara_render_drawable_t</h2>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="ab4228a66056b50049cdc4f5677a248ab" name="ab4228a66056b50049cdc4f5677a248ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4228a66056b50049cdc4f5677a248ab">&#9670;&#160;</a></span>LIARA_TYPEDEF_STRUCT() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef struct liara_render_drawable_t liara_render_drawable_t</td>
+          <td class="memname">LIARA_TYPEDEF_STRUCT </td>
+          <td>(</td>
+          <td class="paramtype">liara_render_drawable_t</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float x;float y;uint32_t color;</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -211,17 +210,30 @@ Typedefs</h2></td></tr>
 <dt>Thread Safety</dt>
 <dd>This type has no thread-safety concerns of its own; it is plain data. </dd>
 </dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">-</td><td>Position in the render target's grid space, [0, grid_width). Position in the render target's grid space, [0, grid_height). Color, 0xAARRGGBB. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a id="a93449459d68aea9151ae8a6cb553dbf5" name="a93449459d68aea9151ae8a6cb553dbf5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93449459d68aea9151ae8a6cb553dbf5">&#9670;&#160;</a></span>liara_render_packet_t</h2>
+<a id="ac51dfe2356c70779d121b1b2a0686435" name="ac51dfe2356c70779d121b1b2a0686435"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac51dfe2356c70779d121b1b2a0686435">&#9670;&#160;</a></span>LIARA_TYPEDEF_STRUCT() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef struct liara_render_packet_t liara_render_packet_t</td>
+          <td class="memname">LIARA_TYPEDEF_STRUCT </td>
+          <td>(</td>
+          <td class="paramtype">liara_render_packet_t</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t struct_version;uint16_t grid_width;uint16_t grid_height;uint32_t background_color;const liara_render_drawable_t *drawables;size_t drawable_count;</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -230,6 +242,12 @@ Typedefs</h2></td></tr>
 <dl class="section threadsafety">
 <dt>Thread Safety</dt>
 <dd>This type has no thread-safety concerns of its own; it is plain data. The lifetime of the <span class="tt">drawables</span> pointer is documented by whichever function produces the packet (see <span class="tt"><a class="el" href="core_8h.html#aaf191d6943ac707a56c574df038d2dd7" title="Retrieves the render packet built during the core&#39;s most recent update.">liara_core_get_render_packet</a></span>). </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">-</td><td>Version of this structure. See LIARA_RENDER_PACKET_VERSION. Width of the render target, in grid cells. Height of the render target, in grid cells. Color used for cells with no drawable, 0xAARRGGBB. Caller-owned array of drawables; see the note above. Number of entries in <span class="tt">drawables</span>. </td></tr>
+  </table>
+  </dd>
 </dl>
 
 </div>

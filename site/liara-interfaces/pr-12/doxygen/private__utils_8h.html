@@ -160,6 +160,7 @@ Macros</h2></td></tr>
 <tr class="memitem:abfe7cae477b1cc6e2c732a71371991c7" id="r_abfe7cae477b1cc6e2c732a71371991c7"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#abfe7cae477b1cc6e2c732a71371991c7">LIARA_NULL</a>&#160;&#160;&#160;((void*)0)</td></tr>
 <tr class="memitem:a1440cb5800d3c20ffe8969f67eff360a" id="r_a1440cb5800d3c20ffe8969f67eff360a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a1440cb5800d3c20ffe8969f67eff360a">LIARA_TYPEDEF</a>(type,  name)</td></tr>
 <tr class="memitem:a3271a2cd5e890e3618f6469ca92ba355" id="r_a3271a2cd5e890e3618f6469ca92ba355"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a3271a2cd5e890e3618f6469ca92ba355">LIARA_TYPEDEF_DEPRECATED</a>(type,  name,  msg)</td></tr>
+<tr class="memitem:a68d31677e7fc762ba2b23efa1079e783" id="r_a68d31677e7fc762ba2b23efa1079e783"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a68d31677e7fc762ba2b23efa1079e783">LIARA_TYPEDEF_STRUCT</a>(name, ...)</td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
 <a id="a5b82cc6d3191ae0b47a869b0528bd7ed" name="a5b82cc6d3191ae0b47a869b0528bd7ed"></a>
@@ -298,6 +299,28 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><span class="keyword">typedef</span> type name <a class="code hl_define" href="#a358d829a6b770576badcef9a112eb786">LIARA_API_DEPRECATED</a>(msg)</div>
 <div class="ttc" id="aprivate__utils_8h_html_a358d829a6b770576badcef9a112eb786"><div class="ttname"><a href="#a358d829a6b770576badcef9a112eb786">LIARA_API_DEPRECATED</a></div><div class="ttdeci">#define LIARA_API_DEPRECATED(msg)</div><div class="ttdef"><b>Definition</b> private_utils.h:24</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a68d31677e7fc762ba2b23efa1079e783" name="a68d31677e7fc762ba2b23efa1079e783"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68d31677e7fc762ba2b23efa1079e783">&#9670;&#160;</a></span>LIARA_TYPEDEF_STRUCT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LIARA_TYPEDEF_STRUCT</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em></em></span>...&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>name { __VA_ARGS__ } name</div>
 </div><!-- fragment -->
 </div>
 </div>
