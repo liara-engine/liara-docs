@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['liara_20core_0',['liara-core',['../index.html',1,'']]],
-  ['liaracore_1',['LiaraCore',['../classLiaraCore.html',1,'LiaraCore'],['../classLiaraCore.html#a58167feee48e306fcd9ff44a151e56ef',1,'LiaraCore::LiaraCore()']]],
-  ['liaracore_2eh_2',['LiaraCore.h',['../LiaraCore_8h.html',1,'']]],
-  ['license_3',['License',['../index.html#autotoc_md10',1,'']]]
+  ['liara_0',['Liara',['../namespaceLiara.html',1,'']]],
+  ['liara_20core_1',['liara-core',['../index.html',1,'']]],
+  ['liara_3a_3acore_2',['Core',['../namespaceLiara_1_1Core.html',1,'Liara']]],
+  ['liaracore_3',['LiaraCore',['../classLiara_1_1Core_1_1LiaraCore.html',1,'Liara::Core::LiaraCore'],['../classLiara_1_1Core_1_1LiaraCore.html#ad8493cce015d7bb10e7c6e221a3697b0',1,'Liara::Core::LiaraCore::LiaraCore()']]],
+  ['liaracore_2eh_4',['LiaraCore.h',['../LiaraCore_8h.html',1,'']]],
+  ['license_5',['License',['../index.html#autotoc_md10',1,'']]]
 ];

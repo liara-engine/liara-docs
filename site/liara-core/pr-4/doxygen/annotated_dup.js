@@ -1,4 +1,8 @@
 var annotated_dup =
 [
-    [ "LiaraCore", "classLiaraCore.html", "classLiaraCore" ]
+    [ "Liara", "namespaceLiara.html", [
+      [ "Core", "namespaceLiara_1_1Core.html", [
+        [ "LiaraCore", "classLiara_1_1Core_1_1LiaraCore.html", "classLiara_1_1Core_1_1LiaraCore" ]
+      ] ]
+    ] ]
 ];

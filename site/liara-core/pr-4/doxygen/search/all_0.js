@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['angle_0',['angle',['../structLiaraCore_1_1OrbitingBody.html#a2928bdbc824fa4530f4b2d87c0d981f0',1,'LiaraCore::OrbitingBody']]],
-  ['angularspeed_1',['angularSpeed',['../structLiaraCore_1_1OrbitingBody.html#a43b90d7e6454f9d920bfa214b628fa98',1,'LiaraCore::OrbitingBody']]]
+  ['angle_0',['angle',['../structLiara_1_1Core_1_1LiaraCore_1_1OrbitingBody.html#a6047e5fc41198a8087a0695424413ed6',1,'Liara::Core::LiaraCore::OrbitingBody']]],
+  ['angularspeed_1',['angularSpeed',['../structLiara_1_1Core_1_1LiaraCore_1_1OrbitingBody.html#acfb1a8aa5ef971387564ef3d43c5f6f2',1,'Liara::Core::LiaraCore::OrbitingBody']]]
 ];
