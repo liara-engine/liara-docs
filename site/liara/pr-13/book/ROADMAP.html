@@ -392,23 +392,29 @@ Arch Linux machine.</li>
 Windows 11 machine with Visual Studio 2022.</li>
 <li><input disabled="" type="checkbox"> An ADR exists for each major decision: multi-repo layout, C
 ABI interfaces, ECS-from-scratch, Vulkan-Hpp, etc.</li>
+<li><input disabled="" type="checkbox"> Every module builds as a shared library (<code>BUILD_SHARED_LIBS=ON</code>)
+with hidden default visibility and an explicit export macro,
+and the launcher links and runs against the shared build.</li>
 </ul>
 <hr>
 <h2 id="5-v01--hello-triangle"><a class="header" href="#5-v01--hello-triangle">5. v0.1 — Hello Triangle</a></h2>
 <p>The first real version of the engine. The goal is not to render
 something impressive; the goal is to <strong>prove that the modular pipeline
 works end to end</strong>. Every architectural decision is exercised: the C
-interfaces, the module loader, the renderer module’s Vulkan
-initialization, the launcher’s composition of core and renderer, the
-cross-platform build.</p>
+interfaces, the host’s composition and version negotiation of the
+modules, the renderer module’s Vulkan initialization, the launcher’s
+composition of core and renderer, the cross-platform build.</p>
 <p>If v0.1 ships, the project’s hardest architectural risk is behind it.
 Every subsequent version is “just” adding features.</p>
 <h3 id="scope"><a class="header" href="#scope">Scope</a></h3>
 <p>The launcher (in the <code>liara</code> meta repository) initializes the core
-module, which in turn initializes the renderer module via the C
-interface, which renders a single hardcoded triangle to a window and
-presents it. The window has a standard close button that triggers a
-graceful shutdown propagated through the core to the renderer.</p>
+and the renderer independently through the C interface, checks their
+interface versions for compatibility, and composes them: it drives
+the core’s per-tick step and mediates the render packets the core
+produces to the renderer, which renders a single hardcoded triangle
+to a window and presents it. The window has a standard close button
+that triggers a graceful shutdown propagated through the core to the
+renderer.</p>
 <p>The triangle is hardcoded in the launcher: three vertices, a vertex
 shader, a fragment shader. There is no ECS yet, no asset loader, no
 math library beyond what the renderer needs internally.</p>
@@ -433,9 +439,10 @@ management.</p>
 <li><input disabled="" type="checkbox"> A window appears with a triangle rendered in it.</li>
 <li><input disabled="" type="checkbox"> The window is closable and the application shuts down cleanly.</li>
 <li><input disabled="" type="checkbox"> No Vulkan validation errors are reported in debug builds.</li>
-<li><input disabled="" type="checkbox"> The interface version negotiation between core and renderer
-is exercised: a contrived major-version mismatch produces a
-clear error and refuses to load.</li>
+<li><input disabled="" type="checkbox"> The interface version negotiation between core and renderer is
+exercised through the runtime-loading path: a contrived major-version
+mismatch is detected at load time, produces a clear error, and
+refuses to load — no crash, no silent mismatch.</li>
 <li><input disabled="" type="checkbox"> Tests pass on all platforms.</li>
 <li><input disabled="" type="checkbox"> User-facing documentation includes a “Build Hello Triangle”
 page.</li>
