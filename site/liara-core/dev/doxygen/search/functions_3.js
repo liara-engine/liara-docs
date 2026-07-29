@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['liaracore_0',['LiaraCore',['../classLiaraCore.html#a58167feee48e306fcd9ff44a151e56ef',1,'LiaraCore']]]
+  ['isstoprequested_0',['IsStopRequested',['../classLiara_1_1Core_1_1LiaraCore.html#ae6985698b5171d0cce1f5d0cd2b17664',1,'Liara::Core::LiaraCore']]]
 ];
