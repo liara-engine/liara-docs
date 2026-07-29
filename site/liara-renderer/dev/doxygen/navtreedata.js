@@ -30,6 +30,9 @@ var NAVTREE =
     [ "Building Standalone", "index.html#autotoc_md6", null ],
     [ "Consuming This Module", "index.html#autotoc_md8", null ],
     [ "License", "index.html#autotoc_md10", null ],
+    [ "Namespaces", "namespaces.html", [
+      [ "Namespace List", "namespaces.html", "namespaces_dup" ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
