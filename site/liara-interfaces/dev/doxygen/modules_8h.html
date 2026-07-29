@@ -155,19 +155,14 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('modules_8h.htm
 </div>
 <p><a href="modules_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:liara_5Fmodule_5Finfo_5Ft" id="r_liara_5Fmodule_5Finfo_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structliara__module__info__t.html">liara_module_info_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure representing information about a Liara module.  <a href="structliara__module__info__t.html#details">More...</a><br /></td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a5b63611626667a270c8108079e122c75" id="r_a5b63611626667a270c8108079e122c75"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a5b63611626667a270c8108079e122c75">LIARA_MODULE_INFO_VERSION</a>&#160;&#160;&#160;1U</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a19bd9f2a1a2d788f2b1bc7c73f923e03" id="r_a19bd9f2a1a2d788f2b1bc7c73f923e03"><td class="memItemLeft">typedef struct liara_module_info_t&#160;</td><td class="memItemRight"><a class="el" href="#a19bd9f2a1a2d788f2b1bc7c73f923e03">liara_module_info_t</a></td></tr>
-<tr class="memdesc:a19bd9f2a1a2d788f2b1bc7c73f923e03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure representing information about a Liara module.  <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a2070d77e8871e1600f3ca1933c7aaf7d" id="r_a2070d77e8871e1600f3ca1933c7aaf7d"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a2070d77e8871e1600f3ca1933c7aaf7d">LIARA_TYPEDEF_STRUCT</a> (liara_module_info_t, uint32_t struct_version;uint32_t abi_version;uint32_t module_version;uint32_t reserved;const char *module_name;const char *abi_version_str;const char *module_version_str;)</td></tr>
+<tr class="memdesc:a2070d77e8871e1600f3ca1933c7aaf7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure representing information about a Liara module.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Liara modules interface header file. </p>
@@ -183,25 +178,38 @@ Typedefs</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Current version of the <a class="el" href="structliara__module__info__t.html" title="Structure representing information about a Liara module.">liara_module_info_t</a> structure. </p>
+<p>Current version of the liara_module_info_t structure. </p>
 
 </div>
 </div>
-<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
-<a id="a19bd9f2a1a2d788f2b1bc7c73f923e03" name="a19bd9f2a1a2d788f2b1bc7c73f923e03"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a19bd9f2a1a2d788f2b1bc7c73f923e03">&#9670;&#160;</a></span>liara_module_info_t</h2>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a2070d77e8871e1600f3ca1933c7aaf7d" name="a2070d77e8871e1600f3ca1933c7aaf7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2070d77e8871e1600f3ca1933c7aaf7d">&#9670;&#160;</a></span>LIARA_TYPEDEF_STRUCT()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef struct liara_module_info_t liara_module_info_t</td>
+          <td class="memname">LIARA_TYPEDEF_STRUCT </td>
+          <td>(</td>
+          <td class="paramtype">liara_module_info_t</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t struct_version;uint32_t abi_version;uint32_t module_version;uint32_t reserved;const char *module_name;const char *abi_version_str;const char *module_version_str;</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Structure representing information about a Liara module. </p>
 <p>This structure contains information about a Liara module, including its version, ABI version, and name. It is used to provide metadata about the module to the Liara framework. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">-</td><td>Version of the liara_module_info_t structure. ABI version of the module. Version of the module. Reserved for future use. Name of the module. String representation of the ABI version. String representation of the module version. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
