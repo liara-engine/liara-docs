@@ -388,7 +388,7 @@ definition is private:</p>
 <pre><code class="language-c">// In liara/renderer/renderer.h
 typedef struct liara_renderer_handle_t liara_renderer_handle;
 
-liara_result liara_renderer_create(
+liara_result_t liara_renderer_create(
     const liara_renderer_create_info_t* create_info,
     liara_renderer_handle_t** out_handle
 );
@@ -439,10 +439,10 @@ user-provided text is passed as a <code>(pointer, length)</code> pair to avoid
 ambiguity about embedded nulls and to support non-null-terminated
 slices from other languages.</p>
 <pre><code class="language-c">// Good: identifier
-liara_result liara_core_get_setting(const char* key, ...);
+liara_result_t liara_core_get_setting(const char* key, ...);
 
 // Good: arbitrary text
-liara_result liara_core_log_message(const char* text, size_t length, ...);
+liara_result_t liara_core_log_message(const char* text, size_t length, ...);
 </code></pre>
 <p>Strings passed across the boundary are <strong>borrowed for the duration of
 the call</strong>. The implementation must not retain the pointer after the
@@ -450,7 +450,7 @@ call returns. If the implementation needs to keep the string, it must
 copy it.</p>
 <h3 id="arrays"><a class="header" href="#arrays">Arrays</a></h3>
 <p>Arrays are passed as <code>(pointer, count)</code> pairs:</p>
-<pre><code class="language-c">liara_result liara_renderer_submit_packet(
+<pre><code class="language-c">liara_result_t liara_renderer_submit_packet(
     liara_renderer_handle_t* renderer,
     const liara_drawable_t* drawables,
     size_t drawable_count
@@ -469,27 +469,27 @@ to reference an array, it does so with a <code>(pointer, count)</code> pair:</p>
 <hr>
 <h2 id="5-error-handling"><a class="header" href="#5-error-handling">5. Error Handling</a></h2>
 <h3 id="the-result-type"><a class="header" href="#the-result-type">The Result Type</a></h3>
-<p>Functions that can fail return a <code>liara_result</code>:</p>
-<pre><code class="language-c">typedef int32_t liara_result;
-
-#define LIARA_RESULT_SUCCESS               0
-#define LIARA_RESULT_OUT_OF_MEMORY        -1
-#define LIARA_RESULT_INVALID_ARGUMENT     -2
-#define LIARA_RESULT_VERSION_MISMATCH     -3
-#define LIARA_RESULT_NOT_FOUND            -4
-#define LIARA_RESULT_ALREADY_EXISTS       -5
-#define LIARA_RESULT_INTERNAL_ERROR       -6
-// ... (additions are minor-version bumps)
+<p>Functions that can fail return a <code>liara_result_t</code>:</p>
+<pre><code class="language-c">typedef int32_t liara_result_t;
 </code></pre>
+<p>Result codes are defined as an <code>enum</code> (using X-macros for maintainability):</p>
+<pre><code class="language-c">typedef enum {
+    LIARA_RESULT_SUCCESS = 0,
+    LIARA_RESULT_&lt;ERROR_NAME_N&gt; = -&lt;N&gt;,
+    // ...
+} liara_result_t;
+</code></pre>
+<p>Codes are sorted by category. For exemple, -2 to -99 are reserved for generic errors (out of memory, invalid
+argument, etc.).</p>
 <p><code>LIARA_RESULT_SUCCESS</code> is always zero, so <code>if (result)</code> reads as “if
 there was an error”, consistent with most C error handling.</p>
-<p>Functions that cannot fail return <code>void</code>. Returning <code>liara_result</code>
+<p>Functions that cannot fail return <code>void</code>. Returning <code>liara_result_t</code>
 unconditionally adds noise; functions should accurately advertise
 whether they can fail.</p>
 <h3 id="output-parameters"><a class="header" href="#output-parameters">Output Parameters</a></h3>
 <p>Functions that produce values pass them through output parameters,
 not return values:</p>
-<pre><code class="language-c">liara_result liara_renderer_create(
+<pre><code class="language-c">liara_result_t liara_renderer_create(
     const liara_renderer_create_info_t* create_info,
     liara_renderer_handle_t** out_handle
 );
@@ -500,11 +500,11 @@ not be <code>NULL</code> (it is undefined behavior to call with <code>out_handle
 <p>Implementations may use exceptions, panics, or longjmp internally,
 but these must not cross the boundary. A C++ implementation that
 catches its exceptions at the boundary and translates them to
-<code>liara_result</code> is conforming; an implementation that lets a C++
+<code>liara_result_t</code> is conforming; an implementation that lets a C++
 exception propagate out of an interface function is non-conforming
 and undefined.</p>
 <p>The renderer in particular is required to handle Vulkan errors and
-GPU exceptions internally and report them as <code>liara_result</code> values
+GPU exceptions internally and report them as <code>liara_result_t</code> values
 or, for asynchronous failures, as callbacks (see section 7).</p>
 <hr>
 <h2 id="6-memory-ownership"><a class="header" href="#6-memory-ownership">6. Memory Ownership</a></h2>
@@ -512,7 +512,7 @@ or, for asynchronous failures, as callbacks (see section 7).</p>
 <h3 id="caller-allocates-inputs"><a class="header" href="#caller-allocates-inputs">Caller Allocates Inputs</a></h3>
 <p>When a function takes a struct by pointer for input, the caller owns
 the memory:</p>
-<pre><code class="language-c">liara_result liara_renderer_create(
+<pre><code class="language-c">liara_result_t liara_renderer_create(
     const liara_renderer_create_info_t* create_info,  // Caller allocates and frees.
     liara_renderer_handle_t** out_handle
 );
@@ -540,7 +540,7 @@ allocator:</p>
     void* user_data;
 } liara_allocator_t;
 
-liara_result liara_renderer_create(
+liara_result_t liara_renderer_create(
     const liara_renderer_create_info_t* create_info,
     const liara_allocator_t* allocator,  // May be NULL for default.
     liara_renderer_handle_t** out_handle
@@ -577,12 +577,12 @@ ends, dereferencing is undefined.</p>
 explicit signatures and are passed alongside a <code>void* user_data</code>
 that the module passes back when invoking:</p>
 <pre><code class="language-c">typedef void (*liara_renderer_error_callback)(
-    liara_result error,
+    liara_result_t error,
     const char* message,
     void* user_data
 );
 
-liara_result liara_renderer_set_error_callback(
+liara_result_t liara_renderer_set_error_callback(
     liara_renderer_handle_t* renderer,
     liara_renderer_error_callback callback,
     void* user_data
@@ -607,7 +607,7 @@ lifetime.</li>
 <p>A version is a single 32-bit integer with bit-packed major, minor,
 and patch components:</p>
 <pre><code class="language-c">// In liara/version.h
-#define LIARA_MAKE_VERSION(major, minor, patch) \
+#define LIARA_MAKE_VERSION_UNSAFE(major, minor, patch) \
     (((uint32_t)(major) &lt;&lt; 22) | ((uint32_t)(minor) &lt;&lt; 12) | (uint32_t)(patch))
 
 #define LIARA_VERSION_MAJOR(version)  (((uint32_t)(version) &gt;&gt; 22) &amp; 0x3FFu)
@@ -632,7 +632,7 @@ It performs no range checking; the caller guarantees the ranges.</p>
 </li>
 <li>
 <p><code>liara_try_make_version(major, minor, patch, out_version)</code> — a
-checked static inline function returning a <code>liara_result</code>; it
+checked static inline function returning a <code>liara_result_t</code>; it
 rejects out-of-range components and a NULL output. Preferred
 outside constant contexts.</p>
 </li>
@@ -663,6 +663,7 @@ own compile time.</p>
     uint32_t    abi_version;      // the ABI the module was compiled against
     uint32_t    module_version;   // the module's own version
     const char* name;             // human-readable module name
+    // ...
 } liara_module_info_t;
 
 #define LIARA_MODULE_INFO_VERSION_1 1u
@@ -707,7 +708,7 @@ module’s <code>manifest.json</code>.</p>
 <p>Compatibility is decided by comparing a provided version against a required one.
 The canonical helper lives in <code>liara/abi_version.h</code>:</p>
 <pre><code class="language-c">// Does `provided` satisfy what `required` asks for?
-bool liara_version_provides(uint32_t provided, uint32_t required);
+liara_version_compat_t liara_version_provides(uint32_t provided, uint32_t required);
 </code></pre>
 <p>The rule it implements:</p>
 <ul>
@@ -731,7 +732,7 @@ parameters are named <code>provided</code> and <code>required</code> rather than
 <code>uint32_t</code>. A convenience wrapper removes the ordering hazard entirely at
 the most common call site:</p>
 <pre><code class="language-c">// Is `module_abi` compatible with the ABI this caller was compiled against?
-bool liara_abi_is_compatible(uint32_t module_abi);
+liara_version_compat_t liara_abi_is_compatible(uint32_t module_abi);
 </code></pre>
 <h3 id="negotiation-outcome"><a class="header" href="#negotiation-outcome">Negotiation Outcome</a></h3>
 <p>A boolean answers “compatible or not”, but a host often needs to distinguish
@@ -742,7 +743,7 @@ a four-state outcome:</p>
     LIARA_VERSION_COMPAT_COMPATIBLE   = 1,  // provider newer minor, fully usable
     LIARA_VERSION_COMPAT_DEGRADED     = 2,  // provider older minor: some newer functions unavailable
     LIARA_VERSION_COMPAT_INCOMPATIBLE = 3,  // major mismatch, or 0.0.x inequality
-} liara_version_compat;
+} liara_version_compat_t;
 </code></pre>
 <ul>
 <li>
@@ -778,7 +779,7 @@ lookup changes.</p>
 <tr><td>Removing a function</td><td>MAJOR</td></tr>
 <tr><td>Renaming a function</td><td>MAJOR</td></tr>
 <tr><td>Changing a function’s parameter types</td><td>MAJOR</td></tr>
-<tr><td>Changing a function’s return type (except <code>void</code> → <code>liara_result</code> for a function newly able to fail, see below)</td><td>MAJOR</td></tr>
+<tr><td>Changing a function’s return type (except <code>void</code> → <code>liara_result_t</code> for a function newly able to fail, see below)</td><td>MAJOR</td></tr>
 <tr><td>Changing the meaning of a parameter</td><td>MAJOR</td></tr>
 <tr><td>Removing a struct field</td><td>MAJOR</td></tr>
 <tr><td>Renaming a struct field</td><td>MAJOR</td></tr>
@@ -912,7 +913,7 @@ which are not.</li>
  * @threadsafety This function is not thread-safe; only one thread
  *               may call it at a time. @endthreadsafety
  */
-liara_result liara_renderer_create(
+liara_result_t liara_renderer_create(
     const liara_renderer_create_info_t* create_info,
     const liara_allocator_t* allocator,
     liara_renderer_handle_t** out_handle
@@ -1027,7 +1028,7 @@ behavior across a major version boundary.</p>
 <li><input disabled="" type="checkbox"> Header uses only types from <code>&lt;stdint.h&gt;</code>, <code>&lt;stddef.h&gt;</code>,
 <code>&lt;stdbool.h&gt;</code>, and other interface headers.</li>
 <li><input disabled="" type="checkbox"> All new symbols use the correct prefix.</li>
-<li><input disabled="" type="checkbox"> Functions that can fail return <code>liara_result</code>; functions that
+<li><input disabled="" type="checkbox"> Functions that can fail return <code>liara_result_t</code>; functions that
 cannot return <code>void</code>.</li>
 <li><input disabled="" type="checkbox"> Output parameters use the <code>out_</code> prefix.</li>
 <li><input disabled="" type="checkbox"> Pointer ownership and lifetime are documented for every
