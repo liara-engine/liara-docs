@@ -29,13 +29,16 @@ var NAVTREE =
     [ "Documentation", "index.html#autotoc_md4", null ],
     [ "Building Standalone", "index.html#autotoc_md6", null ],
     [ "Consuming This Module", "index.html#autotoc_md8", null ],
-    [ "License", "index.html#autotoc_md10", null ]
+    [ "License", "index.html#autotoc_md10", null ],
+    [ "Files", "files.html", [
+      [ "File List", "files.html", "files_dup" ]
+    ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"index.html"
+"LiaraRenderer_8h.html"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';
