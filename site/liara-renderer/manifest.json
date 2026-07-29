@@ -3,7 +3,7 @@
   "metadata": {
     "name": "Liara Engine Vulkan Renderer",
     "description": "A Vulkan renderer for the Liara Engine.",
-    "latest": "0.0.1"
+    "latest": "0.0.2"
   },
   "versions": {
     "dev": {
