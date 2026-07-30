@@ -286,22 +286,6 @@ finds it automatically.</p>
 <p>This file is also the foundation for clang-tidy, code coverage tools,
 and SonarCloud’s analysis. It is never committed to the repository
 but must always be available locally.</p>
-<h3 id="modules-optional-build"><a class="header" href="#modules-optional-build">Modules-Optional Build</a></h3>
-<p>The previous engine experimented with C++20 modules. This experiment
-showed that GCC’s module support remains unstable in 2026, while
-MSVC and Clang are usable. To avoid having a build that fails on
-some compilers, the new project follows a different strategy:</p>
-<ul>
-<li>The reference build uses traditional headers, on all platforms.</li>
-<li>A separate experimental preset (<code>linux-release-clang-modules</code>,
-<code>windows-release-modules</code>) builds with modules where supported.</li>
-<li>The CI runs the reference build on all platforms but runs the
-modules-experimental build only on the platforms where it is known
-to work.</li>
-</ul>
-<p>This avoids the situation where every contributor needs to debug
-GCC’s module bugs to land a small fix. Modules can be re-evaluated
-when toolchain support is uniform.</p>
 <hr>
 <h2 id="3-dependency-management"><a class="header" href="#3-dependency-management">3. Dependency Management</a></h2>
 <h3 id="vcpkg-in-manifest-mode"><a class="header" href="#vcpkg-in-manifest-mode">vcpkg in Manifest Mode</a></h3>
@@ -352,7 +336,7 @@ exception is approved on a case-by-case basis through the
 introduction of a dedicated ADR.</p>
 <h3 id="dependency-list-by-module"><a class="header" href="#dependency-list-by-module">Dependency List by Module</a></h3>
 <p>Each module’s <code>vcpkg.json</code> declares only that module’s direct
-dependencies. The current expected list:</p>
+dependencies. The current list (progressively built up in v0.x) is:</p>
 <p><strong><code>liara-interfaces</code></strong>: no dependencies.</p>
 <p><strong><code>liara-core</code></strong>: doctest (test only), tomlplusplus, miniaudio,
 cgltf or tinygltf (TBD), stb (header-only), glm (internal
