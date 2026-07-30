@@ -1,0 +1,13 @@
+{
+  "$schema": "https://liara-engine.github.io/liara/schemas/documentation-module.schema.json",
+  "metadata": {
+    "name": "Liara Core Documentation",
+    "description": "Documentation for the Liara Engine's core library."
+  },
+
+  "resources": {
+    "unspecified": {
+      "README": "README.md"
+    }
+  }
+}
