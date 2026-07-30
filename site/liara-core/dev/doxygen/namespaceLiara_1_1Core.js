@@ -1,7 +1,7 @@
 var namespaceLiara_1_1Core =
 [
     [ "LiaraCore", "classLiara_1_1Core_1_1LiaraCore.html", "classLiara_1_1Core_1_1LiaraCore" ],
-    [ "DimColor", "namespaceLiara_1_1Core.html#af95e885fb9754feab8dadf0112ae1bc0", null ],
+    [ "DimColor", "namespaceLiara_1_1Core.html#a4ab159e423b9cc9bb439f567a12fd63a", null ],
     [ "BACKGROUND_COLOR", "namespaceLiara_1_1Core.html#a7abaef51586cdbb71e66b96de7253262", null ],
     [ "BODY_COUNT", "namespaceLiara_1_1Core.html#a39c49fb73e2047e3bc9bd194d3977bc2", null ],
     [ "CENTER_X", "namespaceLiara_1_1Core.html#a55e5a1ab724b7328ada5f3ade0778536", null ],

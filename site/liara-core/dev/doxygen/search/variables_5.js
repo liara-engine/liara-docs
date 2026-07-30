@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['radius_0',['radius',['../structLiara_1_1Core_1_1LiaraCore_1_1OrbitingBody.html#acd8f4e0b3e42cdc0f4d5b51f5c8982e4',1,'Liara::Core::LiaraCore::OrbitingBody']]]
+  ['trail_5fdim_5ffactors_0',['TRAIL_DIM_FACTORS',['../namespaceLiara_1_1Core.html#a62ede50d79fd68da836697e2403e4d04',1,'Liara::Core']]],
+  ['trail_5flength_1',['TRAIL_LENGTH',['../namespaceLiara_1_1Core.html#a76ad88a6ff647e42d275889ff7dee983',1,'Liara::Core']]]
 ];

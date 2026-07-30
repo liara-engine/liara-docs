@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['update_0',['Update',['../classLiara_1_1Core_1_1LiaraCore.html#a70b18a51ab0a90941adffa75e424fb4a',1,'Liara::Core::LiaraCore']]]
+  ['_7eliaracore_0',['~LiaraCore',['../classLiara_1_1Core_1_1LiaraCore.html#a857dcbd2592814a6063daac32d563515',1,'Liara::Core::LiaraCore']]]
 ];
