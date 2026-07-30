@@ -2458,12 +2458,20 @@ designed to be idempotent: running it twice does not break anything.</p>
 ./scripts/liara.sh test --preset linux-release-clang
 </code></pre>
 <p>The <code>linux-release-clang</code> preset is the recommended default for
-development. The other available presets:</p>
+most users. The available presets:</p>
 <ul>
 <li><code>linux-debug-gcc</code> — debug build with GCC.</li>
-<li><code>linux-debug-clang</code> — debug build with Clang.</li>
+<li><code>linux-debug-clang</code> — debug build with Clang. Script default.</li>
 <li><code>linux-release-gcc</code> — release build with GCC.</li>
-<li><code>linux-release-clang</code> — release build with Clang. Default.</li>
+<li><code>linux-release-clang</code> — release build with Clang.</li>
+<li><code>windows-debug</code> — debug build with MSVC (Windows only).</li>
+<li><code>windows-release</code> — release build with MSVC (Windows only).</li>
+</ul>
+<p>There is also some experimental presets. Not recommended for general use:</p>
+<ul>
+<li><code>linux-debug-gcc-dynamic</code> — debug build with GCC, runtime dynamic linking of dependencies.</li>
+<li><code>linux-debug-clang-dynamic</code> — debug build with Clang, runtime dynamic linking of dependencies.</li>
+<li><code>windows-debug-dynamic</code> — debug build with MSVC, runtime dynamic linking of dependencies.</li>
 </ul>
 <p>After a successful build, run the test suite.
 If all tests pass, the setup is complete.</p>
@@ -2940,7 +2948,7 @@ high-level structure.</li>
 <li>This document — the workflow.</li>
 <li><a href="#code-style"><code>CODE_STYLE.md</code></a> — only when actually writing
 code.</li>
-<li><a href="https://github.com/liara-engine/liara-interfaces/blob/main/INTERFACES.md"><code>INTERFACES.md</code></a>
+<li><a href="https://liara-engine.liara-engine-documentation.workers.dev/liara-interfaces/latest/book/INTERFACES"><code>INTERFACES.md</code></a>
 — only when modifying anything in <code>liara-interfaces</code>.</li>
 </ol>
 <p>Reading the entire codebase is not necessary. Reading the documents
@@ -3029,7 +3037,7 @@ process in section 11.)</li>
 Each one becomes its own branch, opened in a coordinated sequence.</p>
 <h3 id="stage-3-open-a-branch-and-code"><a class="header" href="#stage-3-open-a-branch-and-code">Stage 3: Open a Branch and Code</a></h3>
 <p>The contributor creates a branch from <code>main</code>, makes the changes,
-and runs <code>./scripts/liara.py check</code> locally before pushing. The script
+and runs <code>./scripts/liara.sh check</code> locally before pushing. The script
 runs the same checks the CI runs (clang-format, clang-tidy, tests,
 build) and fails fast on the same issues.</p>
 <p>A branch is pushed early and often. Pushing to a not-yet-PRed
@@ -3226,16 +3234,16 @@ the in-progress history.</p>
 <h3 id="the-local-cli"><a class="header" href="#the-local-cli">The Local CLI</a></h3>
 <p>The project provides a unified command-line interface through the platform wrappers:</p>
 <ul>
-<li><code>./liara.sh &lt;command&gt;</code> on Linux/macOS</li>
-<li><code>./liara.ps1 &lt;command&gt;</code> on Windows</li>
+<li><code>./scripts/liara.sh &lt;command&gt;</code> on Linux/macOS</li>
+<li><code>./scripts/liara.ps1 &lt;command&gt;</code> on Windows</li>
 </ul>
 <p>These wrappers invoke the common Python orchestration tool and provide a consistent developer workflow across platforms.</p>
 <p>For pre-push validation, use:</p>
 <pre><code class="language-bash"># On Linux
-./liara.sh check
+./scripts/liara.sh check
 
 # On Windows
-./liara.ps1 check
+./scripts/liara.ps1 check
 </code></pre>
 <p>By default, the <code>check</code> command performs the following steps:</p>
 <ul>
@@ -3717,9 +3725,6 @@ header comes from.</p>
 arguments don’t fit on one line, each goes on its own line. This is
 slightly more verbose but produces clean, readable diffs when an
 argument is added or removed.</p>
-<p><strong><code>AllowShortFunctionsOnASingleLine: Empty</code></strong> — only empty functions
-collapse to one line. Single-statement functions get their own
-lines, for consistency.</p>
 <hr>
 <h2 id="4-clang-tidy-configuration"><a class="header" href="#4-clang-tidy-configuration">4. clang-tidy Configuration</a></h2>
 <p>The <code>.clang-tidy</code> file selects which checks run. Rather than enabling
@@ -4616,10 +4621,8 @@ documentation builder).</p>
 </ul>
 <p>Release automation itself (release-please) is invoked directly from each repository
 rather than through a reusable workflow; see §9.</p>
-<p>[Planned additions, general-purpose, targeted for Phase 0 completion: an automated
-dependency-update workflow (Renovate or Dependabot) to keep GitHub Action pins and
-the vcpkg baseline current, and a CodeQL security scan. A SonarCloud analysis workflow
-is also planned but deferred; see §7.]</p>
+<p>Renovate has been added to the organization, and each repository has a <code>renovate.json</code>.</p>
+<p>[A SonarCloud analysis workflow is also planned but deferred; see §7.]</p>
 <h3 id="versioning-the-reusable-workflows"><a class="header" href="#versioning-the-reusable-workflows">Versioning the Reusable Workflows</a></h3>
 <p>The reusable workflows are versioned. Consuming workflows reference
 them by tag (e.g., <code>liara-engine/.github/.github/workflows/reusable-build-and-test.yml@v1</code>).
@@ -4727,6 +4730,9 @@ self-hosted runners).</li>
 with results recorded but not gating.</li>
 <li><code>[slow]</code>: tests that take more than a few hundred milliseconds.
 Excluded by default to keep the fast feedback loop fast.</li>
+<li><code>[cross-lang]</code>: tests that exercise the C API from a non
+C/C++ language (Python, Rust, etc.). Run only in CI configurations
+that have the language’s toolchain installed.</li>
 </ul>
 <p>A developer running tests locally typically runs <code>[unit]</code> only; CI
 runs everything except <code>[gpu]</code>.</p>
@@ -4761,8 +4767,8 @@ percentage shown is the average across all modules.</p>
 <h3 id="clang-format"><a class="header" href="#clang-format">clang-format</a></h3>
 <p>Code formatting is enforced by clang-format 18+. The configuration
 lives in <code>.clang-format</code> at the root of each repository. The
-configuration is identical across repositories and is reviewed for
-changes via the org-level <code>.github</code> repo’s templates.</p>
+configuration is identical across repositories (except for <code>liara-interfaces</code>,
+which has a C-only configuration for its C headers).</p>
 <p>The CI runs <code>clang-format --dry-run --Werror</code> on every C++ source
 file. Any deviation fails the build. There is no “format on save and
 commit” optional pre-hook; the CI is the source of truth.</p>
