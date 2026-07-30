@@ -23,7 +23,7 @@ jobs:
       GH_TOKEN: ${{ secrets.ORG_READ_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: cloudflare-pages
           token: ${{ secrets.DOCS_PUSH_TOKEN }}
