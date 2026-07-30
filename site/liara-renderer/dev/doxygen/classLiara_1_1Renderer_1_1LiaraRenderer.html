@@ -159,16 +159,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae366f5e5a47c378fa3fda7a8992dfa03" id="r_ae366f5e5a47c378fa3fda7a8992dfa03"><td class="memItemLeft"><a class="el" href="#a0442db9fb2fcfd56998c8c8bc4f93845">LiaraRenderer</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ae366f5e5a47c378fa3fda7a8992dfa03">operator=</a> (const <a class="el" href="#a0442db9fb2fcfd56998c8c8bc4f93845">LiaraRenderer</a> &amp;)=delete</td></tr>
 <tr class="memitem:a82a6715438dd7c17c75a2044a252bb4c" id="r_a82a6715438dd7c17c75a2044a252bb4c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a82a6715438dd7c17c75a2044a252bb4c">LiaraRenderer</a> (LiaraRenderer &amp;&amp;)=delete</td></tr>
 <tr class="memitem:a1e36a80a7d3b0c534fae2ee5671034f7" id="r_a1e36a80a7d3b0c534fae2ee5671034f7"><td class="memItemLeft"><a class="el" href="#a0442db9fb2fcfd56998c8c8bc4f93845">LiaraRenderer</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a1e36a80a7d3b0c534fae2ee5671034f7">operator=</a> (<a class="el" href="#a0442db9fb2fcfd56998c8c8bc4f93845">LiaraRenderer</a> &amp;&amp;)=delete</td></tr>
-<tr class="memitem:ac003db5c603b3f36260cad474cdca2ec" id="r_ac003db5c603b3f36260cad474cdca2ec"><td class="memItemLeft">liara_result_t&#160;</td><td class="memItemRight"><a class="el" href="#ac003db5c603b3f36260cad474cdca2ec">SubmitFrame</a> (const liara_render_packet_t &amp;PACKET)</td></tr>
+<tr class="memitem:a92d8a194144af5eb464b6c553dc3c0e0" id="r_a92d8a194144af5eb464b6c553dc3c0e0"><td class="memItemLeft">liara_result_t&#160;</td><td class="memItemRight"><a class="el" href="#a92d8a194144af5eb464b6c553dc3c0e0">SubmitFrame</a> (const liara_render_packet_t &amp;packet)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pri-methods" class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a66db4055f15aa0997aaaf559672114f5" id="r_a66db4055f15aa0997aaaf559672114f5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a66db4055f15aa0997aaaf559672114f5">EnsureGrid</a> (const uint16_t WIDTH, const uint16_t HEIGHT)</td></tr>
-<tr class="memitem:a7dc800af22604b9251887ea41bc7dbc0" id="r_a7dc800af22604b9251887ea41bc7dbc0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7dc800af22604b9251887ea41bc7dbc0">Present</a> (const std::vector&lt; uint32_t &gt; &amp;FRAME)</td></tr>
+<tr class="memitem:a4329e482c6d3de2960e2c3fbdcf709eb" id="r_a4329e482c6d3de2960e2c3fbdcf709eb"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4329e482c6d3de2960e2c3fbdcf709eb">EnsureGrid</a> (const uint16_t width, const uint16_t height)</td></tr>
+<tr class="memitem:a62b4449a3093d4ca3d66a48f67eca2fb" id="r_a62b4449a3093d4ca3d66a48f67eca2fb"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a62b4449a3093d4ca3d66a48f67eca2fb">Present</a> (const std::vector&lt; uint32_t &gt; &amp;frame)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pri-static-methods" class="groupheader"><a id="pri-static-methods" name="pri-static-methods"></a>
 Static Private Member Functions</h2></td></tr>
-<tr class="memitem:a4449c561e3f3da77b6796ec1ee675090" id="r_a4449c561e3f3da77b6796ec1ee675090"><td class="memItemLeft">static std::string&#160;</td><td class="memItemRight"><a class="el" href="#a4449c561e3f3da77b6796ec1ee675090">ColorToAnsi</a> (const uint32_t COLOR)</td></tr>
+<tr class="memitem:af5503bc13ad3106ac5e3541310f4f2bf" id="r_af5503bc13ad3106ac5e3541310f4f2bf"><td class="memItemLeft">static std::string&#160;</td><td class="memItemRight"><a class="el" href="#af5503bc13ad3106ac5e3541310f4f2bf">ColorToAnsi</a> (const uint32_t color)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pri-attribs" class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -279,8 +279,8 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a4449c561e3f3da77b6796ec1ee675090" name="a4449c561e3f3da77b6796ec1ee675090"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4449c561e3f3da77b6796ec1ee675090">&#9670;&#160;</a></span>ColorToAnsi()</h2>
+<a id="af5503bc13ad3106ac5e3541310f4f2bf" name="af5503bc13ad3106ac5e3541310f4f2bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5503bc13ad3106ac5e3541310f4f2bf">&#9670;&#160;</a></span>ColorToAnsi()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -291,7 +291,7 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">std::string Liara::Renderer::LiaraRenderer::ColorToAnsi </td>
           <td>(</td>
-          <td class="paramtype">const uint32_t</td>          <td class="paramname"><span class="paramname"><em>COLOR</em></span></td><td>)</td>
+          <td class="paramtype">const uint32_t</td>          <td class="paramname"><span class="paramname"><em>color</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -304,7 +304,7 @@ Private Attributes</h2></td></tr>
 <p>Converts a 32-bit color value to an ANSI escape code string for setting the foreground color. The color is expected to be in the format 0xRRGGBBAA, where RR, GG, BB are the red, green, and blue components respectively. The alpha component is ignored.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">COLOR</td><td>The 32-bit color value to convert. </td></tr>
+    <tr><td class="paramname">color</td><td>The 32-bit color value to convert. </td></tr>
   </table>
   </dd>
 </dl>
@@ -312,8 +312,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a66db4055f15aa0997aaaf559672114f5" name="a66db4055f15aa0997aaaf559672114f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a66db4055f15aa0997aaaf559672114f5">&#9670;&#160;</a></span>EnsureGrid()</h2>
+<a id="a4329e482c6d3de2960e2c3fbdcf709eb" name="a4329e482c6d3de2960e2c3fbdcf709eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4329e482c6d3de2960e2c3fbdcf709eb">&#9670;&#160;</a></span>EnsureGrid()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -324,12 +324,12 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Liara::Renderer::LiaraRenderer::EnsureGrid </td>
           <td>(</td>
-          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>WIDTH</em></span>, </td>
+          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>width</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>HEIGHT</em></span>&#160;)</td>
+          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>height</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -341,8 +341,8 @@ Private Attributes</h2></td></tr>
 <p>Ensures that the internal grid is initialized and matches the specified dimensions. If the grid is uninitialized or the dimensions have changed, it will reinitialize the grid and clear the previous frame to force a repaint of all cells.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">WIDTH</td><td>The width of the grid. </td></tr>
-    <tr><td class="paramname">HEIGHT</td><td>The height of the grid. </td></tr>
+    <tr><td class="paramname">width</td><td>The width of the grid. </td></tr>
+    <tr><td class="paramname">height</td><td>The height of the grid. </td></tr>
   </table>
   </dd>
 </dl>
@@ -399,8 +399,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a7dc800af22604b9251887ea41bc7dbc0" name="a7dc800af22604b9251887ea41bc7dbc0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7dc800af22604b9251887ea41bc7dbc0">&#9670;&#160;</a></span>Present()</h2>
+<a id="a62b4449a3093d4ca3d66a48f67eca2fb" name="a62b4449a3093d4ca3d66a48f67eca2fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62b4449a3093d4ca3d66a48f67eca2fb">&#9670;&#160;</a></span>Present()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -411,7 +411,7 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Liara::Renderer::LiaraRenderer::Present </td>
           <td>(</td>
-          <td class="paramtype">const std::vector&lt; uint32_t &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>FRAME</em></span></td><td>)</td>
+          <td class="paramtype">const std::vector&lt; uint32_t &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>frame</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -424,15 +424,15 @@ Private Attributes</h2></td></tr>
 <p>Presents the specified frame to the console, updating only the cells that have changed since the last frame. Each cell is represented by two block characters ("██") to create a more visually appealing output.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">FRAME</td><td>The frame to present, represented as a vector of 32-bit color values. </td></tr>
+    <tr><td class="paramname">frame</td><td>The frame to present, represented as a vector of 32-bit color values. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="ac003db5c603b3f36260cad474cdca2ec" name="ac003db5c603b3f36260cad474cdca2ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac003db5c603b3f36260cad474cdca2ec">&#9670;&#160;</a></span>SubmitFrame()</h2>
+<a id="a92d8a194144af5eb464b6c553dc3c0e0" name="a92d8a194144af5eb464b6c553dc3c0e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92d8a194144af5eb464b6c553dc3c0e0">&#9670;&#160;</a></span>SubmitFrame()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -443,7 +443,7 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">liara_result_t Liara::Renderer::LiaraRenderer::SubmitFrame </td>
           <td>(</td>
-          <td class="paramtype">const liara_render_packet_t &amp;</td>          <td class="paramname"><span class="paramname"><em>PACKET</em></span></td><td>)</td>
+          <td class="paramtype">const liara_render_packet_t &amp;</td>          <td class="paramname"><span class="paramname"><em>packet</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -456,7 +456,7 @@ Private Attributes</h2></td></tr>
 <p>Submits a frame for rendering. The frame is represented by a grid of cells, each with a specified color. Only the cells that have changed since the last frame will be updated in the console output.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">PACKET</td><td>The render packet containing the frame data, including grid dimensions, background color, and an array of drawables to render. </td></tr>
+    <tr><td class="paramname">packet</td><td>The render packet containing the frame data, including grid dimensions, background color, and an array of drawables to render. </td></tr>
   </table>
   </dd>
 </dl>
