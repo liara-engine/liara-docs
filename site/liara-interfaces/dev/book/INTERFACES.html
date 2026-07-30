@@ -821,6 +821,28 @@ expressions (case labels, array sizes, <code>static_assert</code>).</li>
 inline) and minimal at compile time. The benefit is that the
 entire interface is consumable from any language with a C FFI,
 not just C and C++.</p>
+<h3 id="compatibility-macros-liaraprivate_utilsh"><a class="header" href="#compatibility-macros-liaraprivate_utilsh">Compatibility Macros (<code>liara/private_utils.h</code>)</a></h3>
+<p><code>liara/private_utils.h</code> is where the C/C++ and compiler/platform
+<code>#ifdef</code> ladders live so the rest of the headers don’t repeat them.
+It currently provides things like <code>LIARA_STATIC_ASSERT</code> (C11
+<code>_Static_assert</code> vs. C++ <code>static_assert</code>), <code>LIARA_API_DEPRECATED</code>
+(<code>[[deprecated]]</code> vs. <code>__declspec</code>/<code>__attribute__</code>), <code>LIARA_API</code>
+(export/import/visibility for the <code>-dynamic</code> shared-library preset),
+<code>LIARA_STATIC_CAST</code>, <code>LIARA_NULL</code>, and the <code>LIARA_TYPEDEF*</code> family for
+declaring a typedef (optionally deprecated, optionally a struct
+definition) once for both languages. Any other header that needs to
+spell something differently depending on the language or standard
+version routes it through a macro here rather than re-deriving the
+<code>#ifdef</code> locally.</p>
+<p>This is deliberately not an exhaustive list, and this section is not
+meant to be kept in lockstep with the header: new compatibility
+macros get added to <code>private_utils.h</code> as new portability gaps turn
+up, without requiring an edit here every time. What doesn’t change is
+that these macros still live at the interface boundary, so the usual
+rules apply to them like to any other symbol in this repository:
+adding one is a MINOR change, changing an existing macro’s expansion
+is a MAJOR change (section 8), and the header must keep compiling as
+both C11 and C++20 (section 2).</p>
 <hr>
 <h2 id="10-documentation"><a class="header" href="#10-documentation">10. Documentation</a></h2>
 <p>Every public symbol in the headers has a Doxygen-style comment
@@ -887,7 +909,67 @@ bare C FFI, not only from C and C++.</li>
 <p>These tests run in CI on every change. A change that affects layout
 or compilation is caught before it merges.</p>
 <hr>
-<h2 id="12-process-for-modifying-an-interface"><a class="header" href="#12-process-for-modifying-an-interface">12. Process for Modifying an Interface</a></h2>
+<h2 id="12-continuous-integration-for-the-abi"><a class="header" href="#12-continuous-integration-for-the-abi">12. Continuous Integration for the ABI</a></h2>
+<p>The checks described in section 11 are not implemented in this
+repository. They are reusable workflows maintained in the
+<code>liara-engine/.github</code> repository (<code>.github/workflows/reusable-abi-*.yml</code>,
+backed by scripts under <code>scripts/</code>), and this repository’s
+<code>.github/workflows/ci.yml</code> calls them pinned to a released tag (e.g.
+<code>@v0</code>). Bumping to a newer version of the shared checks means bumping
+that ref, not just merging something to <code>.github</code>’s <code>main</code>.</p>
+<p>On every push and pull request against <code>main</code>, four jobs run in
+parallel, followed by an aggregator:</p>
+<ul>
+<li><strong><code>abi-header-portability</code></strong> — compiles every public header
+standalone (included twice, to also catch include-guard bugs) as
+both C and C++ across several language standards, warnings as
+errors. This is what actually enforces “valid C, includable from
+C++” (section 2).</li>
+<li><strong><code>abi-interface-rules</code></strong> — a libclang-based lint of the structural
+rules from this document: <code>extern "C"</code> wrapping, symbol prefixing
+(section 3), fixed-width types only (section 4), <code>out_</code>-prefixed
+output parameters (section 5), and forbidden includes (section 2).</li>
+<li><strong><code>abi-layout-freeze</code></strong> — regenerates and checks the golden layout
+header (see below), then compiles it across a gcc/clang/MSVC
+matrix to catch layout drift between platforms.</li>
+<li><strong><code>abi-snapshot</code></strong> — serializes the public ABI surface to JSON,
+diffs it against the base branch, and classifies the diff using the
+table in section 8 to compute the required version bump. A guard
+step then checks that the PR’s declared Conventional Commit type
+(its title, plus a <code>BREAKING CHANGE</code> footer) covers at least that
+bump, and fails the PR if it doesn’t.</li>
+<li><strong><code>abi-report</code></strong> (pull requests only, after the other four) —
+collects their results into a single sticky PR comment. Adding a
+new pipeline step upstream needs no change to this repository; the
+report is driven entirely by the artifacts the other jobs publish.</li>
+</ul>
+<h3 id="regenerating-the-golden-layout-header"><a class="header" href="#regenerating-the-golden-layout-header">Regenerating the Golden Layout Header</a></h3>
+<p><code>tests/abi/abi_layout.generated.h</code> is the “golden” file the
+<code>abi-layout-freeze</code> job checks against: <code>static_assert</code>s on the
+<code>sizeof</code>/<code>alignof</code>/<code>offsetof</code> of every public POD struct, generated
+by <code>abi_layout_asserts.py</code>. Regenerate it whenever a change would
+alter one of those numbers — a struct added or removed, a field
+added, removed, reordered, or retyped. If you forget, CI catches it:
+the <code>--check</code> step fails with “ABI layout assertions are out of
+date” because it re-derives the header in memory and compares it
+byte-for-byte against what’s committed.</p>
+<p>To regenerate locally, run the same script CI runs (it lives in the
+sibling <code>liara-engine/.github</code> checkout, e.g. <code>../../.github</code> from
+this workspace) without <code>--check</code>, and commit the result alongside
+the struct change in the same PR:</p>
+<pre><code class="language-bash">python3 ../../.github/scripts/abi_layout_asserts.py \
+    --include-dir include \
+    --output tests/abi/abi_layout.generated.h \
+    --clang clang-18
+</code></pre>
+<p><strong>Never run <code>clang-format</code> on this file.</strong> The CI check is an exact
+textual comparison between the script’s output and the committed
+file, so reformatting it breaks the check on the next regeneration.
+Treat it as generated output, not source:
+after any bulk-format pass, re-run the generator (or diff against
+what CI expects) to make sure it still matches.</p>
+<hr>
+<h2 id="13-process-for-modifying-an-interface"><a class="header" href="#13-process-for-modifying-an-interface">13. Process for Modifying an Interface</a></h2>
 <p>Changing an interface is a deliberate act with explicit steps.</p>
 <h3 id="step-1-justify-the-change"><a class="header" href="#step-1-justify-the-change">Step 1: Justify the Change</a></h3>
 <p>Open an issue in the <code>liara-interfaces</code> repository describing the
@@ -920,7 +1002,7 @@ released together to minimize the number of major version releases.</p>
 and <code>release-please</code> produces the release. Consumer modules update
 their version pin in their next release.</p>
 <hr>
-<h2 id="13-compatibility-across-versions"><a class="header" href="#13-compatibility-across-versions">13. Compatibility Across Versions</a></h2>
+<h2 id="14-compatibility-across-versions"><a class="header" href="#14-compatibility-across-versions">14. Compatibility Across Versions</a></h2>
 <p>Within a major version, the interface guarantees that:</p>
 <ul>
 <li>Code compiled against version N.x of the interface continues to
@@ -936,7 +1018,7 @@ core compiled against version 1.x, and vice versa.</p>
 released versions of this module, along with the list of interface
 versions it supports.</p>
 <hr>
-<h2 id="14-anti-patterns-to-avoid"><a class="header" href="#14-anti-patterns-to-avoid">14. Anti-Patterns to Avoid</a></h2>
+<h2 id="15-anti-patterns-to-avoid"><a class="header" href="#15-anti-patterns-to-avoid">15. Anti-Patterns to Avoid</a></h2>
 <p>The following patterns have appeared in early drafts of interfaces in
 this project or in similar projects, and are explicitly forbidden.</p>
 <p><strong>Returning C++ types through C wrappers.</strong> A function that returns a
@@ -964,7 +1046,7 @@ accumulates cruft. Bump the major version of the interface and rename
 back to <code>liara_foo</code>. Old code stops compiling, which is the correct
 behavior across a major version boundary.</p>
 <hr>
-<h2 id="15-summary-checklist-for-new-interface-code"><a class="header" href="#15-summary-checklist-for-new-interface-code">15. Summary Checklist for New Interface Code</a></h2>
+<h2 id="16-summary-checklist-for-new-interface-code"><a class="header" href="#16-summary-checklist-for-new-interface-code">16. Summary Checklist for New Interface Code</a></h2>
 <p>Before submitting interface changes, verify:</p>
 <ul>
 <li><input disabled="" type="checkbox"> Header compiles cleanly with both C and C++ compilers.</li>
