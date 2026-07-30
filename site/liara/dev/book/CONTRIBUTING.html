@@ -230,7 +230,7 @@ high-level structure.</li>
 <li>This document — the workflow.</li>
 <li><a href="CODE_STYLE.html"><code>CODE_STYLE.md</code></a> — only when actually writing
 code.</li>
-<li><a href="https://github.com/liara-engine/liara-interfaces/blob/main/INTERFACES.md"><code>INTERFACES.md</code></a>
+<li><a href="https://liara-engine.liara-engine-documentation.workers.dev/liara-interfaces/latest/book/INTERFACES"><code>INTERFACES.md</code></a>
 — only when modifying anything in <code>liara-interfaces</code>.</li>
 </ol>
 <p>Reading the entire codebase is not necessary. Reading the documents
@@ -319,7 +319,7 @@ process in section 11.)</li>
 Each one becomes its own branch, opened in a coordinated sequence.</p>
 <h3 id="stage-3-open-a-branch-and-code"><a class="header" href="#stage-3-open-a-branch-and-code">Stage 3: Open a Branch and Code</a></h3>
 <p>The contributor creates a branch from <code>main</code>, makes the changes,
-and runs <code>./scripts/liara.py check</code> locally before pushing. The script
+and runs <code>./scripts/liara.sh check</code> locally before pushing. The script
 runs the same checks the CI runs (clang-format, clang-tidy, tests,
 build) and fails fast on the same issues.</p>
 <p>A branch is pushed early and often. Pushing to a not-yet-PRed
@@ -516,16 +516,16 @@ the in-progress history.</p>
 <h3 id="the-local-cli"><a class="header" href="#the-local-cli">The Local CLI</a></h3>
 <p>The project provides a unified command-line interface through the platform wrappers:</p>
 <ul>
-<li><code>./liara.sh &lt;command&gt;</code> on Linux/macOS</li>
-<li><code>./liara.ps1 &lt;command&gt;</code> on Windows</li>
+<li><code>./scripts/liara.sh &lt;command&gt;</code> on Linux/macOS</li>
+<li><code>./scripts/liara.ps1 &lt;command&gt;</code> on Windows</li>
 </ul>
 <p>These wrappers invoke the common Python orchestration tool and provide a consistent developer workflow across platforms.</p>
 <p>For pre-push validation, use:</p>
 <pre><code class="language-bash"># On Linux
-./liara.sh check
+./scripts/liara.sh check
 
 # On Windows
-./liara.ps1 check
+./scripts/liara.ps1 check
 </code></pre>
 <p>By default, the <code>check</code> command performs the following steps:</p>
 <ul>

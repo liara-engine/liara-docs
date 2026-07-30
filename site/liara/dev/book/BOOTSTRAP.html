@@ -366,12 +366,20 @@ designed to be idempotent: running it twice does not break anything.</p>
 ./scripts/liara.sh test --preset linux-release-clang
 </code></pre>
 <p>The <code>linux-release-clang</code> preset is the recommended default for
-development. The other available presets:</p>
+most users. The available presets:</p>
 <ul>
 <li><code>linux-debug-gcc</code> — debug build with GCC.</li>
-<li><code>linux-debug-clang</code> — debug build with Clang.</li>
+<li><code>linux-debug-clang</code> — debug build with Clang. Script default.</li>
 <li><code>linux-release-gcc</code> — release build with GCC.</li>
-<li><code>linux-release-clang</code> — release build with Clang. Default.</li>
+<li><code>linux-release-clang</code> — release build with Clang.</li>
+<li><code>windows-debug</code> — debug build with MSVC (Windows only).</li>
+<li><code>windows-release</code> — release build with MSVC (Windows only).</li>
+</ul>
+<p>There is also some experimental presets. Not recommended for general use:</p>
+<ul>
+<li><code>linux-debug-gcc-dynamic</code> — debug build with GCC, runtime dynamic linking of dependencies.</li>
+<li><code>linux-debug-clang-dynamic</code> — debug build with Clang, runtime dynamic linking of dependencies.</li>
+<li><code>windows-debug-dynamic</code> — debug build with MSVC, runtime dynamic linking of dependencies.</li>
 </ul>
 <p>After a successful build, run the test suite.
 If all tests pass, the setup is complete.</p>
