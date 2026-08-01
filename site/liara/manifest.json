@@ -25,6 +25,11 @@
       "abi_compatibility": [
         "dev"
       ]
+    },
+    "0.1.0": {
+      "abi_compatibility": [
+        "dev"
+      ]
     }
   }
 }
