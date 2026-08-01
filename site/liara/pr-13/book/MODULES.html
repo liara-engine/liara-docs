@@ -189,101 +189,212 @@
             <main>
                 <h1 id="modules"><a class="header" href="#modules">Modules</a></h1>
 <blockquote>
-<p>Concrete decomposition of the Liara Engine project into repositories,
-modules, and the boundaries between them. This document is the
-companion to <a href="ARCHITECTURE.html"><code>ARCHITECTURE.md</code></a>: where
-<code>ARCHITECTURE.md</code> explains the philosophy of modularity, this
-document specifies what is actually built and where it lives.</p>
+<p>Concrete decomposition of the Liara Engine project into repositories, modules, and the boundaries between them. This document is the companion to <a href="ARCHITECTURE.html"><code>ARCHITECTURE.md</code></a>: where <code>ARCHITECTURE.md</code> explains the philosophy of modularity, this document specifies what is actually built and where it lives.</p>
 </blockquote>
 <hr>
+<h2 id="table-of-contents"><a class="header" href="#table-of-contents">Table of Contents</a></h2>
+<ul>
+<li><a href="#1-repository-map">1. Repository Map</a>
+<ul>
+<li><a href="#11-the-contract">1.1 The contract</a></li>
+<li><a href="#12-the-modules">1.2 The modules</a></li>
+<li><a href="#13-the-hosts">1.3 The hosts</a></li>
+<li><a href="#14-the-infrastructure">1.4 The infrastructure</a></li>
+<li><a href="#15-the-rule-that-defines-a-module">1.5 The rule that defines a module</a></li>
+<li><a href="#16-introduction-schedule">1.6 Introduction schedule</a></li>
+</ul>
+</li>
+<li><a href="#2-the-meta-repository-liara">2. The Meta Repository: <code>liara</code></a>
+<ul>
+<li><a href="#21-purpose">2.1 Purpose</a></li>
+<li><a href="#22-contents">2.2 Contents</a></li>
+<li><a href="#23-what-it-does-not-contain">2.3 What It Does Not Contain</a></li>
+<li><a href="#24-versioning-policy">2.4 Versioning Policy</a></li>
+</ul>
+</li>
+<li><a href="#3-the-interface-repository-liara-interfaces">3. The Interface Repository: <code>liara-interfaces</code></a>
+<ul>
+<li><a href="#31-purpose">3.1 Purpose</a></li>
+<li><a href="#32-contents">3.2 Contents</a></li>
+<li><a href="#33-what-it-does-not-contain">3.3 What It Does Not Contain</a></li>
+<li><a href="#34-versioning-policy">3.4 Versioning Policy</a></li>
+</ul>
+</li>
+<li><a href="#4-the-core-repository-liara-core">4. The Core Repository: <code>liara-core</code></a>
+<ul>
+<li><a href="#41-purpose">4.1 Purpose</a></li>
+<li><a href="#42-contents">4.2 Contents</a></li>
+<li><a href="#43-what-it-does-not-contain">4.3 What It Does Not Contain</a></li>
+<li><a href="#44-internal-organization">4.4 Internal Organization</a></li>
+</ul>
+</li>
+<li><a href="#5-the-platform-repository-liara-platform">5. The Platform Repository: <code>liara-platform</code></a>
+<ul>
+<li><a href="#51-purpose">5.1 Purpose</a></li>
+<li><a href="#52-contents">5.2 Contents</a></li>
+<li><a href="#53-what-it-does-not-contain">5.3 What It Does Not Contain</a></li>
+<li><a href="#54-shutdown-requests-are-poll-only">5.4 Shutdown requests are poll-only</a></li>
+<li><a href="#55-replaceability">5.5 Replaceability</a></li>
+</ul>
+</li>
+<li><a href="#6-the-assets-repository-liara-assets">6. The Assets Repository: <code>liara-assets</code></a>
+<ul>
+<li><a href="#61-purpose">6.1 Purpose</a></li>
+<li><a href="#62-contents">6.2 Contents</a></li>
+<li><a href="#63-what-it-does-not-contain">6.3 What It Does Not Contain</a></li>
+<li><a href="#64-the-boundary-that-is-easiest-to-get-wrong">6.4 The boundary that is easiest to get wrong</a></li>
+</ul>
+</li>
+<li><a href="#7-the-audio-repository-liara-audio">7. The Audio Repository: <code>liara-audio</code></a>
+<ul>
+<li><a href="#71-purpose">7.1 Purpose</a></li>
+<li><a href="#72-contents">7.2 Contents</a></li>
+<li><a href="#73-what-it-does-not-contain">7.3 What It Does Not Contain</a></li>
+</ul>
+</li>
+<li><a href="#8-the-renderer-repository-liara-renderer">8. The Renderer Repository: <code>liara-renderer</code></a>
+<ul>
+<li><a href="#81-purpose">8.1 Purpose</a></li>
+<li><a href="#82-contents">8.2 Contents</a></li>
+<li><a href="#83-what-it-does-not-contain">8.3 What It Does Not Contain</a></li>
+<li><a href="#84-internal-organization">8.4 Internal Organization</a></li>
+</ul>
+</li>
+<li><a href="#9-the-editor-repository-liara-editor">9. The Editor Repository: <code>liara-editor</code></a>
+<ul>
+<li><a href="#91-purpose">9.1 Purpose</a></li>
+<li><a href="#92-status-in-v0x">9.2 Status in v0.x</a></li>
+<li><a href="#93-contents-anticipated">9.3 Contents (Anticipated)</a></li>
+</ul>
+</li>
+<li><a href="#10-the-physics-repository-liara-physics">10. The Physics Repository: <code>liara-physics</code></a>
+<ul>
+<li><a href="#101-status-in-v0x">10.1 Status in v0.x</a></li>
+<li><a href="#102-contents-anticipated">10.2 Contents (Anticipated)</a></li>
+</ul>
+</li>
+<li><a href="#11-auxiliary-repositories">11. Auxiliary Repositories</a>
+<ul>
+<li><a href="#111-docs-shared">11.1 <code>docs-shared</code></a></li>
+<li><a href="#112-liara-docs">11.2 <code>liara-docs</code></a></li>
+<li><a href="#113-github-organization-level">11.3 <code>.github</code> (Organization-Level)</a></li>
+</ul>
+</li>
+<li><a href="#12-dependency-graph">12. Dependency Graph</a></li>
+<li><a href="#13-module-boundaries-what-crosses-what-doesnt">13. Module Boundaries: What Crosses, What Doesn’t</a>
+<ul>
+<li><a href="#131-core--renderer-per-frame">13.1 Core → Renderer (per frame)</a></li>
+<li><a href="#132-renderer-lifecycle-host-driven">13.2 Renderer lifecycle (host-driven)</a></li>
+<li><a href="#133-resource-upload-host-mediated">13.3 Resource upload (host-mediated)</a></li>
+<li><a href="#134-renderer--host-callbacks">13.4 Renderer → host (callbacks)</a></li>
+<li><a href="#135-core--editor-post-v1">13.5 Core → Editor (post-v1.0)</a></li>
+<li><a href="#136-editor--renderer-post-v1">13.6 Editor → Renderer (post-v1.0)</a></li>
+<li><a href="#137-platform--host-per-frame">13.7 Platform → Host (per frame)</a></li>
+<li><a href="#138-host--platform-at-startup">13.8 Host → Platform (at startup)</a></li>
+<li><a href="#139-assets--host--renderer--audio">13.9 Assets → host → renderer / audio</a></li>
+<li><a href="#1310-core--host--audio-per-frame">13.10 Core → host → audio (per frame)</a></li>
+</ul>
+</li>
+<li><a href="#14-where-things-live-a-cross-reference">14. Where Things Live: A Cross-Reference</a></li>
+<li><a href="#15-adding-a-new-module">15. Adding a New Module</a></li>
+<li><a href="#16-removing-or-renaming-a-module">16. Removing or Renaming a Module</a></li>
+</ul>
+<hr>
 <h2 id="1-repository-map"><a class="header" href="#1-repository-map">1. Repository Map</a></h2>
-<p>The project is composed of the following repositories, all hosted under
-the <code>liara-engine</code> GitHub organization:</p>
+<p>The project is composed of the following repositories, all hosted under the <code>liara-engine</code> GitHub organization. They fall into four kinds, and the kind matters more than the list.</p>
+<h3 id="11-the-contract"><a class="header" href="#11-the-contract">1.1 The contract</a></h3>
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>Repository</th><th>Role</th><th>Replaceable</th><th>Status</th></tr>
+<tr><th>Repository</th><th>Role</th><th>Status</th></tr>
 </thead>
 <tbody>
-<tr><td><code>liara</code></td><td>Meta repository, launcher, distribution</td><td>No</td><td>Phase 0</td></tr>
-<tr><td><code>liara-interfaces</code></td><td>C ABI headers shared by all modules</td><td>No</td><td>Phase 0</td></tr>
-<tr><td><code>liara-core</code></td><td>Engine foundation (ECS, math, assets, …)</td><td>No</td><td>Phase 0</td></tr>
-<tr><td><code>liara-renderer</code></td><td>Reference Vulkan renderer</td><td>Yes</td><td>Phase 0</td></tr>
-<tr><td><code>liara-editor</code></td><td>Editor application (post-v1.0)</td><td>Yes</td><td>Deferred</td></tr>
-<tr><td><code>liara-physics</code></td><td>Physics module (post-v1.0)</td><td>Yes</td><td>Deferred</td></tr>
-<tr><td><code>docs-shared</code></td><td>Shared navigation and doc templates</td><td>No</td><td>Phase 0</td></tr>
-<tr><td><code>liara-docs</code></td><td>Host the full projet’s documentation and deployment to cloudflare</td><td>No</td><td>Phase 0</td></tr>
-<tr><td><code>.github</code></td><td>Org-wide templates and shared actions</td><td>No</td><td>Phase 0</td></tr>
+<tr><td><code>liara-interfaces</code></td><td>The C ABI headers every module implements or consumes</td><td>Phase 0</td></tr>
 </tbody>
 </table>
 </div>
-<p>The “Replaceable” column indicates whether the module is designed to be
-substitutable by an alternative implementation. Replaceable modules
-expose their entire functionality through <code>liara-interfaces</code>;
-non-replaceable modules may use richer C++ APIs internally.</p>
-<p>The “Status” column indicates the planned introduction. “Phase 0” means
-the repository must exist before v0.1. “Deferred” means the repository
-is created when its first code is written, not before.</p>
-<p>A visual representation of the dependency graph appears in section 9.</p>
+<p>The contract is not a module: it contains no implementation and exports no symbol. Everything else in the project either implements a part of it or consumes it.</p>
+<h3 id="12-the-modules"><a class="header" href="#12-the-modules">1.2 The modules</a></h3>
+<p>A module implements one namespace of the contract, is versioned on its own cadence, and is replaceable in principle by an alternative implementation — including one written in another language.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Repository</th><th>ABI namespace</th><th>Role</th><th>Introduced</th></tr>
+</thead>
+<tbody>
+<tr><td><code>liara-core</code></td><td><code>liara_core_*</code></td><td>ECS, math, logger, settings, events, loop primitives</td><td>Phase 0</td></tr>
+<tr><td><code>liara-platform</code></td><td><code>liara_platform_*</code></td><td>Window, input devices, OS signals, timing</td><td>v0.1</td></tr>
+<tr><td><code>liara-renderer</code></td><td><code>liara_renderer_*</code></td><td>Reference Vulkan renderer</td><td>Phase 0</td></tr>
+<tr><td><code>liara-assets</code></td><td><code>liara_assets_*</code></td><td>Loading, decoding and lifetime of asset data</td><td>v0.3</td></tr>
+<tr><td><code>liara-audio</code></td><td><code>liara_audio_*</code></td><td>Audio playback and mixing</td><td>v0.5</td></tr>
+<tr><td><code>liara-physics</code></td><td><code>liara_physics_*</code></td><td>Rigid bodies, collision, queries</td><td>v1.x</td></tr>
+</tbody>
+</table>
+</div>
+<p><code>liara-core</code> is the one module that is not replaceable: it owns the data model everything else agrees on. It is a module rather than a privileged runtime because it obeys the same rules — one ABI namespace, one <code>info()</code> entry point, its own version — and because a subsystem that cannot be described through the contract does not belong in it.</p>
+<h3 id="13-the-hosts"><a class="header" href="#13-the-hosts">1.3 The hosts</a></h3>
+<p>A host composes modules: it creates them, checks their ABI versions against each other, owns the application loop, and moves data between them. A host is not a module — it exports nothing and nobody links against it.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Repository</th><th>Role</th><th>Introduced</th></tr>
+</thead>
+<tbody>
+<tr><td><code>liara</code> (meta)</td><td>The launcher, plus everything that must know about all modules at once</td><td>Phase 0</td></tr>
+<tr><td><code>liara-editor</code></td><td>The editor application</td><td>v1.x</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="14-the-infrastructure"><a class="header" href="#14-the-infrastructure">1.4 The infrastructure</a></h3>
+<p>Consumed by CI and by the documentation pipeline, never by CMake.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Repository</th><th>Role</th><th>Status</th></tr>
+</thead>
+<tbody>
+<tr><td><code>.github</code></td><td>Org-level reusable workflows, shared CI scripts, templates</td><td>Phase 0</td></tr>
+<tr><td><code>docs-shared</code></td><td>Design system, documentation templates, builder image</td><td>Phase 0</td></tr>
+<tr><td><code>liara-docs</code></td><td>Generated documentation hosting and edge worker</td><td>Phase 0</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="15-the-rule-that-defines-a-module"><a class="header" href="#15-the-rule-that-defines-a-module">1.5 The rule that defines a module</a></h3>
+<p>One module is one ABI namespace, and the three spellings never diverge:</p>
+<ul>
+<li>one include namespace — <code>liara/&lt;name&gt;/</code></li>
+<li>one symbol prefix — <code>liara_&lt;name&gt;_*</code></li>
+<li>one self-description entry point — <code>liara_&lt;name&gt;_info()</code></li>
+</ul>
+<p>A subsystem gets its own namespace from its first line of code, before anyone knows whether it will ever move into its own repository. Moving an implementation between repositories is cheap; renaming a symbol that consumers already call is a MAJOR bump of <code>liara-interfaces</code> and breaks every one of them. The repository layout is a delivery decision and is revisable; the namespace is a contract and is not.</p>
+<h3 id="16-introduction-schedule"><a class="header" href="#16-introduction-schedule">1.6 Introduction schedule</a></h3>
+<p>A repository is created when its first line of code is written, not before. <code>liara-platform</code> therefore appears with v0.1, <code>liara-assets</code> with v0.3, <code>liara-audio</code> with v0.5, <code>liara-physics</code> and <code>liara-editor</code> with v1.x. Until then they exist in this document and nowhere else.</p>
 <hr>
 <h2 id="2-the-meta-repository-liara"><a class="header" href="#2-the-meta-repository-liara">2. The Meta Repository: <code>liara</code></a></h2>
-<p>The <code>liara</code> repository is the public face of the project and the
-orchestrator of everything else. It does not contain engine code; it
-contains the things that need to know about all modules at once.</p>
-<h3 id="purpose"><a class="header" href="#purpose">Purpose</a></h3>
-<p>The meta repository serves four functions. It is the <strong>landing page</strong> for
-the project on GitHub: the README that a visitor reads first, the issue
-tracker that catches general questions, the discussions board for
-project-wide topics. It is the <strong>launcher and distribution</strong> point: the
-small executable that loads the core, the AUR <code>PKGBUILD</code>, the Windows
-installer or portable archive script. It is the <strong>workspace orchestrator</strong>:
-the bootstrap script that clones and configures all other repositories
-for local development. And it is the <strong>compatibility matrix</strong>: the
-authoritative record of which versions of which modules work together.</p>
-<h3 id="contents"><a class="header" href="#contents">Contents</a></h3>
+<p>The <code>liara</code> repository is the public face of the project and the orchestrator of everything else. It does not contain engine code; it contains the things that need to know about all modules at once.</p>
+<h3 id="21-purpose"><a class="header" href="#21-purpose">2.1 Purpose</a></h3>
+<p>The meta repository serves four functions. It is the <strong>landing page</strong> for the project on GitHub: the README that a visitor reads first, the issue tracker that catches general questions, the discussions board for project-wide topics. It is the <strong>launcher and distribution</strong> point: the small executable that composes the modules and owns the application loop, the AUR <code>PKGBUILD</code>, the Windows installer or portable archive script. It is the <strong>workspace orchestrator</strong>: the bootstrap script that clones and configures all other repositories for local development. And it is the <strong>compatibility matrix</strong>: the authoritative record of which versions of which modules work together.</p>
+<h3 id="22-contents"><a class="header" href="#22-contents">2.2 Contents</a></h3>
 <p>The repository contains, at minimum:</p>
 <ul>
-<li>A top-level README with project description, build status badges, and
-links to documentation.</li>
-<li>This entire <code>docs/</code> directory: the foundational documents
-(<code>ARCHITECTURE.md</code>, <code>MODULES.md</code>, <code>ROADMAP.md</code>, etc.) and the ADRs.</li>
-<li>A <code>launcher/</code> source directory containing the small standalone
-application that initializes the core and runs the standalone game
-loop. This is the executable that ships in the AUR package.</li>
-<li>A <code>scripts/</code> directory containing the workspace bootstrap script,
-release coordination scripts, and any other tooling that operates
-across repositories.</li>
-<li>A <code>packaging/</code> directory containing the Linux <code>PKGBUILD</code>, the Windows
-packaging script, and any other distribution artifacts [in 0.6].</li>
-<li>A <code>schemas/</code> directory containing JSON schemas for any file formats defined
-at the meta level.</li>
+<li>A top-level README with project description, build status badges, and links to documentation.</li>
+<li>This entire <code>docs/</code> directory: the foundational documents (<code>ARCHITECTURE.md</code>, <code>MODULES.md</code>, <code>ROADMAP.md</code>, etc.) and the ADRs.</li>
+<li>A <code>launcher/</code> source directory containing the small standalone application that initializes the core and runs the standalone game loop. This is the executable that ships in the AUR package.</li>
+<li>A <code>scripts/</code> directory containing the workspace bootstrap script, release coordination scripts, and any other tooling that operates across repositories.</li>
+<li>A <code>packaging/</code> directory containing the Linux <code>PKGBUILD</code>, the Windows packaging script, and any other distribution artifacts [in 0.6].</li>
+<li>A <code>schemas/</code> directory containing JSON schemas for any file formats defined at the meta level.</li>
 <li>A <code>docker/</code> directory containing any Dockerfiles (and associated scripts) used for development or CI.</li>
 </ul>
-<h3 id="what-it-does-not-contain"><a class="header" href="#what-it-does-not-contain">What It Does Not Contain</a></h3>
-<p>The meta repository does not contain engine logic, rendering code, ECS
-implementation, or any other functionality that belongs in a module. It
-also does not contain documentation generated from source code (Doxygen
-output) — that documentation is generated by each module’s and published
-in the <code>liara-docs</code> repository.</p>
-<h3 id="versioning-policy"><a class="header" href="#versioning-policy">Versioning Policy</a></h3>
-<p>The meta repository uses its own version number, distinct from the
-versions of the modules it bundles. A release of <code>liara</code> 1.0.0 corresponds
-to a specific combination of <code>liara-core</code>, <code>liara-renderer</code>, etc.
-The user-visible “Liara Engine 1.0.0” refers to a release of this repository.</p>
-<p>The meta repository’s versioning follows the engine’s milestone roadmap.
-Module repositories version independently, on their own cadence.</p>
+<h3 id="23-what-it-does-not-contain"><a class="header" href="#23-what-it-does-not-contain">2.3 What It Does Not Contain</a></h3>
+<p>The meta repository does not contain engine logic, rendering code, ECS implementation, or any other functionality that belongs in a module. It also does not contain documentation generated from source code (Doxygen output) — that documentation is generated by each module’s and published in the <code>liara-docs</code> repository.</p>
+<h3 id="24-versioning-policy"><a class="header" href="#24-versioning-policy">2.4 Versioning Policy</a></h3>
+<p>The meta repository’s versioning follows the engine’s milestone roadmap. Module repositories version independently, on their own cadence.</p>
 <hr>
 <h2 id="3-the-interface-repository-liara-interfaces"><a class="header" href="#3-the-interface-repository-liara-interfaces">3. The Interface Repository: <code>liara-interfaces</code></a></h2>
-<p>The <code>liara-interfaces</code> repository is the most version-sensitive piece of
-the project. Every other module declares which version of
-<code>liara-interfaces</code> it requires, and a breaking change to interfaces
-ripples through every consumer.</p>
-<h3 id="purpose-1"><a class="header" href="#purpose-1">Purpose</a></h3>
-<p>This repository defines the C ABI contracts between modules. Nothing in
-the project may communicate across a module boundary without going through
-a header defined here. Modules that internally use richer C++ types
-must wrap them at their public surface to expose only the C interface.</p>
-<h3 id="contents-1"><a class="header" href="#contents-1">Contents</a></h3>
+<p>The <code>liara-interfaces</code> repository is the most version-sensitive piece of the project. Every other module declares which version of <code>liara-interfaces</code> it requires, and a breaking change to interfaces ripples through every consumer.</p>
+<h3 id="31-purpose"><a class="header" href="#31-purpose">3.1 Purpose</a></h3>
+<p>This repository defines the C ABI contracts between modules. Nothing in the project may communicate across a module boundary without going through a header defined here. Modules that internally use richer C++ types must wrap them at their public surface to expose only the C interface.</p>
+<h3 id="32-contents"><a class="header" href="#32-contents">3.2 Contents</a></h3>
 <p>The repository contains exclusively C headers, organized by module.</p>
 <p>A possible layout of the headers is (the real layout may differ):</p>
 <pre><code>include/liara/
@@ -306,163 +417,112 @@ must wrap them at their public surface to expose only the C interface.</p>
 </code></pre>
 <p>In addition to headers, the repository contains:</p>
 <ul>
-<li>A <code>CMakeLists.txt</code> exposing the headers as an <code>INTERFACE</code> library that
-consumers link against to gain include paths.</li>
-<li>A <code>vcpkg.json</code> stub (no external dependencies, but present for
-consistency with other modules).</li>
-<li>Tests that verify each header compiles standalone and is C-callable
-(compiled with both a C compiler and a C++ compiler in CI).</li>
-<li>The <code>INTERFACES.md</code> document specifying the rules for designing,
-evolving, and versioning interfaces.</li>
+<li>A <code>CMakeLists.txt</code> exposing the headers as an <code>INTERFACE</code> library that consumers link against to gain include paths.</li>
+<li>A <code>vcpkg.json</code> declaring no runtime dependencies, with a <code>tests</code> feature pulling in doctest.</li>
+<li>Tests that verify each header compiles standalone and is C-callable, compiled with both a C and a C++ compiler in CI, plus cross-language tests that consume the headers from Zig and Rust. The cross-language tests are registered only when the corresponding toolchain is present.</li>
+<li>The <code>INTERFACES.md</code> document specifying the rules for designing, evolving, and versioning interfaces.</li>
 </ul>
-<h3 id="what-it-does-not-contain-1"><a class="header" href="#what-it-does-not-contain-1">What It Does Not Contain</a></h3>
-<p>No implementation. No <code>.c</code> or <code>.cpp</code> files (other than the test files,
-which are minimal and verify properties of the headers themselves). No
-external dependencies (the headers may use only fixed-width integer
-types from <code>&lt;stdint.h&gt;</code> and <code>&lt;stddef.h&gt;</code>).</p>
-<h3 id="versioning-policy-1"><a class="header" href="#versioning-policy-1">Versioning Policy</a></h3>
-<p>This repository follows <strong>strict semantic versioning</strong>, with the rules
-spelled out in <code>INTERFACES.md</code>. The headline:</p>
+<h3 id="33-what-it-does-not-contain"><a class="header" href="#33-what-it-does-not-contain">3.3 What It Does Not Contain</a></h3>
+<p>No implementation. No <code>.c</code> or <code>.cpp</code> files (other than the test files, which are minimal and verify properties of the headers themselves). No external dependencies (the headers may use only fixed-width integer types from <code>&lt;stdint.h&gt;</code> and <code>&lt;stddef.h&gt;</code>).</p>
+<h3 id="34-versioning-policy"><a class="header" href="#34-versioning-policy">3.4 Versioning Policy</a></h3>
+<p>This repository follows <strong>strict semantic versioning</strong>, with the rules spelled out in <code>INTERFACES.md</code>. The headline:</p>
 <ul>
-<li><strong>MAJOR</strong> version bumps for any change that breaks ABI or source
-compatibility for consumers.</li>
-<li><strong>MINOR</strong> version bumps for purely additive changes that do not affect
-existing consumers.</li>
+<li><strong>MAJOR</strong> version bumps for any change that breaks ABI or source compatibility for consumers.</li>
+<li><strong>MINOR</strong> version bumps for purely additive changes that do not affect existing consumers.</li>
 <li><strong>PATCH</strong> version bumps for documentation, comments, or whitespace.</li>
 </ul>
-<p>The version is encoded in <code>version.h</code> as preprocessor macros and is
-checked at module load time via the function each module exports to
-report its interface version.</p>
+<p>The version is encoded in <code>version.h</code> as preprocessor macros and is checked at module load time via the function each module exports to report its interface version.</p>
 <hr>
 <h2 id="4-the-core-repository-liara-core"><a class="header" href="#4-the-core-repository-liara-core">4. The Core Repository: <code>liara-core</code></a></h2>
-<p>The core is the foundation that every other module depends on. It owns
-the data and the schedule; modules transform data on a schedule the
-core dictates.</p>
-<h3 id="purpose-2"><a class="header" href="#purpose-2">Purpose</a></h3>
-<p>The core implements everything that is shared, mandatory, and not
-replaceable. It is the answer to “what is always there, no matter what
-modules are loaded?”.</p>
-<h3 id="contents-2"><a class="header" href="#contents-2">Contents</a></h3>
+<p>The core is the foundation that every other module depends on. It owns the data and the schedule; modules transform data on a schedule the core dictates.</p>
+<h3 id="41-purpose"><a class="header" href="#41-purpose">4.1 Purpose</a></h3>
+<p>The core implements everything that is shared, mandatory, and not replaceable. It is the answer to “what is always there, no matter what modules are loaded?”.</p>
+<h3 id="42-contents"><a class="header" href="#42-contents">4.2 Contents</a></h3>
 <p>The core repository implements:</p>
-<p><strong>The ECS.</strong> Entity allocation with generational handles, sparse-set
-component storage, world container, query API, system scheduling. This
-is hand-written from scratch (see <code>ARCHITECTURE.md</code> section 6 for
-rationale).</p>
-<p><strong>The math layer.</strong> Vector, matrix, and quaternion types as plain C
-structs (defined in <code>liara-interfaces</code>), with implementation functions
-that operate on them. Internal computation may use a vendored copy of
-GLM where convenient, but no GLM type ever crosses the module boundary.</p>
-<p><strong>The asset manager.</strong> Loading, lifetime management, and handle
-allocation for engine-known asset types (meshes, textures, shaders,
-audio). Asset format support is initially limited to glTF for models,
-common formats via stb_image for textures, SPIR-V for shaders, and
-common formats via miniaudio for audio. The asset manager does not
-upload data to the GPU; that is the renderer’s job. The asset manager
-provides the renderer with CPU-side data and a stable handle.</p>
-<p><strong>The logger.</strong> A multi-threaded logging system with structured log
-entries, multiple sinks (stdout, file, in-memory ring buffer for the
-ImGui console), and runtime log level control. The architecture
-follows what was prototyped in the previous engine, simplified.</p>
-<p><strong>The settings system.</strong> Type-safe key-value storage with serialization
-to TOML, runtime change notifications, and category-based organization.
-This carries forward the design from the previous engine, with the
-file format changed from custom to TOML.</p>
-<p><strong>The signal handler.</strong> Cross-platform graceful shutdown handling for
-SIGINT, SIGTERM, and Windows console events. Translates platform
-signals into engine-internal shutdown events.</p>
-<p><strong>The event system.</strong> Internal pub-sub for engine events (entity
-created, component added, asset loaded, etc.) and external input events
-(keyboard, mouse, gamepad, window). Decoupled from rendering: input
-events flow through the core and may be consumed by scripting, editor,
-or game logic, not just by the renderer.</p>
-<p><strong>The application loop primitives.</strong> The <code>liara_core_step(dt)</code> function
-that advances the simulation by one tick, along with the helper
-functions that the launcher (or the editor, in editor mode) uses to
-build a complete loop.</p>
-<p><strong>Module lifecycle primitives.</strong> The core exposes, through the C interface,
-the entry points a host needs to drive it: creation, destruction, and the
-per-tick step. It does not load, register, or hold references to other
-modules. Composition — deciding which renderer (or other module) to pair
-with the core, checking their interface versions against each other, and
-wiring them together — is the host’s responsibility (the launcher today,
-the editor post-v1.0). The core is handed whatever it needs through its
-interface; it never reaches for a sibling module by name. The
-version-negotiation logic the host uses at composition time is the seed
-for what becomes a runtime dynamic loader if the project moves to DSO
-modules — but that loader lives in the host, not in the core.</p>
-<h3 id="what-it-does-not-contain-2"><a class="header" href="#what-it-does-not-contain-2">What It Does Not Contain</a></h3>
-<p>No rendering code. No platform-specific window creation (the windowing
-abstraction is in core, but the actual SDL3 calls happen in a small
-platform layer that is private to core). No editor-specific code. No
-gameplay code. No tools.</p>
-<h3 id="internal-organization"><a class="header" href="#internal-organization">Internal Organization</a></h3>
+<p><strong>The ECS.</strong> Entity allocation with generational handles, sparse-set component storage, world container, query API, system scheduling. This is hand-written from scratch (see <a href="ARCHITECTURE.html#entity-component-system-model">Architecture.md</a> for the rationale).</p>
+<p><strong>The math layer.</strong> Vector, matrix, and quaternion types as plain C structs (defined in <code>liara-interfaces</code>), with implementation functions that operate on them. Internal computation may use a vendored copy of GLM where convenient, but no GLM type ever crosses the module boundary.</p>
+<p><strong>The logger.</strong> A multi-threaded logging system with structured log entries, multiple sinks (stdout, file, in-memory ring buffer for the ImGui console), and runtime log level control. The architecture follows what was prototyped in the previous engine, simplified.</p>
+<p><strong>The settings system.</strong> Type-safe key-value storage with serialization to TOML, runtime change notifications, and category-based organization. This carries forward the design from the previous engine, with the file format changed from custom to TOML.</p>
+<p><strong>The event system.</strong> Internal pub-sub for engine events (entity created, component added, asset loaded, etc.) and external input events (keyboard, mouse, gamepad, window). Decoupled from rendering: input events flow through the core and may be consumed by scripting, editor, or game logic, not just by the renderer.</p>
+<p><strong>The application loop primitives.</strong> The <code>liara_core_step(dt)</code> function that advances the simulation by one tick, along with the helper functions that the launcher (or the editor, in editor mode) uses to build a complete loop.</p>
+<p><strong>Module lifecycle primitives.</strong> The core exposes, through the C interface, the entry points a host needs to drive it: creation, destruction, and the per-tick step. It does not load, register, or hold references to other modules. Composition — deciding which renderer (or other module) to pair with the core, checking their interface versions against each other, and wiring them together — is the host’s responsibility (the launcher today, the editor post-v1.0). The core is handed whatever it needs through its interface; it never reaches for a sibling module by name. The version-negotiation logic the host uses at composition time is the seed for what becomes a runtime dynamic loader if the project moves to DSO modules — but that loader lives in the host, not in the core.</p>
+<h3 id="43-what-it-does-not-contain"><a class="header" href="#43-what-it-does-not-contain">4.3 What It Does Not Contain</a></h3>
+<p>No rendering. No window, no input device, no OS signal handling — those are <code>liara-platform</code>. No file loading or decoding — that is <code>liara-assets</code>. No audio device or mixing — that is <code>liara-audio</code>. No editor code, no gameplay code, no tools.</p>
+<p>The core does not open a file, does not talk to a device, and does not call an OS API beyond threading and time. That is the practical test for whether something belongs here: if it needs the outside world, it is not core.</p>
+<h3 id="44-internal-organization"><a class="header" href="#44-internal-organization">4.4 Internal Organization</a></h3>
 <p>The core’s internal directory layout follows the categories above.</p>
 <p>A possible layout is (the real layout may differ):</p>
 <pre><code>src/
 ├── ecs/
 ├── math/
-├── assets/
 ├── logger/
 ├── settings/
-├── signal/
 ├── events/
-├── loop/
-└── platform/
-    ├── linux/
-    └── windows/
+└── loop/
 </code></pre>
-<p>This layout is internal to the core and may evolve. It is not part of
-any contract.</p>
-<h3 id="versioning-policy-2"><a class="header" href="#versioning-policy-2">Versioning Policy</a></h3>
-<p>The core follows semantic versioning, but its compatibility constraints
-are looser than <code>liara-interfaces</code>. A patch or minor change to the core
-that does not affect any interface is invisible to other modules. A
-major version bump of the core is rare and significant.</p>
-<p>The core’s version is independent of the meta repository’s version.</p>
+<p>This layout is internal to the core and may evolve. It is not part of any contract.</p>
 <hr>
-<h2 id="5-the-renderer-repository-liara-renderer"><a class="header" href="#5-the-renderer-repository-liara-renderer">5. The Renderer Repository: <code>liara-renderer</code></a></h2>
-<p>The renderer is the reference implementation of the renderer interface.
-It is the most complex module and the one whose replaceability matters
-most.</p>
-<h3 id="purpose-3"><a class="header" href="#purpose-3">Purpose</a></h3>
-<p>The renderer takes render packets produced by the core and produces
-pixels. It manages the GPU, the swapchain, render targets, pipelines,
-and shaders. It does not know about the ECS, about gameplay, or about
-the editor; it only knows about the data the core hands it each frame.</p>
-<h3 id="contents-3"><a class="header" href="#contents-3">Contents</a></h3>
+<h2 id="5-the-platform-repository-liara-platform"><a class="header" href="#5-the-platform-repository-liara-platform">5. The Platform Repository: <code>liara-platform</code></a></h2>
+<h3 id="51-purpose"><a class="header" href="#51-purpose">5.1 Purpose</a></h3>
+<p>Everything the engine needs from the operating system, behind one interface. The platform module is what makes “Linux and Windows are both first-class” a property of one repository rather than a <code>#ifdef</code> scattered across all of them.</p>
+<h3 id="52-contents"><a class="header" href="#52-contents">5.2 Contents</a></h3>
+<p><strong>Window management.</strong> Window creation, resizing, fullscreen, and exposure of the native handle that the renderer needs to create its surface. SDL3 is the backend; no SDL type ever crosses the module boundary.</p>
+<p><strong>Input devices.</strong> Keyboard, mouse, gamepad. The module reports physical device state and physical events; it does not know what an action is. Mapping physical inputs to logical actions is a consumer’s concern.</p>
+<p><strong>OS signals and shutdown requests.</strong> SIGINT, SIGTERM and Windows console control events, plus the window’s close button. These are deliberately the same thing at the interface: they are all “the user asked the process to stop”, and a host that handles one handles all of them.</p>
+<p><strong>Timing.</strong> Monotonic clock and high-resolution counters, so that the loop’s notion of time does not depend on which standard library the host was built against.</p>
+<h3 id="53-what-it-does-not-contain"><a class="header" href="#53-what-it-does-not-contain">5.3 What It Does Not Contain</a></h3>
+<p>No ECS, no rendering, no audio device (that is <code>liara-audio</code>, even though both talk to the OS — the boundary is the concern, not the fact of being OS-specific). No file I/O beyond resolving standard paths; reading files is <code>liara-assets</code>. No logical input mapping.</p>
+<h3 id="54-shutdown-requests-are-poll-only"><a class="header" href="#54-shutdown-requests-are-poll-only">5.4 Shutdown requests are poll-only</a></h3>
+<p>The interface exposes shutdown as a flag the host polls, never as a callback:</p>
+<pre><code class="language-c">liara_result_t liara_platform_install_signal_handlers(liara_platform_handle_t*);
+bool           liara_platform_quit_requested(const liara_platform_handle_t*);
+</code></pre>
+<p>Three constraints follow, and all three are easy to violate later:</p>
+<ul>
+<li><strong>No function pointer crosses the boundary for this.</strong> A callback invoked from a POSIX signal handler would be async-signal-unsafe, and a callback in a struct is the anti-pattern of <a href="https://liara-engine.liara-engine-documentation.workers.dev/liara-interfaces/latest/book/INTERFACES#anti-patterns-to-avoid">INTERFACES.md</a>. The handler does the only thing it is allowed to do — write a flag — and the loop reads it.</li>
+<li><strong>Signal handlers are process-global, not per-instance.</strong> <code>liara_platform_install_signal_handlers</code> is documented as idempotent and installed at most once per process, whatever the number of platform handles.</li>
+<li><strong>It works without a window.</strong> Installing the handlers does not require the windowing backend to be initialized, so a headless tool — a test harness, a future asset cooker — can use the module for shutdown handling alone.</li>
+</ul>
+<h3 id="55-replaceability"><a class="header" href="#55-replaceability">5.5 Replaceability</a></h3>
+<p>Replaceable. A platform module built on GLFW, on winit, or directly on Wayland and Win32 is a legitimate substitute, and the SDL3 dependency is confined here precisely so that this remains true.</p>
+<hr>
+<h2 id="6-the-assets-repository-liara-assets"><a class="header" href="#6-the-assets-repository-liara-assets">6. The Assets Repository: <code>liara-assets</code></a></h2>
+<h3 id="61-purpose"><a class="header" href="#61-purpose">6.1 Purpose</a></h3>
+<p>Turning bytes on disk into data the engine can use, and owning that data’s lifetime. It is the only module that reads the file system.</p>
+<h3 id="62-contents"><a class="header" href="#62-contents">6.2 Contents</a></h3>
+<p><strong>Loading and decoding.</strong> glTF 2.0 for models, common image formats through stb_image for textures, SPIR-V for shaders, common audio formats for sounds. Each loader produces a plain description plus a CPU-side buffer.</p>
+<p><strong>Handle allocation and lifetime.</strong> Every asset is referenced by a stable opaque handle. Consumers keep handles, never pointers into asset storage. This is what makes hot-reload buildable later without touching any consumer: the handle survives, the bytes behind it are replaced.</p>
+<p><strong>The residency model.</strong> What is loaded, what is resident, what can be evicted, and what is reference-counted by whom.</p>
+<h3 id="63-what-it-does-not-contain"><a class="header" href="#63-what-it-does-not-contain">6.3 What It Does Not Contain</a></h3>
+<p>No GPU upload — the renderer does that, given CPU-side data and a handle. No playback — <code>liara-audio</code> does that, given decoded PCM. No asset <em>pipeline</em> (offline compilation, packaging, optimization): raw loading only in v0.x, per <code>ARCHITECTURE.md</code>. No ECS: an asset is not an entity.</p>
+<h3 id="64-the-boundary-that-is-easiest-to-get-wrong"><a class="header" href="#64-the-boundary-that-is-easiest-to-get-wrong">6.4 The boundary that is easiest to get wrong</a></h3>
+<p><code>liara-assets</code> decodes; it does not consume. It hands a mesh’s vertex data to whoever asks and never learns that the renderer uploaded it; it hands decoded PCM to whoever asks and never learns that the audio module played it. Every transfer is mediated by the host, exactly as the render packet is. The moment the assets module calls into the renderer, the module boundary is gone.</p>
+<hr>
+<h2 id="7-the-audio-repository-liara-audio"><a class="header" href="#7-the-audio-repository-liara-audio">7. The Audio Repository: <code>liara-audio</code></a></h2>
+<h3 id="71-purpose"><a class="header" href="#71-purpose">7.1 Purpose</a></h3>
+<p>Playing sound. Audio is the clearest replaceability case in the project: the gap between a hobby project’s needs and a shipped game’s needs is filled, in practice, by swapping the audio backend for FMOD or Wwise. The engine’s job is to make that a module swap and not a rewrite.</p>
+<h3 id="72-contents"><a class="header" href="#72-contents">7.2 Contents</a></h3>
+<p><strong>Device and mixing.</strong> Device selection, the mixing graph, voice allocation and lifetime. miniaudio is the backend; no miniaudio type crosses the boundary.</p>
+<p><strong>Playback.</strong> Playing a decoded sound, looping, stopping, volume, and basic bus routing. Spatialization is deferred per <code>ARCHITECTURE.md</code>; v0.x is 2D audio.</p>
+<h3 id="73-what-it-does-not-contain"><a class="header" href="#73-what-it-does-not-contain">7.3 What It Does Not Contain</a></h3>
+<p>No decoding: the module is handed PCM by the host, which got it from <code>liara-assets</code>. No file access. No ECS: an emitter component lives in the core, and the host turns it into playback calls, in exactly the way it turns renderable components into a render packet.</p>
+<hr>
+<h2 id="8-the-renderer-repository-liara-renderer"><a class="header" href="#8-the-renderer-repository-liara-renderer">8. The Renderer Repository: <code>liara-renderer</code></a></h2>
+<p>The renderer is the reference implementation of the renderer interface. It is the most complex module and the one whose replaceability matters most.</p>
+<h3 id="81-purpose"><a class="header" href="#81-purpose">8.1 Purpose</a></h3>
+<p>The renderer takes render packets produced by the core and produces pixels. It manages the GPU, the swapchain, render targets, pipelines, and shaders. It does not know about the ECS, about gameplay, or about the editor; it only knows about the data the core hands it each frame.</p>
+<h3 id="82-contents"><a class="header" href="#82-contents">8.2 Contents</a></h3>
 <p>The renderer repository implements:</p>
-<p><strong>The Vulkan device layer.</strong> Instance creation, physical device
-selection, logical device creation, queue management, command pool
-management. Built on <code>Vulkan-Hpp</code> and <code>VMA</code>.</p>
-<p><strong>The swapchain manager.</strong> Surface creation (delegating to the
-windowing layer in core for the native handle), swapchain creation,
-recreation on resize, image acquisition, and presentation.</p>
-<p><strong>The render target abstraction.</strong> Both swapchain-backed targets and
-offscreen-texture-backed targets, exposed through the same opaque
-handle to consumers. Image transitions, format negotiation, and
-allocation strategy are encapsulated here.</p>
-<p><strong>The pipeline cache.</strong> Shader module loading, pipeline state
-description, pipeline creation, caching of pipelines keyed by their
-state. SPIR-V is consumed; the renderer does not compile GLSL itself
-(that is done at build time by <code>glslc</code> invoked from CMake).</p>
-<p><strong>The render passes.</strong> The actual frame logic: receiving a render
-packet, sorting by material/pipeline, issuing draw calls, handling
-transparency, presenting to the swapchain.</p>
-<p><strong>The debug rendering subsystem.</strong> Lines, wireframes, AABBs, frustums,
-and other primitives submitted by the core (or, post-v1.0, by the
-editor for gizmos). Implemented as a separate pass with its own simple
-pipeline.</p>
-<p><strong>The ImGui integration.</strong> ImGui is rendered by the renderer because
-it is fundamentally a rendering operation. The integration is
-designed so that the editor (post-v1.0) submits its UI through the
-editor interface, and the renderer draws it. In v0.x, ImGui is used
-only for the developer console and stats overlays.</p>
-<h3 id="what-it-does-not-contain-3"><a class="header" href="#what-it-does-not-contain-3">What It Does Not Contain</a></h3>
-<p>No ECS code. No gameplay logic. No window creation (the window is
-created by the core’s platform layer; the renderer receives a native
-handle). No asset loading from disk (the renderer receives prepared
-asset data from the core’s asset manager). No input handling.</p>
-<h3 id="internal-organization-1"><a class="header" href="#internal-organization-1">Internal Organization</a></h3>
+<p><strong>The Vulkan device layer.</strong> Instance creation, physical device selection, logical device creation, queue management, command pool management. Built on <code>Vulkan-Hpp</code> and <code>VMA</code>.</p>
+<p><strong>The swapchain manager.</strong> Surface creation, from the native window handle the host obtained from <code>liara-platform</code> and passed in at initialization, swapchain creation, recreation on resize, image acquisition, and presentation.</p>
+<p><strong>The render target abstraction.</strong> Both swapchain-backed targets and offscreen-texture-backed targets, exposed through the same opaque handle to consumers. Image transitions, format negotiation, and allocation strategy are encapsulated here.</p>
+<p><strong>The pipeline cache.</strong> Shader module loading, pipeline state description, pipeline creation, caching of pipelines keyed by their state. SPIR-V is consumed; the renderer does not compile GLSL itself (that is done at build time by <code>glslc</code> invoked from CMake).</p>
+<p><strong>The render passes.</strong> The actual frame logic: receiving a render packet, sorting by material/pipeline, issuing draw calls, handling transparency, presenting to the swapchain.</p>
+<p><strong>The debug rendering subsystem.</strong> Lines, wireframes, AABBs, frustums, and other primitives submitted by the core (or, post-v1.0, by the editor for gizmos). Implemented as a separate pass with its own simple pipeline.</p>
+<p><strong>The ImGui integration.</strong> ImGui is rendered by the renderer because it is fundamentally a rendering operation. The integration is designed so that the editor (post-v1.0) submits its UI through the editor interface, and the renderer draws it. In v0.x, ImGui is used only for the developer console and stats overlays.</p>
+<h3 id="83-what-it-does-not-contain"><a class="header" href="#83-what-it-does-not-contain">8.3 What It Does Not Contain</a></h3>
+<p>No ECS code. No gameplay logic. No window creation — the window belongs to <code>liara-platform</code>, and the renderer receives only a native handle from the host. No asset loading from disk (the renderer receives prepared asset data from the core’s asset manager). No input handling.</p>
+<h3 id="84-internal-organization"><a class="header" href="#84-internal-organization">8.4 Internal Organization</a></h3>
 <p>A possible layout of the renderer’s internal source tree is (the real layout may differ):</p>
 <pre><code>src/
 ├── device/
@@ -475,152 +535,91 @@ asset data from the core’s asset manager). No input handling.</p>
 └── platform/
 shaders/
 </code></pre>
-<p>The <code>shaders/</code> directory contains GLSL source for the engine’s built-in
-shaders, compiled to SPIR-V at build time and either embedded in the
-binary or shipped alongside it (controlled by a CMake option).</p>
-<h3 id="versioning-policy-3"><a class="header" href="#versioning-policy-3">Versioning Policy</a></h3>
-<p>The renderer follows semantic versioning. Its public contract is
-defined entirely by <code>liara-interfaces</code>, so most changes (bug fixes,
-performance improvements, internal refactoring) are invisible to
-consumers and result in patch or minor bumps. Major bumps are rare and
-correspond to changes in resource consumption, behavior in edge cases,
-or removal of optional features.</p>
-<p>The renderer’s version is independent of both the core’s version and
-the meta repository’s version. The compatibility matrix in the meta
-repository tracks which combinations are tested.</p>
+<p>The <code>shaders/</code> directory contains GLSL source for the engine’s built-in shaders, compiled to SPIR-V at build time and either embedded in the binary or shipped alongside it (controlled by a CMake option).</p>
 <hr>
-<h2 id="6-the-editor-repository-liara-editor"><a class="header" href="#6-the-editor-repository-liara-editor">6. The Editor Repository: <code>liara-editor</code></a></h2>
-<p>The editor is the in-engine authoring tool that, post-v1.0, allows
-scenes to be built without writing code. It is <strong>not introduced until
-the v1.x cycle</strong>; the repository is created when the first editor code
-is written.</p>
-<h3 id="purpose-4"><a class="header" href="#purpose-4">Purpose</a></h3>
-<p>The editor is the application a developer launches to build a game.
-It hosts the engine, lets the developer place entities in the scene
-visually, edit their components through an inspector, and save and
-load scenes. It is the analog of the Unity Editor or the Unreal Editor.</p>
-<h3 id="status-in-v0x"><a class="header" href="#status-in-v0x">Status in v0.x</a></h3>
-<p>The editor does not exist in v0.x. Scenes are constructed in code or
-loaded from JSON files written by hand. This is acknowledged as a
-limitation; it is not a permanent state of affairs. The interfaces in
-v0.x are designed so that introducing the editor in v1.x does not
-require interface changes — see <code>ARCHITECTURE.md</code> section 7 and
-section 11 for the specific design choices that enable this.</p>
-<h3 id="contents-anticipated"><a class="header" href="#contents-anticipated">Contents (Anticipated)</a></h3>
+<h2 id="9-the-editor-repository-liara-editor"><a class="header" href="#9-the-editor-repository-liara-editor">9. The Editor Repository: <code>liara-editor</code></a></h2>
+<p>The editor is the in-engine authoring tool that, post-v1.0, allows scenes to be built without writing code. It is <strong>not introduced until the v1.x cycle</strong>; the repository is created when the first editor code is written.</p>
+<h3 id="91-purpose"><a class="header" href="#91-purpose">9.1 Purpose</a></h3>
+<p>The editor is the application a developer launches to build a game. It hosts the engine, lets the developer place entities in the scene visually, edit their components through an inspector, and save and load scenes. It is the analog of the Unity Editor or the Unreal Editor.</p>
+<h3 id="92-status-in-v0x"><a class="header" href="#92-status-in-v0x">9.2 Status in v0.x</a></h3>
+<p>The editor does not exist in v0.x. Scenes are constructed in code or loaded from JSON files written by hand. This is acknowledged as a limitation; it is not a permanent state of affairs. The interfaces in v0.x are designed so that introducing the editor in v1.x does not require interface changes — see <a href="ARCHITECTURE.html#render-targets-and-multi-view-rendering">Architecture.md Render Targets</a> and <a href="ARCHITECTURE.html#forward-looking-decisions">Architecture.md Forward-Looking Decisions</a> for the specific design choices that enable this.</p>
+<h3 id="93-contents-anticipated"><a class="header" href="#93-contents-anticipated">9.3 Contents (Anticipated)</a></h3>
 <p>When the editor is built, the repository will contain:</p>
 <ul>
-<li>An application that owns its own window and swapchain, embeds the
-engine as a library, and drives the engine’s tick manually.</li>
-<li>An ImGui-based UI: scene hierarchy, component inspector, asset
-browser, scene viewport (rendering the scene to a texture and
-displaying it in an ImGui panel), play/pause/step controls.</li>
-<li>Gizmo rendering for entity manipulation, integrated with the
-renderer’s debug rendering subsystem.</li>
+<li>An application that owns its own window and swapchain, embeds the engine as a library, and drives the engine’s tick manually.</li>
+<li>An ImGui-based UI: scene hierarchy, component inspector, asset browser, scene viewport (rendering the scene to a texture and displaying it in an ImGui panel), play/pause/step controls.</li>
+<li>Gizmo rendering for entity manipulation, integrated with the renderer’s debug rendering subsystem.</li>
 <li>Scene serialization (load/save scenes as JSON or a custom format).</li>
-<li>Project management (create new project, set up directory structure,
-manage assets).</li>
+<li>Project management (create new project, set up directory structure, manage assets).</li>
 </ul>
-<h3 id="replaceability"><a class="header" href="#replaceability">Replaceability</a></h3>
-<p>Although the editor is, in principle, a swappable module like the
-renderer, the practical question of someone writing an alternative
-editor is unlikely. Editors are large pieces of software with
-complex UI requirements, and the value of having an alternative
-editor is questionable for a project of this scale. The editor
-therefore is <strong>not designed for replaceability</strong>; it consumes the
-engine through richer C++ APIs where convenient.</p>
-<p>This is a deliberate exception to the modularity principle, made
-because the cost of treating the editor as replaceable would be
-high and the benefit nil.</p>
 <hr>
-<h2 id="7-the-physics-repository-liara-physics"><a class="header" href="#7-the-physics-repository-liara-physics">7. The Physics Repository: <code>liara-physics</code></a></h2>
-<p>The physics module provides collision detection and rigid body
-dynamics. It is <strong>not introduced until the v1.x cycle</strong>.</p>
-<h3 id="status-in-v0x-1"><a class="header" href="#status-in-v0x-1">Status in v0.x</a></h3>
-<p>Physics does not exist in v0.x. Entities have transforms, but nothing
-moves except by direct ECS manipulation. This is acknowledged as a
-limitation.</p>
-<p>When the physics module is introduced, its design will be informed by
-experience using the engine to build a game without it. The interface
-for physics is <strong>not</strong> designed in v0.x precisely because that design
-would be premature.</p>
-<h3 id="contents-anticipated-1"><a class="header" href="#contents-anticipated-1">Contents (Anticipated)</a></h3>
+<h2 id="10-the-physics-repository-liara-physics"><a class="header" href="#10-the-physics-repository-liara-physics">10. The Physics Repository: <code>liara-physics</code></a></h2>
+<p>The physics module provides collision detection and rigid body dynamics. It is <strong>not introduced until the v1.x cycle</strong>.</p>
+<h3 id="101-status-in-v0x"><a class="header" href="#101-status-in-v0x">10.1 Status in v0.x</a></h3>
+<p>Physics does not exist in v0.x. Entities have transforms, but nothing moves except by direct ECS manipulation. This is acknowledged as a limitation.</p>
+<p>When the physics module is introduced, its design will be informed by experience using the engine to build a game without it. The interface for physics is <strong>not</strong> designed in v0.x precisely because that design would be premature.</p>
+<h3 id="102-contents-anticipated"><a class="header" href="#102-contents-anticipated">10.2 Contents (Anticipated)</a></h3>
 <p>When introduced, the physics module will likely include:</p>
 <ul>
-<li>A choice of integration: a custom implementation, or a wrapper around
-Bullet, PhysX, or Jolt. This decision is deferred until the milestone.</li>
+<li>A choice of integration: a custom implementation, or a wrapper around Bullet, PhysX, or Jolt. This decision is deferred until the milestone.</li>
 <li>Collision shapes (box, sphere, capsule, mesh, heightfield).</li>
 <li>Rigid body dynamics with constraints and joints.</li>
 <li>Raycasts and queries.</li>
-<li>Debug visualization integrated with the renderer’s debug rendering
-subsystem.</li>
+<li>Debug visualization integrated with the renderer’s debug rendering subsystem.</li>
 </ul>
-<h3 id="replaceability-1"><a class="header" href="#replaceability-1">Replaceability</a></h3>
-<p>Physics is designed as a replaceable module. The interface in
-<code>liara-interfaces/physics.h</code> will be the contract.</p>
 <hr>
-<h2 id="8-auxiliary-repositories"><a class="header" href="#8-auxiliary-repositories">8. Auxiliary Repositories</a></h2>
-<h3 id="docs-shared"><a class="header" href="#docs-shared"><code>docs-shared</code></a></h3>
-<p>A small repository containing the shared navigation bar and
-documentation templates that every module’s published documentation
-includes. The shared assets are:</p>
+<h2 id="11-auxiliary-repositories"><a class="header" href="#11-auxiliary-repositories">11. Auxiliary Repositories</a></h2>
+<h3 id="111-docs-shared"><a class="header" href="#111-docs-shared">11.1 <code>docs-shared</code></a></h3>
+<p>The visual identity and the templates shared by every documentation site in the project. Its content is split in two:</p>
 <ul>
-<li><code>navbar.html</code>, <code>navbar.css</code>, <code>navbar.js</code> — the navigation bar that
-appears at the top of every documentation page across all modules.</li>
-<li><code>version.json</code> — list of available versions, consumed by the navbar’s
-JavaScript to populate the version dropdown.</li>
-<li><code>doxygen-header.html</code>, <code>doxygen-footer.html</code>, <code>doxygen-stylesheet.css</code>
-— Doxygen template files that integrate the navbar.</li>
-<li><code>mdbook-theme/</code> — mdBook theme files that integrate the navbar.</li>
+<li><strong>Baked</strong> — <code>mdbook/theme/</code> (the mdBook theme override, including the <code>index.hbs</code> that injects the navbar) and <code>doxygen/</code> (the Doxygen <code>header.html</code> / <code>footer.html</code>). These are copied into the documentation builder image at image-build time, pinned to a tag. Changing them requires rebuilding the image and then rebuilding each module’s docs.</li>
+<li><strong>Runtime</strong> — <code>shared-content/</code>: the design tokens (<code>tokens/design-tokens.css</code>, the single source of truth for the palette, typography and the light/dark/dyslexia modes), the navbar (<code>navbar/</code>), the per-context stylesheets and generated <code>shared-navbar.js</code> files, and <code>assets/</code>. This is deployed once to the site root at <code>/shared-content/</code> and referenced by absolute URL from every generated page, so a CSS change goes live without rebuilding anything.</li>
 </ul>
-<p>Each module’s documentation CI job downloads this repository at build
-time and uses its templates when generating documentation. Updates to
-the navbar are made here and propagate on the next documentation
-generation in each module.</p>
-<p>This repository is small, rarely changes, and follows simple
-versioning: each release tag corresponds to a snapshot that is referenced
-by module CI jobs. Modules pin a specific version to avoid surprise
-breakage.</p>
-<h3 id="liara-docs"><a class="header" href="#liara-docs"><code>liara-docs</code></a></h3>
-<p>The repository that hosts the full project’s documentation, including
-the user guide, the API reference (Doxygen output from all modules), and
-the ADRs. This is the repository that is published to Cloudflare Pages and
-linked from the meta repository’s README.</p>
-<h3 id="github-organization-level"><a class="header" href="#github-organization-level"><code>.github</code> (Organization-Level)</a></h3>
-<p>A special repository that GitHub recognizes as the source of
-organization-wide defaults. It contains:</p>
+<p>The repository also contains <code>hub/</code>, the project’s landing page and custom 404, deployed to the site root, and <code>tests/fixtures/</code>, a synthetic module used to preview template changes in CI.</p>
+<p>The full mechanism is described in <a href="DOCUMENTATION_PIPELINE.html">DOCUMENTATION_PIPELINE.md</a>.</p>
+<h3 id="112-liara-docs"><a class="header" href="#112-liara-docs">11.2 <code>liara-docs</code></a></h3>
+<p>The repository that hosts the project’s generated documentation. It contains no authored prose: everything under <code>site/</code> on its <code>cloudflare-pages</code> branch is produced by the documentation builder from the other repositories’ sources, one directory per module and per version. It also holds the Cloudflare Worker that resolves <code>latest</code>, falls back between views and serves the custom 404, and the scheduled sweep that prunes stale pull request previews.</p>
+<h3 id="113-github-organization-level"><a class="header" href="#113-github-organization-level">11.3 <code>.github</code> (Organization-Level)</a></h3>
+<p>A special repository that GitHub recognizes as the source of organization-wide defaults. It contains:</p>
 <ul>
 <li><code>profile/README.md</code> — the organization’s public landing page.</li>
-<li><code>ISSUE_TEMPLATE/</code> — issue templates that apply to repositories
-without their own.</li>
-<li><code>pull_request_template.md</code> — the default PR template.</li>
-<li><code>workflows/</code> — reusable GitHub Actions workflows that other
-repositories invoke (build, lint, generate docs, deploy gh-pages).</li>
+<li><code>ISSUE_TEMPLATE/</code> — bug report, feature request, documentation, question.</li>
+<li><code>PULL_REQUEST_TEMPLATE.md</code> — the default pull request template.</li>
+<li><code>.github/workflows/reusable-*.yml</code> — the reusable workflows every other repository invokes: build and quality, the ABI pipeline, documentation build/deploy/preview, commitlint, manifest validation, container image generation and pruning.</li>
+<li><code>scripts/</code> — the helpers those workflows call, which are not trivial enough to inline in YAML. A workflow that needs one of them checks this repository out at the ref the caller pinned.</li>
 </ul>
-<p>Each module’s CI consumes the reusable workflows from this repository,
-so that updates to CI logic happen in one place. This is the same
-discipline as <code>docs-shared</code>, applied to CI.</p>
+<p>Each module’s CI consumes the reusable workflows from this repository, so that updates to CI logic happen in one place. This is the same discipline as <code>docs-shared</code>, applied to CI.</p>
 <hr>
-<h2 id="9-dependency-graph"><a class="header" href="#9-dependency-graph">9. Dependency Graph</a></h2>
+<h2 id="12-dependency-graph"><a class="header" href="#12-dependency-graph">12. Dependency Graph</a></h2>
 <p>The static dependency graph between repositories is:</p>
 <pre class="mermaid">flowchart TB
 
     interfaces["liara-interfaces&lt;br/&gt;(C headers only)"]
 
     core["liara-core"]
+    platform["liara-platform"]
     renderer["liara-renderer"]
-    physics["liara-physics&lt;br/&gt;(post-v1)"]
+    assets["liara-assets"]
+    audio["liara-audio"]
+    physics["liara-physics&lt;br/&gt;(v1.x)"]
 
-    launcher["liara&lt;br/&gt;(launcher)"]
-    editor["liara-editor&lt;br/&gt;(post-v1)"]
+    launcher["liara&lt;br/&gt;(launcher — host)"]
+    editor["liara-editor&lt;br/&gt;(v1.x — host)"]
 
     interfaces --&gt; core
+    interfaces --&gt; platform
     interfaces --&gt; renderer
+    interfaces --&gt; assets
+    interfaces --&gt; audio
     interfaces --&gt; physics
 
-    merge1((.))
+    merge1(( ))
 
     core --&gt; merge1
+    platform --&gt; merge1
     renderer --&gt; merge1
+    assets --&gt; merge1
+    audio --&gt; merge1
     physics --&gt; merge1
 
     merge1 --&gt; launcher
@@ -630,66 +629,45 @@ discipline as <code>docs-shared</code>, applied to CI.</p>
 <p>Reading the graph:</p>
 <ul>
 <li><code>liara-interfaces</code> depends on nothing.</li>
-<li><code>liara-core</code>, <code>liara-renderer</code>, and <code>liara-physics</code> each depend only
-on <code>liara-interfaces</code>. They do <strong>not</strong> depend on each other.</li>
-<li>The <code>liara</code> meta repository (specifically the launcher) depends on
-<code>liara-core</code> and <code>liara-renderer</code> (and later, <code>liara-physics</code>),
-composing them into a runnable application.</li>
-<li>The <code>liara-editor</code> repository (post-v1.0) depends on the same set,
-composing them into the editor application.</li>
+<li><strong>Every module depends on <code>liara-interfaces</code> and on nothing else.</strong> No module depends on another module — not even on the core. They are siblings.</li>
+<li>Hosts depend on the modules they compose.</li>
 </ul>
-<p>The crucial property is that the renderer does <strong>not</strong> depend on the
-core, and the core does <strong>not</strong> depend on the renderer. They are
-siblings, communicating only through interfaces. This is what makes
-either of them replaceable. If the core had a <code>#include</code> of a
-renderer header, the architecture would be broken.</p>
-<p>The auxiliary repositories (<code>docs-shared</code>, <code>liara-docs</code>, <code>.github</code>) are not in the
-dependency graph because their consumption is at the CI level, not the
-build level. They are pulled in by GitHub Actions, not by CMake.</p>
+<p>The infrastructure repositories (<code>.github</code>, <code>docs-shared</code>, <code>liara-docs</code>) do not appear: they are consumed by GitHub Actions, not by CMake.</p>
 <hr>
-<h2 id="10-module-boundaries-what-crosses-what-doesnt"><a class="header" href="#10-module-boundaries-what-crosses-what-doesnt">10. Module Boundaries: What Crosses, What Doesn’t</a></h2>
-<p>This section enumerates the data flows that cross module boundaries.
-Anything not listed here should not cross.</p>
-<h3 id="core--renderer-per-frame"><a class="header" href="#core--renderer-per-frame">Core → Renderer (per frame)</a></h3>
-<p>The core sends the renderer a render packet describing what to draw
-this frame. The packet contains, at minimum:</p>
+<h2 id="13-module-boundaries-what-crosses-what-doesnt"><a class="header" href="#13-module-boundaries-what-crosses-what-doesnt">13. Module Boundaries: What Crosses, What Doesn’t</a></h2>
+<p>This section enumerates the data flows that cross module boundaries. Anything not listed here should not cross.</p>
+<h3 id="131-core--renderer-per-frame"><a class="header" href="#131-core--renderer-per-frame">13.1 Core → Renderer (per frame)</a></h3>
+<p>The core sends the renderer a render packet describing what to draw this frame. The packet contains, at minimum:</p>
 <ul>
 <li>A list of views, each with a camera, viewport, and target.</li>
-<li>A list of drawables per view, each with a transform, mesh handle,
-and material handle.</li>
+<li>A list of drawables per view, each with a transform, mesh handle, and material handle.</li>
 <li>A list of lights affecting the scene.</li>
 <li>A list of debug primitives to draw this frame.</li>
 <li>A list of UI draw commands (ImGui draw data, in v0.x).</li>
 </ul>
-<p>This data is plain-old-data and does not retain ownership: once the
-renderer has consumed the packet, it may discard it.</p>
-<h3 id="renderer-lifecycle-host-driven"><a class="header" href="#renderer-lifecycle-host-driven">Renderer lifecycle (host-driven)</a></h3>
-<p>The host creates and destroys the renderer, and the core, independently,
-through their respective C interfaces. At startup the host supplies the
-renderer with the native window handle and GPU configuration; at
-shutdown it requests the renderer to flush and release resources. The
-core never creates, owns, or directly calls the renderer.</p>
-<h3 id="resource-upload-host-mediated"><a class="header" href="#resource-upload-host-mediated">Resource upload (host-mediated)</a></h3>
-<p>When the core loads an asset, it exposes the CPU-side data and a stable
-handle through its interface. The host passes that data to the renderer
-for GPU upload and associates the handle with the resulting GPU resource.
-Subsequent render packets reference the asset by handle. The data path
-is core → host → renderer; there is no direct core → renderer call.</p>
-<h3 id="renderer--host-callbacks"><a class="header" href="#renderer--host-callbacks">Renderer → host (callbacks)</a></h3>
-<p>The renderer reports events — surface lost, swapchain resized, GPU
-error — through callbacks the host registers at renderer init. The
-host decides how to propagate these to the core.</p>
-<h3 id="core--editor-post-v1"><a class="header" href="#core--editor-post-v1">Core → Editor (post-v1)</a></h3>
-<p>The editor reads ECS state to populate the scene hierarchy and
-inspector. The interface for this is <strong>read-mostly</strong>: the editor can
-inspect any entity but mutates entities only through specific edit
-commands that the core executes (so that undo/redo is possible).</p>
-<h3 id="editor--renderer-post-v1"><a class="header" href="#editor--renderer-post-v1">Editor → Renderer (post-v1)</a></h3>
-<p>The editor submits gizmo geometry through the debug rendering
-interface, on top of the scene render. The editor also requests render
-targets for its scene viewport panels.</p>
+<p>This data is plain-old-data and does not retain ownership: once the renderer has consumed the packet, it may discard it.</p>
+<h3 id="132-renderer-lifecycle-host-driven"><a class="header" href="#132-renderer-lifecycle-host-driven">13.2 Renderer lifecycle (host-driven)</a></h3>
+<p>The host creates and destroys the renderer, and the core, independently, through their respective C interfaces. At startup the host supplies the renderer with the native window handle and GPU configuration; at shutdown it requests the renderer to flush and release resources. The core never creates, owns, or directly calls the renderer.</p>
+<h3 id="133-resource-upload-host-mediated"><a class="header" href="#133-resource-upload-host-mediated">13.3 Resource upload (host-mediated)</a></h3>
+<p>When the core loads an asset, it exposes the CPU-side data and a stable handle through its interface. The host passes that data to the renderer for GPU upload and associates the handle with the resulting GPU resource. Subsequent render packets reference the asset by handle. The data path is core → host → renderer; there is no direct core → renderer call.</p>
+<h3 id="134-renderer--host-callbacks"><a class="header" href="#134-renderer--host-callbacks">13.4 Renderer → host (callbacks)</a></h3>
+<p>The renderer reports events — surface lost, swapchain resized, GPU error — through callbacks the host registers at renderer init. The host decides how to propagate these to the core.</p>
+<h3 id="135-core--editor-post-v1"><a class="header" href="#135-core--editor-post-v1">13.5 Core → Editor (post-v1)</a></h3>
+<p>The editor reads ECS state to populate the scene hierarchy and inspector. The interface for this is <strong>read-mostly</strong>: the editor can inspect any entity but mutates entities only through specific edit commands that the core executes (so that undo/redo is possible).</p>
+<h3 id="136-editor--renderer-post-v1"><a class="header" href="#136-editor--renderer-post-v1">13.6 Editor → Renderer (post-v1)</a></h3>
+<p>The editor submits gizmo geometry through the debug rendering interface, on top of the scene render. The editor also requests render targets for its scene viewport panels.</p>
+<h3 id="137-platform--host-per-frame"><a class="header" href="#137-platform--host-per-frame">13.7 Platform → host (per frame)</a></h3>
+<p>The platform module reports, on demand: the physical input events accumulated since the last poll, the window’s current size and state, whether a shutdown has been requested (close button or OS signal — see <a href="#the-platform-repository-liara-platform">The Platform Repository</a>), and the monotonic time. All of it is plain data, valid until the next poll.</p>
+<p>The host decides what to do with it: which events to forward to the core’s event bus, how to map physical inputs to logical actions, and whether a shutdown request is honoured immediately or deferred. The platform module never terminates the process itself.</p>
+<h3 id="138-host--platform-at-startup"><a class="header" href="#138-host--platform-at-startup">13.8 Host → platform (at startup)</a></h3>
+<p>The host creates the window and asks for its native handle, which it then passes to the renderer at initialization. This is the one piece of data that travels from one module to another, and it travels through the host, as an opaque pointer or a fixed-width integer whose interpretation is documented.</p>
+<h3 id="139-assets--host--renderer--audio"><a class="header" href="#139-assets--host--renderer--audio">13.9 Assets → host → renderer / audio</a></h3>
+<p>When the host loads an asset, it receives a stable handle and, on request, the CPU-side data behind it. It hands mesh and texture data to the renderer for GPU upload, and decoded PCM to the audio module for playback. Neither consumer retains a pointer into asset storage: they keep the handle, and the data is theirs to copy or upload during the call.</p>
+<p>That constraint is what makes asset hot-reload implementable later without touching a single consumer.</p>
+<h3 id="1310-core--host--audio-per-frame"><a class="header" href="#1310-core--host--audio-per-frame">13.10 Core → host → audio (per frame)</a></h3>
+<p>The core produces, alongside the render packet, the list of audio events for this tick — start, stop, parameter change, each referencing an asset handle. The host submits it to the audio module. It is the render packet pattern applied to sound, and for the same reasons: plain data, no retained ownership, no coupling between the simulation and the backend.</p>
 <hr>
-<h2 id="11-where-things-live-a-cross-reference"><a class="header" href="#11-where-things-live-a-cross-reference">11. Where Things Live: A Cross-Reference</a></h2>
+<h2 id="14-where-things-live-a-cross-reference"><a class="header" href="#14-where-things-live-a-cross-reference">14. Where Things Live: A Cross-Reference</a></h2>
 <p>For specific topics, the canonical location is:</p>
 <div class="table-wrapper">
 <table>
@@ -698,79 +676,67 @@ targets for its scene viewport panels.</p>
 </thead>
 <tbody>
 <tr><td>ECS implementation</td><td><code>liara-core</code></td></tr>
-<tr><td>ECS handle types (in API)</td><td><code>liara-interfaces</code></td></tr>
-<tr><td>Math types (in API)</td><td><code>liara-interfaces</code></td></tr>
 <tr><td>Math implementation</td><td><code>liara-core</code></td></tr>
-<tr><td>Asset loading</td><td><code>liara-core</code></td></tr>
+<tr><td>Logger</td><td><code>liara-core</code></td></tr>
+<tr><td>Settings (TOML)</td><td><code>liara-core</code></td></tr>
+<tr><td>Event bus</td><td><code>liara-core</code></td></tr>
+<tr><td>Window creation</td><td><code>liara-platform</code></td></tr>
+<tr><td>Input devices</td><td><code>liara-platform</code></td></tr>
+<tr><td>OS signals / shutdown request</td><td><code>liara-platform</code></td></tr>
+<tr><td>Asset loading and decoding</td><td><code>liara-assets</code></td></tr>
+<tr><td>Asset handles and lifetime</td><td><code>liara-assets</code></td></tr>
+<tr><td>Audio playback and mixing</td><td><code>liara-audio</code></td></tr>
 <tr><td>GPU upload</td><td><code>liara-renderer</code></td></tr>
-<tr><td>Window creation</td><td><code>liara-core</code></td></tr>
 <tr><td>Vulkan device</td><td><code>liara-renderer</code></td></tr>
+<tr><td>ImGui setup</td><td><code>liara-renderer</code></td></tr>
+<tr><td>Debug primitives drawing</td><td><code>liara-renderer</code></td></tr>
+<tr><td>All handle and POD types in the API</td><td><code>liara-interfaces</code></td></tr>
 <tr><td>Render packet structure</td><td><code>liara-interfaces</code></td></tr>
 <tr><td>Render packet construction</td><td><code>liara-core</code></td></tr>
 <tr><td>Render packet consumption</td><td><code>liara-renderer</code></td></tr>
-<tr><td>ImGui setup</td><td><code>liara-renderer</code></td></tr>
-<tr><td>Debug primitives API</td><td><code>liara-interfaces</code></td></tr>
-<tr><td>Debug primitives drawing</td><td><code>liara-renderer</code></td></tr>
-<tr><td>Logger</td><td><code>liara-core</code></td></tr>
-<tr><td>Settings (TOML)</td><td><code>liara-core</code></td></tr>
+<tr><td>Logical input mapping</td><td><code>liara</code> (launcher)</td></tr>
 <tr><td>Standalone game loop</td><td><code>liara</code> (launcher)</td></tr>
-<tr><td>Editor loop</td><td><code>liara-editor</code> (post-v1)</td></tr>
+<tr><td>Compatibility matrix</td><td><code>liara</code></td></tr>
 <tr><td>AUR PKGBUILD</td><td><code>liara</code></td></tr>
-<tr><td>Doxygen config per module</td><td>each module repo</td></tr>
-<tr><td>User documentation (mdBook)</td><td><code>liara</code> (<code>docs/user/</code>)</td></tr>
 <tr><td>ADRs</td><td><code>liara</code> (<code>docs/adr/</code>)</td></tr>
-<tr><td>Shared navbar</td><td><code>docs-shared</code></td></tr>
-<tr><td>Shared CI workflows</td><td><code>.github</code> (org-level)</td></tr>
+<tr><td>Design system, navbar, templates</td><td><code>docs-shared</code></td></tr>
+<tr><td>Documentation hub landing page</td><td><code>docs-shared</code> (<code>hub/</code>)</td></tr>
+<tr><td>Shared CI workflows and scripts</td><td><code>.github</code></td></tr>
+<tr><td>Documentation hosting + worker</td><td><code>liara-docs</code></td></tr>
 </tbody>
 </table>
 </div>
 <p>When a topic is added to the project, this table is updated.</p>
 <hr>
-<h2 id="12-adding-a-new-module"><a class="header" href="#12-adding-a-new-module">12. Adding a New Module</a></h2>
+<h2 id="15-adding-a-new-module"><a class="header" href="#15-adding-a-new-module">15. Adding a New Module</a></h2>
 <p>The process for introducing a new module to the project is:</p>
 <ol>
 <li>
-<p><strong>Justify the module’s existence.</strong> A new module is added when
-functionality cannot reasonably fit in an existing module without
-bloating it, and when the new functionality has a clear boundary
-that can be expressed as a C interface.</p>
+<p><strong>Claim the namespace first.</strong> Before any code: pick <code>&lt;name&gt;</code>, and use <code>liara/&lt;name&gt;/</code> and <code>liara_&lt;name&gt;_*</code> from the first line, even while the implementation still lives inside an existing repository. This step is free now and irreversible later.</p>
 </li>
 <li>
-<p><strong>Design the interface first.</strong> Add headers to <code>liara-interfaces</code>
-defining the module’s public surface. This is the most expensive
-step and should not be skipped.</p>
+<p><strong>Justify the module.</strong> A subsystem earns its own namespace when it has a boundary expressible as a C interface <em>and</em> at least one of: it is not always needed (a headless tool can do without it), it is a plausible replacement target, or it drags in an external dependency that nothing else needs. A subsystem that fails all three belongs inside an existing module.</p>
 </li>
 <li>
-<p><strong>Bump <code>liara-interfaces</code>.</strong> Adding a new module is a minor version
-bump (additive). Update the version macros and tag a release.</p>
+<p><strong>Design the interface.</strong> Add headers to <code>liara-interfaces</code>. This is the expensive step and the one that must not be rushed; it is also the reason a module’s interface is designed when its first real implementation is written, not years ahead.</p>
 </li>
 <li>
-<p><strong>Create the module repository.</strong> Follow the conventions for
-repository setup (see <code>CONTRIBUTING.md</code>).</p>
+<p><strong>Bump <code>liara-interfaces</code>.</strong> A new namespace is additive: MINOR.</p>
 </li>
 <li>
-<p><strong>Update this document.</strong> The new module appears in the repository
-map (section 1), the dependency graph (section 9), and the
-cross-reference (section 11).</p>
+<p><strong>Create the repository</strong> — and not before this point. Copy the standard scaffolding, register it in the workspace orchestrator’s module list, in the documentation registry, and in the compatibility matrix.</p>
 </li>
 <li>
-<p><strong>Update the launcher (if applicable).</strong> If the new module is part
-of the standalone runtime, the launcher composes it into the loop.</p>
+<p><strong>Update this document</strong>, the dependency graph, and the cross-reference table.</p>
 </li>
 </ol>
-<p>The cost of adding a module is intentionally non-trivial. Modules
-should be added because they earn their place, not because the project
-is in a phase where adding modules feels productive.</p>
+<p>Splitting an existing module follows steps 1 to 3 only, then moves files. That is the whole point of step 1: if the namespace was claimed early, the split is a repository move and consumers recompile unchanged.</p>
 <hr>
-<h2 id="13-removing-or-renaming-a-module"><a class="header" href="#13-removing-or-renaming-a-module">13. Removing or Renaming a Module</a></h2>
-<p>Modules are not removed or renamed lightly. When a module’s
-responsibilities shrink to nothing, or when its name becomes
-misleading, the change is treated as a major version event for the
-meta repository. The old repository is archived (not deleted), the new
-repository is created, and the migration path is documented in an ADR.</p>
-<p>This conservatism reflects the reality that external links to
-repositories accumulate over time and that breaking them is a real
-cost, even for a project at this scale.</p>
+<h2 id="16-removing-or-renaming-a-module"><a class="header" href="#16-removing-or-renaming-a-module">16. Removing or Renaming a Module</a></h2>
+<p>Modules are not removed or renamed lightly. When a module’s responsibilities shrink to nothing, or when its name becomes misleading, the change is treated as a major version event for the meta repository. The old repository is archived (not deleted), the new repository is created, and the migration path is documented in an ADR.</p>
+<p>This conservatism reflects the reality that external links to repositories accumulate over time and that breaking them is a real cost, even for a project at this scale.</p>
+<hr>
+<p><a href="#modules">Back to top</a></p>
 
             </main>
 
