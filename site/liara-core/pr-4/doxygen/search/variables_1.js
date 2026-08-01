@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['background_5fcolor_0',['BACKGROUND_COLOR',['../namespaceLiara_1_1Core.html#a7abaef51586cdbb71e66b96de7253262',1,'Liara::Core']]],
-  ['body_5fcount_1',['BODY_COUNT',['../namespaceLiara_1_1Core.html#a39c49fb73e2047e3bc9bd194d3977bc2',1,'Liara::Core']]]
+  ['center_5fx_0',['CENTER_X',['../namespaceLiara_1_1Core.html#a55e5a1ab724b7328ada5f3ade0778536',1,'Liara::Core']]],
+  ['center_5fy_1',['CENTER_Y',['../namespaceLiara_1_1Core.html#a12be831d5c99267d1b1becc3049e8bae',1,'Liara::Core']]]
 ];
