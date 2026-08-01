@@ -189,16 +189,43 @@
             <main>
                 <h1 id="bootstrap"><a class="header" href="#bootstrap">Bootstrap</a></h1>
 <blockquote>
-<p>The practical setup guide for getting Liara to build on a fresh
-machine. This document covers two platforms: <strong>Arch Linux</strong>
-(the primary development platform) and <strong>Windows 11</strong> (the
-validated cross-platform target).</p>
-<p>If you want to set up on a different Linux distribution, the
-Arch instructions are a starting point but you will need to
-translate package names. Distribution-specific support is not a
-project goal; however, community contributions of setup
-instructions for other distributions are welcome.</p>
+<p>The practical setup guide for getting Liara to build on a fresh machine. This document covers two platforms: <strong>Arch Linux</strong> (the primary development platform) and <strong>Windows 11</strong> (the validated cross-platform target).</p>
+<p>If you want to set up on a different Linux distribution, the Arch instructions are a starting point but you will need to translate package names. Distribution-specific support is not a project goal; however, community contributions of setup instructions for other distributions are welcome.</p>
 </blockquote>
+<hr>
+<h2 id="table-of-contents"><a class="header" href="#table-of-contents">Table of Contents</a></h2>
+<ul>
+<li><a href="#1-quick-start">1. Quick Start</a></li>
+<li><a href="#2-arch-linux-detailed-setup">2. Arch Linux: Detailed Setup</a>
+<ul>
+<li><a href="#21-system-packages">2.1 System Packages</a></li>
+<li><a href="#22-vulkan-sdk-components">2.2 Vulkan SDK Components</a></li>
+<li><a href="#23-vcpkg-installation">2.3 vcpkg Installation</a></li>
+<li><a href="#24-clone-and-bootstrap-the-workspace">2.4 Clone and Bootstrap the Workspace</a></li>
+<li><a href="#25-build-and-test">2.5 Build and Test</a></li>
+<li><a href="#26-run-the-demo">2.6 Run the Demo</a></li>
+<li><a href="#27-editor-setup">2.7 Editor Setup</a></li>
+</ul>
+</li>
+<li><a href="#3-windows-11-detailed-setup">3. Windows 11: Detailed Setup</a>
+<ul>
+<li><a href="#31-visual-studio-2022">3.1 Visual Studio 2022</a></li>
+<li><a href="#32-vulkan-sdk">3.2 Vulkan SDK</a></li>
+<li><a href="#33-cmake-git-and-python">3.3 CMake, Git and Python</a></li>
+<li><a href="#34-vcpkg">3.4 vcpkg</a></li>
+<li><a href="#35-clone-and-bootstrap">3.5 Clone and Bootstrap</a></li>
+<li><a href="#36-build-and-test">3.6 Build and Test</a></li>
+<li><a href="#37-run-the-demo">3.7 Run the Demo</a></li>
+<li><a href="#38-editor-setup">3.8 Editor Setup</a></li>
+</ul>
+</li>
+<li><a href="#4-verifying-the-setup">4. Verifying the Setup</a></li>
+<li><a href="#5-common-issues-and-workarounds">5. Common Issues and Workarounds</a></li>
+<li><a href="#6-optional-tools">6. Optional Tools</a></li>
+<li><a href="#7-updating-the-setup">7. Updating the Setup</a></li>
+<li><a href="#8-uninstalling">8. Uninstalling</a></li>
+<li><a href="#9-getting-help">9. Getting Help</a></li>
+</ul>
 <hr>
 <h2 id="1-quick-start"><a class="header" href="#1-quick-start">1. Quick Start</a></h2>
 <p>If everything works first try, the procedure is:</p>
@@ -259,8 +286,7 @@ cd liara
 # 8. Run the demo
 .\scripts\liara.ps1 launch --preset windows-release
 </code></pre>
-<p>If anything fails, the rest of this document explains each step in
-detail and lists known issues.</p>
+<p>If anything fails, the rest of this document explains each step in detail and lists known issues.</p>
 <hr>
 <h2 id="2-arch-linux-detailed-setup"><a class="header" href="#2-arch-linux-detailed-setup">2. Arch Linux: Detailed Setup</a></h2>
 <h3 id="21-system-packages"><a class="header" href="#21-system-packages">2.1 System Packages</a></h3>
@@ -291,34 +317,31 @@ detail and lists known issues.</p>
      vulkan-validation-layers shaderc clang gcc mold \
      clang-tools-extra python
 </code></pre>
+<pre><code class="language-bash"># Optional, for the cross-language ABI tests of liara-interfaces
+sudo pacman -S zig rust
+</code></pre>
+<p>Without them, the Zig and Rust tests are not registered at all: <code>ctest</code> reports success without having run them.<code> liara verify --optional</code> reports their absence.</p>
 <p>Verify the toolchain versions meet the project’s requirements:</p>
 <pre><code class="language-bash">cmake --version    # Must be 3.29 or newer
 clang --version    # Must be 18 or newer
 gcc --version      # Must be 14 or newer
 glslc --version    # Must report a Vulkan SDK version
 </code></pre>
-<p>If any version is below the requirement, update via <code>pacman -Syu</code>. As
-of 2026, Arch’s repositories ship versions that meet all
-requirements; if a future Arch release lags, the workaround is to
-install from the AUR.</p>
+<p>If any version is below the requirement, update via <code>pacman -Syu</code>. As of 2026, Arch’s repositories ship versions that meet all requirements; if a future Arch release lags, the workaround is to install from the AUR.</p>
 <h3 id="22-vulkan-sdk-components"><a class="header" href="#22-vulkan-sdk-components">2.2 Vulkan SDK Components</a></h3>
-<p><code>vulkan-devel</code> from the official repos provides the core Vulkan
-development files. The optional but recommended components:</p>
+<p><code>vulkan-devel</code> from the official repos provides the core Vulkan development files. The optional but recommended components:</p>
 <pre><code class="language-bash"># Already installed if you ran the command in 2.1, listed for clarity
 sudo pacman -S vulkan-validation-layers  # Required for debug builds
-sudo pacman -S vulkan-tools              # vulkaninfo, vkcube
+sudo pacman -S vulkan-tools              # Vulkan utilities
 sudo pacman -S spirv-tools               # SPIR-V utilities
 sudo pacman -S renderdoc                 # GPU debugger (optional)
 </code></pre>
 <p>Verify Vulkan is functional:</p>
 <pre><code class="language-bash">vulkaninfo --summary
 </code></pre>
-<p>The output should list at least one GPU with Vulkan 1.3 support. If
-no GPU is listed, the issue is GPU drivers (Mesa for AMD/Intel,
-proprietary or NVK for NVIDIA), not Liara — fix the drivers first.</p>
+<p>The output should list at least one GPU with Vulkan 1.3 support. If no GPU is listed, the issue is GPU drivers (Mesa for AMD/Intel, proprietary or NVK for NVIDIA), not Liara — fix the drivers first.</p>
 <h3 id="23-vcpkg-installation"><a class="header" href="#23-vcpkg-installation">2.3 vcpkg Installation</a></h3>
-<p>vcpkg is installed in the user’s home directory, not system-wide.
-This is the convention for vcpkg and avoids permission issues:</p>
+<p>vcpkg is installed in the user’s home directory, not system-wide. This is the convention for vcpkg and avoids permission issues:</p>
 <pre><code class="language-bash">git clone https://github.com/microsoft/vcpkg.git ~/.vcpkg
 ~/.vcpkg/bootstrap-vcpkg.sh
 </code></pre>
@@ -334,26 +357,21 @@ fish_add_path $VCPKG_ROOT
 <pre><code class="language-bash">vcpkg --version
 </code></pre>
 <h3 id="24-clone-and-bootstrap-the-workspace"><a class="header" href="#24-clone-and-bootstrap-the-workspace">2.4 Clone and Bootstrap the Workspace</a></h3>
-<p>The meta repository’s unified Python orchestrator clones the other repositories,
-resolves dependencies and configures the workspace:</p>
+<p>The meta repository’s unified Python orchestrator clones the other repositories, resolves dependencies and configures the workspace:</p>
 <pre><code class="language-bash">git clone https://github.com/liara-engine/liara.git
 cd liara
 ./scripts/liara.sh setup
 </code></pre>
 <p>The script performs:</p>
 <ul>
-<li>Clone or fast-forward update of <code>liara-interfaces</code>, <code>liara-core</code>, <code>liara-renderer</code> into
-<code>workspace/</code>.</li>
-<li>Generation of a top-level <code>CMakeLists.txt</code> that includes each
-module via <code>add_subdirectory()</code>.</li>
+<li>Clone or fast-forward update of <code>liara-interfaces</code>, <code>liara-core</code>, <code>liara-renderer</code> into <code>workspace/</code>.</li>
+<li>Generation of a top-level <code>CMakeLists.txt</code> that includes each module via <code>add_subdirectory()</code>.</li>
 <li>Merge of all submodules’ dependencies into a single root <code>workspace/vcpkg.json</code> manifest.</li>
 <li>Generation of workspace-level <code>CMakePresets.json</code> with pre-defined presets.</li>
-<li>Initial vcpkg dependency resolution (this can take 10-30 minutes
-on first run; subsequent runs are cached).</li>
+<li>Initial vcpkg dependency resolution (this can take 10-30 minutes on first run; subsequent runs are cached).</li>
 <li>Generation of <code>compile_commands.json</code> for clangd consumers.</li>
 </ul>
-<p>If the script fails partway through, it can be re-run. It is
-designed to be idempotent: running it twice does not break anything.</p>
+<p>If the script fails partway through, it can be re-run. It is designed to be idempotent: running it twice does not break anything.</p>
 <h3 id="25-build-and-test"><a class="header" href="#25-build-and-test">2.5 Build and Test</a></h3>
 <p>To build and test the project using the orchestrator:</p>
 <pre><code class="language-bash"># Build the default development preset (linux-debug-clang)
@@ -365,35 +383,29 @@ designed to be idempotent: running it twice does not break anything.</p>
 # Run the test suite for the compiled preset
 ./scripts/liara.sh test --preset linux-release-clang
 </code></pre>
-<p>The <code>linux-release-clang</code> preset is the recommended default for
-most users. The available presets:</p>
+<h4 id="linux-presets"><a class="header" href="#linux-presets">Linux Presets</a></h4>
+<p>The presets follow one naming scheme: <code>linux-&lt;build type&gt;-&lt;compiler&gt;</code> for the default static build, plus two variants.</p>
 <ul>
-<li><code>linux-debug-gcc</code> — debug build with GCC.</li>
-<li><code>linux-debug-clang</code> — debug build with Clang. Script default.</li>
-<li><code>linux-release-gcc</code> — release build with GCC.</li>
-<li><code>linux-release-clang</code> — release build with Clang.</li>
-<li><code>windows-debug</code> — debug build with MSVC (Windows only).</li>
-<li><code>windows-release</code> — release build with MSVC (Windows only).</li>
+<li><code>linux-debug-gcc</code>, <code>linux-debug-clang</code>, <code>linux-release-gcc</code>, <code>linux-release-clang</code> — modules built as static libraries and linked into the launcher. This is the default and the recommended choice for day-to-day work; <code>linux-debug-clang</code> is the script default.</li>
+<li>The same four names suffixed with <code>-link</code> — modules built as shared libraries, still linked at build time. Used to check that the shared build works and that the export macros are correct.</li>
+<li>The same four names suffixed with <code>-runtime</code> — modules built as shared libraries and loaded by the launcher at runtime through <code>dlopen</code>. This is the configuration the architecture is designed for, and the one that catches accidental static coupling. Experimental in Phase 0.</li>
 </ul>
-<p>There is also some experimental presets. Not recommended for general use:</p>
+<h4 id="windows-presets"><a class="header" href="#windows-presets">Windows Presets</a></h4>
+<p>The Visual Studio generator is multi-configuration: the build type is chosen when building, not when configuring. There are therefore three configure presets — <code>windows</code>, <code>windows-link</code>, <code>windows-runtime</code> — and six build presets pairing each with a configuration:</p>
 <ul>
-<li><code>linux-debug-gcc-dynamic</code> — debug build with GCC, runtime dynamic linking of dependencies.</li>
-<li><code>linux-debug-clang-dynamic</code> — debug build with Clang, runtime dynamic linking of dependencies.</li>
-<li><code>windows-debug-dynamic</code> — debug build with MSVC, runtime dynamic linking of dependencies.</li>
+<li><code>windows-debug</code>, <code>windows-release</code> — static, the default.</li>
+<li><code>windows-debug-link</code>, <code>windows-release-link</code> — shared libraries, linked.</li>
+<li><code>windows-debug-runtime</code>, <code>windows-release-runtime</code> — shared libraries, loaded at runtime. Experimental.</li>
 </ul>
-<p>After a successful build, run the test suite.
-If all tests pass, the setup is complete.</p>
+<p><code>windows-release</code> is the default for development. Because Debug and Release share one configure step, switching between them does not re-run vcpkg; binaries land in a <code>Debug\</code> or <code>Release\</code> subdirectory of the same build tree.</p>
+<p>After a successful build, run the test suite. If all tests pass, the setup is complete.</p>
 <h3 id="26-run-the-demo"><a class="header" href="#26-run-the-demo">2.6 Run the Demo</a></h3>
-<p>The launcher built from the meta repository runs the engine’s
-sample scene:</p>
+<p>The launcher built from the meta repository runs the engine’s sample scene:</p>
 <pre><code class="language-bash"># Run the demo with the default preset
 ./scripts/liara.sh launch --preset linux-release-clang
 </code></pre>
-<p>The demo opens a window showing the version-appropriate scene. In
-v0.1, this is a single triangle. In later versions, the demo grows
-with the engine’s capabilities.</p>
-<p>If the demo opens and renders without Vulkan validation errors, the
-environment is fully functional.</p>
+<p>The demo opens a window showing the version-appropriate scene. In v0.1, this is a single triangle. In later versions, the demo grows with the engine’s capabilities.</p>
+<p>If the demo opens and renders without Vulkan validation errors, the environment is fully functional.</p>
 <h3 id="27-editor-setup"><a class="header" href="#27-editor-setup">2.7 Editor Setup</a></h3>
 <h4 id="clion"><a class="header" href="#clion">CLion</a></h4>
 <p>CLion’s CMake support handles the workspace directly:</p>
@@ -403,11 +415,9 @@ environment is fully functional.</p>
 <li>Select a preset in the configurations dropdown.</li>
 <li>Build and run from CLion’s UI.</li>
 </ol>
-<p>CLion picks up <code>.clang-format</code> and <code>.clang-tidy</code> automatically and
-applies them on save (configurable in preferences).</p>
+<p>CLion picks up <code>.clang-format</code> and <code>.clang-tidy</code> automatically and applies them on save (configurable in preferences).</p>
 <h4 id="neovim-with-clangd"><a class="header" href="#neovim-with-clangd">Neovim with clangd</a></h4>
-<p>The workspace generates <code>compile_commands.json</code> at
-<code>workspace/compile_commands.json</code>. Configure clangd to find it:</p>
+<p>The workspace generates <code>compile_commands.json</code> at <code>workspace/compile_commands.json</code>. Configure clangd to find it:</p>
 <p>In <code>~/.config/nvim/lua/config/lsp.lua</code> (or equivalent):</p>
 <pre><code class="language-lua">require('lspconfig').clangd.setup({
     cmd = {
@@ -419,16 +429,12 @@ applies them on save (configurable in preferences).</p>
     },
 })
 </code></pre>
-<p>Open any source file in <code>workspace/</code> and clangd should activate
-automatically.</p>
-<p>For formatting, use a Neovim plugin like <code>conform.nvim</code> or <code>null-ls</code>
-configured to invoke <code>clang-format</code> on save. The project’s
-<code>.clang-format</code> is picked up automatically.</p>
+<p>Open any source file in <code>workspace/</code> and clangd should activate automatically.</p>
+<p>For formatting, use a Neovim plugin like <code>conform.nvim</code> or <code>null-ls</code> configured to invoke <code>clang-format</code> on save. The project’s <code>.clang-format</code> is picked up automatically.</p>
 <h4 id="vscode"><a class="header" href="#vscode">VSCode</a></h4>
 <p>For VSCode users:</p>
 <ol>
-<li>Install the <code>clangd</code> extension (preferred over the <code>C/C++</code>
-extension for this project).</li>
+<li>Install the <code>clangd</code> extension (preferred over the <code>C/C++</code> extension for this project).</li>
 <li>Open <code>workspace/</code> as the workspace folder.</li>
 <li>clangd activates automatically.</li>
 <li>Install the <code>CMake</code> extension for preset management.</li>
@@ -436,22 +442,16 @@ extension for this project).</li>
 <hr>
 <h2 id="3-windows-11-detailed-setup"><a class="header" href="#3-windows-11-detailed-setup">3. Windows 11: Detailed Setup</a></h2>
 <h3 id="31-visual-studio-2022"><a class="header" href="#31-visual-studio-2022">3.1 Visual Studio 2022</a></h3>
-<p>Install Visual Studio 2022 (Community edition is sufficient) from
-https://visualstudio.microsoft.com/. During installation, select
-the <strong>“Desktop development with C++”</strong> workload, and verify the
-following components are checked:</p>
+<p>Install Visual Studio 2022 (Community edition is sufficient) from https://visualstudio.microsoft.com/. During installation, select the <strong>“Desktop development with C++”</strong> workload, and verify the following components are checked:</p>
 <ul>
 <li>MSVC v143 — VS 2022 C++ x64/x86 build tools</li>
 <li>C++ CMake tools for Windows</li>
 <li>Windows 11 SDK (latest)</li>
 <li>Git for Windows (or install separately)</li>
 </ul>
-<p>The default installation produces a Visual Studio that can build
-the project from inside the IDE, plus command-line tools accessible
-from the “x64 Native Tools Command Prompt for VS 2022”.</p>
+<p>The default installation produces a Visual Studio that can build the project from inside the IDE, plus command-line tools accessible from the “x64 Native Tools Command Prompt for VS 2022”.</p>
 <h3 id="32-vulkan-sdk"><a class="header" href="#32-vulkan-sdk">3.2 Vulkan SDK</a></h3>
-<p>Download and install the Vulkan SDK from https://vulkan.lunarg.com/.
-Use the latest 1.3.x release.</p>
+<p>Download and install the Vulkan SDK from https://vulkan.lunarg.com/. Use the latest 1.3.x release.</p>
 <p>The installer:</p>
 <ul>
 <li>Installs the SDK to <code>C:\VulkanSDK\&lt;version&gt;\</code>.</li>
@@ -463,16 +463,12 @@ Use the latest 1.3.x release.</p>
 glslc --version
 vulkaninfo --summary
 </code></pre>
-<p>If <code>vulkaninfo</code> does not list a GPU with Vulkan 1.3, the issue is
-GPU drivers. Update from your GPU vendor’s website (NVIDIA, AMD,
-Intel) before continuing.</p>
+<p>If <code>vulkaninfo</code> does not list a GPU with Vulkan 1.3, the issue is GPU drivers. Update from your GPU vendor’s website (NVIDIA, AMD, Intel) before continuing.</p>
 <h3 id="33-cmake-git-and-python"><a class="header" href="#33-cmake-git-and-python">3.3 CMake, Git and Python</a></h3>
-<p>CMake is included with Visual Studio’s CMake tools, but a standalone
-CMake 3.29+ is recommended for command-line work:</p>
+<p>CMake is included with Visual Studio’s CMake tools, but a standalone CMake 3.29+ is recommended for command-line work:</p>
 <pre><code class="language-powershell">winget install Kitware.CMake
 </code></pre>
-<p>Git is included with Visual Studio if you selected the option, or
-install separately:</p>
+<p>Git is included with Visual Studio if you selected the option, or install separately:</p>
 <pre><code class="language-powershell">winget install Git.Git
 </code></pre>
 <p>Verify:</p>
@@ -485,6 +481,11 @@ git --version
 <p>Verify:</p>
 <pre><code class="language-powershell">python --version
 </code></pre>
+<p>If you want to use Zig or Rust for the cross-language ABI tests, install them via winget:</p>
+<pre><code class="language-powershell">winget install Ziglang.Zig
+winget install Rustlang.Rustup
+</code></pre>
+<p>Without them, the Zig and Rust tests are not registered at all: <code>ctest</code> reports success without having run them. <code>liara verify --optional</code> reports their absence.</p>
 <h3 id="34-vcpkg"><a class="header" href="#34-vcpkg">3.4 vcpkg</a></h3>
 <p>Install vcpkg in <code>C:\vcpkg</code>:</p>
 <pre><code class="language-powershell">git clone https://github.com/microsoft/vcpkg.git C:\vcpkg
@@ -505,10 +506,7 @@ C:\vcpkg\bootstrap-vcpkg.bat
 cd liara
 .\scripts\liara.ps1 setup
 </code></pre>
-<p>The PowerShell wrapper runs the unified Python CLI orchestrator which performs the
-exact same workspace setup as Linux: clones modules into <code>workspace\</code>, generates the
-top-level <code>CMakeLists.txt</code>, creates the merged <code>vcpkg.json</code> manifest, generates presets,
-and runs CMake configure.</p>
+<p>The PowerShell wrapper runs the unified Python CLI orchestrator which performs the exact same workspace setup as Linux: clones modules into <code>workspace\</code>, generates the top-level <code>CMakeLists.txt</code>, creates the merged <code>vcpkg.json</code> manifest, generates presets, and runs CMake configure.</p>
 <p>If PowerShell refuses to run the script due to execution policy:</p>
 <pre><code class="language-powershell">Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 </code></pre>
@@ -528,41 +526,30 @@ and runs CMake configure.</p>
 <li><code>windows-debug</code> — debug build, single configuration.</li>
 <li><code>windows-release</code> — release build. Default for development.</li>
 </ul>
-<p>After a successful build, run the test suite. If all tests pass, the
-setup is complete.</p>
+<p>After a successful build, run the test suite. If all tests pass, the setup is complete.</p>
 <h3 id="37-run-the-demo"><a class="header" href="#37-run-the-demo">3.7 Run the Demo</a></h3>
 <pre><code class="language-powershell"># Run the demo with the default preset
 .\scripts\liara.ps1 launch --preset windows-release
 </code></pre>
-<p>The Visual Studio generator places binaries under a configuration
-subdirectory (<code>Release\</code>), unlike Ninja’s flat layout. This is a
-quirk of the multi-config generator.</p>
+<p>The Visual Studio generator places binaries under a configuration subdirectory (<code>Release\</code>), unlike Ninja’s flat layout. This is a quirk of the multi-config generator.</p>
 <h3 id="38-editor-setup"><a class="header" href="#38-editor-setup">3.8 Editor Setup</a></h3>
 <h4 id="visual-studio-2022"><a class="header" href="#visual-studio-2022">Visual Studio 2022</a></h4>
 <ol>
-<li>Open the workspace folder via <strong>File → Open → Folder…</strong>, pointing
-at <code>workspace\</code>.</li>
+<li>Open the workspace folder via <strong>File → Open → Folder…</strong>, pointing at <code>workspace\</code>.</li>
 <li>Visual Studio detects the <code>CMakeLists.txt</code> and the presets.</li>
 <li>Select a preset from the dropdown next to the build/run buttons.</li>
 <li>Build and run from the IDE.</li>
 </ol>
-<p>Visual Studio picks up <code>.clang-format</code> and applies it on save
-(configurable in Tools → Options → Text Editor → C/C++ → Code Style).</p>
+<p>Visual Studio picks up <code>.clang-format</code> and applies it on save (configurable in Tools → Options → Text Editor → C/C++ → Code Style).</p>
 <h4 id="clion-1"><a class="header" href="#clion-1">CLion</a></h4>
-<p>CLion on Windows works the same as on Linux: open <code>workspace\</code>,
-select a preset, build.</p>
-<p>When configuring CLion, set the toolchain to <strong>Visual Studio</strong> so
-that CLion uses MSVC and not MinGW.</p>
+<p>CLion on Windows works the same as on Linux: open <code>workspace\</code>, select a preset, build.</p>
+<p>When configuring CLion, set the toolchain to <strong>Visual Studio</strong> so that CLion uses MSVC and not MinGW.</p>
 <h4 id="vscode-1"><a class="header" href="#vscode-1">VSCode</a></h4>
-<p>Same as Linux: install clangd extension, open <code>workspace\</code>, clangd
-activates.</p>
-<p>For VSCode to find clangd’s binary, install LLVM separately (or use
-clangd from the Vulkan SDK, which ships one) and configure the
-extension’s <code>clangd.path</code> setting if needed.</p>
+<p>Same as Linux: install clangd extension, open <code>workspace\</code>, clangd activates.</p>
+<p>For VSCode to find clangd’s binary, install LLVM separately (or use clangd from the Vulkan SDK, which ships one) and configure the extension’s <code>clangd.path</code> setting if needed.</p>
 <hr>
 <h2 id="4-verifying-the-setup"><a class="header" href="#4-verifying-the-setup">4. Verifying the Setup</a></h2>
-<p>After completing the platform-specific setup, run the verification
-CLI command provided by the meta repository:</p>
+<p>After completing the platform-specific setup, run the verification CLI command provided by the meta repository:</p>
 <pre><code class="language-bash"># Linux
 ./scripts/liara.sh verify
 
@@ -576,12 +563,8 @@ CLI command provided by the meta repository:</p>
 <li>The Vulkan SDK is functional.</li>
 <li>A trivial CMake project configures successfully.</li>
 </ul>
-<p>The script’s exit code is the source of truth. If it succeeds, the
-environment is ready. If it fails, the message indicates what is
-missing or misconfigured.</p>
-<p>o also check optional but recommended development tools (such as
-<code>clang-format</code>, <code>clang-tidy</code>, <code>ccache</code>, <code>mold</code>, etc.), add the
-<code>--optional</code> flag:</p>
+<p>The script’s exit code is the source of truth. If it succeeds, the environment is ready. If it fails, the message indicates what is missing or misconfigured.</p>
+<p>To also check optional but recommended development tools (such as <code>clang-format</code>, <code>clang-tidy</code>, <code>ccache</code>, <code>mold</code>, etc.), add the <code>--optional</code> flag:</p>
 <pre><code class="language-bash"># Linux
 ./scripts/liara.sh verify --optional
 
@@ -591,32 +574,22 @@ missing or misconfigured.</p>
 <hr>
 <h2 id="5-common-issues-and-workarounds"><a class="header" href="#5-common-issues-and-workarounds">5. Common Issues and Workarounds</a></h2>
 <h3 id="vcpkg-dependency-build-fails"><a class="header" href="#vcpkg-dependency-build-fails">vcpkg Dependency Build Fails</a></h3>
-<p>The first vcpkg run downloads and builds many dependencies, which
-can fail for various reasons (network, disk space, transient errors
-in dependency build scripts). The standard recovery:</p>
+<p>The first vcpkg run downloads and builds many dependencies, which can fail for various reasons (network, disk space, transient errors in dependency build scripts). The standard recovery:</p>
 <pre><code class="language-bash">cd $VCPKG_ROOT  # Or %VCPKG_ROOT% on Windows
 vcpkg remove --recurse &lt;failed-package&gt;
 </code></pre>
-<p>Then re-run the workspace bootstrap or CMake configure step. vcpkg
-caches successfully-built packages, so the second attempt resumes
-from where the first left off.</p>
-<p>If a specific package consistently fails, check the vcpkg issue
-tracker on GitHub.</p>
+<p>Then re-run the workspace bootstrap or CMake configure step. vcpkg caches successfully-built packages, so the second attempt resumes from where the first left off.</p>
+<p>If a specific package consistently fails, check the vcpkg issue tracker on GitHub.</p>
 <h3 id="vulkan-validation-layer-errors-at-runtime"><a class="header" href="#vulkan-validation-layer-errors-at-runtime">Vulkan Validation Layer Errors at Runtime</a></h3>
-<p>If the demo crashes or behaves unexpectedly with messages about
-validation layers, the validation layers package may be missing or
-mismatched with the Vulkan loader version.</p>
+<p>If the demo crashes or behaves unexpectedly with messages about validation layers, the validation layers package may be missing or mismatched with the Vulkan loader version.</p>
 <p>On Arch:</p>
 <pre><code class="language-bash">sudo pacman -S vulkan-validation-layers
 sudo pacman -Syu  # Make sure all Vulkan packages are at consistent versions
 </code></pre>
 <p>On Windows: reinstall the Vulkan SDK.</p>
-<p>If validation errors persist on a known-good driver, capture the
-exact message and open a bug report; this is often a real bug in
-the engine.</p>
+<p>If validation errors persist on a known-good driver, capture the exact message and open a bug report; this is often a real bug in the engine.</p>
 <h3 id="glsl-compiler-not-found"><a class="header" href="#glsl-compiler-not-found">“GLSL compiler not found”</a></h3>
-<p>The <code>glslc</code> binary is part of <code>shaderc</code> on Arch and the Vulkan SDK
-on Windows. If the build complains about <code>glslc</code> not being found:</p>
+<p>The <code>glslc</code> binary is part of <code>shaderc</code> on Arch and the Vulkan SDK on Windows. If the build complains about <code>glslc</code> not being found:</p>
 <pre><code class="language-bash"># Arch
 which glslc
 # Should output something like /usr/bin/glslc
@@ -625,35 +598,23 @@ which glslc
 Get-Command glslc
 # Should output something in %VULKAN_SDK%\Bin\
 </code></pre>
-<p>If the binary is not on PATH, the SDK installation is incomplete.
-Re-run the Vulkan SDK installer or <code>pacman -S shaderc</code>.</p>
+<p>If the binary is not on PATH, the SDK installation is incomplete. Re-run the Vulkan SDK installer or <code>pacman -S shaderc</code>.</p>
 <h3 id="clion-does-not-pick-up-presets"><a class="header" href="#clion-does-not-pick-up-presets">CLion Does Not Pick Up Presets</a></h3>
-<p>CLion’s CMake preset support requires the project to be opened at
-the level where <code>CMakePresets.json</code> lives. For Liara, this is
-<code>workspace/</code>, not the meta repo’s root.</p>
+<p>CLion’s CMake preset support requires the project to be opened at the level where <code>CMakePresets.json</code> lives. For Liara, this is <code>workspace/</code>, not the meta repo’s root.</p>
 <p>If presets still don’t appear, you can force-regenerate the workspace by re-running the setup step:</p>
 <pre><code class="language-bash">./scripts/liara.sh setup
 </code></pre>
 <h3 id="slow-linker-on-linux"><a class="header" href="#slow-linker-on-linux">Slow Linker on Linux</a></h3>
-<p>The default GNU <code>ld</code> is slow for large C++ projects. The CMake
-configuration uses <code>mold</code> if it is available, but if for some reason
-mold is not used, link times can be painful.</p>
+<p>The default GNU <code>ld</code> is slow for large C++ projects. The CMake configuration uses <code>mold</code> if it is available, but if for some reason mold is not used, link times can be painful.</p>
 <p>Verify mold is being used:</p>
 <pre><code class="language-bash">ninja -t commands | grep -- '-fuse-ld'
 </code></pre>
-<p>Should show <code>-fuse-ld=mold</code>. If not, ensure mold is installed
-(<code>sudo pacman -S mold</code>) and that the CMake cache reflects the
-linker choice (delete <code>build/</code> and reconfigure if needed).</p>
+<p>Should show <code>-fuse-ld=mold</code>. If not, ensure mold is installed (<code>sudo pacman -S mold</code>) and that the CMake cache reflects the linker choice (delete <code>build/</code> and reconfigure if needed).</p>
 <h3 id="cannot-find-compile_commandsjson"><a class="header" href="#cannot-find-compile_commandsjson">“Cannot find compile_commands.json”</a></h3>
-<p>clangd looks for <code>compile_commands.json</code> in the workspace root or
-the build directory. The bootstrap script creates a symlink at
-<code>workspace/compile_commands.json</code> pointing at the active build’s
-file, but if the build is not yet configured the symlink is broken.</p>
-<p>The fix: configure CMake at least once. The symlink updates
-automatically.</p>
+<p>clangd looks for <code>compile_commands.json</code> in the workspace root or the build directory. The bootstrap script creates a symlink at <code>workspace/compile_commands.json</code> pointing at the active build’s file, but if the build is not yet configured the symlink is broken.</p>
+<p>The fix: configure CMake at least once. The symlink updates automatically.</p>
 <h3 id="msvc-compile-times"><a class="header" href="#msvc-compile-times">MSVC Compile Times</a></h3>
-<p>MSVC’s compile times for templates and modern C++ can be
-significant. Mitigations:</p>
+<p>MSVC’s compile times for templates and modern C++ can be significant. Mitigations:</p>
 <ul>
 <li>Use <strong>Ninja</strong> generator on Windows for faster builds (requires
 installing Ninja and using a different preset). The default
@@ -666,37 +627,29 @@ and the CMake configuration uses it automatically when found.</li>
 due to skipped optimizations.</li>
 </ul>
 <h3 id="antivirus-slowing-builds-windows"><a class="header" href="#antivirus-slowing-builds-windows">Antivirus Slowing Builds (Windows)</a></h3>
-<p>Windows Defender or third-party antivirus can dramatically slow
-builds by scanning every produced object file. Add an exclusion
-for the workspace directory:</p>
+<p>Windows Defender or third-party antivirus can dramatically slow builds by scanning every produced object file. Add an exclusion for the workspace directory:</p>
 <pre><code class="language-powershell">Add-MpPreference -ExclusionPath "$HOME\src\liara\workspace"
 </code></pre>
-<p>Adjust the path to match your actual workspace location. This
-typically halves or better the build time on Windows.</p>
+<p>Adjust the path to match your actual workspace location. This typically halves or better the build time on Windows.</p>
 <hr>
 <h2 id="6-optional-tools"><a class="header" href="#6-optional-tools">6. Optional Tools</a></h2>
 <p>These tools improve the development experience but are not required.</p>
 <h3 id="ccache-linux"><a class="header" href="#ccache-linux">ccache (Linux)</a></h3>
-<p>Compile cache that speeds up incremental and recompile-from-scratch
-builds:</p>
+<p>Compile cache that speeds up incremental and recompile-from-scratch builds:</p>
 <pre><code class="language-bash">sudo pacman -S ccache
 </code></pre>
-<p>The CMake configuration detects ccache and uses it automatically.
-Configure ccache’s max size:</p>
+<p>The CMake configuration detects ccache and uses it automatically. Configure ccache’s max size:</p>
 <pre><code class="language-bash">ccache -M 10G
 </code></pre>
 <h3 id="sccache-cross-platform"><a class="header" href="#sccache-cross-platform">sccache (Cross-Platform)</a></h3>
-<p>Mozilla’s sccache, a Rust-based ccache equivalent that works on
-Windows. Useful especially on Windows where ccache support is
-limited:</p>
+<p>Mozilla’s sccache, a Rust-based ccache equivalent that works on Windows. Useful especially on Windows where ccache support is limited:</p>
 <pre><code class="language-bash"># Linux/macOS
 cargo install sccache  # Or use the package manager.
 
 # Windows
 winget install Mozilla.Sccache
 </code></pre>
-<p>The CMake configuration uses sccache when found (via
-<code>CMAKE_C_COMPILER_LAUNCHER</code> and friends).</p>
+<p>The CMake configuration uses sccache when found (via <code>CMAKE_C_COMPILER_LAUNCHER</code> and friends).</p>
 <h3 id="renderdoc-cross-platform"><a class="header" href="#renderdoc-cross-platform">RenderDoc (Cross-Platform)</a></h3>
 <p>A GPU debugger that captures Vulkan frames for inspection:</p>
 <pre><code class="language-bash"># Arch
@@ -704,22 +657,17 @@ sudo pacman -S renderdoc
 
 # Windows: download from https://renderdoc.org/
 </code></pre>
-<p>When developing rendering code, RenderDoc is invaluable for
-inspecting GPU state, viewing intermediate textures, and diagnosing
-draw call issues.</p>
+<p>When developing rendering code, RenderDoc is invaluable for inspecting GPU state, viewing intermediate textures, and diagnosing draw call issues.</p>
 <h3 id="tracy-profiler-cross-platform"><a class="header" href="#tracy-profiler-cross-platform">Tracy Profiler (Cross-Platform)</a></h3>
 <p>A real-time frame profiler:</p>
 <pre><code class="language-bash"># Arch
 yay -S tracy
 # Or build from source: https://github.com/wolfpld/tracy
 </code></pre>
-<p>Liara’s profiling integration with Tracy is planned for v1.x and is
-not yet active.</p>
+<p>Liara’s profiling integration with Tracy is planned for v1.x and is not yet active.</p>
 <hr>
 <h2 id="7-updating-the-setup"><a class="header" href="#7-updating-the-setup">7. Updating the Setup</a></h2>
-<p>Periodically, the project’s dependency requirements change: a new
-version of Vulkan, a new compiler version, a new external library.
-The procedure:</p>
+<p>Periodically, the project’s dependency requirements change: a new version of Vulkan, a new compiler version, a new external library. The procedure:</p>
 <h3 id="updating-system-packages"><a class="header" href="#updating-system-packages">Updating System Packages</a></h3>
 <pre><code class="language-bash"># Arch
 sudo pacman -Syu
@@ -732,10 +680,7 @@ winget upgrade --all
 .\scripts\liara.ps1 verify --optional  # Windows
 </code></pre>
 <h3 id="updating-vcpkg"><a class="header" href="#updating-vcpkg">Updating vcpkg</a></h3>
-<p>vcpkg’s manifest mode pins dependencies via the registry baseline.
-To pull newer versions of dependencies, the project’s
-<code>vcpkg-configuration.json</code> baseline is bumped (a project-side
-change, not a developer-side change).</p>
+<p>vcpkg’s manifest mode pins dependencies via the registry baseline. To pull newer versions of dependencies, the project’s <code>vcpkg-configuration.json</code> baseline is bumped (a project-side change, not a developer-side change).</p>
 <p>To update the vcpkg tool itself:</p>
 <pre><code class="language-bash">cd $VCPKG_ROOT
 git pull
@@ -747,22 +692,17 @@ git pull
 git pull
 ./scripts/liara.sh setup  # Or .ps1 on Windows
 </code></pre>
-<p>The orchestrator will automatically pull (<code>git pull</code>) each module
-repository and update the merged files. If you want to configure
-the workspace without fetching new git changes, you can use:</p>
+<p>The orchestrator will automatically pull (<code>git pull</code>) each module repository and update the merged files. If you want to configure the workspace without fetching new git changes, you can use:</p>
 <pre><code class="language-bash">./scripts/liara.sh setup --no-pull  # Or .ps1 on Windows
 </code></pre>
 <h3 id="updating-the-vulkan-sdk-windows"><a class="header" href="#updating-the-vulkan-sdk-windows">Updating the Vulkan SDK (Windows)</a></h3>
-<p>Download the new SDK installer and run it. The installer cleanly
-upgrades over the existing installation. After upgrading, regenerate
-the build:</p>
+<p>Download the new SDK installer and run it. The installer cleanly upgrades over the existing installation. After upgrading, regenerate the build:</p>
 <pre><code class="language-powershell">cd workspace
 Remove-Item -Recurse -Force build
 cmake --preset=windows-release
 cmake --build --preset=windows-release
 </code></pre>
-<p>A clean reconfigure is needed because shader compilation paths and
-SDK includes may have changed.</p>
+<p>A clean reconfigure is needed because shader compilation paths and SDK includes may have changed.</p>
 <hr>
 <h2 id="8-uninstalling"><a class="header" href="#8-uninstalling">8. Uninstalling</a></h2>
 <p>If you want to remove Liara and all its development setup:</p>
@@ -786,16 +726,13 @@ Remove-Item -Recurse -Force C:\vcpkg
 
 # Visual Studio and Vulkan SDK can remain; they are not Liara-specific
 </code></pre>
-<p>The system packages (compilers, Vulkan SDK, Visual Studio) are not
-removed by these steps; they are not Liara-specific and may be used
-by other projects.</p>
+<p>The system packages (compilers, Vulkan SDK, Visual Studio) are not removed by these steps; they are not Liara-specific and may be used by other projects.</p>
 <hr>
 <h2 id="9-getting-help"><a class="header" href="#9-getting-help">9. Getting Help</a></h2>
 <p>If something in this document does not work as described:</p>
 <ul>
 <li>Check <strong>section 5</strong> for common issues.</li>
-<li>Check the <strong>issues</strong> on the meta repository (closed issues
-included; the answer is often there).</li>
+<li>Check the <strong>issues</strong> on the meta repository (closed issues included; the answer is often there).</li>
 <li>Open a new issue using the <strong>Bug Report</strong> template, including:
 <ul>
 <li>Platform (Arch version, Windows version)</li>
@@ -806,12 +743,10 @@ included; the answer is often there).</li>
 </ul>
 </li>
 </ul>
-<p>For general questions about how something works (as opposed to
-“this is broken”), use <strong>GitHub Discussions</strong> on the meta
-repository.</p>
-<p>This document is itself maintained as part of the project; if the
-instructions are out of date or unclear, that is a documentation
-defect and a PR fixing it is welcome.</p>
+<p>For general questions about how something works (as opposed to “this is broken”), use <strong>GitHub Discussions</strong> on the meta repository.</p>
+<p>This document is itself maintained as part of the project; if the instructions are out of date or unclear, that is a documentation defect and a PR fixing it is welcome.</p>
+<hr>
+<p><a href="#bootstrap">Back to top</a></p>
 
             </main>
 
