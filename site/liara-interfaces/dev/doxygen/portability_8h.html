@@ -1,7 +1,7 @@
 <!--
     Liara Engine — Doxygen header template
     This template replaces Doxygen's default <head> + opening of <body>.
-    Doxygen substitutes special tokens like include/liara/private_utils.h File Reference, , <link href="navtree.css" rel="stylesheet" type="text/css"/>
+    Doxygen substitutes special tokens like include/liara/internal/portability.h File Reference, , <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
@@ -14,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11"/>
     <meta name="generator" content="Doxygen 1.17.0"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>liara-interfaces: include/liara/private_utils.h File Reference</title>
+    <title>liara-interfaces: include/liara/internal/portability.h File Reference</title>
     <!-- Fonts: Inter for sans, JetBrains Mono for code, OpenDyslexic for a11y -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 <script type="text/javascript">
-document.addEventListener('DOMContentLoaded',() => { initNavTree('private__utils_8h.html','',''); });
+document.addEventListener('DOMContentLoaded',() => { initNavTree('portability_8h.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -145,11 +145,14 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('private__utils
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">private_utils.h File Reference</div></div>
+  <div class="headertitle"><div class="title">portability.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p><a href="private__utils_8h_source.html">Go to the source code of this file.</a></p>
+<p>Portability macros for Liara interfaces.  
+<a href="#details">More...</a></p>
+
+<p><a href="portability_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
@@ -160,8 +163,13 @@ Macros</h2></td></tr>
 <tr class="memitem:a1440cb5800d3c20ffe8969f67eff360a" id="r_a1440cb5800d3c20ffe8969f67eff360a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a1440cb5800d3c20ffe8969f67eff360a">LIARA_TYPEDEF</a>(type,  name)</td></tr>
 <tr class="memitem:a3271a2cd5e890e3618f6469ca92ba355" id="r_a3271a2cd5e890e3618f6469ca92ba355"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a3271a2cd5e890e3618f6469ca92ba355">LIARA_TYPEDEF_DEPRECATED</a>(type,  name,  msg)</td></tr>
 <tr class="memitem:a68d31677e7fc762ba2b23efa1079e783" id="r_a68d31677e7fc762ba2b23efa1079e783"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a68d31677e7fc762ba2b23efa1079e783">LIARA_TYPEDEF_STRUCT</a>(name, ...)</td></tr>
+<tr class="memitem:a63e068be0ebcefbbebd4a9e321da3bda" id="r_a63e068be0ebcefbbebd4a9e321da3bda"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a63e068be0ebcefbbebd4a9e321da3bda">LIARA_CONSTEXPR_FN</a>&#160;&#160;&#160;static inline</td></tr>
 </table>
-<a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Portability macros for Liara interfaces. </p>
+<p>This header file defines macros and type definitions to ensure compatibility across different compilers and programming languages (C and C++). It provides static assertions, deprecation attributes, type casting, and other utilities to facilitate the development of Liara interfaces.</p>
+<dl class="section note"><dt>Note</dt><dd>This header is intended for internal use within the Liara interfaces and should not be included directly by external applications. Use the appropriate Liara interface headers instead. </dd></dl>
+</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
 <a id="a358d829a6b770576badcef9a112eb786" name="a358d829a6b770576badcef9a112eb786"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a358d829a6b770576badcef9a112eb786">&#9670;&#160;</a></span>LIARA_API_DEPRECATED</h2>
 
@@ -173,6 +181,20 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>msg</em></span></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a63e068be0ebcefbbebd4a9e321da3bda" name="a63e068be0ebcefbbebd4a9e321da3bda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63e068be0ebcefbbebd4a9e321da3bda">&#9670;&#160;</a></span>LIARA_CONSTEXPR_FN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LIARA_CONSTEXPR_FN&#160;&#160;&#160;static inline</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -283,7 +305,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><span class="keyword">typedef</span> type name <a class="code hl_define" href="#a358d829a6b770576badcef9a112eb786">LIARA_API_DEPRECATED</a>(msg)</div>
-<div class="ttc" id="aprivate__utils_8h_html_a358d829a6b770576badcef9a112eb786"><div class="ttname"><a href="#a358d829a6b770576badcef9a112eb786">LIARA_API_DEPRECATED</a></div><div class="ttdeci">#define LIARA_API_DEPRECATED(msg)</div><div class="ttdef"><b>Definition</b> private_utils.h:24</div></div>
+<div class="ttc" id="aportability_8h_html_a358d829a6b770576badcef9a112eb786"><div class="ttname"><a href="#a358d829a6b770576badcef9a112eb786">LIARA_API_DEPRECATED</a></div><div class="ttdeci">#define LIARA_API_DEPRECATED(msg)</div><div class="ttdef"><b>Definition</b> portability.h:36</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -329,7 +351,7 @@ Macros</h2></td></tr>
 -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
     <ul>
-        <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_285aa40730b2df8f5cd48498b8604c92.html">liara</a></li><li class="navelem"><a href="private__utils_8h.html">private_utils.h</a></li>
+        <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_285aa40730b2df8f5cd48498b8604c92.html">liara</a></li><li class="navelem"><a href="dir_4b1f466f7686c9cd7ad39ca8bd686c17.html">internal</a></li><li class="navelem"><a href="portability_8h.html">portability.h</a></li>
         <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
     </ul>
 </div>

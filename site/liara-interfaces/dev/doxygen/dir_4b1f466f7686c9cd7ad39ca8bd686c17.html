@@ -1,7 +1,7 @@
 <!--
     Liara Engine — Doxygen header template
     This template replaces Doxygen's default <head> + opening of <body>.
-    Doxygen substitutes special tokens like include/liara/renderer/packet.h File Reference, , <link href="navtree.css" rel="stylesheet" type="text/css"/>
+    Doxygen substitutes special tokens like include/liara/internal Directory Reference, , <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
@@ -14,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11"/>
     <meta name="generator" content="Doxygen 1.17.0"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>liara-interfaces: include/liara/renderer/packet.h File Reference</title>
+    <title>liara-interfaces: include/liara/internal Directory Reference</title>
     <!-- Fonts: Inter for sans, JetBrains Mono for code, OpenDyslexic for a11y -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 <script type="text/javascript">
-document.addEventListener('DOMContentLoaded',() => { initNavTree('packet_8h.html','',''); });
+document.addEventListener('DOMContentLoaded',() => { initNavTree('dir_4b1f466f7686c9cd7ad39ca8bd686c17.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -145,114 +145,15 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('packet_8h.html
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">packet.h File Reference</div></div>
+  <div class="headertitle"><div class="title">internal Directory Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Render packet structures: the plain-old-data snapshot the core hands to the renderer each frame.  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="portability_8h_source.html">liara/internal/portability.h</a>&gt;</code><br />
-<code>#include &lt;stddef.h&gt;</code><br />
-<code>#include &lt;stdint.h&gt;</code><br />
-</div>
-<p><a href="packet_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a4e673ff6a0841214a5b1a2600b45d919" id="r_a4e673ff6a0841214a5b1a2600b45d919"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a4e673ff6a0841214a5b1a2600b45d919">LIARA_RENDER_PACKET_VERSION</a>&#160;&#160;&#160;1U</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ab4228a66056b50049cdc4f5677a248ab" id="r_ab4228a66056b50049cdc4f5677a248ab"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab4228a66056b50049cdc4f5677a248ab">LIARA_TYPEDEF_STRUCT</a> (liara_render_drawable_t, float x;float y;uint32_t color;)</td></tr>
-<tr class="memdesc:ab4228a66056b50049cdc4f5677a248ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">A single drawable submitted to the renderer as part of a render packet.  <br /></td></tr>
-<tr class="memitem:ac51dfe2356c70779d121b1b2a0686435" id="r_ac51dfe2356c70779d121b1b2a0686435"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ac51dfe2356c70779d121b1b2a0686435">LIARA_TYPEDEF_STRUCT</a> (liara_render_packet_t, uint32_t struct_version;uint16_t grid_width;uint16_t grid_height;uint32_t background_color;const liara_render_drawable_t *drawables;size_t drawable_count;)</td></tr>
-<tr class="memdesc:ac51dfe2356c70779d121b1b2a0686435"><td class="mdescLeft">&#160;</td><td class="mdescRight">One frame's worth of drawable data, extracted by the core and submitted to the renderer.  <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>
+Files</h2></td></tr>
+<tr class="memitem:portability_2Eh" id="r_portability_2Eh"><td class="memItemLeft"><a href="portability_8h_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight"><a class="el" href="portability_8h.html">portability.h</a></td></tr>
+<tr class="memdesc:portability_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Portability macros for Liara interfaces. <br /></td></tr>
 </table>
-<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Render packet structures: the plain-old-data snapshot the core hands to the renderer each frame. </p>
-</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
-<a id="a4e673ff6a0841214a5b1a2600b45d919" name="a4e673ff6a0841214a5b1a2600b45d919"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e673ff6a0841214a5b1a2600b45d919">&#9670;&#160;</a></span>LIARA_RENDER_PACKET_VERSION</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define LIARA_RENDER_PACKET_VERSION&#160;&#160;&#160;1U</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Current version of the liara_render_packet_t structure. </p>
-
-</div>
-</div>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="ab4228a66056b50049cdc4f5677a248ab" name="ab4228a66056b50049cdc4f5677a248ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4228a66056b50049cdc4f5677a248ab">&#9670;&#160;</a></span>LIARA_TYPEDEF_STRUCT() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">LIARA_TYPEDEF_STRUCT </td>
-          <td>(</td>
-          <td class="paramtype">liara_render_drawable_t</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float x;float y;uint32_t color;</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>A single drawable submitted to the renderer as part of a render packet. </p>
-<dl class="section threadsafety">
-<dt>Thread Safety</dt>
-<dd>This type has no thread-safety concerns of its own; it is plain data. </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">-</td><td>Position in the render target's grid space, [0, grid_width). Position in the render target's grid space, [0, grid_height). Color, 0xAARRGGBB. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ac51dfe2356c70779d121b1b2a0686435" name="ac51dfe2356c70779d121b1b2a0686435"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac51dfe2356c70779d121b1b2a0686435">&#9670;&#160;</a></span>LIARA_TYPEDEF_STRUCT() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">LIARA_TYPEDEF_STRUCT </td>
-          <td>(</td>
-          <td class="paramtype">liara_render_packet_t</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t struct_version;uint16_t grid_width;uint16_t grid_height;uint32_t background_color;const liara_render_drawable_t *drawables;size_t drawable_count;</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>One frame's worth of drawable data, extracted by the core and submitted to the renderer. </p>
-<dl class="section threadsafety">
-<dt>Thread Safety</dt>
-<dd>This type has no thread-safety concerns of its own; it is plain data. The lifetime of the <span class="tt">drawables</span> pointer is documented by whichever function produces the packet (see <span class="tt"><a class="el" href="core_8h.html#aaf191d6943ac707a56c574df038d2dd7" title="Retrieves the render packet built during the core&#39;s most recent update.">liara_core_get_render_packet</a></span>). </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">-</td><td>Version of this structure. See LIARA_RENDER_PACKET_VERSION. Width of the render target, in grid cells. Height of the render target, in grid cells. Color used for cells with no drawable, 0xAARRGGBB. Caller-owned array of drawables; see the note above. Number of entries in <span class="tt">drawables</span>. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
@@ -271,7 +172,7 @@ Functions</h2></td></tr>
 -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
     <ul>
-        <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_285aa40730b2df8f5cd48498b8604c92.html">liara</a></li><li class="navelem"><a href="dir_db3dd50d23d5038f8fea3131491ea79d.html">renderer</a></li><li class="navelem"><a href="packet_8h.html">packet.h</a></li>
+        <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_285aa40730b2df8f5cd48498b8604c92.html">liara</a></li><li class="navelem"><a href="dir_4b1f466f7686c9cd7ad39ca8bd686c17.html">internal</a></li>
         <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
     </ul>
 </div>

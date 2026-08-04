@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('version_8h.htm
 
 <p>Generic 32-bit version encoding/decoding and utilities.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="private__utils_8h_source.html">liara/private_utils.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="portability_8h_source.html">liara/internal/portability.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="result_8h_source.html">liara/result.h</a>&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
@@ -188,14 +188,14 @@ Functions</h2></td></tr>
 <tr class="memitem:ab8bf328df4ec2c6a76bfc8627f29a4b1" id="r_ab8bf328df4ec2c6a76bfc8627f29a4b1"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab8bf328df4ec2c6a76bfc8627f29a4b1">LIARA_STATIC_ASSERT</a> (<a class="el" href="#ac41a58838efb97a050f2cc6786259fde">LIARA_VERSION_MAJOR_BITS</a>+<a class="el" href="#a4c030fe28eb7ba8d4d0127de1663a36d">LIARA_VERSION_MINOR_BITS</a>+<a class="el" href="#a47f6351c340557f03ba264dc1ac8f9a5">LIARA_VERSION_PATCH_BITS</a>&lt;=32U, &quot;Version components exceed 32 bits&quot;)</td></tr>
 <tr class="memitem:a84fa657663ed01664e638e07bc64550a" id="r_a84fa657663ed01664e638e07bc64550a"><td class="memItemLeft">static liara_result_t&#160;</td><td class="memItemRight"><a class="el" href="#a84fa657663ed01664e638e07bc64550a">liara_try_make_version</a> (const uint32_t major, const uint32_t minor, const uint32_t patch, uint32_t *out_version)</td></tr>
 <tr class="memdesc:a84fa657663ed01664e638e07bc64550a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline function to create a version number from major, minor, and patch components.  <br /></td></tr>
-<tr class="memitem:a3ed7190d8840207d6a7328f37db27b32" id="r_a3ed7190d8840207d6a7328f37db27b32"><td class="memItemLeft">static uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a3ed7190d8840207d6a7328f37db27b32">liara_version_major</a> (const uint32_t v)</td></tr>
-<tr class="memdesc:a3ed7190d8840207d6a7328f37db27b32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline function to extract the major version component from a combined version number.  <br /></td></tr>
-<tr class="memitem:a5360c555aa6c87b5cd7186e196f0f095" id="r_a5360c555aa6c87b5cd7186e196f0f095"><td class="memItemLeft">static uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a5360c555aa6c87b5cd7186e196f0f095">liara_version_minor</a> (const uint32_t v)</td></tr>
-<tr class="memdesc:a5360c555aa6c87b5cd7186e196f0f095"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline function to extract the minor version component from a combined version number.  <br /></td></tr>
-<tr class="memitem:a8520dd93cfa2392e3b0526280ac1596f" id="r_a8520dd93cfa2392e3b0526280ac1596f"><td class="memItemLeft">static uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a8520dd93cfa2392e3b0526280ac1596f">liara_version_patch</a> (const uint32_t v)</td></tr>
-<tr class="memdesc:a8520dd93cfa2392e3b0526280ac1596f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline function to extract the patch version component from a combined version number.  <br /></td></tr>
-<tr class="memitem:a38031dee7d64ee342c23ca57eaa0635a" id="r_a38031dee7d64ee342c23ca57eaa0635a"><td class="memItemLeft">static int8_t&#160;</td><td class="memItemRight"><a class="el" href="#a38031dee7d64ee342c23ca57eaa0635a">liara_version_compare</a> (const uint32_t v1, const uint32_t v2, const bool ignore_patch)</td></tr>
-<tr class="memdesc:a38031dee7d64ee342c23ca57eaa0635a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline function to compare two version numbers and return a signed integer indicating their relative order, with an option to ignore the patch version.  <br /></td></tr>
+<tr class="memitem:a53c7af29c805e6e50a87bbbb16bb0690" id="r_a53c7af29c805e6e50a87bbbb16bb0690"><td class="memItemLeft"><a class="el" href="portability_8h.html#a63e068be0ebcefbbebd4a9e321da3bda">LIARA_CONSTEXPR_FN</a> uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a53c7af29c805e6e50a87bbbb16bb0690">liara_version_major</a> (const uint32_t v)</td></tr>
+<tr class="memdesc:a53c7af29c805e6e50a87bbbb16bb0690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline function to extract the major version component from a combined version number.  <br /></td></tr>
+<tr class="memitem:ae2513a819fd734731ad69ffe3bccfd4a" id="r_ae2513a819fd734731ad69ffe3bccfd4a"><td class="memItemLeft"><a class="el" href="portability_8h.html#a63e068be0ebcefbbebd4a9e321da3bda">LIARA_CONSTEXPR_FN</a> uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#ae2513a819fd734731ad69ffe3bccfd4a">liara_version_minor</a> (const uint32_t v)</td></tr>
+<tr class="memdesc:ae2513a819fd734731ad69ffe3bccfd4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline function to extract the minor version component from a combined version number.  <br /></td></tr>
+<tr class="memitem:a07ea3e3b1e6840f115b8537d05fb2102" id="r_a07ea3e3b1e6840f115b8537d05fb2102"><td class="memItemLeft"><a class="el" href="portability_8h.html#a63e068be0ebcefbbebd4a9e321da3bda">LIARA_CONSTEXPR_FN</a> uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a07ea3e3b1e6840f115b8537d05fb2102">liara_version_patch</a> (const uint32_t v)</td></tr>
+<tr class="memdesc:a07ea3e3b1e6840f115b8537d05fb2102"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline function to extract the patch version component from a combined version number.  <br /></td></tr>
+<tr class="memitem:aa905239ac2a9fe0a9cf4f4118cc5dc30" id="r_aa905239ac2a9fe0a9cf4f4118cc5dc30"><td class="memItemLeft"><a class="el" href="portability_8h.html#a63e068be0ebcefbbebd4a9e321da3bda">LIARA_CONSTEXPR_FN</a> int8_t&#160;</td><td class="memItemRight"><a class="el" href="#aa905239ac2a9fe0a9cf4f4118cc5dc30">liara_version_compare</a> (const uint32_t v1, const uint32_t v2, const bool ignore_patch)</td></tr>
+<tr class="memdesc:aa905239ac2a9fe0a9cf4f4118cc5dc30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline function to compare two version numbers and return a signed integer indicating their relative order, with an option to ignore the patch version.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Generic 32-bit version encoding/decoding and utilities. </p>
@@ -223,11 +223,11 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">(<a class="code hl_define" href="private__utils_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a>(uint32_t,                                                            \</div>
-<div class="line">                   ((<a class="code hl_define" href="private__utils_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a>(uint32_t, major) &lt;&lt; <a class="code hl_define" href="#a7dba188c54a7ecc4a0b1061e65cf0e27">LIARA_VERSION_MAJOR_SHIFT</a>)   \</div>
-<div class="line">                    | (<a class="code hl_define" href="private__utils_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a>(uint32_t, minor) &lt;&lt; <a class="code hl_define" href="#a9215d415f742a835e45c532f7d5e1052">LIARA_VERSION_MINOR_SHIFT</a>) \</div>
-<div class="line">                    | (<a class="code hl_define" href="private__utils_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a>(uint32_t, patch) &lt;&lt; <a class="code hl_define" href="#ae91e05419e0418901b1610e6bbbe1f68">LIARA_VERSION_PATCH_SHIFT</a>))))</div>
-<div class="ttc" id="aprivate__utils_8h_html_a54036a9ac6d747dd291773cdda6a79b1"><div class="ttname"><a href="private__utils_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a></div><div class="ttdeci">#define LIARA_STATIC_CAST(type, value)</div><div class="ttdef"><b>Definition</b> private_utils.h:30</div></div>
+<b>Value:</b><div class="fragment"><div class="line">(<a class="code hl_define" href="portability_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a>(uint32_t,                                                            \</div>
+<div class="line">                   ((<a class="code hl_define" href="portability_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a>(uint32_t, major) &lt;&lt; <a class="code hl_define" href="#a7dba188c54a7ecc4a0b1061e65cf0e27">LIARA_VERSION_MAJOR_SHIFT</a>)   \</div>
+<div class="line">                    | (<a class="code hl_define" href="portability_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a>(uint32_t, minor) &lt;&lt; <a class="code hl_define" href="#a9215d415f742a835e45c532f7d5e1052">LIARA_VERSION_MINOR_SHIFT</a>) \</div>
+<div class="line">                    | (<a class="code hl_define" href="portability_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a>(uint32_t, patch) &lt;&lt; <a class="code hl_define" href="#ae91e05419e0418901b1610e6bbbe1f68">LIARA_VERSION_PATCH_SHIFT</a>))))</div>
+<div class="ttc" id="aportability_8h_html_a54036a9ac6d747dd291773cdda6a79b1"><div class="ttname"><a href="portability_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a></div><div class="ttdeci">#define LIARA_STATIC_CAST(type, value)</div><div class="ttdef"><b>Definition</b> portability.h:42</div></div>
 <div class="ttc" id="aversion_8h_html_a7dba188c54a7ecc4a0b1061e65cf0e27"><div class="ttname"><a href="#a7dba188c54a7ecc4a0b1061e65cf0e27">LIARA_VERSION_MAJOR_SHIFT</a></div><div class="ttdeci">#define LIARA_VERSION_MAJOR_SHIFT</div><div class="ttdef"><b>Definition</b> version.h:26</div></div>
 <div class="ttc" id="aversion_8h_html_a9215d415f742a835e45c532f7d5e1052"><div class="ttname"><a href="#a9215d415f742a835e45c532f7d5e1052">LIARA_VERSION_MINOR_SHIFT</a></div><div class="ttdeci">#define LIARA_VERSION_MINOR_SHIFT</div><div class="ttdef"><b>Definition</b> version.h:27</div></div>
 <div class="ttc" id="aversion_8h_html_ae91e05419e0418901b1610e6bbbe1f68"><div class="ttname"><a href="#ae91e05419e0418901b1610e6bbbe1f68">LIARA_VERSION_PATCH_SHIFT</a></div><div class="ttdeci">#define LIARA_VERSION_PATCH_SHIFT</div><div class="ttdef"><b>Definition</b> version.h:28</div></div>
@@ -335,7 +335,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">((<a class="code hl_define" href="private__utils_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a>(uint32_t, v) &gt;&gt; <a class="code hl_define" href="#a7dba188c54a7ecc4a0b1061e65cf0e27">LIARA_VERSION_MAJOR_SHIFT</a>) &amp; <a class="code hl_define" href="#a80857ca4a694ce0ca9c432a76254e01c">LIARA_VERSION_MAJOR_MASK</a>)</div>
+<b>Value:</b><div class="fragment"><div class="line">((<a class="code hl_define" href="portability_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a>(uint32_t, v) &gt;&gt; <a class="code hl_define" href="#a7dba188c54a7ecc4a0b1061e65cf0e27">LIARA_VERSION_MAJOR_SHIFT</a>) &amp; <a class="code hl_define" href="#a80857ca4a694ce0ca9c432a76254e01c">LIARA_VERSION_MAJOR_MASK</a>)</div>
 <div class="ttc" id="aversion_8h_html_a80857ca4a694ce0ca9c432a76254e01c"><div class="ttname"><a href="#a80857ca4a694ce0ca9c432a76254e01c">LIARA_VERSION_MAJOR_MASK</a></div><div class="ttdeci">#define LIARA_VERSION_MAJOR_MASK</div><div class="ttdef"><b>Definition</b> version.h:30</div></div>
 </div><!-- fragment -->
 <p>Extract the major version component from a combined version number. </p>
@@ -410,7 +410,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">((<a class="code hl_define" href="private__utils_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a>(uint32_t, v) &gt;&gt; <a class="code hl_define" href="#a9215d415f742a835e45c532f7d5e1052">LIARA_VERSION_MINOR_SHIFT</a>) &amp; <a class="code hl_define" href="#ad80a2c3254820ceb00c35ec180a49bcb">LIARA_VERSION_MINOR_MASK</a>)</div>
+<b>Value:</b><div class="fragment"><div class="line">((<a class="code hl_define" href="portability_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a>(uint32_t, v) &gt;&gt; <a class="code hl_define" href="#a9215d415f742a835e45c532f7d5e1052">LIARA_VERSION_MINOR_SHIFT</a>) &amp; <a class="code hl_define" href="#ad80a2c3254820ceb00c35ec180a49bcb">LIARA_VERSION_MINOR_MASK</a>)</div>
 <div class="ttc" id="aversion_8h_html_ad80a2c3254820ceb00c35ec180a49bcb"><div class="ttname"><a href="#ad80a2c3254820ceb00c35ec180a49bcb">LIARA_VERSION_MINOR_MASK</a></div><div class="ttdeci">#define LIARA_VERSION_MINOR_MASK</div><div class="ttdef"><b>Definition</b> version.h:31</div></div>
 </div><!-- fragment -->
 <p>Extract the minor version component from a combined version number. </p>
@@ -485,7 +485,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">((<a class="code hl_define" href="private__utils_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a>(uint32_t, v) &gt;&gt; <a class="code hl_define" href="#ae91e05419e0418901b1610e6bbbe1f68">LIARA_VERSION_PATCH_SHIFT</a>) &amp; <a class="code hl_define" href="#a474542da7831f5d0527294e94775f72b">LIARA_VERSION_PATCH_MASK</a>)</div>
+<b>Value:</b><div class="fragment"><div class="line">((<a class="code hl_define" href="portability_8h.html#a54036a9ac6d747dd291773cdda6a79b1">LIARA_STATIC_CAST</a>(uint32_t, v) &gt;&gt; <a class="code hl_define" href="#ae91e05419e0418901b1610e6bbbe1f68">LIARA_VERSION_PATCH_SHIFT</a>) &amp; <a class="code hl_define" href="#a474542da7831f5d0527294e94775f72b">LIARA_VERSION_PATCH_MASK</a>)</div>
 <div class="ttc" id="aversion_8h_html_a474542da7831f5d0527294e94775f72b"><div class="ttname"><a href="#a474542da7831f5d0527294e94775f72b">LIARA_VERSION_PATCH_MASK</a></div><div class="ttdeci">#define LIARA_VERSION_PATCH_MASK</div><div class="ttdef"><b>Definition</b> version.h:32</div></div>
 </div><!-- fragment -->
 <p>Extract the patch version component from a combined version number. </p>
@@ -630,17 +630,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a38031dee7d64ee342c23ca57eaa0635a" name="a38031dee7d64ee342c23ca57eaa0635a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a38031dee7d64ee342c23ca57eaa0635a">&#9670;&#160;</a></span>liara_version_compare()</h2>
+<a id="aa905239ac2a9fe0a9cf4f4118cc5dc30" name="aa905239ac2a9fe0a9cf4f4118cc5dc30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa905239ac2a9fe0a9cf4f4118cc5dc30">&#9670;&#160;</a></span>liara_version_compare()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int8_t liara_version_compare </td>
+          <td class="memname"><a class="el" href="portability_8h.html#a63e068be0ebcefbbebd4a9e321da3bda">LIARA_CONSTEXPR_FN</a> int8_t liara_version_compare </td>
           <td>(</td>
           <td class="paramtype">const uint32_t</td>          <td class="paramname"><span class="paramname"><em>v1</em></span>, </td>
         </tr>
@@ -655,11 +652,6 @@ Functions</h2></td></tr>
           <td class="paramtype">const bool</td>          <td class="paramname"><span class="paramname"><em>ignore_patch</em></span>&#160;)</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Inline function to compare two version numbers and return a signed integer indicating their relative order, with an option to ignore the patch version. </p>
@@ -685,27 +677,19 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3ed7190d8840207d6a7328f37db27b32" name="a3ed7190d8840207d6a7328f37db27b32"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ed7190d8840207d6a7328f37db27b32">&#9670;&#160;</a></span>liara_version_major()</h2>
+<a id="a53c7af29c805e6e50a87bbbb16bb0690" name="a53c7af29c805e6e50a87bbbb16bb0690"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53c7af29c805e6e50a87bbbb16bb0690">&#9670;&#160;</a></span>liara_version_major()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t liara_version_major </td>
+          <td class="memname"><a class="el" href="portability_8h.html#a63e068be0ebcefbbebd4a9e321da3bda">LIARA_CONSTEXPR_FN</a> uint32_t liara_version_major </td>
           <td>(</td>
           <td class="paramtype">const uint32_t</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Inline function to extract the major version component from a combined version number. </p>
@@ -724,27 +708,19 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a5360c555aa6c87b5cd7186e196f0f095" name="a5360c555aa6c87b5cd7186e196f0f095"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5360c555aa6c87b5cd7186e196f0f095">&#9670;&#160;</a></span>liara_version_minor()</h2>
+<a id="ae2513a819fd734731ad69ffe3bccfd4a" name="ae2513a819fd734731ad69ffe3bccfd4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2513a819fd734731ad69ffe3bccfd4a">&#9670;&#160;</a></span>liara_version_minor()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t liara_version_minor </td>
+          <td class="memname"><a class="el" href="portability_8h.html#a63e068be0ebcefbbebd4a9e321da3bda">LIARA_CONSTEXPR_FN</a> uint32_t liara_version_minor </td>
           <td>(</td>
           <td class="paramtype">const uint32_t</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Inline function to extract the minor version component from a combined version number. </p>
@@ -763,27 +739,19 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8520dd93cfa2392e3b0526280ac1596f" name="a8520dd93cfa2392e3b0526280ac1596f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8520dd93cfa2392e3b0526280ac1596f">&#9670;&#160;</a></span>liara_version_patch()</h2>
+<a id="a07ea3e3b1e6840f115b8537d05fb2102" name="a07ea3e3b1e6840f115b8537d05fb2102"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07ea3e3b1e6840f115b8537d05fb2102">&#9670;&#160;</a></span>liara_version_patch()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t liara_version_patch </td>
+          <td class="memname"><a class="el" href="portability_8h.html#a63e068be0ebcefbbebd4a9e321da3bda">LIARA_CONSTEXPR_FN</a> uint32_t liara_version_patch </td>
           <td>(</td>
           <td class="paramtype">const uint32_t</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Inline function to extract the patch version component from a combined version number. </p>

@@ -631,11 +631,12 @@ const liara_module_info_t* liara_&lt;module&gt;_info(void);
 <pre><code class="language-c">// Does `provided` satisfy what `required` asks for?
 liara_version_compat_t liara_version_provides(uint32_t provided, uint32_t required);
 </code></pre>
-<p>The rule it implements:</p>
+<p>The rule it implements, applied in order:</p>
 <ul>
+<li><strong>Identical versions → <code>EXACT</code>.</strong> No further test is needed.</li>
 <li><strong>Different major → never compatible.</strong> Major encodes breaking change; no minor or patch can bridge it.</li>
-<li><strong>Required is a 0.0.x version → exact equality required.</strong> Pre-0.1 is the Phase 0 playground (see <code>ROADMAP.md</code> §3): nothing is promised, so only an identical version satisfies. This is the one place the rule departs from ordinary semver, and it is deliberate.</li>
-<li><strong>Otherwise → provided.minor &gt;= required.minor.</strong> Minor bumps are additive, so a newer provider satisfies an older requirement; patch is ignored.</li>
+<li><strong>Either side is a 0.0.x version → exact equality required, otherwise <code>INCOMPATIBLE</code>.</strong> Pre-0.1 is the Phase 0 playground: nothing is promised in either direction, so a 0.0.x version neither satisfies nor is satisfied by anything but itself. This is the one place the rule departs from ordinary semver, and it is deliberate. It is also the strictest reading: the alternative — treating a 0.0.x requirement as an ordinary minor comparison — would let a playground version silently pass for a released one.</li>
+<li><strong>Otherwise → <code>provided.minor &gt;= required.minor</code> is <code>COMPATIBLE</code>, below it is <code>DEGRADED</code>.</strong> Minor bumps are additive, so a newer provider satisfies an older requirement.</li>
 </ul>
 <p>The argument order is load-bearing and easy to get wrong, which is why the parameters are named <code>provided</code> and <code>required</code> rather than two anonymous <code>uint32_t</code>. A convenience wrapper removes the ordering hazard entirely at the most common call site:</p>
 <pre><code class="language-c">// Is `module_abi` compatible with the ABI this caller was compiled against?
@@ -654,7 +655,7 @@ liara_version_compat_t liara_abi_is_compatible(uint32_t module_abi);
 <li><code>EXACT</code> / <code>COMPATIBLE</code> — proceed. Under <code>COMPATIBLE</code>, the provider is a newer minor than required: everything the host calls exists.</li>
 <li><code>DEGRADED</code> — proceed with care. The provider is an <em>older</em> minor than the host expects; functions added in newer minors may be absent, and the host must check before calling them. This is the state that gives the “minor mismatch is a warning” policy its concrete meaning.</li>
 <li><code>INCOMPATIBLE</code> — refuse. Either the majors differ, or a 0.0.x requirement was not met exactly.</li>
-<li><strong>Patch differences never affect the outcome.</strong> Patch is documentation and comments only.</li>
+<li><strong>Patch differences never affect the outcome, except under the 0.0.x rule.</strong> Above 0.0.x, patch is documentation and comments only and is ignored entirely. Under the 0.0.x rule, equality is exact and therefore includes the patch component — which is the point: in the playground, two patches apart is as good as unrelated.</li>
 </ul>
 <p>Composition is the <strong>host’s</strong> job (the launcher, later the editor), not the core’s: the core neither loads nor version-checks sibling modules. Today the host calls each module’s entry point directly at static-link time; under future dynamic loading the same host resolves the entry point via <code>dlsym</code>/<code>GetProcAddress</code>. The logic is identical; only the lookup changes.</p>
 <h3 id="87-what-counts-as-a-breaking-change"><a class="header" href="#87-what-counts-as-a-breaking-change">8.7 What Counts as a Breaking Change</a></h3>
@@ -732,9 +733,11 @@ extern "C" {
 <li>Or both: a macro <strong>and</strong> a <code>static inline</code> function delegating to the macro, when the macro form is needed for constant expressions (case labels, array sizes, <code>static_assert</code>).</li>
 </ul>
 <p>The cost of <code>static inline</code> functions is zero at runtime (they inline) and minimal at compile time. The benefit is that the entire interface is consumable from any language with a C FFI, not just C and C++.</p>
-<h3 id="96-compatibility-macros-liaraprivate_utilsh"><a class="header" href="#96-compatibility-macros-liaraprivate_utilsh">9.6 Compatibility Macros (<code>liara/private_utils.h</code>)</a></h3>
-<p><code>liara/private_utils.h</code> is where the C/C++ and compiler/platform <code>#ifdef</code> ladders live so the rest of the headers don’t repeat them. It currently provides things like <code>LIARA_STATIC_ASSERT</code> (C11 <code>_Static_assert</code> vs. C++ <code>static_assert</code>), <code>LIARA_API_DEPRECATED</code> (<code>[[deprecated]]</code> vs. <code>__declspec</code>/<code>__attribute__</code>), <code>LIARA_STATIC_CAST</code>, <code>LIARA_NULL</code>, and the <code>LIARA_TYPEDEF*</code> family for declaring a typedef (optionally deprecated, optionally a struct definition) once for both languages. Any other header that needs to spell something differently depending on the language or standard version routes it through a macro here rather than re-deriving the <code>#ifdef</code> locally.</p>
-<p>This is deliberately not an exhaustive list, and this section is not meant to be kept in lockstep with the header: new compatibility macros get added to <code>private_utils.h</code> as new portability gaps turn up, without requiring an edit here every time. What doesn’t change is that these macros still live at the interface boundary, so the usual rules apply to them like to any other symbol in this repository: adding one is a MINOR change, changing an existing macro’s expansion is a MAJOR change (section 8), and the header must keep compiling as both C11 and C++20 (section 2).</p>
+<h3 id="96-internal-macros-liarainternal"><a class="header" href="#96-internal-macros-liarainternal">9.6 Internal Macros (<code>liara/internal/</code>)</a></h3>
+<p>Headers under <code>liara/internal/</code> are part of this repository’s own implementation. They exist so the public headers can spell portability differences in one place, and they carry no stability promise of their own beyond the versioning rules of section 8. A module includes them transitively, by including a public header; it never includes them directly, and never uses the macros they define in its own implementation code. A macro that a module legitimately needs is not internal, and belongs in a public header instead.</p>
+<ul>
+<li><code>liara/internal/portability.h</code> is where the C/C++ and compiler/platform <code>#ifdef</code> ladders live so the rest of the headers don’t repeat them. It currently provides things like <code>LIARA_STATIC_ASSERT</code> (C11 <code>_Static_assert</code> vs. C++ <code>static_assert</code>), <code>LIARA_API_DEPRECATED</code> (<code>[[deprecated]]</code> vs. <code>__declspec</code>/<code>__attribute__</code>), <code>LIARA_STATIC_CAST</code>, <code>LIARA_NULL</code>, and the <code>LIARA_TYPEDEF*</code> family for declaring a typedef (optionally deprecated, optionally a struct definition) once for both languages. Any other header that needs to spell something differently depending on the language or standard version routes it through a macro here rather than re-deriving the <code>#ifdef</code> locally.</li>
+</ul>
 <h3 id="97-export-macros"><a class="header" href="#97-export-macros">9.7 Export Macros</a></h3>
 <p>Every declaration that a module implements carries that module’s export macro: <code>LIARA_&lt;MODULE&gt;_API</code>, declared in <code>liara/&lt;module&gt;/&lt;module&gt;_export.h</code>. Each expands to <code>__declspec(dllexport)</code> or <code>__declspec(dllimport)</code> on Windows and to<code> __attribute__((visibility("default")))</code> elsewhere, selected by two macros the build defines: <code>LIARA_&lt;MODULE&gt;_SHARED</code> (the module is built or consumed as a shared library) and <code>LIARA_&lt;MODULE&gt;_BUILD</code> (this translation unit is building the module, not consuming it). Modules compile with hidden default visibility, so a symbol that does not carry the macro does not leave the library at all.</p>
 <p>One export header per module, on that pattern, is the rule: a new module adds liara/<module>/<module>_export.h rather than reusing another module’s macro, because the exporting and importing sides have to be distinguishable per library.</module></module></p>
@@ -805,7 +808,7 @@ liara_result_t liara_renderer_create(
 <pre><code class="language-bash">python3 ../../.github/scripts/abi_layout_asserts.py \
     --include-dir include \
     --output tests/abi/abi_layout.generated.h \
-    --clang clang-18
+    --clang clang-20
 </code></pre>
 <p><strong>Never run <code>clang-format</code> on this file.</strong> The CI check is an exact textual comparison between the script’s output and the committed file, so reformatting it breaks the check on the next regeneration. Treat it as generated output, not source: after any bulk-format pass, re-run the generator (or diff against what CI expects) to make sure it still matches.</p>
 <hr>
