@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['liara_5fabi_5fis_5fcompatible_0',['liara_abi_is_compatible',['../abi__version_8h.html#a75537e621828db610840d0d4d3ac3029',1,'abi_version.h']]],
-  ['liara_5fabi_5fversion_1',['liara_abi_version',['../abi__version_8h.html#a559a9f7d94773527f1acad5f7d0251fc',1,'abi_version.h']]],
+  ['liara_5fabi_5fis_5fcompatible_0',['liara_abi_is_compatible',['../abi__version_8h.html#a4a59fb68f5154f0e3e62bd89a1cffb8c',1,'abi_version.h']]],
+  ['liara_5fabi_5fversion_1',['liara_abi_version',['../abi__version_8h.html#a3aa68cd5f81eeaa02a18e72ebea931d4',1,'abi_version.h']]],
   ['liara_5fabi_5fversion_5fstr_2',['liara_abi_version_str',['../abi__version_8h.html#a08a173eb86e8dce30d8a5dee2dc06ad5',1,'abi_version.h']]],
   ['liara_5fcore_5fabi_5fversion_3',['liara_core_abi_version',['../core_8h.html#a7a40738cb9dcd3fb67112b0efb835c94',1,'core.h']]],
   ['liara_5fcore_5fcreate_4',['liara_core_create',['../core_8h.html#a8e96d9aa71536780f9a9627ee2b22e9f',1,'core.h']]],
@@ -23,9 +23,10 @@ var searchData=
   ['liara_5ftry_5fmake_5fversion_20',['liara_try_make_version',['../version_8h.html#a84fa657663ed01664e638e07bc64550a',1,'version.h']]],
   ['liara_5ftypedef_21',['LIARA_TYPEDEF',['../core_8h.html#a2fb43f55b62eb514d65f3ca07b799079',1,'LIARA_TYPEDEF(struct liara_module_info_t, liara_module_info_t):&#160;core.h'],['../core_8h.html#a2addc54894973b870d7ddd2f452d1935',1,'LIARA_TYPEDEF(struct liara_render_packet_t, liara_render_packet_t):&#160;core.h'],['../core_8h.html#aeaf434d651ad23873b655bfb369e2dae',1,'LIARA_TYPEDEF(int32_t, liara_result_t):&#160;core.h'],['../core_8h.html#a196e35e95b6caebd01ed5b8b25db21d5',1,'LIARA_TYPEDEF(struct liara_core_t, liara_core_handle_t):&#160;core.h'],['../renderer_8h.html#a2fb43f55b62eb514d65f3ca07b799079',1,'LIARA_TYPEDEF(struct liara_module_info_t, liara_module_info_t):&#160;renderer.h'],['../renderer_8h.html#a2addc54894973b870d7ddd2f452d1935',1,'LIARA_TYPEDEF(struct liara_render_packet_t, liara_render_packet_t):&#160;renderer.h'],['../renderer_8h.html#aeaf434d651ad23873b655bfb369e2dae',1,'LIARA_TYPEDEF(int32_t, liara_result_t):&#160;renderer.h'],['../renderer_8h.html#a545609dd432736eafa2c0c10be12d6c0',1,'LIARA_TYPEDEF(struct liara_renderer_t, liara_renderer_handle_t):&#160;renderer.h'],['../result_8h.html#aeaf434d651ad23873b655bfb369e2dae',1,'LIARA_TYPEDEF(int32_t, liara_result_t):&#160;result.h']]],
   ['liara_5ftypedef_5fstruct_22',['LIARA_TYPEDEF_STRUCT',['../modules_8h.html#a2070d77e8871e1600f3ca1933c7aaf7d',1,'LIARA_TYPEDEF_STRUCT(liara_module_info_t, uint32_t struct_version;uint32_t abi_version;uint32_t module_version;uint32_t reserved;const char *module_name;const char *abi_version_str;const char *module_version_str;):&#160;modules.h'],['../packet_8h.html#ab4228a66056b50049cdc4f5677a248ab',1,'LIARA_TYPEDEF_STRUCT(liara_render_drawable_t, float x;float y;uint32_t color;):&#160;packet.h'],['../packet_8h.html#ac51dfe2356c70779d121b1b2a0686435',1,'LIARA_TYPEDEF_STRUCT(liara_render_packet_t, uint32_t struct_version;uint16_t grid_width;uint16_t grid_height;uint32_t background_color;const liara_render_drawable_t *drawables;size_t drawable_count;):&#160;packet.h']]],
-  ['liara_5fversion_5fcompare_23',['liara_version_compare',['../version_8h.html#a38031dee7d64ee342c23ca57eaa0635a',1,'version.h']]],
-  ['liara_5fversion_5fmajor_24',['liara_version_major',['../version_8h.html#a3ed7190d8840207d6a7328f37db27b32',1,'version.h']]],
-  ['liara_5fversion_5fminor_25',['liara_version_minor',['../version_8h.html#a5360c555aa6c87b5cd7186e196f0f095',1,'version.h']]],
-  ['liara_5fversion_5fpatch_26',['liara_version_patch',['../version_8h.html#a8520dd93cfa2392e3b0526280ac1596f',1,'version.h']]],
-  ['liara_5fversion_5fprovides_27',['liara_version_provides',['../abi__version_8h.html#a53d55effe67e64a32ef0e5f17c4b270f',1,'abi_version.h']]]
+  ['liara_5fversion_5fcompare_23',['liara_version_compare',['../version_8h.html#aa905239ac2a9fe0a9cf4f4118cc5dc30',1,'version.h']]],
+  ['liara_5fversion_5fcompat_5fstr_24',['liara_version_compat_str',['../abi__version_8h.html#a33e4da8096fd22b09f70b3a90eb55f02',1,'abi_version.h']]],
+  ['liara_5fversion_5fmajor_25',['liara_version_major',['../version_8h.html#a53c7af29c805e6e50a87bbbb16bb0690',1,'version.h']]],
+  ['liara_5fversion_5fminor_26',['liara_version_minor',['../version_8h.html#ae2513a819fd734731ad69ffe3bccfd4a',1,'version.h']]],
+  ['liara_5fversion_5fpatch_27',['liara_version_patch',['../version_8h.html#a07ea3e3b1e6840f115b8537d05fb2102',1,'version.h']]],
+  ['liara_5fversion_5fprovides_28',['liara_version_provides',['../abi__version_8h.html#a89ee8baeef8156bca5bc0947f875c15d',1,'abi_version.h']]]
 ];
