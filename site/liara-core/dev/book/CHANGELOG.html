@@ -4,8 +4,7 @@
 <html lang="en" class="sidebar-visible no-js light">
 <head>
 <meta charset="UTF-8">
-<title> - Liara Engine — User Guide</title>
-<meta name="robots" content="noindex">
+<title>CHANGELOG - Liara Engine — User Guide</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="theme-color" content="#FFFAFC">
@@ -154,6 +153,9 @@
                 <a href="https://github.com/liara-engine/liara-core" title="Git repository" aria-label="Git repository">
                     <i id="git-repository-button" class="fa fa-github"></i>
                 </a>
+                <a href="https://github.com/liara-engine/liara-core/edit/main/docs/docs/CHANGELOG.md" title="Suggest an edit" aria-label="Suggest an edit">
+                    <i id="git-edit-button" class="fa fa-edit"></i>
+                </a>
             </div>
         </div>
 
@@ -185,55 +187,7 @@
 
         <div id="content" class="content">
             <main>
-                <h1 id="liara-core"><a class="header" href="#liara-core">liara-core</a></h1>
-<blockquote>
-<p>The core library for the Liara Engine.</p>
-</blockquote>
-<p>This repository contains the c++ implementation of the Liara Engine’s core
-module. It is a consumer of the <a href="https://github.com/liara-engine/liara-interfaces">Liara Interfaces</a>.</p>
-<p>This module provides the foundational components and abstractions for the Liara Engine, including memory management,
-logging, configuration, and other essential utilities.</p>
-<hr>
-<h2 id="status"><a class="header" href="#status">Status</a></h2>
-<p><strong>Phase 0</strong> — bootstrap. The core library is in the early stages of development, and the API is subject to change.</p>
-<hr>
-<h2 id="documentation"><a class="header" href="#documentation">Documentation</a></h2>
-<ul>
-<li><strong>Architecture and rationale</strong>: see the meta repository’s
-<a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/ARCHITECTURE"><code>docs/ARCHITECTURE.md</code></a>
-and <a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/MODULES"><code>docs/MODULES.md</code></a>.</li>
-<li><strong>Day-to-day workflow</strong>: meta repository’s
-<a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/CONTRIBUTING"><code>docs/CONTRIBUTING.md</code></a>.</li>
-<li><strong>API reference</strong> :
-<a href="https://liara-engine.liara-engine-documentation.workers.dev/">liara-engine.liara-engine-documentation.workers.dev/liara-core</a>.</li>
-</ul>
-<hr>
-<h2 id="building-standalone"><a class="header" href="#building-standalone">Building Standalone</a></h2>
-<p>Most of the time you will not build this repository on its own; it is
-consumed by other modules through <code>find_package(LiaraCore)</code> or
-<code>add_subdirectory()</code>. To verify the headers compile and the tests pass
-in isolation:</p>
-<pre><code class="language-bash">git clone https://github.com/liara-engine/liara-core.git
-cd liara-core
-
-cmake --preset=linux-debug-clang
-cmake --build --preset=linux-debug-clang
-ctest --preset=linux-debug-clang --output-on-failure
-</code></pre>
-<p>The full development setup (Vulkan SDK, vcpkg, presets, etc.) is
-documented in the meta repository’s
-<a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/BOOTSTRAP"><code>docs/BOOTSTRAP.md</code></a>.</p>
-<hr>
-<h2 id="consuming-this-module"><a class="header" href="#consuming-this-module">Consuming This Module</a></h2>
-<p>In a consumer’s <code>CMakeLists.txt</code>:</p>
-<pre><code class="language-cmake">find_package(LiaraCore REQUIRED)
-target_link_libraries(my_module PRIVATE Liara::Core)
-</code></pre>
-<hr>
-<h2 id="license"><a class="header" href="#license">License</a></h2>
-<p>Released under the <a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/LICENSE">MIT License</a>.</p>
-<div style="break-before: page; page-break-before: always;"></div>
-<h1 id="changelog"><a class="header" href="#changelog">Changelog</a></h1>
+                <h1 id="changelog"><a class="header" href="#changelog">Changelog</a></h1>
 <h2 id="021-2026-08-05"><a class="header" href="#021-2026-08-05"><a href="https://github.com/liara-engine/liara-core/compare/v0.2.0...v0.2.1">0.2.1</a> (2026-08-05)</a></h2>
 <h3 id="features"><a class="header" href="#features">Features</a></h3>
 <ul>
@@ -291,6 +245,9 @@ target_link_libraries(my_module PRIVATE Liara::Core)
             </main>
 
             <nav class="nav-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
 
 
                 <div style="clear: both"></div>
@@ -299,6 +256,9 @@ target_link_libraries(my_module PRIVATE Liara::Core)
     </div>
 
     <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            <a rel="prev" href="index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+            </a>
 
     </nav>
 </div>
