@@ -3,7 +3,7 @@
   "metadata": {
     "name": "Liara Engine Core",
     "description": "The core library for the Liara Engine.",
-    "latest": "0.2.1"
+    "latest": "0.2.2"
   },
   "versions": {
     "dev": {
