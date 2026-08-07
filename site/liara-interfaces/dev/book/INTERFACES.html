@@ -96,7 +96,7 @@
 
 <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
     <div class="sidebar-scrollbox">
-        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html"><strong aria-hidden="true">1.</strong> Docs</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="INTERFACES.html"><strong aria-hidden="true">2.</strong> INTERFACES</a></span></li></ol>
+        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html"><strong aria-hidden="true">1.</strong> Docs</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="CHANGELOG.html"><strong aria-hidden="true">2.</strong> CHANGELOG</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="INTERFACES.html"><strong aria-hidden="true">3.</strong> INTERFACES</a></span></li></ol>
     </div>
     <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
         <div class="sidebar-resize-indicator"></div>
@@ -318,12 +318,6 @@
 liara_core_world_create(...)
 liara_core_entity_destroy(...)
 </code></pre>
-<p>Types are nouns and prefixed with the module:</p>
-<pre><code class="language-c">typedef struct liara_renderer_handle_t    liara_renderer_handle_t;
-typedef struct liara_core_world_handle_t  liara_core_world_handle_t;
-typedef struct liara_view_t             liara_view_t;
-</code></pre>
-<p>Type names use a <code>_t</code> suffix when the type is a value type meant to be embedded in structs or passed by value (<code>liara_view_t</code>,<code>liara_transform_t</code>). Opaque handle types use a <code>_handle_t</code> suffix and are forward-declared structs whose definition is private to the implementing module.</p>
 <p>Constants and enum values are uppercase, prefixed:</p>
 <pre><code class="language-c">LIARA_RESULT_SUCCESS
 LIARA_RESULT_OUT_OF_MEMORY
@@ -334,6 +328,11 @@ LIARA_RENDERER_TARGET_OFFSCREEN
 <pre><code class="language-c">LIARA_VERSION_MAJOR
 LIARA_MAKE_VERSION(major, minor, patch)
 </code></pre>
+<p>An opaque handle is a pointer to an incomplete struct. Two names are involved and they are not the same name: the struct tag names the thing, and the typedef names the handle to it.</p>
+<pre><code class="language-c">LIARA_TYPEDEF(struct liara_renderer_t, liara_renderer_handle_t);
+</code></pre>
+<p>The tag is <code>&lt;module&gt;_t</code>, the typedef is <code>&lt;module&gt;_handle_t</code>. The struct is never defined in a public header, so a consumer can hold and pass a handle without being able to construct, copy or inspect one — which is the entire point. Adding a field to the definition on the implementation side is not an ABI change, because no consumer’s compiler ever knew the size.</p>
+<p>Version words are built with <code>LIARA_MAKE_VERSION_UNSAFE(major, minor, patch)</code>. The suffix is not decoration: the macro does not range-check its arguments, and a component that overflows its field corrupts the neighboring ones silently. <code>liara_try_make_version()</code> is the checked form and is what anything handling untrusted or computed input should call.</p>
 <h3 id="33-why-lowercase-why-prefixed"><a class="header" href="#33-why-lowercase-why-prefixed">3.3 Why Lowercase, Why Prefixed</a></h3>
 <p>C has a single global namespace. Without prefixes, two libraries that expose a function called <code>create</code> will collide at link time. The prefix is verbose, but it is the price of namespace safety in C.</p>
 <p>Lowercase is the standard convention in C ecosystems (POSIX, Vulkan, SDL, libcurl). It is followed for consistency with the broader ecosystem, regardless of any aesthetic preference for camelCase or PascalCase that may exist in C++ contexts.</p>
@@ -818,7 +817,7 @@ liara_result_t liara_renderer_create(
             </main>
 
             <nav class="nav-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="CHANGELOG.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
@@ -829,7 +828,7 @@ liara_result_t liara_renderer_create(
     </div>
 
     <nav class="nav-wide-wrapper" aria-label="Page navigation">
-            <a rel="prev" href="index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+            <a rel="prev" href="CHANGELOG.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
             </a>
 

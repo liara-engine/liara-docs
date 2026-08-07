@@ -97,7 +97,7 @@
 
 <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
     <div class="sidebar-scrollbox">
-        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html"><strong aria-hidden="true">1.</strong> Docs</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="INTERFACES.html"><strong aria-hidden="true">2.</strong> INTERFACES</a></span></li></ol>
+        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html"><strong aria-hidden="true">1.</strong> Docs</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="CHANGELOG.html"><strong aria-hidden="true">2.</strong> CHANGELOG</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="INTERFACES.html"><strong aria-hidden="true">3.</strong> INTERFACES</a></span></li></ol>
     </div>
     <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
         <div class="sidebar-resize-indicator"></div>
@@ -243,6 +243,93 @@ package config.</p>
 <h2 id="license"><a class="header" href="#license">License</a></h2>
 <p>Released under the <a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/LICENSE">MIT License</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div>
+<h1 id="changelog"><a class="header" href="#changelog">Changelog</a></h1>
+<h2 id="020-2026-08-04"><a class="header" href="#020-2026-08-04"><a href="https://github.com/liara-engine/liara-interfaces/compare/v0.1.1...v0.2.0">0.2.0</a> (2026-08-04)</a></h2>
+<h3 id="-breaking-changes"><a class="header" href="#-breaking-changes">⚠ BREAKING CHANGES</a></h3>
+<ul>
+<li>portability (<a href="https://github.com/liara-engine/liara-interfaces/issues/19">#19</a>)</li>
+<li><strong>private_utils:</strong> remove redundant API visibility macros for cleaner code</li>
+<li>liara_result replaced by liara_result_t, all functions deprecated in v0.1.1 removed</li>
+</ul>
+<h3 id="features"><a class="header" href="#features">Features</a></h3>
+<ul>
+<li>add LIARA_TYPEDEF_STRUCT macro for struct type definitions (<a href="https://github.com/liara-engine/liara-interfaces/commit/19f9c58b8d7e12556048adfcc2a45a80c135e47d">19f9c58</a>)</li>
+<li><strong>manifest:</strong> add new version entry for 0.2.0 with ABI compatibility (<a href="https://github.com/liara-engine/liara-interfaces/commit/094e375a46271f564bef9562aeb28478e9a83410">094e375</a>)</li>
+<li>portability (<a href="https://github.com/liara-engine/liara-interfaces/issues/19">#19</a>) (<a href="https://github.com/liara-engine/liara-interfaces/commit/b95993b840e3be08eaf5093b11461093416d15db">b95993b</a>)</li>
+</ul>
+<h3 id="bug-fixes"><a class="header" href="#bug-fixes">Bug Fixes</a></h3>
+<ul>
+<li><strong>clang-tidy:</strong> refine checks and add readability rules for better code quality (<a href="https://github.com/liara-engine/liara-interfaces/commit/665dc7799d6e2d68b388a7779dd699c4d48beaab">665dc77</a>)</li>
+<li><strong>cmake:</strong> GNUInstallDirs and set export name for liara_interfaces (<a href="https://github.com/liara-engine/liara-interfaces/commit/2ed2375783eeaf144db374d03e27c3a03494b476">2ed2375</a>)</li>
+<li>include private_utils.h in packet and modules headers (<a href="https://github.com/liara-engine/liara-interfaces/commit/b4b278af5c8d2ab1bd610c467aea483d0e64e9bb">b4b278a</a>)</li>
+</ul>
+<h3 id="code-refactoring"><a class="header" href="#code-refactoring">Code Refactoring</a></h3>
+<ul>
+<li><strong>private_utils:</strong> remove redundant API visibility macros for cleaner code (<a href="https://github.com/liara-engine/liara-interfaces/commit/df4676ba94a924cf3ab6c56f380efd8ff0acfbe7">df4676b</a>)</li>
+<li>replace deprecated liara_result with liara_result_t in core and renderer APIs (<a href="https://github.com/liara-engine/liara-interfaces/issues/11">#11</a>) (<a href="https://github.com/liara-engine/liara-interfaces/commit/d5f4fd4234d9f0a5a62665133314e915cf296d84">d5f4fd4</a>)</li>
+</ul>
+<h2 id="011-2026-07-28"><a class="header" href="#011-2026-07-28"><a href="https://github.com/liara-engine/liara-interfaces/compare/v0.1.0...v0.1.1">0.1.1</a> (2026-07-28)</a></h2>
+<h3 id="features-1"><a class="header" href="#features-1">Features</a></h3>
+<ul>
+<li>interfaces result t and version compare (<a href="https://github.com/liara-engine/liara-interfaces/issues/9">#9</a>) (<a href="https://github.com/liara-engine/liara-interfaces/commit/ca6c8ebb8269c543c51ac45bb0e2152b7944a165">ca6c8eb</a>)</li>
+<li><strong>renderer:</strong> add render packet (<a href="https://github.com/liara-engine/liara-interfaces/issues/10">#10</a>) (<a href="https://github.com/liara-engine/liara-interfaces/commit/1992902b442932cefcbe360d69589a92f2bd23af">1992902</a>)</li>
+<li>Standardize macros, improve documentation, and enhance ABI features (<a href="https://github.com/liara-engine/liara-interfaces/issues/7">#7</a>) (<a href="https://github.com/liara-engine/liara-interfaces/commit/6be3e0afec1613c772d84212f1ae20a57716eb31">6be3e0a</a>)</li>
+</ul>
+<h2 id="010-2026-07-18"><a class="header" href="#010-2026-07-18"><a href="https://github.com/liara-engine/liara-interfaces/compare/v0.0.1...v0.1.0">0.1.0</a> (2026-07-18)</a></h2>
+<h3 id="-breaking-changes-1"><a class="header" href="#-breaking-changes-1">⚠ BREAKING CHANGES</a></h3>
+<ul>
+<li><strong>version:</strong> liara_try_make_version now return liara_result, 0 is now a success</li>
+</ul>
+<h3 id="features-2"><a class="header" href="#features-2">Features</a></h3>
+<ul>
+<li><strong>abi:</strong> introduce LIARA_STATIC_ASSERT (<a href="https://github.com/liara-engine/liara-interfaces/commit/f388fe3429ea88fe899b20a57e7e1d832f6ec9dc">f388fe3</a>)</li>
+<li><strong>ci:</strong> add CI workflow (<a href="https://github.com/liara-engine/liara-interfaces/issues/6">#6</a>) (<a href="https://github.com/liara-engine/liara-interfaces/commit/e6ea14e59b5a2afc228e05ef0c663d9aba6d11f7">e6ea14e</a>)</li>
+<li><strong>core:</strong> add a first very basic Liara core API (<a href="https://github.com/liara-engine/liara-interfaces/commit/bb90517be2297d3e7dcf090826235e8f6c6852c2">bb90517</a>)</li>
+<li><strong>manifest:</strong> update ABI compatibility for versions 0.0.1 and 0.1.0 (<a href="https://github.com/liara-engine/liara-interfaces/commit/cc3562211d09cd7b8fda82e9df554f4b822f35d5">cc35622</a>)</li>
+<li><strong>renderer:</strong> add a first very basic Liara renderer API (console only) (<a href="https://github.com/liara-engine/liara-interfaces/commit/0809a0abf3da9ada61517013f4a817658a9654d4">0809a0a</a>)</li>
+<li><strong>renderer:</strong> add functions to retrieve renderer version and println (<a href="https://github.com/liara-engine/liara-interfaces/commit/1f990a97c69000f73661534831a29fd161590224">1f990a9</a>)</li>
+<li><strong>renderer:</strong> update renderer functions to return liara_result for better error handling (<a href="https://github.com/liara-engine/liara-interfaces/commit/06450aca44213f3dfdb54831377f70ac0d49797e">06450ac</a>)</li>
+<li><strong>result:</strong> add liara_result type and error code definitions (<a href="https://github.com/liara-engine/liara-interfaces/commit/62815b279fb4676b1211467ecd59ca238d4f0d81">62815b2</a>)</li>
+<li><strong>version:</strong> update liara_try_make_version to return error codes for null pointer and out of range values (<a href="https://github.com/liara-engine/liara-interfaces/commit/d5fabd6464f9936e64354e099b8dae695eda11ee">d5fabd6</a>)</li>
+</ul>
+<h3 id="bug-fixes-1"><a class="header" href="#bug-fixes-1">Bug Fixes</a></h3>
+<ul>
+<li><strong>format:</strong> update clang-format and clang-tidy (<a href="https://github.com/liara-engine/liara-interfaces/commit/d8dd48e5f9cd4185224c62fce1c2206cf5528ff5">d8dd48e</a>)</li>
+<li><strong>renderer:</strong> add missing liara result include (<a href="https://github.com/liara-engine/liara-interfaces/commit/68dfb3c1bfa4a6ed9384b1c5e5cf67feb75f153b">68dfb3c</a>)</li>
+</ul>
+<h2 id="001-2026-07-15"><a class="header" href="#001-2026-07-15">0.0.1 (2026-07-15)</a></h2>
+<h3 id="features-3"><a class="header" href="#features-3">Features</a></h3>
+<ul>
+<li><strong>abi:</strong> add Liara ABI version definition and compatibility functions (<a href="https://github.com/liara-engine/liara-interfaces/commit/ca4e3cc4a6367a38df0ac2aefa4b1cd6cf094536">ca4e3cc</a>)</li>
+<li>add versioning macros for Liara project (<a href="https://github.com/liara-engine/liara-interfaces/commit/224f9809de1f678093f338beaf2e0ff6f53e5c87">224f980</a>)</li>
+<li><strong>docs:</strong> add alias for thread safety in Doxyfile (<a href="https://github.com/liara-engine/liara-interfaces/commit/4f19c4e86e3e607d2681013287a86bbb16bcc018">4f19c4e</a>)</li>
+<li><strong>docs:</strong> add initial book configuration for user guide (<a href="https://github.com/liara-engine/liara-interfaces/commit/83167a89519651d23a67c7b250782eefef0d1b27">83167a8</a>)</li>
+<li><strong>docs:</strong> add initial documentation module configuration (<a href="https://github.com/liara-engine/liara-interfaces/commit/2d16b58c00eb7dbb37b2753c6aafcddeb52dadc9">2d16b58</a>)</li>
+<li><strong>docs:</strong> add project icon and enable code folding in Doxyfile (<a href="https://github.com/liara-engine/liara-interfaces/commit/cc1bbe8e33196d823c84d152e5645c8e0d933f01">cc1bbe8</a>)</li>
+<li><strong>docs:</strong> add workflows for documentation preview and cleanup on pull requests (<a href="https://github.com/liara-engine/liara-interfaces/commit/ce72c58e728b910823050220d6f7dd3da116cc62">ce72c58</a>)</li>
+<li>enhance versioning system with detailed macros and inline functions (<a href="https://github.com/liara-engine/liara-interfaces/commit/ad37dbfb41c04bd075f1f3febb26b43f55a7d329">ad37dbf</a>)</li>
+<li><strong>manifest:</strong> add initial module manifest (<a href="https://github.com/liara-engine/liara-interfaces/commit/f0193131bf09c99854b7ad3faa3f4bd547fa1156">f019313</a>)</li>
+<li><strong>release:</strong> add configuration files for release-please automation (<a href="https://github.com/liara-engine/liara-interfaces/commit/f11fdf2d7baa8b49ea7a0aade429ef85a58f5138">f11fdf2</a>)</li>
+<li><strong>release:</strong> update release-please configuration for pre-major versioning (<a href="https://github.com/liara-engine/liara-interfaces/commit/9b6068d19a3cc67b603aca50b420ec6056be1bb5">9b6068d</a>)</li>
+<li><strong>tests:</strong> add platform-specific Zig and Rust test commands (<a href="https://github.com/liara-engine/liara-interfaces/commit/a4e6ad4d1ea711ff84519d3336fa58196e36bf60">a4e6ad4</a>)</li>
+<li><strong>version:</strong> enhance version handling with safety checks and new comparison functions (<a href="https://github.com/liara-engine/liara-interfaces/commit/5c1fc9a393d191e236e7fe84e89a2fdcbcdbb75c">5c1fc9a</a>)</li>
+<li><strong>versioning:</strong> automate version management with generated config header (<a href="https://github.com/liara-engine/liara-interfaces/commit/3cf4e4f2ea1f9b1df0b709d40d55795d3d8493c8">3cf4e4f</a>)</li>
+</ul>
+<h3 id="bug-fixes-2"><a class="header" href="#bug-fixes-2">Bug Fixes</a></h3>
+<ul>
+<li>add extern “C” linkage for versioning macros in version.h (<a href="https://github.com/liara-engine/liara-interfaces/commit/dd5026895c73392543308e24dcdec2fbd4b6ceff">dd50268</a>)</li>
+<li><strong>docs:</strong> update Doxyfile output directory and resource paths (<a href="https://github.com/liara-engine/liara-interfaces/commit/93f4da21cfe17b3543c07499fd3ced514499bac4">93f4da2</a>)</li>
+<li><strong>docs:</strong> update image reference in documentation workflow to fix a typo (<a href="https://github.com/liara-engine/liara-interfaces/commit/a343e18f8c0da1275d93278e8674471932ee98fe">a343e18</a>)</li>
+<li><strong>docs:</strong> update links in documentation for consistency and accuracy (<a href="https://github.com/liara-engine/liara-interfaces/commit/5d4006bfdca8083d7c9c97e2880897ba0d888e61">5d4006b</a>)</li>
+<li><strong>docs:</strong> update permissions for packages in docs-preview.yml (<a href="https://github.com/liara-engine/liara-interfaces/commit/52e984d65440399a3c3e58d1526c4830875c244e">52e984d</a>)</li>
+<li><strong>docs:</strong> update permissions for preview workflow in docs-preview.yml (<a href="https://github.com/liara-engine/liara-interfaces/commit/64b842ebff5403b8613662eb191b7fdc674caa13">64b842e</a>)</li>
+<li><strong>docs:</strong> update repository URLs and add navbar configuration file (<a href="https://github.com/liara-engine/liara-interfaces/commit/6486d07ea68dcf5760dec466b43c2e62af0bcace">6486d07</a>)</li>
+<li><strong>doxygen:</strong> fix thread safety annotations and formatting in Doxyfile (<a href="https://github.com/liara-engine/liara-interfaces/issues/2">#2</a>) (<a href="https://github.com/liara-engine/liara-interfaces/commit/d63e9dacef718439b9e2d602cb117c22e3cf51cc">d63e9da</a>)</li>
+<li>fix project name and input paths in Doxyfile (<a href="https://github.com/liara-engine/liara-interfaces/commit/ff77761f08414a35ce036c97d6115a51209bdccb">ff77761</a>)</li>
+<li><strong>test:</strong> update patch version to 1 in each test (<a href="https://github.com/liara-engine/liara-interfaces/commit/39b5196b127e317f5ddeda1b73dc83efb1154f93">39b5196</a>)</li>
+<li>update CMakeLists.txt for conditional C and C++ standard settings (<a href="https://github.com/liara-engine/liara-interfaces/commit/651fbec6271ba882d3ef0d2b1aae24c216ad8dad">651fbec</a>)</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
 <h1 id="interfaces"><a class="header" href="#interfaces">Interfaces</a></h1>
 <blockquote>
 <p>Rules for designing, implementing, and evolving the C ABI interfaces that connect Liara’s modules. This document lives in the <code>liara-interfaces</code> repository and is <strong>required reading</strong> before modifying anything in this repository.</p>
@@ -374,12 +461,6 @@ package config.</p>
 liara_core_world_create(...)
 liara_core_entity_destroy(...)
 </code></pre>
-<p>Types are nouns and prefixed with the module:</p>
-<pre><code class="language-c">typedef struct liara_renderer_handle_t    liara_renderer_handle_t;
-typedef struct liara_core_world_handle_t  liara_core_world_handle_t;
-typedef struct liara_view_t             liara_view_t;
-</code></pre>
-<p>Type names use a <code>_t</code> suffix when the type is a value type meant to be embedded in structs or passed by value (<code>liara_view_t</code>,<code>liara_transform_t</code>). Opaque handle types use a <code>_handle_t</code> suffix and are forward-declared structs whose definition is private to the implementing module.</p>
 <p>Constants and enum values are uppercase, prefixed:</p>
 <pre><code class="language-c">LIARA_RESULT_SUCCESS
 LIARA_RESULT_OUT_OF_MEMORY
@@ -390,6 +471,11 @@ LIARA_RENDERER_TARGET_OFFSCREEN
 <pre><code class="language-c">LIARA_VERSION_MAJOR
 LIARA_MAKE_VERSION(major, minor, patch)
 </code></pre>
+<p>An opaque handle is a pointer to an incomplete struct. Two names are involved and they are not the same name: the struct tag names the thing, and the typedef names the handle to it.</p>
+<pre><code class="language-c">LIARA_TYPEDEF(struct liara_renderer_t, liara_renderer_handle_t);
+</code></pre>
+<p>The tag is <code>&lt;module&gt;_t</code>, the typedef is <code>&lt;module&gt;_handle_t</code>. The struct is never defined in a public header, so a consumer can hold and pass a handle without being able to construct, copy or inspect one — which is the entire point. Adding a field to the definition on the implementation side is not an ABI change, because no consumer’s compiler ever knew the size.</p>
+<p>Version words are built with <code>LIARA_MAKE_VERSION_UNSAFE(major, minor, patch)</code>. The suffix is not decoration: the macro does not range-check its arguments, and a component that overflows its field corrupts the neighboring ones silently. <code>liara_try_make_version()</code> is the checked form and is what anything handling untrusted or computed input should call.</p>
 <h3 id="33-why-lowercase-why-prefixed"><a class="header" href="#33-why-lowercase-why-prefixed">3.3 Why Lowercase, Why Prefixed</a></h3>
 <p>C has a single global namespace. Without prefixes, two libraries that expose a function called <code>create</code> will collide at link time. The prefix is verbose, but it is the price of namespace safety in C.</p>
 <p>Lowercase is the standard convention in C ecosystems (POSIX, Vulkan, SDL, libcurl). It is followed for consistency with the broader ecosystem, regardless of any aesthetic preference for camelCase or PascalCase that may exist in C++ contexts.</p>
