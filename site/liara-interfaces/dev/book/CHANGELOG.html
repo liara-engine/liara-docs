@@ -188,6 +188,16 @@
         <div id="content" class="content">
             <main>
                 <h1 id="changelog"><a class="header" href="#changelog">Changelog</a></h1>
+<h2 id="021-2026-08-07"><a class="header" href="#021-2026-08-07"><a href="https://github.com/liara-engine/liara-interfaces/compare/v0.2.0...v0.2.1">0.2.1</a> (2026-08-07)</a></h2>
+<h3 id="features"><a class="header" href="#features">Features</a></h3>
+<ul>
+<li><strong>ci:</strong> update workflows to use v1 version of .github, complete CI with lint and test (<a href="https://github.com/liara-engine/liara-interfaces/issues/18">#18</a>) (<a href="https://github.com/liara-engine/liara-interfaces/commit/9c660187616b0668390c61fffc4f30362c69829a">9c66018</a>)</li>
+<li>enhance CI workflows and improve documentation clarity (<a href="https://github.com/liara-engine/liara-interfaces/issues/23">#23</a>) (<a href="https://github.com/liara-engine/liara-interfaces/commit/146e51f18ded980454e62c614689ca7e72dfdd92">146e51f</a>)</li>
+</ul>
+<h3 id="bug-fixes"><a class="header" href="#bug-fixes">Bug Fixes</a></h3>
+<ul>
+<li><strong>tests:</strong> add conditional checks for cross-language tests on Windows (<a href="https://github.com/liara-engine/liara-interfaces/commit/1962f680077a19bcb52ae9094a1d29587092f8a7">1962f68</a>)</li>
+</ul>
 <h2 id="020-2026-08-04"><a class="header" href="#020-2026-08-04"><a href="https://github.com/liara-engine/liara-interfaces/compare/v0.1.1...v0.2.0">0.2.0</a> (2026-08-04)</a></h2>
 <h3 id="-breaking-changes"><a class="header" href="#-breaking-changes">⚠ BREAKING CHANGES</a></h3>
 <ul>
@@ -195,13 +205,13 @@
 <li><strong>private_utils:</strong> remove redundant API visibility macros for cleaner code</li>
 <li>liara_result replaced by liara_result_t, all functions deprecated in v0.1.1 removed</li>
 </ul>
-<h3 id="features"><a class="header" href="#features">Features</a></h3>
+<h3 id="features-1"><a class="header" href="#features-1">Features</a></h3>
 <ul>
 <li>add LIARA_TYPEDEF_STRUCT macro for struct type definitions (<a href="https://github.com/liara-engine/liara-interfaces/commit/19f9c58b8d7e12556048adfcc2a45a80c135e47d">19f9c58</a>)</li>
 <li><strong>manifest:</strong> add new version entry for 0.2.0 with ABI compatibility (<a href="https://github.com/liara-engine/liara-interfaces/commit/094e375a46271f564bef9562aeb28478e9a83410">094e375</a>)</li>
 <li>portability (<a href="https://github.com/liara-engine/liara-interfaces/issues/19">#19</a>) (<a href="https://github.com/liara-engine/liara-interfaces/commit/b95993b840e3be08eaf5093b11461093416d15db">b95993b</a>)</li>
 </ul>
-<h3 id="bug-fixes"><a class="header" href="#bug-fixes">Bug Fixes</a></h3>
+<h3 id="bug-fixes-1"><a class="header" href="#bug-fixes-1">Bug Fixes</a></h3>
 <ul>
 <li><strong>clang-tidy:</strong> refine checks and add readability rules for better code quality (<a href="https://github.com/liara-engine/liara-interfaces/commit/665dc7799d6e2d68b388a7779dd699c4d48beaab">665dc77</a>)</li>
 <li><strong>cmake:</strong> GNUInstallDirs and set export name for liara_interfaces (<a href="https://github.com/liara-engine/liara-interfaces/commit/2ed2375783eeaf144db374d03e27c3a03494b476">2ed2375</a>)</li>
@@ -213,7 +223,7 @@
 <li>replace deprecated liara_result with liara_result_t in core and renderer APIs (<a href="https://github.com/liara-engine/liara-interfaces/issues/11">#11</a>) (<a href="https://github.com/liara-engine/liara-interfaces/commit/d5f4fd4234d9f0a5a62665133314e915cf296d84">d5f4fd4</a>)</li>
 </ul>
 <h2 id="011-2026-07-28"><a class="header" href="#011-2026-07-28"><a href="https://github.com/liara-engine/liara-interfaces/compare/v0.1.0...v0.1.1">0.1.1</a> (2026-07-28)</a></h2>
-<h3 id="features-1"><a class="header" href="#features-1">Features</a></h3>
+<h3 id="features-2"><a class="header" href="#features-2">Features</a></h3>
 <ul>
 <li>interfaces result t and version compare (<a href="https://github.com/liara-engine/liara-interfaces/issues/9">#9</a>) (<a href="https://github.com/liara-engine/liara-interfaces/commit/ca6c8ebb8269c543c51ac45bb0e2152b7944a165">ca6c8eb</a>)</li>
 <li><strong>renderer:</strong> add render packet (<a href="https://github.com/liara-engine/liara-interfaces/issues/10">#10</a>) (<a href="https://github.com/liara-engine/liara-interfaces/commit/1992902b442932cefcbe360d69589a92f2bd23af">1992902</a>)</li>
@@ -224,7 +234,7 @@
 <ul>
 <li><strong>version:</strong> liara_try_make_version now return liara_result, 0 is now a success</li>
 </ul>
-<h3 id="features-2"><a class="header" href="#features-2">Features</a></h3>
+<h3 id="features-3"><a class="header" href="#features-3">Features</a></h3>
 <ul>
 <li><strong>abi:</strong> introduce LIARA_STATIC_ASSERT (<a href="https://github.com/liara-engine/liara-interfaces/commit/f388fe3429ea88fe899b20a57e7e1d832f6ec9dc">f388fe3</a>)</li>
 <li><strong>ci:</strong> add CI workflow (<a href="https://github.com/liara-engine/liara-interfaces/issues/6">#6</a>) (<a href="https://github.com/liara-engine/liara-interfaces/commit/e6ea14e59b5a2afc228e05ef0c663d9aba6d11f7">e6ea14e</a>)</li>
@@ -236,13 +246,13 @@
 <li><strong>result:</strong> add liara_result type and error code definitions (<a href="https://github.com/liara-engine/liara-interfaces/commit/62815b279fb4676b1211467ecd59ca238d4f0d81">62815b2</a>)</li>
 <li><strong>version:</strong> update liara_try_make_version to return error codes for null pointer and out of range values (<a href="https://github.com/liara-engine/liara-interfaces/commit/d5fabd6464f9936e64354e099b8dae695eda11ee">d5fabd6</a>)</li>
 </ul>
-<h3 id="bug-fixes-1"><a class="header" href="#bug-fixes-1">Bug Fixes</a></h3>
+<h3 id="bug-fixes-2"><a class="header" href="#bug-fixes-2">Bug Fixes</a></h3>
 <ul>
 <li><strong>format:</strong> update clang-format and clang-tidy (<a href="https://github.com/liara-engine/liara-interfaces/commit/d8dd48e5f9cd4185224c62fce1c2206cf5528ff5">d8dd48e</a>)</li>
 <li><strong>renderer:</strong> add missing liara result include (<a href="https://github.com/liara-engine/liara-interfaces/commit/68dfb3c1bfa4a6ed9384b1c5e5cf67feb75f153b">68dfb3c</a>)</li>
 </ul>
 <h2 id="001-2026-07-15"><a class="header" href="#001-2026-07-15">0.0.1 (2026-07-15)</a></h2>
-<h3 id="features-3"><a class="header" href="#features-3">Features</a></h3>
+<h3 id="features-4"><a class="header" href="#features-4">Features</a></h3>
 <ul>
 <li><strong>abi:</strong> add Liara ABI version definition and compatibility functions (<a href="https://github.com/liara-engine/liara-interfaces/commit/ca4e3cc4a6367a38df0ac2aefa4b1cd6cf094536">ca4e3cc</a>)</li>
 <li>add versioning macros for Liara project (<a href="https://github.com/liara-engine/liara-interfaces/commit/224f9809de1f678093f338beaf2e0ff6f53e5c87">224f980</a>)</li>
@@ -259,7 +269,7 @@
 <li><strong>version:</strong> enhance version handling with safety checks and new comparison functions (<a href="https://github.com/liara-engine/liara-interfaces/commit/5c1fc9a393d191e236e7fe84e89a2fdcbcdbb75c">5c1fc9a</a>)</li>
 <li><strong>versioning:</strong> automate version management with generated config header (<a href="https://github.com/liara-engine/liara-interfaces/commit/3cf4e4f2ea1f9b1df0b709d40d55795d3d8493c8">3cf4e4f</a>)</li>
 </ul>
-<h3 id="bug-fixes-2"><a class="header" href="#bug-fixes-2">Bug Fixes</a></h3>
+<h3 id="bug-fixes-3"><a class="header" href="#bug-fixes-3">Bug Fixes</a></h3>
 <ul>
 <li>add extern “C” linkage for versioning macros in version.h (<a href="https://github.com/liara-engine/liara-interfaces/commit/dd5026895c73392543308e24dcdec2fbd4b6ceff">dd50268</a>)</li>
 <li><strong>docs:</strong> update Doxyfile output directory and resource paths (<a href="https://github.com/liara-engine/liara-interfaces/commit/93f4da21cfe17b3543c07499fd3ced514499bac4">93f4da2</a>)</li>
