@@ -3,7 +3,7 @@
   "metadata": {
     "name": "Liara Engine Core",
     "description": "The core library for the Liara Engine.",
-    "latest": "0.2.2"
+    "latest": "0.2.3"
   },
   "versions": {
     "dev": {
@@ -23,22 +23,26 @@
     },
     "0.2.0": {
       "abi_compatibility": [
-        "0.2.0", "0.2.1"
+        "0.2.0",
+        "0.2.1"
       ]
     },
     "0.2.1": {
       "abi_compatibility": [
-        "0.2.0", "0.2.1"
+        "0.2.0",
+        "0.2.1"
       ]
     },
     "0.2.2": {
       "abi_compatibility": [
-        "0.2.0", "0.2.1"
+        "0.2.0",
+        "0.2.1"
       ]
     },
     "0.2.3": {
       "abi_compatibility": [
-        "0.2.0", "0.2.1"
+        "0.2.0",
+        "0.2.1"
       ]
     }
   }
