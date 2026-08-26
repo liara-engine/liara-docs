@@ -4,22 +4,22 @@
 <html lang="en" class="sidebar-visible no-js light">
 <head>
 <meta charset="UTF-8">
-<title>License - Liara Engine — Meta Repository</title>
+<title>ADR-0004: Module boundaries: what stays in the core - Liara Engine — Meta Repository</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="theme-color" content="#FFFAFC">
 
 <link rel="icon" type="image/x-icon" href="/shared-content/assets/logo.svg">
-<link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/general.css">
-<link rel="stylesheet" href="css/chrome.css">
-<link rel="stylesheet" href="css/print.css" media="print">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/general.css">
+<link rel="stylesheet" href="../css/chrome.css">
+<link rel="stylesheet" href="../css/print.css" media="print">
 
-<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="../fonts/fonts.css">
 
-<link rel="stylesheet" id="mdbook-highlight-css" href="highlight.css">
-<link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night.css">
-<link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight.css">
+<link rel="stylesheet" id="mdbook-highlight-css" href="../highlight.css">
+<link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night.css">
+<link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight.css">
 
 <link rel="stylesheet" href="/shared-content/tokens/design-tokens.css">
 <link rel="stylesheet" href="/shared-content/navbar/navbar.css">
@@ -68,11 +68,11 @@
 <script defer src="/shared-content/navbar/version-banner.js"></script>
 
 
-<input type="hidden" id="MDBOOK_OUTPUT" value="">
+<input type="hidden" id="MDBOOK_OUTPUT" value="../">
 
 
 <script>
-    var path_to_root = "";
+    var path_to_root = "../";
     var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "navy" : "light";
 </script>
@@ -153,7 +153,7 @@
                 <a href="https://github.com/liara-engine/liara" title="Git repository" aria-label="Git repository">
                     <i id="git-repository-button" class="fa fa-github"></i>
                 </a>
-                <a href="https://github.com/liara/docs/edit/main/docs/docs/LICENSE.md" title="Suggest an edit" aria-label="Suggest an edit">
+                <a href="https://github.com/liara/docs/edit/main/docs/docs/adr/0004-module-boundaries.md" title="Suggest an edit" aria-label="Suggest an edit">
                     <i id="git-edit-button" class="fa fa-edit"></i>
                 </a>
             </div>
@@ -187,31 +187,52 @@
 
         <div id="content" class="content">
             <main>
-                <p>MIT License</p>
-<p>Copyright (c) 2026 liara-engine</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the “Software”), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.</p>
+                <h1 id="adr-0004--module-boundaries-what-is-a-module-and-what-stays-in-the-core"><a class="header" href="#adr-0004--module-boundaries-what-is-a-module-and-what-stays-in-the-core">ADR 0004 — Module Boundaries: What Is a Module and What Stays in the Core</a></h1>
+<ul>
+<li><strong>Status</strong>: Accepted</li>
+<li><strong>Date</strong>: 2026-08-26</li>
+<li><strong>Deciders</strong>: Antoine</li>
+</ul>
+<h2 id="context"><a class="header" href="#context">Context</a></h2>
+<p>ADRs 0001 and 0002 say the project is split into modules with a hard contract between them. Neither says where the splits go. That question came up as soon as the module list had to be written down.</p>
+<p>The first version of the list had <code>liara-core</code> containing the ECS, math, the logger, settings, the event bus, the loop, plus asset management, plus window and input, plus audio. Everything that wasn’t rendering. It looked reasonable because each of those had a small implementation at the time, and none of them seemed worth a repository of its own.</p>
+<p>That is exactly what happened in the previous project, and the reason it happened is that a core described as “the foundation” has no criterion for refusing anything. Every subsystem is foundational from some angle. Once assets and platform are inside it, the core depends on a file format library and a windowing library, cannot be built without either, and cannot be tested without both.</p>
+<h2 id="decision"><a class="header" href="#decision">Decision</a></h2>
+<p>Repositories fall into four kinds, and the kind determines what the repository is allowed to do:</p>
+<ul>
+<li><strong>Contract</strong> — <code>liara-interfaces</code>. Headers only. Depends on nothing.</li>
+<li><strong>Modules</strong> — <code>liara-core</code>, <code>liara-platform</code>, <code>liara-renderer</code>, <code>liara-assets</code>, <code>liara-audio</code>, and later <code>liara-physics</code>. Each implements one part of the contract and depends only on the contract.</li>
+<li><strong>Hosts</strong> — <code>liara</code> (the launcher), later <code>liara-editor</code>. Compose modules. Allowed to know the module graph, which nothing else is.</li>
+<li><strong>Infrastructure</strong> — <code>docs-shared</code>, <code>liara-docs</code>, <code>.github</code>. No engine code.</li>
+</ul>
+<p>The test for whether something is a module, from <code>MODULES.md</code> §1.5: could it be reimplemented in another language against the same C interface and substituted? If not, it is not a module and does not get a repository.</p>
+<p>Applying that test, <code>liara-core</code> keeps the ECS, math, the logger, settings, the event bus and loop primitives. Platform, assets and audio are their own modules from the point at which they exist, rather than starting in the core and being extracted later.</p>
+<h2 id="alternatives-considered"><a class="header" href="#alternatives-considered">Alternatives Considered</a></h2>
+<p><strong>Start with a large core and extract when it hurts.</strong> The obvious approach: fewer repositories early, split when the pain is real, and avoid guessing wrong. Rejected because “when it hurts” is after every extraction has become expensive. A subsystem inside the core accumulates callers that reach into it directly, and by the time the split is obviously needed it is not a move any more, it is a rewrite. I have done the extract-later version and it did not get done.</p>
+<p><strong>Keep the boundaries but ship them from one repository at first</strong>, splitting the repositories later while keeping the interfaces. This was seriously considered, and it is what <code>ARCHITECTURE.md</code> §4.3 already does for ABI namespaces — every subsystem gets its own namespace from the first line regardless of which repository implements it. Rejected as a general policy for the same reason as above, and because the two-step version means doing the packaging work twice.</p>
+<p><strong>Finer modules</strong> — math separate from the ECS, the logger separate again. Rejected: none of them passes the substitution test in a way that means anything. Nobody reimplements a logger in Rust and swaps it in, and each additional repository has a fixed cost in CI, releases and documentation.</p>
+<h2 id="consequences"><a class="header" href="#consequences">Consequences</a></h2>
+<p>There are more repositories earlier than the amount of code justifies. <code>liara-platform</code> exists from v0.1 for one window and an event pump. That is accepted: the cost of a repository is mostly one-time setup, and the cost of not having one shows up later and is not one-time.</p>
+<p>Some things become awkward on purpose. Assets and the renderer have to exchange data through the contract and through the host rather than by calling each other, so adding an interaction between them is a change to <code>liara-interfaces</code> — deliberately more expensive than a function call.</p>
+<p>The core is now describable in one sentence, and I can tell whether something belongs in it without arguing with myself. That was the actual goal.</p>
+<p>Dependencies sort themselves out. Because each module declares only its own, <code>liara-core</code> needs toml++ and glm and nothing else, and there is no build in which the ECS drags in a glTF parser.</p>
+<h2 id="revisit-if"><a class="header" href="#revisit-if">Revisit If</a></h2>
+<ul>
+<li>A subsystem inside <code>liara-core</code> starts being replaceable in a way that means something — most likely the logger, if the choice between spdlog and something in-house turns into a real configuration point.</li>
+<li>Two modules end up passing so much through the host that the indirection costs more than the separation is worth. Measured, not suspected.</li>
+<li>A module turns out to be too small to justify its own release cycle after a version or two of living with it. Merging back is allowed; it just needs its own ADR.</li>
+</ul>
 
             </main>
 
             <nav class="nav-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="adr/0010-vulkan-without-abstraction-layer.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../adr/0003-the-host-composes-modules.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
+                    <a rel="next prefetch" href="../adr/0005-version-encoding-and-compatibility.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
 
                 <div style="clear: both"></div>
             </nav>
@@ -219,10 +240,13 @@ SOFTWARE.</p>
     </div>
 
     <nav class="nav-wide-wrapper" aria-label="Page navigation">
-            <a rel="prev" href="adr/0010-vulkan-without-abstraction-layer.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+            <a rel="prev" href="../adr/0003-the-host-composes-modules.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
             </a>
 
+            <a rel="next prefetch" href="../adr/0005-version-encoding-and-compatibility.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+            </a>
     </nav>
 </div>
 
@@ -234,13 +258,13 @@ SOFTWARE.</p>
 </script>
 
 
-<script src="elasticlunr.min.js"></script>
-<script src="mark.min.js"></script>
-<script src="searcher.js"></script>
+<script src="../elasticlunr.min.js"></script>
+<script src="../mark.min.js"></script>
+<script src="../searcher.js"></script>
 
-<script src="clipboard.min.js"></script>
-<script src="highlight.js"></script>
-<script src="book.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../highlight.js"></script>
+<script src="../book.js"></script>
 
 <script defer src="/shared-content/mdbook/js/admonitions.js"></script>
 

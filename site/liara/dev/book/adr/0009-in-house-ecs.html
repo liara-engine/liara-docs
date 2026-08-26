@@ -4,22 +4,22 @@
 <html lang="en" class="sidebar-visible no-js light">
 <head>
 <meta charset="UTF-8">
-<title>License - Liara Engine — Meta Repository</title>
+<title>ADR-0009: An in-house ECS rather than an existing library - Liara Engine — Meta Repository</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="theme-color" content="#FFFAFC">
 
 <link rel="icon" type="image/x-icon" href="/shared-content/assets/logo.svg">
-<link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/general.css">
-<link rel="stylesheet" href="css/chrome.css">
-<link rel="stylesheet" href="css/print.css" media="print">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/general.css">
+<link rel="stylesheet" href="../css/chrome.css">
+<link rel="stylesheet" href="../css/print.css" media="print">
 
-<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="../fonts/fonts.css">
 
-<link rel="stylesheet" id="mdbook-highlight-css" href="highlight.css">
-<link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night.css">
-<link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight.css">
+<link rel="stylesheet" id="mdbook-highlight-css" href="../highlight.css">
+<link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night.css">
+<link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight.css">
 
 <link rel="stylesheet" href="/shared-content/tokens/design-tokens.css">
 <link rel="stylesheet" href="/shared-content/navbar/navbar.css">
@@ -68,11 +68,11 @@
 <script defer src="/shared-content/navbar/version-banner.js"></script>
 
 
-<input type="hidden" id="MDBOOK_OUTPUT" value="">
+<input type="hidden" id="MDBOOK_OUTPUT" value="../">
 
 
 <script>
-    var path_to_root = "";
+    var path_to_root = "../";
     var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "navy" : "light";
 </script>
@@ -153,7 +153,7 @@
                 <a href="https://github.com/liara-engine/liara" title="Git repository" aria-label="Git repository">
                     <i id="git-repository-button" class="fa fa-github"></i>
                 </a>
-                <a href="https://github.com/liara/docs/edit/main/docs/docs/LICENSE.md" title="Suggest an edit" aria-label="Suggest an edit">
+                <a href="https://github.com/liara/docs/edit/main/docs/docs/adr/0009-in-house-ecs.md" title="Suggest an edit" aria-label="Suggest an edit">
                     <i id="git-edit-button" class="fa fa-edit"></i>
                 </a>
             </div>
@@ -187,31 +187,49 @@
 
         <div id="content" class="content">
             <main>
-                <p>MIT License</p>
-<p>Copyright (c) 2026 liara-engine</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the “Software”), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.</p>
+                <h1 id="adr-0009--a-hand-written-ecs-rather-than-an-existing-library"><a class="header" href="#adr-0009--a-hand-written-ecs-rather-than-an-existing-library">ADR 0009 — A Hand-Written ECS Rather Than an Existing Library</a></h1>
+<ul>
+<li><strong>Status</strong>: Proposed</li>
+<li><strong>Date</strong>: 2026-08-26</li>
+<li><strong>Deciders</strong>: Antoine</li>
+</ul>
+<blockquote>
+<p>Proposed rather than Accepted: the ECS arrives in v0.2 and nothing has yet been built on it. This records the decision before the investment, which is the only point at which changing my mind is still cheap. It moves to Accepted when v0.2 closes.</p>
+</blockquote>
+<h2 id="context"><a class="header" href="#context">Context</a></h2>
+<p>The core needs a way to hold game state. I want an ECS: it separates data from behaviour, it suits data-oriented layouts, and it lets systems be written independently of each other, which fits an architecture where the renderer and a future physics module both operate on the same entities through different components without knowing about each other.</p>
+<p>EnTT and flecs exist, are excellent, are faster than what I will write, and would take an afternoon to integrate.</p>
+<h2 id="decision"><a class="header" href="#decision">Decision</a></h2>
+<p>The ECS is written by hand, in <code>liara-core</code>. The first implementation uses sparse sets: one sparse array indexed by entity ID and one packed array of component data per component type.</p>
+<h2 id="alternatives-considered"><a class="header" href="#alternatives-considered">Alternatives Considered</a></h2>
+<p><strong>EnTT.</strong> Header-only, mature, extremely fast, and the default answer for this problem in C++. Rejected, and I want to be honest about the reason, because “it wouldn’t have been fast enough” or “it wouldn’t have fit the architecture” would both be false. Neither is true. I rejected it because adopting it would remove the part of this project I am here for.</p>
+<p>The stated goal of Liara is learning: graphics programming, modern C++, and large-scale architecture. Writing an ECS teaches memory layout design, template metaprogramming and API design in a way that calling one does not. That is the version of this argument that belongs in a design document, and it is accurate as far as it goes.</p>
+<p>The fuller version is that I work on things I can see the bottom of. Assembling a project out of libraries whose internals I do not know is, for me, not the same activity as building something — it is a different task that happens to produce a similar artifact, and it is one I lose interest in quickly. On a project with no deadline and no client, sustained interest is the actual constraint, and a technically superior choice that I stop working on is worse than an adequate one I finish. This is a bad criterion for a team and a decisive one for me, so it is recorded here rather than left implicit and rediscovered later as inconsistency.</p>
+<p><strong>flecs.</strong> More featureful than EnTT, with relationships and queries I would not write myself. Rejected for the same reason, more so: the more it does, the less of it I would understand.</p>
+<p><strong>No ECS</strong> — plain object hierarchies, or arrays of structs with hand-written iteration. Simpler and sufficient for the scale Liara will reach before v1.0. Rejected because it does not compose with the module boundaries: the render packet pattern of <code>ARCHITECTURE.md</code> §6.3 depends on the core being able to iterate a specific component set cheaply, and an object hierarchy makes that a traversal rather than a scan.</p>
+<p><strong>Archetype storage</strong> (Bevy, Unity DOTS) instead of sparse sets. Better for multi-component queries, which is most of them, and worse in every other way to implement: fragment management, archetype graph transitions, and structural change deferral. Rejected for v0.x as a first implementation, not on principle. If iteration performance becomes the bottleneck, this is where to go, and switching is an internal change since the ECS is not exposed across the ABI.</p>
+<h2 id="consequences"><a class="header" href="#consequences">Consequences</a></h2>
+<p>It will be slower than EnTT, and probably by a lot at first. This is accepted, with a caveat: the ECS is benchmarked in CI from v0.2 onward, so “slower” stays a number I am looking at rather than a thing I assume is fine.</p>
+<p>Bugs in it are mine, including the ones EnTT solved years ago and I have not thought of yet. Entity ID recycling with generation counters, iteration stability under structural change, and lifetime of component references are the three I expect to get wrong at least once each.</p>
+<p>It is small enough to hold in my head, which is the point. When something behaves oddly, the explanation is in code I wrote, not in a template instantiation four layers into someone else’s header.</p>
+<p>The API is mine, so it can change to fit what the engine turns out to need instead of what a library author anticipated. The corresponding cost is that there is no upgrade path and no community answering questions about it.</p>
+<p>Sparse arrays grow with the maximum entity ID rather than with the entity count, so a workload that creates and destroys many entities pays memory for the high-water mark. Acceptable at v0.x scale, and a real problem at simulation scale.</p>
+<h2 id="revisit-if"><a class="header" href="#revisit-if">Revisit If</a></h2>
+<ul>
+<li>The benchmarks show the ECS is the frame-time bottleneck, and archetype storage is the fix — which is a change of storage strategy under the same API, not a change of this decision.</li>
+<li>I find myself maintaining it instead of building the engine with it. Writing it is the point; keeping it alive at the expense of everything else is not, and if that happens the honest move is to swap in EnTT and say so in a superseding ADR.</li>
+</ul>
 
             </main>
 
             <nav class="nav-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="adr/0010-vulkan-without-abstraction-layer.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../adr/0008-two-tier-ci.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
+                    <a rel="next prefetch" href="../adr/0010-vulkan-without-abstraction-layer.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
 
                 <div style="clear: both"></div>
             </nav>
@@ -219,10 +237,13 @@ SOFTWARE.</p>
     </div>
 
     <nav class="nav-wide-wrapper" aria-label="Page navigation">
-            <a rel="prev" href="adr/0010-vulkan-without-abstraction-layer.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+            <a rel="prev" href="../adr/0008-two-tier-ci.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
             </a>
 
+            <a rel="next prefetch" href="../adr/0010-vulkan-without-abstraction-layer.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+            </a>
     </nav>
 </div>
 
@@ -234,13 +255,13 @@ SOFTWARE.</p>
 </script>
 
 
-<script src="elasticlunr.min.js"></script>
-<script src="mark.min.js"></script>
-<script src="searcher.js"></script>
+<script src="../elasticlunr.min.js"></script>
+<script src="../mark.min.js"></script>
+<script src="../searcher.js"></script>
 
-<script src="clipboard.min.js"></script>
-<script src="highlight.js"></script>
-<script src="book.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../highlight.js"></script>
+<script src="../book.js"></script>
 
 <script defer src="/shared-content/mdbook/js/admonitions.js"></script>
 
