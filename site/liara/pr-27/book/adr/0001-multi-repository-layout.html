@@ -4,22 +4,22 @@
 <html lang="en" class="sidebar-visible no-js light">
 <head>
 <meta charset="UTF-8">
-<title>License - Liara Engine — Meta Repository</title>
+<title>ADR-0001: Multi-repository layout - Liara Engine — Meta Repository</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="theme-color" content="#FFFAFC">
 
 <link rel="icon" type="image/x-icon" href="/shared-content/assets/logo.svg">
-<link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/general.css">
-<link rel="stylesheet" href="css/chrome.css">
-<link rel="stylesheet" href="css/print.css" media="print">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/general.css">
+<link rel="stylesheet" href="../css/chrome.css">
+<link rel="stylesheet" href="../css/print.css" media="print">
 
-<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="../fonts/fonts.css">
 
-<link rel="stylesheet" id="mdbook-highlight-css" href="highlight.css">
-<link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night.css">
-<link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight.css">
+<link rel="stylesheet" id="mdbook-highlight-css" href="../highlight.css">
+<link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night.css">
+<link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight.css">
 
 <link rel="stylesheet" href="/shared-content/tokens/design-tokens.css">
 <link rel="stylesheet" href="/shared-content/navbar/navbar.css">
@@ -68,11 +68,11 @@
 <script defer src="/shared-content/navbar/version-banner.js"></script>
 
 
-<input type="hidden" id="MDBOOK_OUTPUT" value="">
+<input type="hidden" id="MDBOOK_OUTPUT" value="../">
 
 
 <script>
-    var path_to_root = "";
+    var path_to_root = "../";
     var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "navy" : "light";
 </script>
@@ -153,7 +153,7 @@
                 <a href="https://github.com/liara-engine/liara" title="Git repository" aria-label="Git repository">
                     <i id="git-repository-button" class="fa fa-github"></i>
                 </a>
-                <a href="https://github.com/liara/docs/edit/main/docs/docs/LICENSE.md" title="Suggest an edit" aria-label="Suggest an edit">
+                <a href="https://github.com/liara/docs/edit/main/docs/docs/adr/0001-multi-repository-layout.md" title="Suggest an edit" aria-label="Suggest an edit">
                     <i id="git-edit-button" class="fa fa-edit"></i>
                 </a>
             </div>
@@ -187,31 +187,48 @@
 
         <div id="content" class="content">
             <main>
-                <p>MIT License</p>
-<p>Copyright (c) 2026 liara-engine</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the “Software”), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.</p>
+                <h1 id="adr-0001--multi-repository-layout"><a class="header" href="#adr-0001--multi-repository-layout">ADR 0001 — Multi-Repository Layout</a></h1>
+<ul>
+<li><strong>Status</strong>: Accepted</li>
+<li><strong>Date</strong>: 2026-08-26</li>
+<li><strong>Deciders</strong>: Antoine</li>
+</ul>
+<blockquote>
+<p>Retrospective. The decision was made when the project was bootstrapped; this records why it still holds.</p>
+</blockquote>
+<h2 id="context"><a class="header" href="#context">Context</a></h2>
+<p>Liara is a reboot of an earlier engine of mine. That one was a single repository, and it worked until it didn’t. What went wrong there is the whole context for this decision, so it is worth being specific about it rather than saying “it got messy”.</p>
+<p>Everything being in one place meant everything could reach everything. Nothing stopped me from coupling two systems together, so I did, repeatedly, because in the moment it was always the fastest way to get the thing working. The coupling then made later tasks harder than they should have been, and tasks that are harder than they should be are tasks I put off. Several parts of that project stalled for that reason and not for any technical one.</p>
+<p>Opening the project to work on one thing meant having every other thing in front of me. I would open it to work on X and spend the day on everything except X. That is not a discipline problem I can solve by trying harder, and pretending otherwise is how the previous project ended.</p>
+<p>There was also a mismatch I never got used to. The design talked about interchangeable subsystems that don’t know about each other, and the folder structure said they all live together and can call each other freely. Reading the docs and reading the tree gave two different answers about what the project was.</p>
+<h2 id="decision"><a class="header" href="#decision">Decision</a></h2>
+<p>One Git repository per module, under the <code>liara-engine</code> organization. A module depends on <code>liara-interfaces</code> and on nothing else. Local development happens in a workspace assembled by a bootstrap script, which clones the repositories side by side and builds them as one superbuild.</p>
+<h2 id="alternatives-considered"><a class="header" href="#alternatives-considered">Alternatives Considered</a></h2>
+<p><strong>A monorepo.</strong> Easier on every operational axis, and I do not dispute that. Cross-cutting refactors happen in one commit instead of five coordinated pull requests. There is no compatibility matrix to maintain, no workspace to bootstrap, no version negotiation between components that ship together anyway. If the only criterion were “which is less work to run”, this would be the answer.</p>
+<p>I rejected it because I have already built the monorepo version of this project and I know how it ends. The operational cost of the multi-repo layout is real but it is bounded and mostly automated; the cost of the monorepo showed up as coupling I couldn’t undo and tasks I couldn’t start.</p>
+<p><strong>A monorepo with enforced boundaries</strong> — separate CMake targets, a lint rule against cross-module includes, a directory convention. This is the option I would recommend to most people, and it is the one I trust least for myself. A boundary I can cross by editing one line is a boundary I will cross at some point, with a good reason, at 2am. A boundary that requires opening another repository, changing the contract, releasing it, and updating a manifest is one I will not cross by accident. The friction is the mechanism, not a side effect of it.</p>
+<p><strong>A middle layout</strong>, one repository for the engine and one per optional module. Rejected because the split would have to be decided up front and would inevitably be wrong: whichever subsystems started out together would grow into each other, exactly as they did before, and separating them later means a breaking ABI change and a migration.</p>
+<h2 id="consequences"><a class="header" href="#consequences">Consequences</a></h2>
+<p>A change that crosses modules is several pull requests in a defined order, and I have to write down which versions work together. <code>CONTRIBUTING.md</code> §12 describes the procedure. It is slow on purpose — the friction is what keeps interface changes from being casual — but it is genuinely slow, and on a day where I want to move fast it is the thing standing in the way.</p>
+<p>Local development needs tooling that would not otherwise exist: a bootstrap script, a generated superbuild, a preset template shared across repositories, and a CI that assembles the workspace around whichever repository is under test. That is a real amount of Phase 0 work that a monorepo would not have required at all.</p>
+<p>Each module can be built, tested and released alone, and a module’s test suite has nothing to stand up but itself. This is the payoff and it shows up immediately, not eventually.</p>
+<p>The structure now matches what the documentation says. When I read that modules don’t know about each other, the tree agrees, and I don’t have to hold two versions of the project in my head.</p>
+<h2 id="revisit-if"><a class="header" href="#revisit-if">Revisit If</a></h2>
+<ul>
+<li>The cross-repository coordination cost stops being bounded and starts dominating — if a normal change routinely takes four pull requests, the boundaries are in the wrong place, and that is a problem with ADR 0004 rather than with this one.</li>
+<li>Contributors other than me appear in numbers, at which point the barrier to a first contribution matters more than my own working constraints do.</li>
+</ul>
 
             </main>
 
             <nav class="nav-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="adr/0010-vulkan-without-abstraction-layer.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../adr/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
+                    <a rel="next prefetch" href="../adr/0002-c-abi-as-the-inter-module-contract.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
 
                 <div style="clear: both"></div>
             </nav>
@@ -219,10 +236,13 @@ SOFTWARE.</p>
     </div>
 
     <nav class="nav-wide-wrapper" aria-label="Page navigation">
-            <a rel="prev" href="adr/0010-vulkan-without-abstraction-layer.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+            <a rel="prev" href="../adr/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
             </a>
 
+            <a rel="next prefetch" href="../adr/0002-c-abi-as-the-inter-module-contract.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+            </a>
     </nav>
 </div>
 
@@ -234,13 +254,13 @@ SOFTWARE.</p>
 </script>
 
 
-<script src="elasticlunr.min.js"></script>
-<script src="mark.min.js"></script>
-<script src="searcher.js"></script>
+<script src="../elasticlunr.min.js"></script>
+<script src="../mark.min.js"></script>
+<script src="../searcher.js"></script>
 
-<script src="clipboard.min.js"></script>
-<script src="highlight.js"></script>
-<script src="book.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../highlight.js"></script>
+<script src="../book.js"></script>
 
 <script defer src="/shared-content/mdbook/js/admonitions.js"></script>
 

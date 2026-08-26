@@ -4,22 +4,22 @@
 <html lang="en" class="sidebar-visible no-js light">
 <head>
 <meta charset="UTF-8">
-<title>License - Liara Engine — Meta Repository</title>
+<title>ADR-0005: Version encoding and compatibility semantics - Liara Engine — Meta Repository</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="theme-color" content="#FFFAFC">
 
 <link rel="icon" type="image/x-icon" href="/shared-content/assets/logo.svg">
-<link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/general.css">
-<link rel="stylesheet" href="css/chrome.css">
-<link rel="stylesheet" href="css/print.css" media="print">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/general.css">
+<link rel="stylesheet" href="../css/chrome.css">
+<link rel="stylesheet" href="../css/print.css" media="print">
 
-<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="../fonts/fonts.css">
 
-<link rel="stylesheet" id="mdbook-highlight-css" href="highlight.css">
-<link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night.css">
-<link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight.css">
+<link rel="stylesheet" id="mdbook-highlight-css" href="../highlight.css">
+<link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night.css">
+<link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight.css">
 
 <link rel="stylesheet" href="/shared-content/tokens/design-tokens.css">
 <link rel="stylesheet" href="/shared-content/navbar/navbar.css">
@@ -68,11 +68,11 @@
 <script defer src="/shared-content/navbar/version-banner.js"></script>
 
 
-<input type="hidden" id="MDBOOK_OUTPUT" value="">
+<input type="hidden" id="MDBOOK_OUTPUT" value="../">
 
 
 <script>
-    var path_to_root = "";
+    var path_to_root = "../";
     var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "navy" : "light";
 </script>
@@ -153,7 +153,7 @@
                 <a href="https://github.com/liara-engine/liara" title="Git repository" aria-label="Git repository">
                     <i id="git-repository-button" class="fa fa-github"></i>
                 </a>
-                <a href="https://github.com/liara/docs/edit/main/docs/docs/LICENSE.md" title="Suggest an edit" aria-label="Suggest an edit">
+                <a href="https://github.com/liara/docs/edit/main/docs/docs/adr/0005-version-encoding-and-compatibility.md" title="Suggest an edit" aria-label="Suggest an edit">
                     <i id="git-edit-button" class="fa fa-edit"></i>
                 </a>
             </div>
@@ -187,31 +187,58 @@
 
         <div id="content" class="content">
             <main>
-                <p>MIT License</p>
-<p>Copyright (c) 2026 liara-engine</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the “Software”), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.</p>
+                <h1 id="adr-0005--version-encoding-and-compatibility-semantics"><a class="header" href="#adr-0005--version-encoding-and-compatibility-semantics">ADR 0005 — Version Encoding and Compatibility Semantics</a></h1>
+<ul>
+<li><strong>Status</strong>: Accepted</li>
+<li><strong>Date</strong>: 2026-08-26</li>
+<li><strong>Deciders</strong>: Antoine</li>
+</ul>
+<blockquote>
+<p>Retrospective. The encoding was decided when <code>liara-interfaces</code> was created; the compatibility rule was only fully settled later, and this records both.</p>
+</blockquote>
+<h2 id="context"><a class="header" href="#context">Context</a></h2>
+<p>Modules version independently and have to agree at their boundary. Two things needed deciding: how a version is written down in the ABI, and what “compatible” means when two of them differ.</p>
+<p>The encoding was the easy part. The check happens before anything else does — the host reads a module’s version and decides whether to call into it, and under runtime loading that happens right after symbol resolution, when nothing about the module is yet known to work. I did not want the first thing the program does to be parsing a string. Vulkan packs major, minor and patch into a 32-bit word, that pattern is familiar to anyone who has touched Vulkan, and I copied it.</p>
+<p>The rule was messier, and the mess is the reason this record exists. <code>INTERFACES.md</code> §8.5 said that a 0.0.x version <em>required</em> means exact equality. The code in <code>liara_version_provides</code> tested the 0.0.x condition on the <em>provided</em> version instead. Both are defensible readings and they disagree on two specific pairs: provided 0.0.5 against required 0.1.0, and provided 0.1.0 against required 0.0.5. I found the divergence during a Phase 0 audit, not through a failure, which means it had been there since the function was written.</p>
+<h2 id="decision"><a class="header" href="#decision">Decision</a></h2>
+<p>A version is a single 32-bit word, packed as Vulkan packs it. <code>LIARA_MAKE_VERSION_UNSAFE</code> builds one at compile time with no range checking; <code>liara_try_make_version</code> is the checked form for computed or untrusted input.</p>
+<p>Compatibility is one rule, applied in order:</p>
+<ol>
+<li>Identical versions are <code>EXACT</code>.</li>
+<li>Different major versions are <code>INCOMPATIBLE</code>.</li>
+<li><strong>If either side is a 0.0.x version, only exact equality is compatible.</strong></li>
+<li>Otherwise, a provided minor at or above the required minor is <code>COMPATIBLE</code>; below it, <code>DEGRADED</code>.</li>
+</ol>
+<p>Rule 3 is symmetric, which resolves the divergence by taking the strictest available reading: both disputed pairs come out <code>INCOMPATIBLE</code>. It also makes the patch component significant, which it is nowhere else in the scheme.</p>
+<p>The rule is written once. <code>LIARA_CONSTEXPR_FN</code> expands to <code>constexpr</code> in C++ and <code>static inline</code> in C, so the same function serves a <code>static_assert</code> in the launcher and a runtime check in a C consumer without a second implementation to keep in step.</p>
+<h2 id="alternatives-considered"><a class="header" href="#alternatives-considered">Alternatives Considered</a></h2>
+<p><strong>Textual semver, parsed at negotiation time.</strong> Readable in a log without decoding, and directly  comparable to what the Git tags and <code>manifest.json</code> contain. I did not want the earliest check in the program to be the one that allocates and parses, and it would add a “malformed version” failure mode next to the “incompatible version” one at a point where telling them apart helps nobody.</p>
+<p><strong>Comparing the packed words as integers.</strong> The bit layout orders correctly, so <code>provided &gt;= required</code> gives the right answer for the common case in one instruction. This is what the launcher actually did until the audit, and it worked — which is the problem. It cannot distinguish <code>DEGRADED</code> from <code>INCOMPATIBLE</code>, it ignores the major boundary entirely, and it gets rule 3 wrong in both directions. The launcher now goes through the rule.</p>
+<p><strong>Treating 0.0.x as an ordinary minor comparison</strong>, dropping rule 3. One fewer special case, and it would let a 0.0.x module satisfy an 0.0.y requirement instead of demanding lockstep. Rejected: a playground version would silently pass for a released one, and the failure would show up as undefined behaviour at a struct layout mismatch rather than as a refusal at load time. During Phase 0, lockstep is what is actually true.</p>
+<p><strong>Applying rule 3 to only one side</strong>, either reading. Both were on the table since both were already written down somewhere. I took the symmetric version because a rule whose direction has to be remembered is a rule that gets applied backwards, and because the strict reading fails safe: the worst case is refusing a combination that would have worked, which I find out immediately.</p>
+<h2 id="consequences"><a class="header" href="#consequences">Consequences</a></h2>
+<p>The negotiation is a few comparisons on a value already in a register. It works in a <code>static_assert</code>, in C and in C++, and before any allocator exists.</p>
+<p>Version words are unreadable in a debugger or a log. <code>liara_version_to_string</code> exists for that and is the only thing that should be decoding them.</p>
+<p>Under rule 3, every 0.0.x release breaks anything pinned to a different one. Phase 0 is therefore more rigid than it looks from outside, and that is deliberate rather than an oversight.</p>
+<p><code>LIARA_MAKE_VERSION_UNSAFE</code> corrupts neighbouring fields if a component overflows, and the <code>_UNSAFE</code> suffix is the whole mitigation. Thin, but its callers are compile-time literals in headers I review, and the checked form exists for anything else.</p>
+<p>The ABI pipeline cannot see a change like this one. <code>liara_version_provides</code> keeps its signature when its behaviour changes, so the snapshot shows no diff and the breaking change has to be declared by hand in the pull request title and a <code>BREAKING CHANGE</code> footer. Nothing catches me forgetting.</p>
+<h2 id="revisit-if"><a class="header" href="#revisit-if">Revisit If</a></h2>
+<ul>
+<li>Everything on both sides of every negotiation is past 1.0.0, at which point rule 3 is dead code and should be deleted rather than left as a branch nothing exercises.</li>
+<li>A fourth component becomes necessary — a build or revision number — which the bit layout has no room for.</li>
+<li>A module needs to express a range rather than a floor: works with 1.2 through 1.4 but not 1.5. The current rule cannot say that.</li>
+</ul>
 
             </main>
 
             <nav class="nav-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="adr/0010-vulkan-without-abstraction-layer.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../adr/0004-module-boundaries.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
+                    <a rel="next prefetch" href="../adr/0006-manifest-as-compatibility-source-of-truth.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
 
                 <div style="clear: both"></div>
             </nav>
@@ -219,10 +246,13 @@ SOFTWARE.</p>
     </div>
 
     <nav class="nav-wide-wrapper" aria-label="Page navigation">
-            <a rel="prev" href="adr/0010-vulkan-without-abstraction-layer.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+            <a rel="prev" href="../adr/0004-module-boundaries.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
             </a>
 
+            <a rel="next prefetch" href="../adr/0006-manifest-as-compatibility-source-of-truth.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+            </a>
     </nav>
 </div>
 
@@ -234,13 +264,13 @@ SOFTWARE.</p>
 </script>
 
 
-<script src="elasticlunr.min.js"></script>
-<script src="mark.min.js"></script>
-<script src="searcher.js"></script>
+<script src="../elasticlunr.min.js"></script>
+<script src="../mark.min.js"></script>
+<script src="../searcher.js"></script>
 
-<script src="clipboard.min.js"></script>
-<script src="highlight.js"></script>
-<script src="book.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../highlight.js"></script>
+<script src="../book.js"></script>
 
 <script defer src="/shared-content/mdbook/js/admonitions.js"></script>
 

@@ -97,7 +97,7 @@
 
 <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
     <div class="sidebar-scrollbox">
-        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html"><strong aria-hidden="true">1.</strong> Liara Engine</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ARCHITECTURE.html"><strong aria-hidden="true">2.</strong> Architecture</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="MODULES.html"><strong aria-hidden="true">3.</strong> Modules</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ROADMAP.html"><strong aria-hidden="true">4.</strong> Roadmap</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="BOOTSTRAP.html"><strong aria-hidden="true">5.</strong> Bootstrap</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="CONTRIBUTING.html"><strong aria-hidden="true">6.</strong> Contributing</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="CODE_STYLE.html"><strong aria-hidden="true">7.</strong> Code Style</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="TOOLING.html"><strong aria-hidden="true">8.</strong> Tooling</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="DOCUMENTATION_PIPELINE.html"><strong aria-hidden="true">9.</strong> Documentation Pipeline</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="LICENSE.html"><strong aria-hidden="true">10.</strong> License</a></span></li></ol>
+        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html"><strong aria-hidden="true">1.</strong> Liara Engine</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ARCHITECTURE.html"><strong aria-hidden="true">2.</strong> Architecture</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="MODULES.html"><strong aria-hidden="true">3.</strong> Modules</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ROADMAP.html"><strong aria-hidden="true">4.</strong> Roadmap</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="BOOTSTRAP.html"><strong aria-hidden="true">5.</strong> Bootstrap</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="CONTRIBUTING.html"><strong aria-hidden="true">6.</strong> Contributing</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="CODE_STYLE.html"><strong aria-hidden="true">7.</strong> Code Style</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="TOOLING.html"><strong aria-hidden="true">8.</strong> Tooling</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="DOCUMENTATION_PIPELINE.html"><strong aria-hidden="true">9.</strong> Documentation Pipeline</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="adr/index.html"><strong aria-hidden="true">10.</strong> Architecture Decision Records</a><a class="chapter-fold-toggle"><div>❱</div></a></span><ol class="section"><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0001-multi-repository-layout.html"><strong aria-hidden="true">10.1.</strong> ADR-0001: Multi-repository layout</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0002-c-abi-as-the-inter-module-contract.html"><strong aria-hidden="true">10.2.</strong> ADR-0002: A C ABI as the inter-module contract</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0003-the-host-composes-modules.html"><strong aria-hidden="true">10.3.</strong> ADR-0003: The host composes modules</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0004-module-boundaries.html"><strong aria-hidden="true">10.4.</strong> ADR-0004: Module boundaries: what stays in the core</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0005-version-encoding-and-compatibility.html"><strong aria-hidden="true">10.5.</strong> ADR-0005: Version encoding and compatibility semantics</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0006-manifest-as-compatibility-source-of-truth.html"><strong aria-hidden="true">10.6.</strong> ADR-0006: manifest.json as the single compatibility source of truth</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0007-cmake-presets-and-vcpkg.html"><strong aria-hidden="true">10.7.</strong> ADR-0007: CMake with presets, and vcpkg in manifest mode</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0008-two-tier-ci.html"><strong aria-hidden="true">10.8.</strong> ADR-0008: Two-tier CI, and reusable workflows</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0009-in-house-ecs.html"><strong aria-hidden="true">10.9.</strong> ADR-0009: An in-house ECS rather than an existing library</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0010-vulkan-without-abstraction-layer.html"><strong aria-hidden="true">10.10.</strong> ADR-0010: Vulkan directly, without a rendering abstraction layer</a></span></li></ol><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="LICENSE.html"><strong aria-hidden="true">11.</strong> License</a></span></li></ol>
     </div>
     <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
         <div class="sidebar-resize-indicator"></div>
@@ -284,24 +284,30 @@ focused on one aspect:</p>
 <p>Documentation of the whole project can be found at
 <a href="https://liara-engine.liara-engine-documentation.workers.dev/">liara-engine.liara-engine-documentation.workers.dev</a>.</p>
 <p>User-facing documentation (tutorials, guides) is hosted at
-TODO: add link when section is ready.</p>
+[TODO]: add link when section is ready.</p>
 <p>For newcomers, the recommended reading order is the sequence above,
 top to bottom.</p>
 <hr>
 <h2 id="project-structure"><a class="header" href="#project-structure">Project Structure</a></h2>
+<p>Liara is a set of independently versioned repositories rather than one tree. Each module owns one concern, exposes it through the shared C ABI, and knows nothing about its siblings.</p>
 <p>The repositories under <a href="https://github.com/liara-engine"><code>liara-engine</code></a>:</p>
 <pre><code>liara-engine/
 ├── liara                  # This repository: launcher, packaging,
 │                          # documentation, compatibility matrix.
-├── liara-interfaces       # C ABI headers shared by all modules.
-├── liara-core             # ECS, math, assets, logger, settings.
+├── liara-interfaces       # The C ABI contract. Header-only.
+│                          # Every module depends on it; it depends on nothing.
+├── liara-core             # ECS, math, logger, settings, event bus, loop primitives.
+├── liara-platform         # Window, input, OS signals, timing (v0.1).
 ├── liara-renderer         # Vulkan reference renderer.
+├── liara-assets           # Asset loading, decoding, lifetime (v0.3).
+├── liara-audio            # Playback and mixing (v0.5).
 ├── liara-editor           # Editor application (post-v1.0).
 ├── liara-physics          # Physics module (post-v1.0).
 ├── docs-shared            # Shared documentation templates.
 ├── liara-docs             # Documentation for the engine.
 └── .github                # Organization-level workflows and templates.
 </code></pre>
+<p>Modules do not compose themselves. The launcher creates each one, negotiates ABI versions, and wires them together; <code>liara-core</code> neither loads nor references any of the others. The consequence worth stating up front is that there is no dependency order to learn between modules — there is only each module’s dependency on the contract.</p>
 <p>The interfaces repository is the contract; everything else
 implements or consumes it. See <a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/MODULES"><code>MODULES.md</code></a>
 for the full picture.</p>
@@ -355,7 +361,7 @@ and
 <tr><td>Code formatting</td><td>clang-format</td></tr>
 <tr><td>Release automation</td><td>release-please</td></tr>
 <tr><td>Platforms</td><td>Linux (Arch primary, Ubuntu CI), Windows 11</td></tr>
-<tr><td>Compilers</td><td>GCC 14+, Clang 18+, MSVC 2022 17.6+</td></tr>
+<tr><td>Compilers</td><td>GCC 14+, Clang 20+, MSVC 2022 17.6+</td></tr>
 </tbody>
 </table>
 </div>
@@ -372,7 +378,7 @@ discussed before code is written.</li>
 be opened directly without prior discussion.</li>
 </ul>
 <p>The project follows the <a href="https://www.contributor-covenant.org/">Contributor Covenant</a>
-code of conduct (a copy lives in <code>CODE_OF_CONDUCT.md</code>) [TODO].</p>
+code of conduct (a copy lives in <a href="CODE_OF_CONDUCT.html">CODE_OF_CONDUCT.md</a>).</p>
 <hr>
 <h2 id="license"><a class="header" href="#license">License</a></h2>
 <p>Liara is released under the <strong>MIT License</strong>. See
@@ -525,7 +531,7 @@ differently.</li>
 <h3 id="42-designed-for-dynamic-implemented-as-static"><a class="header" href="#42-designed-for-dynamic-implemented-as-static">4.2 Designed for Dynamic, Implemented as Static</a></h3>
 <p>Although modules are linked statically today, the <strong>interfaces between them are designed as if they were dynamic</strong>. This means the boundary between any two modules uses C linkage, plain-old-data types, opaque handles, and explicit version negotiation. The cost of this discipline is small at the interface boundary; the benefit is that switching to runtime loading later becomes a runtime concern (writing a loader) and not an architectural rewrite.</p>
 <p>This decision also has an immediate benefit independent of any future dynamic loading: it makes it possible, in principle, to replace any module with an implementation written in another language. A user who wanted to write the renderer in Rust against OpenGL, or the physics module in Zig, could do so by implementing the same C interface. Whether this ever happens in practice is a separate question; what matters is that nothing in the architecture forbids it.</p>
-<p>A CI leg builds every module as a shared library and links the launcher against them (<a href="#reusable-workflows">Tooling</a>, <code>reusable-shared-dynamic.yml</code>); if a module silently acquired a link-time dependency on another module’s symbols, or leaked C++ across its boundary, that build fails. The static/dynamic choice is thus a build-time flag (<code>BUILD_SHARED_LIBS</code>), not an architectural fork. A further, optional step exercises actual runtime loading (<code>dlopen</code>/<code>LoadLibrary</code> + symbol resolution through each module’s <code>liara_&lt;module&gt;_info</code> entry point), giving the version-negotiation machinery its first real workout instead of leaving it a design that nothing runs.</p>
+<p>A CI leg builds every module as a shared library and links the launcher against them, and a further leg makes the launcher resolve them at runtime instead (<a href="#5-ci-pipelines">Tooling</a>, the <code>-link</code> and <code>-runtime</code> presets); if a module silently acquired a link-time dependency on another module’s symbols, or leaked C++ across its boundary, one of the two fails. The static/dynamic choice is thus a pair of build-time flags, not an architectural fork.</p>
 <h3 id="43-one-namespace-per-subsystem-from-the-first-line"><a class="header" href="#43-one-namespace-per-subsystem-from-the-first-line">4.3 One Namespace Per Subsystem, From the First Line</a></h3>
 <p>A subsystem that could plausibly become a separate module is given its own ABI namespace immediately, whatever repository implements it today. The cost is nil at the time; the cost of retrofitting is a MAJOR bump of <code>liara-interfaces</code> and a forced migration of every consumer.</p>
 <p>This is the same trade as the previous section, one level up: there, the interfaces are designed as if modules were dynamic although they are linked statically; here, they are designed as if every subsystem were its own repository although several may share one. Both keep a future reorganization a matter of moving files rather than rewriting contracts.</p>
@@ -1224,6 +1230,25 @@ shaders/
 <p>The path from an empty repository to Liara Engine 2.0, with explicit exit criteria for each milestone. This document is intentionally precise about Phase 0 through v1.0 and intentionally vague about what comes after; that vagueness is a feature, not a gap.</p>
 </blockquote>
 <hr>
+<h2 id="table-of-contents-2"><a class="header" href="#table-of-contents-2">Table of Contents</a></h2>
+<ul>
+<li><a href="#1-how-to-read-this-document">1. How to Read This Document</a></li>
+<li><a href="#2-cadence-philosophy">2. Cadence Philosophy</a></li>
+<li><a href="#3-versioning-conventions">3. Versioning Conventions</a></li>
+<li><a href="#4-phase-0-bootstrap">4. Phase 0: Bootstrap</a></li>
+<li><a href="#5-v01--hello-triangle">5. v0.1 — Hello Triangle</a></li>
+<li><a href="#6-v02--ecs-and-math">6. v0.2 — ECS and Math</a></li>
+<li><a href="#7-v03--assets">7. v0.3 — Assets</a></li>
+<li><a href="#8-v04--lighting-and-materials-v1">8. v0.4 — Lighting and Materials v1</a></li>
+<li><a href="#9-v05--input-and-audio">9. v0.5 — Input and Audio</a></li>
+<li><a href="#10-v06--packaging">10. v0.6 — Packaging</a></li>
+<li><a href="#11-v07-through-v09--dogfooding">11. v0.7 — v0.7 through v0.9 — Dogfooding</a></li>
+<li><a href="#12-v10--first-shippable-game">12. v1.0 — The First Game</a></li>
+<li><a href="#13-post-v10--themes-only">13. Post-v1.0 — Thematic Roadmap</a></li>
+<li><a href="#14-the-documentation-platform-continuous-track">14. The Documentation Platform (Continuous Track)</a></li>
+<li><a href="#15-living-document">15. Living Document</a></li>
+</ul>
+<hr>
 <h2 id="1-how-to-read-this-document"><a class="header" href="#1-how-to-read-this-document">1. How to Read This Document</a></h2>
 <p>This roadmap is structured around <strong>milestones</strong>, not dates. Each milestone has a defined scope, a Definition of Done, and an explicit list of what is <strong>not</strong> in scope (the “non-goals” section is as important as the “goals” section).</p>
 <p>The document is divided into three zones of decreasing precision:</p>
@@ -1277,7 +1302,7 @@ shaders/
 </ul>
 <p><del>Each module repository contains a minimal stub: a CMakeLists.txt that compiles, a README that points to the meta repository’s docs, LICENSE, .gitignore, .editorconfig, .clang-format, .clang-tidy, and a placeholder test that passes.</del></p>
 <p>The <code>liara-editor</code> and <code>liara-physics</code> repositories are <strong>not</strong> created in Phase 0. They will be created when their first code is written.</p>
-<h3 id="documentation-in-place"><a class="header" href="#documentation-in-place">Documentation in Place</a></h3>
+<h3 id="documentation-in-place"><a class="header" href="#documentation-in-place"><del>Documentation in Place</del></a></h3>
 <p>The meta repository contains, at minimum, the following documents, all written and reviewed:</p>
 <ul>
 <li><del><code>README.md</code></del></li>
@@ -1289,21 +1314,21 @@ shaders/
 <li><del><code>docs/TOOLING.md</code></del></li>
 <li><del><code>docs/BOOTSTRAP.md</code></del></li>
 <li><del><code>docs/DOCUMENTATION_PIPELINE.md</code></del></li>
-<li><code>docs/adr/0001-*.md</code> through whatever ADRs are needed to capture the major decisions taken so far.</li>
+<li><del><code>docs/adr/0001-*.md</code> through whatever ADRs are needed to capture the major decisions taken so far.</del></li>
 </ul>
 <p><del>The <code>liara-interfaces</code> repository contains its own <code>INTERFACES.md</code>.</del></p>
 <p><del>The <code>docs-shared</code> repository contains the navbar HTML/CSS/JS and the Doxygen and mdBook templates that include it. It also contains its own developer guide describing the templates and the shared-content split.</del></p>
-<h3 id="ci-pipelines-operational"><a class="header" href="#ci-pipelines-operational">CI Pipelines Operational</a></h3>
+<h3 id="ci-pipelines-operational"><a class="header" href="#ci-pipelines-operational"><del>CI Pipelines Operational</del></a></h3>
 <p>Each module repository has GitHub Actions workflows that, on every push and pull request:</p>
 <ul>
-<li>Build on Linux (GCC and Clang) and Windows (MSVC).</li>
-<li>Run clang-format checks.</li>
-<li>Run clang-tidy.</li>
-<li>Run the test suite (even if it is just one placeholder test).</li>
+<li><del>Build on Linux (GCC and Clang) and Windows (MSVC).</del></li>
+<li><del>Run clang-format checks.</del></li>
+<li><del>Run clang-tidy.</del></li>
+<li><del>Run the test suite (even if it is just one placeholder test).</del></li>
 <li><del>Generate Doxygen and Mdbook documentation.</del></li>
-<li><del>On pushes to main, deploy the documentation to Cloudflare Pages.</del></li>
+<li><del>On pushes to main, deploy the documentation to Cloudflare Workers.</del></li>
 </ul>
-<p>The reusable workflows that implement these steps live in the <code>.github</code> organization-level repository and are invoked from each module’s workflows.</p>
+<p><del>The reusable workflows that implement these steps live in the <code>.github</code> organization-level repository and are invoked from each module’s workflows.</del></p>
 <h3 id="release-please-configured"><a class="header" href="#release-please-configured"><del>Release-Please Configured</del></a></h3>
 <p><del>Each repository has <code>release-please</code> configured to track conventional commits and produce release PRs automatically. The configuration is in <code>.release-please-manifest.json</code> and <code>release-please-config.json</code> at each repository’s root.</del></p>
 <h3 id="workspace-bootstrap-working"><a class="header" href="#workspace-bootstrap-working"><del>Workspace Bootstrap Working</del></a></h3>
@@ -1328,14 +1353,14 @@ shaders/
 <p>Phase 0 is complete when:</p>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> All listed repositories exist and are configured.</li>
-<li><input disabled="" type="checkbox"> All listed documents are written.</li>
-<li><input disabled="" type="checkbox"> CI is green on every repository (even if testing only stubs).</li>
-<li><input disabled="" type="checkbox" checked=""> Documentation is generated and deployed to cloudflare pages.</li>
+<li><input disabled="" type="checkbox" checked=""> All listed documents are written.</li>
+<li><input disabled="" type="checkbox" checked=""> CI is green on every repository (even if testing only stubs).</li>
+<li><input disabled="" type="checkbox" checked=""> Documentation is generated and deployed to cloudflare workers.</li>
 <li><input disabled="" type="checkbox" checked=""> The hub at <code>liara-engine.liara-engine-documentation.workers.dev</code> is accessible and renders with the navbar.</li>
 <li><input disabled="" type="checkbox" checked=""> The workspace bootstrap script runs successfully on a clean Arch Linux machine.</li>
 <li><input disabled="" type="checkbox"> The workspace bootstrap script runs successfully on a clean Windows 11 machine with Visual Studio 2022.</li>
-<li><input disabled="" type="checkbox"> An ADR exists for each major decision: multi-repo layout, C ABI interfaces, ECS-from-scratch, Vulkan-Hpp, etc.</li>
-<li><input disabled="" type="checkbox"> Every module builds as a shared library (<code>BUILD_SHARED_LIBS=ON</code>) with hidden default visibility and an explicit export macro, and the launcher links and runs against the shared build.</li>
+<li><input disabled="" type="checkbox" checked=""> An ADR exists for each major decision: multi-repo layout, C ABI interfaces, ECS-from-scratch, Vulkan-Hpp, etc.</li>
+<li><input disabled="" type="checkbox" checked=""> Every module builds as a shared library (<code>BUILD_SHARED_LIBS=ON</code>) with hidden default visibility and an explicit export macro, and the launcher links and runs against the shared build.</li>
 </ul>
 <hr>
 <h2 id="5-v01--hello-triangle"><a class="header" href="#5-v01--hello-triangle">5. v0.1 — Hello Triangle</a></h2>
@@ -1363,7 +1388,7 @@ shaders/
 <li><input disabled="" type="checkbox"> A window appears with a triangle rendered in it.</li>
 <li><input disabled="" type="checkbox"> The window is closable and the application shuts down cleanly.</li>
 <li><input disabled="" type="checkbox"> No Vulkan validation errors are reported in debug builds.</li>
-<li><input disabled="" type="checkbox"> The interface version negotiation between core and renderer is exercised through the runtime-loading path: a contrived major-version mismatch is detected at load time, produces a clear error, and refuses to load — no crash, no silent mismatch.</li>
+<li><input disabled="" type="checkbox"> The interface version negotiation between core and renderer is exercised: an ABI mismatch is detected before anything is called, produces a clear error, and refuses to proceed — no crash, no silent mismatch. Under the <code>-runtime</code> presets, the same check runs after symbol resolution rather than before the first call; both paths reach the same verdict.</li>
 <li><input disabled="" type="checkbox"> Tests pass on all platforms.</li>
 <li><input disabled="" type="checkbox"> User-facing documentation includes a “Build Hello Triangle” page.</li>
 <li><input disabled="" type="checkbox"> Compatibility matrix updated.</li>
@@ -1390,6 +1415,29 @@ shaders/
 <li><input disabled="" type="checkbox"> It rejects an ABI-incompatible combination with a clear message, before assembly.</li>
 <li><input disabled="" type="checkbox"> It assembles a compatible combination into a layout the launcher can run against.</li>
 <li><input disabled="" type="checkbox"> It works on Linux for the developer’s own workflow.</li>
+</ul>
+<hr>
+<h2 id="v01x--the-module-loader-experimental"><a class="header" href="#v01x--the-module-loader-experimental">v0.1.x — The Module Loader (Experimental)</a></h2>
+<p>Like the composition tool, this is not a numbered milestone: it is the piece of the host that turns “the interfaces are designed as if modules were dynamic” into something a program actually runs.</p>
+<h3 id="rationale-1"><a class="header" href="#rationale-1">Rationale</a></h3>
+<p><code>ARCHITECTURE.md</code> §4.2 makes a claim — that switching to runtime loading is a matter of writing a loader, not of rewriting contracts. A claim nothing exercises is a claim nobody has checked. The <code>-runtime</code> presets exist from Phase 0 precisely so the claim is testable early, before enough code has accumulated for a static coupling to be expensive to undo.</p>
+<h3 id="scope-experimental-form-1"><a class="header" href="#scope-experimental-form-1">Scope (experimental form)</a></h3>
+<p>The launcher gains a small loader: it resolves each module’s shared library by a platform-correct name, opens it, resolves that module’s <code>liara_&lt;module&gt;_info</code> entry point plus the handful of functions the host actually calls, runs the negotiation of <code>INTERFACES.md</code> §8.5 on the result, and refuses to proceed on <code>INCOMPATIBLE</code>. Library names live in one place, next to the platform macros, rather than being spelled at each call site.</p>
+<p>In this form the loader is deliberately naive: a fixed list of modules, no discovery, no plugin directory, no versioned filename resolution, no graceful degradation when a module is absent.</p>
+<h3 id="out-of-scope-deferred-until-a-host-actually-needs-it"><a class="header" href="#out-of-scope-deferred-until-a-host-actually-needs-it">Out of Scope (deferred until a host actually needs it)</a></h3>
+<ul>
+<li>Module discovery: scanning a directory, reading a manifest, deciding what to load.</li>
+<li>Loading a module the launcher was not compiled to know about.</li>
+<li>Unload and reload at runtime (that is code hot-reload; deferred indefinitely, see <code>ARCHITECTURE.md</code> §12).</li>
+<li>Any policy beyond “refuse INCOMPATIBLE, warn on DEGRADED”.</li>
+</ul>
+<h3 id="definition-of-done-experimental-1"><a class="header" href="#definition-of-done-experimental-1">Definition of Done (experimental)</a></h3>
+<ul>
+<li><input disabled="" type="checkbox"> Under the <code>-runtime</code> presets, the launcher links against <code>liara-interfaces</code> only; the module libraries are resolved at load time, not at link time.</li>
+<li><input disabled="" type="checkbox"> Library names are correct on both Linux and Windows, and are defined in one place.</li>
+<li><input disabled="" type="checkbox"> A contrived ABI mismatch is detected after symbol resolution and refuses to proceed, with a message naming the module and both versions.</li>
+<li><input disabled="" type="checkbox"> A missing or unopenable library produces a clear error rather than a crash.</li>
+<li><input disabled="" type="checkbox"> The <code>-runtime</code> presets are exercised by CI on both platforms.</li>
 </ul>
 <hr>
 <h2 id="6-v02--ecs-and-math"><a class="header" href="#6-v02--ecs-and-math">6. v0.2 — ECS and Math</a></h2>
@@ -1433,8 +1481,10 @@ shaders/
 <h2 id="7-v03--assets"><a class="header" href="#7-v03--assets">7. v0.3 — Assets</a></h2>
 <p>This version introduces persistent assets: meshes loaded from glTF files, textures loaded from PNG/JPG, shaders compiled from GLSL to SPIR-V at build time. This version creates <code>liara-assets</code>.</p>
 <h3 id="scope-2"><a class="header" href="#scope-2">Scope</a></h3>
-<p>The core implements the asset manager: handles for meshes, textures, and shaders, with reference counting and explicit lifetime management. Assets are loaded via dedicated functions (<code>liara_core_asset_load_mesh</code>, etc.) that return handles.</p>
-<p>glTF support uses cgltf or tinygltf (TBD). The first supported features are static meshes (no skeletal animation), with embedded or external textures. Materials in glTF are read but only the <code>baseColorTexture</code> is honored at this stage.</p>
+<p>This version creates <code>liara-assets</code>. Loading, decoding and lifetime management of assets are its concern from the outset rather than something extracted from the core later: an asset system that starts inside the core acquires a dozen callers before anyone notices, and the extraction stops being a move and becomes a rewrite.</p>
+<p>The module exposes <code>liara_assets_load_mesh</code>, <code>liara_assets_load_texture</code> and their release counterparts across the ABI, in its own <code>liara_assets_</code> namespace. The core does not call them and does not link against the module; the launcher composes the two, as it does for every other pair.</p>
+<p>glTF 2.0 is the mesh format and PNG the texture format, decoded through cgltf (or tinygltf, TBD) and stb. Neither library appears in any public header: they are implementation details of the module, and the ABI exposes handles.</p>
+<p>The first supported features are static meshes (no skeletal animation), with embedded or external textures. Materials in glTF are read but only the <code>baseColorTexture</code> is honored at this stage.</p>
 <p>Texture loading uses stb_image. Supported formats: PNG and JPG. Mipmaps are generated automatically.</p>
 <p>The launcher’s procedural cubes are replaced by real glTF assets loaded from disk. A small selection of test assets ships with the engine (a textured cube, a Suzanne head, a simple environment).</p>
 <p>Shader hot-reload: in development builds, the engine watches the shader source files and reloads pipelines when they change. This is a quality-of-life feature for the engine’s development itself, not a shipped capability.</p>
@@ -1640,7 +1690,33 @@ shaders/
 <li>A finished product. Even at v2.0, the engine is a personal learning project that happens to be usable; that frame does not change.</li>
 </ul>
 <hr>
-<h2 id="14-living-document"><a class="header" href="#14-living-document">14. Living Document</a></h2>
+<h2 id="14-the-documentation-platform-continuous-track"><a class="header" href="#14-the-documentation-platform-continuous-track">14. The Documentation Platform (Continuous Track)</a></h2>
+<p>The documentation pipeline is infrastructure, not a feature of the engine, and it does not fit the milestone model: it was born in Phase 0, it will keep evolving after v1.0, and none of its work gates an engine release. It is tracked here as a continuous track rather than being scattered across versions it has nothing to do with.</p>
+<p>Items are unordered and are picked up opportunistically, typically when a documentation change makes the friction concrete. The one rule: an item that changes a tool (rather than how an existing tool is used) needs an ADR, per <code>TOOLING.md</code> §1, once Phase 0 is closed.</p>
+<h3 id="manifests-and-compatibility-metadata"><a class="header" href="#manifests-and-compatibility-metadata">Manifests and compatibility metadata</a></h3>
+<p><code>manifest.json</code> was designed when <code>liara-interfaces</code> was the only repository, and it shows: every module version declares an <code>abi_compatibility</code> list, including repositories for which the notion is meaningless (the meta repository, <code>docs-shared</code>) and repositories that ship a host rather than a module. The schema should distinguish the kinds of repository it actually has to describe — contract, module, host, infrastructure — and require of each only what applies to it.</p>
+<ul>
+<li><input disabled="" type="checkbox"> The schema models repository kinds and validates each accordingly.</li>
+<li><input disabled="" type="checkbox"> The meta repository’s manifest describes the launcher’s ABI requirement rather than declaring a compatibility it does not have.</li>
+<li><input disabled="" type="checkbox"> The navbar’s compatibility badges are derived from the new model without special cases.</li>
+</ul>
+<h3 id="version-lifecycle"><a class="header" href="#version-lifecycle">Version lifecycle</a></h3>
+<p>Nothing currently removes a published documentation version, and nothing can rebuild an old one. Both are needed: the 0.0.x series stops being worth hosting once 1.x ships (the last 0.0 is the only one with archival value), and a template change that improves every page should be applicable to pages already published.</p>
+<ul>
+<li><input disabled="" type="checkbox"> A published version can be retired, with its URLs redirecting somewhere sensible rather than 404-ing.</li>
+<li><input disabled="" type="checkbox"> Any tag can be re-rendered with the current pipeline, from its own sources, without a new release of the module.</li>
+</ul>
+<h3 id="rendering-and-pipeline"><a class="header" href="#rendering-and-pipeline">Rendering and pipeline</a></h3>
+<ul>
+<li><input disabled="" type="checkbox"> The Doxygen renderer is replaced by a tool that accepts real customization, so that the API reference and the developer guide can share a visual language rather than approximate one. Tool to be determined; the choice requires an ADR.</li>
+<li><input disabled="" type="checkbox"> The pipeline is simplified, starting with the static side: the baked/runtime split of <code>docs-shared</code> earns its complexity only where a runtime change genuinely has to go live without a rebuild, and the current split is wider than that.</li>
+<li><input disabled="" type="checkbox"> The published site stops carrying dozens of byte-identical copies of the same asset across versions.</li>
+</ul>
+<h3 id="definition-of-done-7"><a class="header" href="#definition-of-done-7">Definition of Done</a></h3>
+<p>There is none. This track is complete when the project stops producing documentation, which is to
+say never. Individual items have their own checkboxes; the track does not gate anything.</p>
+<hr>
+<h2 id="15-living-document"><a class="header" href="#15-living-document">15. Living Document</a></h2>
 <p>This roadmap is a living document. Versions that have shipped are moved to a “Completed” section (or annotated as completed in place, TBD by the author). Versions that have not shipped may be revised in light of experience.</p>
 <p>Revisions follow a discipline:</p>
 <ul>
@@ -1658,7 +1734,7 @@ shaders/
 <p>If you want to set up on a different Linux distribution, the Arch instructions are a starting point but you will need to translate package names. Distribution-specific support is not a project goal; however, community contributions of setup instructions for other distributions are welcome.</p>
 </blockquote>
 <hr>
-<h2 id="table-of-contents-2"><a class="header" href="#table-of-contents-2">Table of Contents</a></h2>
+<h2 id="table-of-contents-3"><a class="header" href="#table-of-contents-3">Table of Contents</a></h2>
 <ul>
 <li><a href="#1-quick-start">1. Quick Start</a></li>
 <li><a href="#2-arch-linux-detailed-setup">2. Arch Linux: Detailed Setup</a>
@@ -1788,7 +1864,7 @@ sudo pacman -S zig rust
 <p>Without them, the Zig and Rust tests are not registered at all: <code>ctest</code> reports success without having run them.<code> liara verify --optional</code> reports their absence.</p>
 <p>Verify the toolchain versions meet the project’s requirements:</p>
 <pre><code class="language-bash">cmake --version    # Must be 3.29 or newer
-clang --version    # Must be 18 or newer
+clang --version    # Must be 20 or newer
 gcc --version      # Must be 14 or newer
 glslc --version    # Must report a Vulkan SDK version
 </code></pre>
@@ -1977,21 +2053,28 @@ cd liara
 </code></pre>
 <p>Then re-run.</p>
 <h3 id="36-build-and-test"><a class="header" href="#36-build-and-test">3.6 Build and Test</a></h3>
-<pre><code class="language-powershell"># Build the default development preset (windows-release)
-.\scripts\liara.ps1 build
+<pre><code class="language-powershell"># Configure once. One configure preset serves both Debug and Release on Windows.
+.\scripts\liara.ps1 setup --preset windows
 
-# Or build with a specific preset
-.\scripts\liara.ps1 build --preset windows-debug
-
-# Run tests
-.\scripts\liara.ps1 test --preset windows-debug
+# Build and test, choosing the configuration at build time.
+.\scripts\liara.ps1 build --preset windows-release
+.\scripts\liara.ps1 test --preset windows-release
 </code></pre>
-<p>Available Windows presets:</p>
-<ul>
-<li><code>windows-debug</code> — debug build, single configuration.</li>
-<li><code>windows-release</code> — release build. Default for development.</li>
-</ul>
-<p>After a successful build, run the test suite. If all tests pass, the setup is complete.</p>
+<p>The Windows presets are multi-configuration, which is why there are three configure presets and six build presets rather than a matching pair of each. The configure presets differ by linkage only:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Configure preset</th><th><code>BUILD_SHARED_LIBS</code></th><th><code>LIARA_LAUNCHER_MODULE_LOADING</code></th></tr>
+</thead>
+<tbody>
+<tr><td><code>windows</code></td><td><code>OFF</code></td><td><code>link</code></td></tr>
+<tr><td><code>windows-link</code></td><td><code>ON</code></td><td><code>link</code></td></tr>
+<tr><td><code>windows-runtime</code></td><td><code>ON</code></td><td><code>runtime</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>Each of those serves a <code>-debug</code> and a <code>-release</code> build preset (<code>windows-debug</code>, <code>windows-release</code>, <code>windows-debug-link</code>, and so on), and the build preset carries the configuration. Switching between Debug and Release therefore does not re-resolve dependencies, which is the practical reason the Windows side is arranged this way.</p>
+<p>A build preset’s name does not always match its configure preset’s name. <code>liara.ps1</code> resolves the build directory through the preset file rather than guessing it from the name; anything else that needs it should do the same.</p>
 <h3 id="37-run-the-demo"><a class="header" href="#37-run-the-demo">3.7 Run the Demo</a></h3>
 <pre><code class="language-powershell"># Run the demo with the default preset
 .\scripts\liara.ps1 launch --preset windows-release
@@ -2161,13 +2244,10 @@ git pull
 <pre><code class="language-bash">./scripts/liara.sh setup --no-pull  # Or .ps1 on Windows
 </code></pre>
 <h3 id="updating-the-vulkan-sdk-windows"><a class="header" href="#updating-the-vulkan-sdk-windows">Updating the Vulkan SDK (Windows)</a></h3>
-<p>Download the new SDK installer and run it. The installer cleanly upgrades over the existing installation. After upgrading, regenerate the build:</p>
-<pre><code class="language-powershell">cd workspace
-Remove-Item -Recurse -Force build
-cmake --preset=windows-release
-cmake --build --preset=windows-release
+<p>Download the new SDK installer and run it. The installer cleanly upgrades over the existing installation. After updating the Vulkan SDK, re-run the configure step so that CMake picks up the new location:</p>
+<pre><code class="language-powershell">.\scripts\liara.ps1 setup --preset windows
 </code></pre>
-<p>A clean reconfigure is needed because shader compilation paths and SDK includes may have changed.</p>
+<p><code>windows</code> is the configure preset; <code>windows-release</code> and its siblings are build presets and cannot be passed to a configure step.</p>
 <hr>
 <h2 id="8-uninstalling"><a class="header" href="#8-uninstalling">8. Uninstalling</a></h2>
 <p>If you want to remove Liara and all its development setup:</p>
@@ -2218,7 +2298,7 @@ Remove-Item -Recurse -Force C:\vcpkg
 <p>The day-to-day workflow for contributing to Liara: from “I want to change something” to “the change is merged”. This document is for the project’s primary developer (and for any future contributor), not just for external newcomers. It is the procedure that turns intent into shipped code.</p>
 </blockquote>
 <hr>
-<h2 id="table-of-contents-3"><a class="header" href="#table-of-contents-3">Table of Contents</a></h2>
+<h2 id="table-of-contents-4"><a class="header" href="#table-of-contents-4">Table of Contents</a></h2>
 <ul>
 <li><a href="#1-who-this-document-is-for">1. Who This Document Is For</a></li>
 <li><a href="#2-reading-order-before-contributing">2. Reading Order Before Contributing</a></li>
@@ -2940,7 +3020,7 @@ Checks: &gt;
     readability-*,
     -readability-magic-numbers,
     -readability-identifier-length,
-    -security.insecureAPI.DeprecatedOrUnsafeBufferHandling
+    -clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling
 
 WarningsAsErrors: &gt;
     *,
@@ -3128,31 +3208,33 @@ namespace Liara::Graphics
 </code></pre>
 <p>The order is: file-level docstring, <code>#pragma once</code>, includes (in the configured groups), namespace, type declarations.</p>
 <h3 id="implementation-structure"><a class="header" href="#implementation-structure">Implementation Structure</a></h3>
-<p>Every <code>.cpp</code> file starts with the corresponding header’s include, followed by additional includes:</p>
-<pre><code class="language-cpp">// In src/renderer.cpp — the shim exposing liara/renderer/renderer.h
+<p>The ABI shim is the only place in a module where C and C++ meet. It lives in a file named after the module — <code>src/renderer.cpp</code> for <code>liara-renderer</code> — and contains nothing but the translation between the two:</p>
+<pre><code class="language-cpp">#include &lt;liara/renderer/renderer.h&gt;
 
-#include &lt;liara/renderer/renderer.h&gt;  // Corresponding header first.
+#include "renderer/Renderer.hpp"
 
-#include "Renderer.h"              // Module-internal header next.
+extern "C" {
 
-extern "C" liara_result_t liara_renderer_create(  // NOLINT(readability-identifier-naming)
-    const liara_renderer_create_info_t* create_info,
-    liara_renderer_handle_t** out_handle)
-{
-    if (create_info == nullptr || out_handle == nullptr) {
-        return LIARA_RESULT_INVALID_ARGUMENT;
-    }
+liara_result_t liara_renderer_create(const liara_renderer_create_info_t* createInfo,
+                                     liara_renderer_handle_t* outHandle) {
+    if (createInfo == nullptr || outHandle == nullptr) { return LIARA_RESULT_INVALID_ARGUMENT; }
+
+    // No exception crosses this boundary: the C caller has no way to catch one, and unwinding
+    // through a foreign frame is undefined. Everything becomes a result code here or nowhere.
     try {
-        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory) — ownership crosses to C
-        *out_handle = reinterpret_cast&lt;liara_renderer_handle_t*&gt;(
-            new Liara::Renderer::LiaraRenderer(*create_info));
+        auto* renderer = new liara::renderer::Renderer(*createInfo);
+        *outHandle = reinterpret_cast&lt;liara_renderer_handle_t&gt;(renderer);
         return LIARA_RESULT_SUCCESS;
+    } catch (const std::bad_alloc&amp;) {
+        return LIARA_RESULT_OUT_OF_MEMORY;
+    } catch (...) {
+        return LIARA_RESULT_UNKNOWN_ERROR;
     }
-    catch (const std::bad_alloc&amp;)   { return LIARA_RESULT_OUT_OF_MEMORY; }
-    catch (const std::exception&amp;)   { return LIARA_RESULT_INTERNAL_ERROR; }
-    catch (...)                     { return LIARA_RESULT_INTERNAL_ERROR; }
 }
+
+}  // extern "C"
 </code></pre>
+<p>Every name that crosses the boundary carries the <code>_t</code> suffix its declaration gives it. The shim is thin by construction: if it starts containing logic, that logic belongs on the C++ side where it can be tested without going through the ABI.</p>
 <p>The <code>catch (...)</code> is not defensive padding: an exception escaping through a C boundary is undefined behaviour, so the shim catches everything, including what it cannot name.</p>
 <h3 id="one-type-per-file-mostly"><a class="header" href="#one-type-per-file-mostly">One Type Per File (Mostly)</a></h3>
 <p>Each non-trivial type lives in its own pair of files. Small helper types (POD structs, simple enums) that exist purely in the service of a larger type may be co-located in the same file as that type.</p>
@@ -3451,7 +3533,7 @@ class ComponentStorage
 <p>The complete tooling reference for Liara: how the project is built, tested, validated, packaged, and published. This document describes the <strong>mechanics</strong> of the project; for the <strong>why</strong> behind these choices, see <a href="#architecture"><code>ARCHITECTURE.md</code></a>. For the day-to-day <strong>workflow</strong>, see <a href="#contributing-1"><code>CONTRIBUTING.md</code></a>.</p>
 </blockquote>
 <hr>
-<h2 id="table-of-contents-4"><a class="header" href="#table-of-contents-4">Table of Contents</a></h2>
+<h2 id="table-of-contents-5"><a class="header" href="#table-of-contents-5">Table of Contents</a></h2>
 <ul>
 <li><a href="#1-tooling-inventory">1. Tooling Inventory</a></li>
 <li><a href="#2-build-system">2. Build System</a>
@@ -3542,22 +3624,18 @@ class ComponentStorage
 <tbody>
 <tr><td>Build system</td><td>CMake 3.29+ with presets</td></tr>
 <tr><td>Dependency management</td><td>vcpkg in manifest mode</td></tr>
-<tr><td>Compiler (Linux)</td><td>GCC 14+ and Clang 18+</td></tr>
+<tr><td>Compiler (Linux)</td><td>GCC 14+ and Clang 20+</td></tr>
 <tr><td>Compiler (Windows)</td><td>MSVC 2022 (17.6+)</td></tr>
 <tr><td>Linker (Linux)</td><td>mold (preferred), lld, or ld</td></tr>
 <tr><td>Generator (Linux)</td><td>Ninja</td></tr>
 <tr><td>Generator (Windows)</td><td>Visual Studio 17 2022</td></tr>
-<tr><td>Code formatter</td><td>clang-format 18+</td></tr>
-<tr><td>Static analysis</td><td>clang-tidy 18+</td></tr>
-<tr><td>Cloud static analysis</td><td>SonarCloud</td></tr>
+<tr><td>Code formatter</td><td>clang-format 20+</td></tr>
+<tr><td>Static analysis</td><td>clang-tidy 20+</td></tr>
 <tr><td>Test framework</td><td>doctest</td></tr>
-<tr><td>Coverage (Linux)</td><td>gcovr (Cobertura output)</td></tr>
-<tr><td>Coverage (Windows)</td><td>OpenCppCoverage</td></tr>
-<tr><td>Coverage upload</td><td>Codecov</td></tr>
 <tr><td>Compile commands</td><td>Generated by CMake, consumed by clangd</td></tr>
 <tr><td>API documentation</td><td>Doxygen 1.16+</td></tr>
 <tr><td>User documentation</td><td>mdBook 0.5+</td></tr>
-<tr><td>Documentation hosting</td><td>Cloudflare Pages</td></tr>
+<tr><td>Documentation hosting</td><td>Cloudflare Workers (Static Assets)</td></tr>
 <tr><td>Release automation</td><td>release-please</td></tr>
 <tr><td>Conventional commits</td><td>commitlint (Husky-free, in CI)</td></tr>
 <tr><td>CI</td><td>GitHub Actions</td></tr>
@@ -3575,7 +3653,8 @@ class ComponentStorage
 <hr>
 <h2 id="2-build-system"><a class="header" href="#2-build-system">2. Build System</a></h2>
 <h3 id="21-cmake-with-presets"><a class="header" href="#21-cmake-with-presets">2.1 CMake with Presets</a></h3>
-<p>The project uses CMake 3.29 or newer, configured exclusively through presets. Each module repository contains a <code>CMakePresets.json</code> file defining configurations for the supported platform/compiler/build-type combinations. There is no support for “configure CMake by passing options on the command line”; the presets are the supported interface.</p>
+<p>The project uses CMake 3.29 or newer, configured exclusively through presets.</p>
+<p>The presets live in the meta repository, as a template from which the bootstrap script generates the workspace’s <code>CMakePresets.json</code>. A module repository does not carry its own: a module is configured as part of the workspace, and a second set of presets per repository would be copies of the same file drifting apart. There is no support for “configure CMake by passing options on the command line”; the generated presets are the supported interface, and the CI invokes them unmodified.</p>
 <p>Each non-hidden preset is invokable from the command line and used by the CI. The CI does not pass extra options to CMake; it invokes the preset and the preset is fully sufficient.</p>
 <h3 id="22-preset-structure"><a class="header" href="#22-preset-structure">2.2 Preset Structure</a></h3>
 <p>Presets are generated from a single template and organized along three axes: platform and compiler, build type, and linkage:</p>
@@ -3598,6 +3677,7 @@ class ComponentStorage
 <p>The consequence for tooling is that a build preset’s name does not always match its configure preset’s name. Anything that needs the build directory resolves it through the preset file rather than guessing from the name.</p>
 <h3 id="24-out-of-source-builds"><a class="header" href="#24-out-of-source-builds">2.4 Out-of-Source Builds</a></h3>
 <p>Build artifacts go to <code>build/&lt;preset-name&gt;/</code>, not to the source directory. The source tree contains no build output. CMake refuses in-source builds with an explicit error message.</p>
+<p>Within a build tree, artifacts are grouped by kind rather than by producing module: executables and shared libraries land in <code>build/&lt;preset&gt;/bin/</code>, static libraries and import libraries in <code>build/&lt;preset&gt;/lib/</code>, with multi-config generators adding a configuration subdirectory to each. The launcher and the modules it may load at runtime are therefore siblings, and the launcher’s rpath is <code>$ORIGIN</code> rather than an absolute path into the build tree — the same arrangement a packaged install needs, established early so that packaging does not have to relocate anything later.</p>
 <h3 id="25-compile-commands-database"><a class="header" href="#25-compile-commands-database">2.5 Compile Commands Database</a></h3>
 <p>CMake generates <code>compile_commands.json</code> for every Linux build. The file is symlinked to the workspace root by the bootstrap script, so that clangd (consumed by VSCode, Neovim, CLion, and other editors) finds it automatically.</p>
 <p>This file is also the foundation for clang-tidy, code coverage tools, and SonarCloud’s analysis. It is never committed to the repository but must always be available locally.</p>
@@ -3606,6 +3686,7 @@ class ComponentStorage
 <h3 id="31-vcpkg-in-manifest-mode"><a class="header" href="#31-vcpkg-in-manifest-mode">3.1 vcpkg in Manifest Mode</a></h3>
 <p>External dependencies are managed through vcpkg in manifest mode. Each module repository contains a <code>vcpkg.json</code> declaring its dependencies and a <code>vcpkg-configuration.json</code> pinning the registry baseline.</p>
 <p>When CMake configures a project, it invokes vcpkg, which reads the manifest and ensures the declared dependencies are available. The first configuration on a fresh machine downloads and builds the dependencies; subsequent configurations use cached binaries.</p>
+<p>Every module repository’s <code>vcpkg-configuration.json</code> pins the same registry baseline, and this is a constraint rather than an observation: the workspace merges the manifests into one and resolves dependencies once, so two modules pinned to different baselines would produce a build in which one of the two silently gets versions it never asked for. The bootstrap script checks that they agree and refuses to proceed if they do not, rather than picking one.</p>
 <h3 id="32-why-vcpkg"><a class="header" href="#32-why-vcpkg">3.2 Why vcpkg</a></h3>
 <p>Three options were considered: vcpkg, Conan, and using each distribution’s package manager. The third option is rejected because it produces inconsistent builds across distributions (Ubuntu vs Arch vs Fedora ship different versions of the same library) and because it does not work on Windows without significant friction.</p>
 <p>vcpkg is preferred over Conan for this project because:</p>
@@ -3623,11 +3704,16 @@ class ComponentStorage
 <p>Git submodules and <code>FetchContent</code> are not used for external dependencies. Submodules complicate the developer’s local workflow (easy to forget to update them, conflicts on detached HEADs); <code>FetchContent</code> re-downloads sources on every fresh build, which is the slow path that vcpkg’s binary cache exists to avoid.</p>
 <p>The exception: <code>FetchContent</code> is allowed for <strong>header-only</strong> dependencies that are not in vcpkg’s registry, where the cost of re-downloading a few kilobytes of headers is negligible. This exception is approved on a case-by-case basis through the introduction of a dedicated ADR.</p>
 <h3 id="35-dependency-list-by-module"><a class="header" href="#35-dependency-list-by-module">3.5 Dependency List by Module</a></h3>
-<p>Each module’s <code>vcpkg.json</code> declares only that module’s direct dependencies. The current list (progressively built up in v0.x) is:</p>
-<p><strong><code>liara-interfaces</code></strong>: no dependencies.</p>
-<p><strong><code>liara-core</code></strong>: doctest (test only), tomlplusplus, miniaudio, cgltf or tinygltf (TBD), stb (header-only), glm (internal implementation, not exposed), spdlog (or own logger; TBD).</p>
-<p><strong><code>liara-renderer</code></strong>: doctest (test only), Vulkan-Headers, vulkan-memory-allocator, glslang or shaderc (for runtime shader compilation if needed), imgui[vulkan-binding,sdl3-binding].</p>
+<p>Each module’s <code>vcpkg.json</code> declares only that module’s direct dependencies. A dependency belongs to the module that owns the concern, which is what makes the list short: the moment a module needs a library the boundary says belongs elsewhere, the boundary is what is wrong, not the list.</p>
+<p>The current target (progressively built up in v0.x):</p>
+<p><strong><code>liara-interfaces</code></strong>: no dependencies. The contract must be includable by anything, including a consumer that has never heard of vcpkg.</p>
+<p><strong><code>liara-core</code></strong>: doctest (test only), tomlplusplus (settings), glm (internal implementation, not exposed across the ABI).</p>
+<p><strong><code>liara-platform</code></strong>: doctest (test only), SDL3.</p>
+<p><strong><code>liara-renderer</code></strong>: doctest (test only), Vulkan-Headers, vulkan-memory-allocator, glslang or shaderc (TBD, only if runtime shader compilation is needed), imgui.</p>
+<p><strong><code>liara-assets</code></strong>: doctest (test only), cgltf or tinygltf (TBD), stb (header-only).</p>
+<p><strong><code>liara-audio</code></strong>: doctest (test only), miniaudio.</p>
 <p>The Vulkan SDK itself is <strong>not</strong> managed by vcpkg; it is a system dependency that the developer installs (instructions in <a href="#bootstrap"><code>BOOTSTRAP.md</code></a>).</p>
+<p>Logging is deliberately absent from this list: whether <code>liara-core</code> uses spdlog or its own logger is undecided, and the decision is deferred to v0.2 rather than being settled by a line in a manifest.</p>
 <h3 id="36-inter-module-dependencies"><a class="header" href="#36-inter-module-dependencies">3.6 Inter-Module Dependencies</a></h3>
 <p>Dependencies between Liara’s own modules are not handled by vcpkg. They are handled differently depending on whether the build is a workspace build (all modules together) or a consumer build (one module installed, another consuming it):</p>
 <ul>
@@ -3650,15 +3736,13 @@ class ComponentStorage
 <h4 id="build-and-quality"><a class="header" href="#build-and-quality">Build and quality</a></h4>
 <ul>
 <li>
-<p><code>reusable-build-and-test.yml</code> — the canonical build-and-test matrix. Inputs: the calling repository’s name, the CMake preset, whether to run tests, whether to collect coverage. Builds each module and the workspace, runs the test suite, uploads artifacts.</p>
+<p><code>reusable-build-and-test.yml</code> — assembles the workspace superbuild around the calling repository and runs the matrix of §5.2. Inputs: the calling repository’s name, the matrix (a JSON array of legs, each naming a configure, build and test preset), and the CTest labels to exclude.</p>
 </li>
 <li>
-<p><code>reusable-lint.yml</code> — clang-format (diff check) and clang-tidy. Inputs: repository name, source directories. Fails on any formatting diff or new clang-tidy warning.</p>
-</li>
-<li>
-<p><code>reusable-shared-dynamic.yml</code> — builds the modules as shared libraries and links the launcher against them, proving the “designed for dynamic, implemented as static” property is not silently violated.</p>
+<p><code>reusable-lint.yml</code> — clang-format on the calling repository’s tracked sources, and clang-tidy on its translation units against the workspace’s compilation database. Generated files are excluded by pattern, because reformatting a file that is compared byte-for-byte with its generator breaks the check that generated it.</p>
 </li>
 </ul>
+<p>The linkage matrix makes a dedicated shared-library workflow unnecessary: the <code>-link</code> and <code>-runtime</code> legs build every module as a shared library and, for <code>-runtime</code>, make the launcher resolve them through <code>dlopen</code>/<code>LoadLibrary</code> instead of linking them. A separate workflow would duplicate them under another name and drift from them.</p>
 <h4 id="interface-integrity-liara-interfaces-only"><a class="header" href="#interface-integrity-liara-interfaces-only">Interface integrity (<code>liara-interfaces</code> only)</a></h4>
 <ul>
 <li><code>reusable-abi-header-portability.yml</code> — every public header compiles standalone, warning-free, as C and C++ across several language standards.</li>
@@ -3702,42 +3786,44 @@ class ComponentStorage
 </ul>
 <p>The CI does <strong>not</strong> run on pushes to feature branches that are not yet associated with a PR. This avoids burning compute on work-in-progress that the developer is not ready to validate.</p>
 <h3 id="52-build-matrix"><a class="header" href="#52-build-matrix">5.2 Build Matrix</a></h3>
-<p>For each PR or push, the build matrix is:</p>
+<p>The matrix is expressed as preset names rather than as (OS, compiler, build type) tuples: the presets are the project’s supported build interface, and a CI leg a developer cannot reproduce with one preset name is a leg that lies about what it proves.</p>
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>OS</th><th>Compiler</th><th>Configuration</th><th>Notes</th></tr>
+<tr><th>Leg</th><th>Preset</th><th>What it is there for</th></tr>
 </thead>
 <tbody>
-<tr><td>Ubuntu 24.04</td><td>GCC 14</td><td>Debug</td><td>Tests + coverage</td></tr>
-<tr><td>Ubuntu 24.04</td><td>GCC 14</td><td>Release</td><td>Performance build</td></tr>
-<tr><td>Ubuntu 24.04</td><td>Clang 18</td><td>Debug</td><td>Tests, no coverage</td></tr>
-<tr><td>Ubuntu 24.04</td><td>Clang 18</td><td>Release</td><td>Performance build</td></tr>
-<tr><td>Windows Server 2022</td><td>MSVC 2022</td><td>Debug</td><td>Tests + coverage</td></tr>
-<tr><td>Windows Server 2022</td><td>MSVC 2022</td><td>Release</td><td>Performance build</td></tr>
+<tr><td><code>linux-gcc-debug</code></td><td><code>linux-debug-gcc</code></td><td>Tests, GCC diagnostics</td></tr>
+<tr><td><code>linux-gcc-release</code></td><td><code>linux-release-gcc</code></td><td>Optimized build, different warnings</td></tr>
+<tr><td><code>linux-clang-debug</code></td><td><code>linux-debug-clang</code></td><td>Tests, Clang diagnostics, cross-language tests</td></tr>
+<tr><td><code>linux-clang-release</code></td><td><code>linux-release-clang</code></td><td>Optimized build</td></tr>
+<tr><td><code>linux-shared-link</code></td><td><code>linux-debug-clang-link</code></td><td>Export macros: catches a missing <code>LIARA_*_API</code></td></tr>
+<tr><td><code>linux-shared-runtime</code></td><td><code>linux-debug-clang-runtime</code></td><td>Static coupling: the launcher links nothing it loads</td></tr>
+<tr><td><code>windows-debug</code></td><td><code>windows</code> / <code>windows-debug</code></td><td>MSVC, multi-config generator</td></tr>
+<tr><td><code>windows-release</code></td><td><code>windows</code> / <code>windows-release</code></td><td>MSVC, optimized</td></tr>
+<tr><td><code>windows-runtime</code></td><td><code>windows-runtime</code> / <code>windows-debug-runtime</code></td><td><code>LoadLibrary</code> path and DLL naming</td></tr>
 </tbody>
 </table>
 </div>
-<p>Six configurations. All must pass for the CI to be considered green.</p>
-<p>The matrix uses Ubuntu rather than Arch because GitHub-hosted runners do not offer Arch and self-hosted Arch runners would add operational burden. The promise that “the project supports Arch” is made by the fact that <strong>the developer uses Arch daily</strong>; the CI tests Ubuntu as a reasonable proxy for “modern Linux”. A scheduled weekly job verifies the build on an Arch container to catch divergence.</p>
+<p>All must pass for the CI to be considered green. The two shared-library legs are not optional extras: they are the only thing standing between “designed for dynamic” and a claim nobody checks.</p>
+<p>The matrix uses Ubuntu rather than Arch because GitHub-hosted runners do not offer Arch and self-hosted Arch runners would add operational burden. The promise that “the project supports Arch” is made by the fact that the developer uses Arch daily. A scheduled Arch container job is deferred until the project has a contributor who is not that developer.he matrix uses Ubuntu rather than Arch because GitHub-hosted runners do not offer Arch and self-hosted Arch runners would add operational burden. The promise that “the project supports Arch” is made by the fact that <strong>the developer uses Arch daily</strong>; the CI tests Ubuntu as a reasonable proxy for “modern Linux”. A scheduled weekly job verifies the build on an Arch container to catch divergence.</p>
 <h3 id="53-parallelism-and-caching"><a class="header" href="#53-parallelism-and-caching">5.3 Parallelism and Caching</a></h3>
 <p>Each matrix job runs independently. Caches are used aggressively:</p>
 <ul>
-<li><strong>vcpkg binary cache</strong>: shared across matrix entries with the same triplet. Hit rate is typically &gt;95% on PRs that don’t touch dependencies.</li>
-<li><strong>ccache</strong> (Linux) and <strong>sccache</strong> (Windows): compile cache for source files, dramatically speeds up incremental CI builds. Cache is keyed by source content, so it survives across PRs.</li>
-<li><strong>Doxygen cache</strong>: not currently planned, but considered if doc generation becomes a bottleneck.</li>
+<li><strong>vcpkg binary cache</strong>: a per-leg GitHub Actions cache over <code>VCPKG_DEFAULT_BINARY_CACHE</code>, keyed by the runner OS, the preset and the hash of the merged manifest. It invalidates itself when any of those change.</li>
+<li><strong>Compile cache</strong> (ccache / sccache): picked up automatically by the workspace CMakeLists when present, and deliberately not installed in CI. With the current dependency set the build is dominated by the project’s own handful of translation units, and a compile cache would cost more in cache transfer than it saves. Revisit when a build leg exceeds a few minutes.</li>
 </ul>
 <p>The total CI time per push, with warm caches, is under 5 minutes per matrix entry, with all entries running in parallel: end-to-end under 10 minutes.</p>
 <h3 id="54-required-status-checks"><a class="header" href="#54-required-status-checks">5.4 Required Status Checks</a></h3>
 <p>The following checks are required to merge a PR:</p>
 <ul>
-<li>All build matrix entries pass.</li>
+<li>Every build matrix leg passes, <code>linux-shared-link</code> and <code>linux-shared-runtime</code> included.</li>
 <li>clang-format produces no diff.</li>
 <li>clang-tidy produces no new warnings.</li>
-<li>doctest tests all pass.</li>
-<li>The ABI checks pass (<code>liara-interfaces</code> only)</li>
-<li>Coverage does not decrease (with a configurable tolerance).</li>
-<li>SonarCloud quality gate passes. [When <code>reusable-sonarcloud.yml</code> is implemented.]</li>
+<li>The test suite passes, cross-language tests included.</li>
+<li>The ABI checks pass (<code>liara-interfaces</code> only).</li>
+<li>Coverage: deferred. Measuring coverage of Phase 0’s placeholder implementations would report a number about scaffolding. The gate is introduced in v0.2, alongside the first code worth covering.</li>
+<li>SonarCloud quality gate: deferred, see §7.3.</li>
 </ul>
 <p>Documentation generation is not a required check (a doc-only failure should not block code merges); it runs but only reports.</p>
 <hr>
@@ -3745,10 +3831,14 @@ class ComponentStorage
 <h3 id="61-doctest"><a class="header" href="#61-doctest">6.1 doctest</a></h3>
 <p>The project uses doctest as its test framework. The choice over Catch2 is motivated by compile times: doctest is roughly an order of magnitude faster to compile, and at this project’s scale that difference compounds across every CI run.</p>
 <p>Tests are organized as separate executables per module, located in each module’s <code>tests/</code> directory. Each test executable is a doctest runner, registered with CTest:</p>
-<pre><code class="language-cmake">add_executable(liara_core_tests tests/main.cpp tests/test_ecs.cpp ...)
-target_link_libraries(liara_core_tests PRIVATE doctest::doctest liara_core)
-add_test(NAME liara_core_tests COMMAND liara_core_tests)
+<p>Each repository’s test targets are named after what they exercise and the language they exercise it from, because the same contract is tested from more than one:</p>
+<pre><code class="language-cmake">add_executable(test_core_functions_cxx test_core_functions.cpp)
+target_link_libraries(test_core_functions_cxx PRIVATE Liara::Core doctest::doctest)
+
+add_test(NAME test_core_functions_cxx COMMAND test_core_functions_cxx)
+set_tests_properties(test_core_functions_cxx PROPERTIES LABELS "unit")
 </code></pre>
+<p>Modules are consumed through their <code>Liara::</code> alias, never through the bare target name, so that a test compiles against exactly what a consumer would get.</p>
 <p>This integration with CTest means that the same <code>ctest</code> invocation runs all tests across all modules, both locally and in CI.</p>
 <h3 id="62-test-categories"><a class="header" href="#62-test-categories">6.2 Test Categories</a></h3>
 <p>Tests are classified with CTest labels, not with doctest tags. The taxonomy has to cover tests that are not doctest executables at all — the C-only compilation test, the Zig and Rust cross-language tests, the launcher smoke test — so it lives at the CTest level:</p>
@@ -3765,6 +3855,8 @@ set_tests_properties(test_interfaces_cxx PROPERTIES LABELS "unit")
 <li><code>slow</code>: tests that take more than a few hundred milliseconds. Excluded by default to keep the fast feedback loop fast.</li>
 <li><code>cross-lang</code>: tests that exercise the C API from a non C/C++ language with a C FFI (python, Zig, Rust…).</li>
 </ul>
+<p>Selection is by exclusion, not by inclusion: CI and the developer both run everything and subtract what does not apply (<code>ctest -LE gpu</code>, <code>ctest -LE "slow|gpu"</code>). A test that carries no label therefore runs everywhere, which is the safe default — forgetting a label costs time, never coverage, and the reverse would let a whole repository report success without executing anything.</p>
+<p>The corollary is that a label is only worth adding when something is meant to exclude it. <code>unit</code> is carried anyway, because <code>ctest -L unit</code> is the fast loop a developer reaches for while working, and it is the one place inclusion is convenient.</p>
 <p>A developer running tests locally typically runs <code>unit</code> only; CI runs everything except <code>gpu</code> (<code>slow</code> may be usually skipped, and used in release PR, for example).</p>
 <h3 id="63-test-discipline"><a class="header" href="#63-test-discipline">6.3 Test Discipline</a></h3>
 <ul>
@@ -3781,7 +3873,7 @@ set_tests_properties(test_interfaces_cxx PROPERTIES LABELS "unit")
 <hr>
 <h2 id="7-static-analysis"><a class="header" href="#7-static-analysis">7. Static Analysis</a></h2>
 <h3 id="71-clang-format"><a class="header" href="#71-clang-format">7.1 clang-format</a></h3>
-<p>Code formatting is enforced by clang-format 18+. The configuration lives in <code>.clang-format</code> at the root of each repository. The configuration is identical across repositories (except for <code>liara-interfaces</code>, which has a C-only configuration for its C headers).</p>
+<p>Code formatting is enforced by clang-format 20+. The configuration lives in <code>.clang-format</code> at the root of each repository. The configuration is identical across repositories (except for <code>liara-interfaces</code>, which has a C-only configuration for its C headers).</p>
 <p>The CI runs <code>clang-format --dry-run --Werror</code> on every C++ source file. Any deviation fails the build. There is no “format on save and commit” optional pre-hook; the CI is the source of truth.</p>
 <p>The detailed style is documented in <a href="#code-style"><code>CODE_STYLE.md</code></a>.</p>
 <h3 id="72-clang-tidy"><a class="header" href="#72-clang-tidy">7.2 clang-tidy</a></h3>
@@ -3829,21 +3921,34 @@ set_tests_properties(test_interfaces_cxx PROPERTIES LABELS "unit")
 <p>Some examples of possible scopes (not exhaustive):</p>
 <p>In <code>liara-core</code>:</p>
 <ul>
-<li><code>ecs</code>, <code>math</code>, <code>assets</code>, <code>logger</code>, <code>settings</code>, <code>events</code>, <code>loop</code>, <code>platform</code>.</li>
+<li><code>ecs</code>, <code>math</code>, <code>logger</code>, <code>settings</code>, <code>events</code>, <code>loop</code>.</li>
+</ul>
+<p>In <code>liara-platform</code>:</p>
+<ul>
+<li><code>window</code>, <code>input</code>, <code>timing</code>, <code>signals</code>.</li>
 </ul>
 <p>In <code>liara-renderer</code>:</p>
 <ul>
 <li><code>device</code>, <code>swapchain</code>, <code>pipeline</code>, <code>passes</code>, <code>targets</code>, <code>imgui</code>, <code>debug</code>.</li>
 </ul>
+<p>In <code>liara-assets</code>:</p>
+<ul>
+<li><code>loading</code>, <code>decoding</code>, <code>lifetime</code>, <code>mesh</code>, <code>texture</code>.</li>
+</ul>
+<p>In <code>liara-audio</code>:</p>
+<ul>
+<li><code>playback</code>, <code>mixing</code>, <code>sources</code>.</li>
+</ul>
 <p>In <code>liara-interfaces</code>:</p>
 <ul>
-<li><code>core</code>, <code>renderer</code>, <code>physics</code>, <code>version</code>, <code>types</code>.</li>
+<li><code>core</code>, <code>platform</code>, <code>renderer</code>, <code>assets</code>, <code>audio</code>, <code>physics</code>, <code>version</code>, <code>types</code>.</li>
 </ul>
 <p>In <code>liara</code> (meta):</p>
 <ul>
 <li><code>launcher</code>, <code>docs</code>, <code>packaging</code>, <code>scripts</code>.</li>
 </ul>
 <p>Cross-cutting scopes available everywhere: <code>build</code>, <code>ci</code>, <code>deps</code>.</p>
+<p>A scope names a concern inside one repository. It never names another module: a commit in <code>liara-core</code> scoped <code>assets</code> would be describing work that belongs in <code>liara-assets</code>, and the scope is the first place that mistake becomes visible.</p>
 <h3 id="83-breaking-changes"><a class="header" href="#83-breaking-changes">8.3 Breaking Changes</a></h3>
 <p>A breaking change is signaled in two ways: the type is suffixed with <code>!</code> (e.g., <code>feat(renderer)!: change packet structure</code>) <strong>and</strong> the footer contains a <code>BREAKING CHANGE:</code> block describing the impact. Both signals are required.</p>
 <p>For modules that expose interfaces (most of them), a breaking change in the conventional-commits sense triggers a major version bump through release-please.</p>
@@ -3954,7 +4059,7 @@ set_tests_properties(test_interfaces_cxx PROPERTIES LABELS "unit")
 </blockquote>
 <p>This page explains how Liara Engine’s documentation is produced, versioned, and served — every repository, tool, and moving part involved, and how they fit together. If you are touching templates, CI, or the hosting layer, start here.</p>
 <hr>
-<h2 id="table-of-contents-5"><a class="header" href="#table-of-contents-5">Table of contents</a></h2>
+<h2 id="table-of-contents-6"><a class="header" href="#table-of-contents-6">Table of contents</a></h2>
 <ul>
 <li><a href="#1-the-big-picture">1. The big picture</a></li>
 <li><a href="#2-the-repositories-and-their-roles">2. The repositories and their roles</a></li>
@@ -4198,6 +4303,370 @@ set_tests_properties(test_interfaces_cxx PROPERTIES LABELS "unit")
 </div>
 <hr>
 <p><a href="#the-documentation-pipeline">Back to top</a></p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="architecture-decision-records"><a class="header" href="#architecture-decision-records">Architecture Decision Records</a></h1>
+<p>Each file here records one decision: what was decided, what else was on the table, and what the decision costs. They are append-only. A decision that no longer holds is not edited or deleted — a new ADR supersedes it, and the old one is marked as superseded, because the reasoning that turned out to be wrong is often more useful than the reasoning that turned out to be right.</p>
+<p>Most of the Phase 0 records are retrospective: the decision was made while bootstrapping and written down afterward. That is stated rather than hidden. A retrospective ADR records why a decision still holds, which is a different and more honest claim than a reconstruction of why it was made.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>ADR</th><th>Title</th><th>Status</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="#adr-0001--multi-repository-layout">0001</a></td><td>Multi-repository layout</td><td>Accepted</td></tr>
+<tr><td><a href="#adr-0002--a-c-abi-as-the-inter-module-contract">0002</a></td><td>A C ABI as the inter-module contract</td><td>Accepted</td></tr>
+<tr><td><a href="#adr-0003--the-host-composes-modules">0003</a></td><td>The host composes modules</td><td>Accepted</td></tr>
+<tr><td><a href="#adr-0004--module-boundaries-what-is-a-module-and-what-stays-in-the-core">0004</a></td><td>Module boundaries: what stays in the core</td><td>Accepted</td></tr>
+<tr><td><a href="#adr-0005--version-encoding-and-compatibility-semantics">0005</a></td><td>Version encoding and compatibility semantics</td><td>Accepted</td></tr>
+<tr><td><a href="#adr-0006--manifestjson-as-the-single-compatibility-source-of-truth">0006</a></td><td><code>manifest.json</code> as the single compatibility source of truth</td><td>Accepted</td></tr>
+<tr><td><a href="#adr-0007--cmake-with-presets-and-vcpkg-in-manifest-mode">0007</a></td><td>CMake with presets, and vcpkg in manifest mode</td><td>Accepted</td></tr>
+<tr><td><a href="#adr-0008--two-tier-ci-and-reusable-workflows-over-composite-actions">0008</a></td><td>Two-tier CI, and reusable workflows</td><td>Accepted</td></tr>
+<tr><td><a href="#adr-0009--a-hand-written-ecs-rather-than-an-existing-library">0009</a></td><td>An in-house ECS rather than an existing library</td><td>Proposed</td></tr>
+<tr><td><a href="#adr-0010--vulkan-directly-without-a-rendering-abstraction-layer">0010</a></td><td>Vulkan directly, without a rendering abstraction layer</td><td>Proposed</td></tr>
+</tbody>
+</table>
+</div>
+<p>New tooling requires an ADR (<code>TOOLING.md</code> section 1), with one exception: the bootstrapping phase, whose policy is in <code>ROADMAP.md</code> section 4.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="adr-0001--multi-repository-layout"><a class="header" href="#adr-0001--multi-repository-layout">ADR 0001 — Multi-Repository Layout</a></h1>
+<ul>
+<li><strong>Status</strong>: Accepted</li>
+<li><strong>Date</strong>: 2026-08-26</li>
+<li><strong>Deciders</strong>: Antoine</li>
+</ul>
+<blockquote>
+<p>Retrospective. The decision was made when the project was bootstrapped; this records why it still holds.</p>
+</blockquote>
+<h2 id="context"><a class="header" href="#context">Context</a></h2>
+<p>Liara is a reboot of an earlier engine of mine. That one was a single repository, and it worked until it didn’t. What went wrong there is the whole context for this decision, so it is worth being specific about it rather than saying “it got messy”.</p>
+<p>Everything being in one place meant everything could reach everything. Nothing stopped me from coupling two systems together, so I did, repeatedly, because in the moment it was always the fastest way to get the thing working. The coupling then made later tasks harder than they should have been, and tasks that are harder than they should be are tasks I put off. Several parts of that project stalled for that reason and not for any technical one.</p>
+<p>Opening the project to work on one thing meant having every other thing in front of me. I would open it to work on X and spend the day on everything except X. That is not a discipline problem I can solve by trying harder, and pretending otherwise is how the previous project ended.</p>
+<p>There was also a mismatch I never got used to. The design talked about interchangeable subsystems that don’t know about each other, and the folder structure said they all live together and can call each other freely. Reading the docs and reading the tree gave two different answers about what the project was.</p>
+<h2 id="decision"><a class="header" href="#decision">Decision</a></h2>
+<p>One Git repository per module, under the <code>liara-engine</code> organization. A module depends on <code>liara-interfaces</code> and on nothing else. Local development happens in a workspace assembled by a bootstrap script, which clones the repositories side by side and builds them as one superbuild.</p>
+<h2 id="alternatives-considered"><a class="header" href="#alternatives-considered">Alternatives Considered</a></h2>
+<p><strong>A monorepo.</strong> Easier on every operational axis, and I do not dispute that. Cross-cutting refactors happen in one commit instead of five coordinated pull requests. There is no compatibility matrix to maintain, no workspace to bootstrap, no version negotiation between components that ship together anyway. If the only criterion were “which is less work to run”, this would be the answer.</p>
+<p>I rejected it because I have already built the monorepo version of this project and I know how it ends. The operational cost of the multi-repo layout is real but it is bounded and mostly automated; the cost of the monorepo showed up as coupling I couldn’t undo and tasks I couldn’t start.</p>
+<p><strong>A monorepo with enforced boundaries</strong> — separate CMake targets, a lint rule against cross-module includes, a directory convention. This is the option I would recommend to most people, and it is the one I trust least for myself. A boundary I can cross by editing one line is a boundary I will cross at some point, with a good reason, at 2am. A boundary that requires opening another repository, changing the contract, releasing it, and updating a manifest is one I will not cross by accident. The friction is the mechanism, not a side effect of it.</p>
+<p><strong>A middle layout</strong>, one repository for the engine and one per optional module. Rejected because the split would have to be decided up front and would inevitably be wrong: whichever subsystems started out together would grow into each other, exactly as they did before, and separating them later means a breaking ABI change and a migration.</p>
+<h2 id="consequences"><a class="header" href="#consequences">Consequences</a></h2>
+<p>A change that crosses modules is several pull requests in a defined order, and I have to write down which versions work together. <code>CONTRIBUTING.md</code> §12 describes the procedure. It is slow on purpose — the friction is what keeps interface changes from being casual — but it is genuinely slow, and on a day where I want to move fast it is the thing standing in the way.</p>
+<p>Local development needs tooling that would not otherwise exist: a bootstrap script, a generated superbuild, a preset template shared across repositories, and a CI that assembles the workspace around whichever repository is under test. That is a real amount of Phase 0 work that a monorepo would not have required at all.</p>
+<p>Each module can be built, tested and released alone, and a module’s test suite has nothing to stand up but itself. This is the payoff and it shows up immediately, not eventually.</p>
+<p>The structure now matches what the documentation says. When I read that modules don’t know about each other, the tree agrees, and I don’t have to hold two versions of the project in my head.</p>
+<h2 id="revisit-if"><a class="header" href="#revisit-if">Revisit If</a></h2>
+<ul>
+<li>The cross-repository coordination cost stops being bounded and starts dominating — if a normal change routinely takes four pull requests, the boundaries are in the wrong place, and that is a problem with ADR 0004 rather than with this one.</li>
+<li>Contributors other than me appear in numbers, at which point the barrier to a first contribution matters more than my own working constraints do.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="adr-0002--a-c-abi-as-the-inter-module-contract"><a class="header" href="#adr-0002--a-c-abi-as-the-inter-module-contract">ADR 0002 — A C ABI as the Inter-Module Contract</a></h1>
+<ul>
+<li><strong>Status</strong>: Accepted</li>
+<li><strong>Date</strong>: 2026-08-26</li>
+<li><strong>Deciders</strong>: Antoine</li>
+</ul>
+<blockquote>
+<p>Retrospective.</p>
+</blockquote>
+<h2 id="context-1"><a class="header" href="#context-1">Context</a></h2>
+<p>ADR 0001 put each module in its own repository. That answers where the code lives; it does not answer what modules are allowed to say to each other. Without a second decision, “separate repository” would only mean the same coupling spread across six clones, which would be worse than the monorepo rather than better.</p>
+<p>So this decision and ADR 0001 have the same root. Both exist to make a boundary I can’t casually step over, and both were chosen because they fit how I work rather than because they are elegant. The repository split makes the boundary visible; the C ABI makes it load-bearing.</p>
+<p>The technical constraint on top of that: C++ has no stable ABI. Two C++ libraries built with different compilers, different standard library versions, or different flags cannot reliably pass C++ types between them. Templates, exceptions, RTTI and standard library containers all make it worse. C has a defined ABI everywhere, which is why Vulkan, SDL, libcurl and Lua all expose C interfaces regardless of what they are written in.</p>
+<h2 id="decision-1"><a class="header" href="#decision-1">Decision</a></h2>
+<p>Every module exposes its functionality through C-linkage declarations in <code>liara-interfaces</code>. That is the only contract another module may rely on; the C++ implementation behind it is private.</p>
+<p>Across a module boundary: no standard library types in signatures, no templates, no exceptions, no C++ classes. Objects are opaque handles from factory functions, errors are return values, and whoever allocates says who frees.</p>
+<h2 id="alternatives-considered-1"><a class="header" href="#alternatives-considered-1">Alternatives Considered</a></h2>
+<p><strong>Shared C++ headers between modules.</strong> Much less verbose, and it lets me use the language I am actually writing in. Rejected on the ABI point above: it would rule out ever loading a module built by a different compiler, which kills the runtime-loading path and the “reimplement a module in another language” property along with it. It also would not have created a real boundary — a shared header can expose whatever I feel like exposing that day, and I would have.</p>
+<p><strong>C++ headers with a hand-imposed restriction</strong> — no templates, no standard library, POD only. This gets most of the ABI stability without the C verbosity. Rejected because the restriction is a promise rather than a mechanism. Nothing fails when I break it, and I would break it, probably without noticing.</p>
+<p><strong>A serialization layer or IPC</strong> between modules, one process each. Real isolation, no ABI question at all. Rejected on latency: a frame loop cannot afford a round trip per call. This works well for desktop tooling (Hyprland does it) and not for this.</p>
+<h2 id="consequences-1"><a class="header" href="#consequences-1">Consequences</a></h2>
+<p>The interface is verbose, and writing it is not the fun part. Every object needs create/destroy functions, every error is a code the caller has to check, and anything structured needs a POD declaration. The verbosity is paid once per interface and collected by every consumer, but it is paid in advance and the benefit arrives later.</p>
+<p>Each module needs a shim translating between the C boundary and its C++ implementation. That shim is where <code>reinterpret_cast</code> and exception-to-error-code conversion live, it is easy to get subtly wrong, and it is not covered by the module’s own tests as thoroughly as the C++ behind it is.</p>
+<p>The contract can be implemented in any language that speaks C, and consumed the same way. The <code>liara-interfaces</code> test suite exercises the headers from C, C++, Zig and Rust, which is how I know this is true and not just intended.</p>
+<p><code>liara-interfaces</code> becomes the most sensitive repository in the project, since everything depends on it and a breaking change there forces a migration everywhere. That is why it has an ABI pipeline of its own — layout freezing, snapshot diffing, portability and interface rules — and why the version negotiation of ADR 0005 exists at all.</p>
+<h2 id="revisit-if-1"><a class="header" href="#revisit-if-1">Revisit If</a></h2>
+<ul>
+<li>The C boundary becomes a measured performance problem in a hot path, rather than a suspected one.</li>
+<li>A module needs to exchange something the C type system genuinely cannot express, and the workaround is worse than the problem.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="adr-0003--the-host-composes-modules"><a class="header" href="#adr-0003--the-host-composes-modules">ADR 0003 — The Host Composes Modules</a></h1>
+<ul>
+<li><strong>Status</strong>: Accepted</li>
+<li><strong>Date</strong>: 2026-08-26</li>
+<li><strong>Deciders</strong>: Antoine</li>
+</ul>
+<h2 id="context-2"><a class="header" href="#context-2">Context</a></h2>
+<p>Liara is a set of modules that version independently and communicate through a C ABI. Something has to decide which modules exist in a given run, create them, and connect them. The obvious candidate is the core: it is the module every other one seems to revolve around, it is created first, and giving it the job requires no new component.</p>
+<p>That instinct had already been acted on before this was written down. The core held a reference to the renderer, drove the frame loop, and produced a render packet the renderer consumed. Nothing about that arrangement looked wrong from inside the core.</p>
+<p>It is wrong from outside it. A core that creates a renderer is a core that cannot be used without one, cannot be tested without one, and cannot be versioned independently of one — which removes the reason the modules were separated in the first place. The coupling is also invisible in a static build: the symbols resolve at link time and nothing complains, so the drift accumulates silently and is discovered only when someone tries to load a module at runtime, by which point the dependencies are everywhere.</p>
+<h2 id="decision-2"><a class="header" href="#decision-2">Decision</a></h2>
+<p>The host composes. The launcher — and later the editor — creates each module independently, negotiates ABI versions with each, wires them together, and owns the frame loop.</p>
+<p>A module never creates, loads, references, or links against a sibling module. Its only dependency is <code>liara-interfaces</code>. Where two modules must exchange data, they exchange it through a type declared in the contract, passed by the host; the renderer receives a render packet, it does not ask the core for one.</p>
+<h2 id="alternatives-considered-2"><a class="header" href="#alternatives-considered-2">Alternatives Considered</a></h2>
+<p><strong>The core orchestrates.</strong> Fewer moving parts, and the host becomes a thin <code>main()</code>. Rejected: it makes <code>liara-core</code> depend on every module it orchestrates, which is precisely the dependency graph the multi-repository layout (ADR 0001) exists to avoid. It also makes “core” mean two unrelated things — a set of foundational services, and an application framework — which is how a core becomes  a place things are put rather than a place things belong.</p>
+<p><strong>A dedicated orchestration module</strong>, sitting between the host and the modules. Rejected as premature: it is the core-orchestrates option with an extra name, and it would have to be composed by something anyway. If the launcher and the editor eventually share enough composition logic to justify extracting it, that extraction is a later, better-informed decision.</p>
+<p><strong>A plugin registry</strong> that modules register themselves into at load time. Rejected for now: it solves discovery, which is not yet a problem, at the cost of making the set of loaded modules a runtime property that no build-time check can verify. Revisit when a host needs to load a module it was not compiled to know about.</p>
+<h2 id="consequences-2"><a class="header" href="#consequences-2">Consequences</a></h2>
+<p>The host is the only component that knows the module graph, and it grows as modules are added. This is accepted: composition logic has to live somewhere, and concentrating it in one place that is allowed to know everything is better than distributing it among components that then all know a little too much.</p>
+<p>Two modules cannot call each other, even when it would be convenient. Data crosses through a type in the contract and through the host, which means adding an interaction between two modules is a change to <code>liara-interfaces</code> — deliberately more expensive than adding a function call, because it is a change to the contract everything depends on.</p>
+<p>Testing a module in isolation becomes possible and therefore expected. A module with no siblings to stand up is a module whose tests are cheap, which is the practical payoff of the whole arrangement.</p>
+<p>The <code>-runtime</code> build configuration exists to keep this decision honest. In it, the launcher links against <code>liara-interfaces</code> only and resolves modules through <code>dlopen</code>/<code>LoadLibrary</code>; a module that has acquired a link-time dependency on a sibling fails there and nowhere else. Without that configuration in CI, this ADR would describe an intention rather than a property.</p>
+<h2 id="revisit-if-2"><a class="header" href="#revisit-if-2">Revisit If</a></h2>
+<ul>
+<li>A host needs to load modules it was not compiled to know about, which turns composition into discovery and makes the plugin-registry alternative worth reopening.</li>
+<li>The launcher and the editor accumulate enough shared composition logic that duplicating it costs more than extracting it.</li>
+<li>Passing data through the contract becomes the bottleneck for an interaction that is genuinely hot — measured, not suspected.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="adr-0004--module-boundaries-what-is-a-module-and-what-stays-in-the-core"><a class="header" href="#adr-0004--module-boundaries-what-is-a-module-and-what-stays-in-the-core">ADR 0004 — Module Boundaries: What Is a Module and What Stays in the Core</a></h1>
+<ul>
+<li><strong>Status</strong>: Accepted</li>
+<li><strong>Date</strong>: 2026-08-26</li>
+<li><strong>Deciders</strong>: Antoine</li>
+</ul>
+<h2 id="context-3"><a class="header" href="#context-3">Context</a></h2>
+<p>ADRs 0001 and 0002 say the project is split into modules with a hard contract between them. Neither says where the splits go. That question came up as soon as the module list had to be written down.</p>
+<p>The first version of the list had <code>liara-core</code> containing the ECS, math, the logger, settings, the event bus, the loop, plus asset management, plus window and input, plus audio. Everything that wasn’t rendering. It looked reasonable because each of those had a small implementation at the time, and none of them seemed worth a repository of its own.</p>
+<p>That is exactly what happened in the previous project, and the reason it happened is that a core described as “the foundation” has no criterion for refusing anything. Every subsystem is foundational from some angle. Once assets and platform are inside it, the core depends on a file format library and a windowing library, cannot be built without either, and cannot be tested without both.</p>
+<h2 id="decision-3"><a class="header" href="#decision-3">Decision</a></h2>
+<p>Repositories fall into four kinds, and the kind determines what the repository is allowed to do:</p>
+<ul>
+<li><strong>Contract</strong> — <code>liara-interfaces</code>. Headers only. Depends on nothing.</li>
+<li><strong>Modules</strong> — <code>liara-core</code>, <code>liara-platform</code>, <code>liara-renderer</code>, <code>liara-assets</code>, <code>liara-audio</code>, and later <code>liara-physics</code>. Each implements one part of the contract and depends only on the contract.</li>
+<li><strong>Hosts</strong> — <code>liara</code> (the launcher), later <code>liara-editor</code>. Compose modules. Allowed to know the module graph, which nothing else is.</li>
+<li><strong>Infrastructure</strong> — <code>docs-shared</code>, <code>liara-docs</code>, <code>.github</code>. No engine code.</li>
+</ul>
+<p>The test for whether something is a module, from <code>MODULES.md</code> §1.5: could it be reimplemented in another language against the same C interface and substituted? If not, it is not a module and does not get a repository.</p>
+<p>Applying that test, <code>liara-core</code> keeps the ECS, math, the logger, settings, the event bus and loop primitives. Platform, assets and audio are their own modules from the point at which they exist, rather than starting in the core and being extracted later.</p>
+<h2 id="alternatives-considered-3"><a class="header" href="#alternatives-considered-3">Alternatives Considered</a></h2>
+<p><strong>Start with a large core and extract when it hurts.</strong> The obvious approach: fewer repositories early, split when the pain is real, and avoid guessing wrong. Rejected because “when it hurts” is after every extraction has become expensive. A subsystem inside the core accumulates callers that reach into it directly, and by the time the split is obviously needed it is not a move any more, it is a rewrite. I have done the extract-later version and it did not get done.</p>
+<p><strong>Keep the boundaries but ship them from one repository at first</strong>, splitting the repositories later while keeping the interfaces. This was seriously considered, and it is what <code>ARCHITECTURE.md</code> §4.3 already does for ABI namespaces — every subsystem gets its own namespace from the first line regardless of which repository implements it. Rejected as a general policy for the same reason as above, and because the two-step version means doing the packaging work twice.</p>
+<p><strong>Finer modules</strong> — math separate from the ECS, the logger separate again. Rejected: none of them passes the substitution test in a way that means anything. Nobody reimplements a logger in Rust and swaps it in, and each additional repository has a fixed cost in CI, releases and documentation.</p>
+<h2 id="consequences-3"><a class="header" href="#consequences-3">Consequences</a></h2>
+<p>There are more repositories earlier than the amount of code justifies. <code>liara-platform</code> exists from v0.1 for one window and an event pump. That is accepted: the cost of a repository is mostly one-time setup, and the cost of not having one shows up later and is not one-time.</p>
+<p>Some things become awkward on purpose. Assets and the renderer have to exchange data through the contract and through the host rather than by calling each other, so adding an interaction between them is a change to <code>liara-interfaces</code> — deliberately more expensive than a function call.</p>
+<p>The core is now describable in one sentence, and I can tell whether something belongs in it without arguing with myself. That was the actual goal.</p>
+<p>Dependencies sort themselves out. Because each module declares only its own, <code>liara-core</code> needs toml++ and glm and nothing else, and there is no build in which the ECS drags in a glTF parser.</p>
+<h2 id="revisit-if-3"><a class="header" href="#revisit-if-3">Revisit If</a></h2>
+<ul>
+<li>A subsystem inside <code>liara-core</code> starts being replaceable in a way that means something — most likely the logger, if the choice between spdlog and something in-house turns into a real configuration point.</li>
+<li>Two modules end up passing so much through the host that the indirection costs more than the separation is worth. Measured, not suspected.</li>
+<li>A module turns out to be too small to justify its own release cycle after a version or two of living with it. Merging back is allowed; it just needs its own ADR.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="adr-0005--version-encoding-and-compatibility-semantics"><a class="header" href="#adr-0005--version-encoding-and-compatibility-semantics">ADR 0005 — Version Encoding and Compatibility Semantics</a></h1>
+<ul>
+<li><strong>Status</strong>: Accepted</li>
+<li><strong>Date</strong>: 2026-08-26</li>
+<li><strong>Deciders</strong>: Antoine</li>
+</ul>
+<blockquote>
+<p>Retrospective. The encoding was decided when <code>liara-interfaces</code> was created; the compatibility rule was only fully settled later, and this records both.</p>
+</blockquote>
+<h2 id="context-4"><a class="header" href="#context-4">Context</a></h2>
+<p>Modules version independently and have to agree at their boundary. Two things needed deciding: how a version is written down in the ABI, and what “compatible” means when two of them differ.</p>
+<p>The encoding was the easy part. The check happens before anything else does — the host reads a module’s version and decides whether to call into it, and under runtime loading that happens right after symbol resolution, when nothing about the module is yet known to work. I did not want the first thing the program does to be parsing a string. Vulkan packs major, minor and patch into a 32-bit word, that pattern is familiar to anyone who has touched Vulkan, and I copied it.</p>
+<p>The rule was messier, and the mess is the reason this record exists. <code>INTERFACES.md</code> §8.5 said that a 0.0.x version <em>required</em> means exact equality. The code in <code>liara_version_provides</code> tested the 0.0.x condition on the <em>provided</em> version instead. Both are defensible readings and they disagree on two specific pairs: provided 0.0.5 against required 0.1.0, and provided 0.1.0 against required 0.0.5. I found the divergence during a Phase 0 audit, not through a failure, which means it had been there since the function was written.</p>
+<h2 id="decision-4"><a class="header" href="#decision-4">Decision</a></h2>
+<p>A version is a single 32-bit word, packed as Vulkan packs it. <code>LIARA_MAKE_VERSION_UNSAFE</code> builds one at compile time with no range checking; <code>liara_try_make_version</code> is the checked form for computed or untrusted input.</p>
+<p>Compatibility is one rule, applied in order:</p>
+<ol>
+<li>Identical versions are <code>EXACT</code>.</li>
+<li>Different major versions are <code>INCOMPATIBLE</code>.</li>
+<li><strong>If either side is a 0.0.x version, only exact equality is compatible.</strong></li>
+<li>Otherwise, a provided minor at or above the required minor is <code>COMPATIBLE</code>; below it, <code>DEGRADED</code>.</li>
+</ol>
+<p>Rule 3 is symmetric, which resolves the divergence by taking the strictest available reading: both disputed pairs come out <code>INCOMPATIBLE</code>. It also makes the patch component significant, which it is nowhere else in the scheme.</p>
+<p>The rule is written once. <code>LIARA_CONSTEXPR_FN</code> expands to <code>constexpr</code> in C++ and <code>static inline</code> in C, so the same function serves a <code>static_assert</code> in the launcher and a runtime check in a C consumer without a second implementation to keep in step.</p>
+<h2 id="alternatives-considered-4"><a class="header" href="#alternatives-considered-4">Alternatives Considered</a></h2>
+<p><strong>Textual semver, parsed at negotiation time.</strong> Readable in a log without decoding, and directly  comparable to what the Git tags and <code>manifest.json</code> contain. I did not want the earliest check in the program to be the one that allocates and parses, and it would add a “malformed version” failure mode next to the “incompatible version” one at a point where telling them apart helps nobody.</p>
+<p><strong>Comparing the packed words as integers.</strong> The bit layout orders correctly, so <code>provided &gt;= required</code> gives the right answer for the common case in one instruction. This is what the launcher actually did until the audit, and it worked — which is the problem. It cannot distinguish <code>DEGRADED</code> from <code>INCOMPATIBLE</code>, it ignores the major boundary entirely, and it gets rule 3 wrong in both directions. The launcher now goes through the rule.</p>
+<p><strong>Treating 0.0.x as an ordinary minor comparison</strong>, dropping rule 3. One fewer special case, and it would let a 0.0.x module satisfy an 0.0.y requirement instead of demanding lockstep. Rejected: a playground version would silently pass for a released one, and the failure would show up as undefined behaviour at a struct layout mismatch rather than as a refusal at load time. During Phase 0, lockstep is what is actually true.</p>
+<p><strong>Applying rule 3 to only one side</strong>, either reading. Both were on the table since both were already written down somewhere. I took the symmetric version because a rule whose direction has to be remembered is a rule that gets applied backwards, and because the strict reading fails safe: the worst case is refusing a combination that would have worked, which I find out immediately.</p>
+<h2 id="consequences-4"><a class="header" href="#consequences-4">Consequences</a></h2>
+<p>The negotiation is a few comparisons on a value already in a register. It works in a <code>static_assert</code>, in C and in C++, and before any allocator exists.</p>
+<p>Version words are unreadable in a debugger or a log. <code>liara_version_to_string</code> exists for that and is the only thing that should be decoding them.</p>
+<p>Under rule 3, every 0.0.x release breaks anything pinned to a different one. Phase 0 is therefore more rigid than it looks from outside, and that is deliberate rather than an oversight.</p>
+<p><code>LIARA_MAKE_VERSION_UNSAFE</code> corrupts neighbouring fields if a component overflows, and the <code>_UNSAFE</code> suffix is the whole mitigation. Thin, but its callers are compile-time literals in headers I review, and the checked form exists for anything else.</p>
+<p>The ABI pipeline cannot see a change like this one. <code>liara_version_provides</code> keeps its signature when its behaviour changes, so the snapshot shows no diff and the breaking change has to be declared by hand in the pull request title and a <code>BREAKING CHANGE</code> footer. Nothing catches me forgetting.</p>
+<h2 id="revisit-if-4"><a class="header" href="#revisit-if-4">Revisit If</a></h2>
+<ul>
+<li>Everything on both sides of every negotiation is past 1.0.0, at which point rule 3 is dead code and should be deleted rather than left as a branch nothing exercises.</li>
+<li>A fourth component becomes necessary — a build or revision number — which the bit layout has no room for.</li>
+<li>A module needs to express a range rather than a floor: works with 1.2 through 1.4 but not 1.5. The current rule cannot say that.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="adr-0006--manifestjson-as-the-single-compatibility-source-of-truth"><a class="header" href="#adr-0006--manifestjson-as-the-single-compatibility-source-of-truth">ADR 0006 — <code>manifest.json</code> as the Single Compatibility Source of Truth</a></h1>
+<ul>
+<li><strong>Status</strong>: Accepted</li>
+<li><strong>Date</strong>: 2026-08-26</li>
+<li><strong>Deciders</strong>: Antoine</li>
+</ul>
+<h2 id="context-5"><a class="header" href="#context-5">Context</a></h2>
+<p>Modules version independently, so something has to record which versions of which modules work together. The original plan was a <code>compatibility.toml</code> in the meta repository, listing the combinations that had been validated.</p>
+<p>It never got written. Before it reached the top of my todo list, <code>docs-shared</code> needed something else: the documentation navbar has to know, for a given repository and version, what other versions exist and what they are compatible with. A <code>compatibility.toml</code> in the meta repository could not answer that — it would have had to be fetched from another repository at documentation build time, and it would have described the engine rather than each module’s own history. So each repository got a <code>manifest.json</code> instead, listing its versions with an <code>abi_compatibility</code> field per version.</p>
+<p>When <code>compatibility.toml</code> finally came up, I read the item and realised the manifests already did almost all of it, and did it better: they live next to the thing they describe, they are updated in the same pull request that changes it, and they are already validated in CI against <code>.release-please-manifest.json</code>.</p>
+<h2 id="decision-5"><a class="header" href="#decision-5">Decision</a></h2>
+<p><code>manifest.json</code> is the only compatibility record. There is no <code>compatibility.toml</code> and there will not be one. Anything that needs to know what works with what — the navbar, CI resolving which <code>liara-interfaces</code> to build against, the composition tool — reads the manifests.</p>
+<h2 id="alternatives-considered-5"><a class="header" href="#alternatives-considered-5">Alternatives Considered</a></h2>
+<p><strong><code>compatibility.toml</code> in the meta repository</strong>, as originally planned. It had one capability the manifests do not: a list of engine-level meta-versions, saying that Liara vX is ABI vY plus renderer vZ plus core vW. That is genuinely useful for a user who wants a working set rather than a set of compatible pairs.</p>
+<p>I rejected it anyway. One file in one repository describing versions released from six others has to be updated by hand, after the fact, by me, every time anything ships — which means it is wrong roughly as often as I am distracted. The manifests are updated in the pull request that causes the change, and CI refuses a release whose version is missing from its own manifest. Adding a second file that says nearly the same thing, less reliably, to gain one feature was not worth it.</p>
+<p><strong>Both files</strong>, with <code>compatibility.toml</code> generated from the manifests. This removes the manual maintenance problem and keeps meta-versions. Rejected as premature rather than as wrong: nothing consumes meta-versions yet, and generating a file for a consumer that does not exist is how you end up maintaining a format nobody reads.</p>
+<p><strong>Git tags alone</strong>, with no manifest, deriving compatibility from what was released when. Rejected: it makes compatibility a matter of chronology, which is exactly the assumption that breaks when the contract moves ahead of its consumers — the normal direction of travel here.</p>
+<h2 id="consequences-5"><a class="header" href="#consequences-5">Consequences</a></h2>
+<p>Nothing today records that a specific set of module versions has been tested together. Compatibility is expressed pairwise against the ABI, and a user assembling a set gets “each of these is compatible with ABI 0.2” rather than “this set is known to work”. The composition tool of v0.1.x has to derive what it can from the pairs.</p>
+<p>If meta-versions become genuinely useful, I would rather build something better than a hand-written TOML file — most likely generated from what the release artifacts actually contain, so it describes what was published rather than what someone remembered to write down.</p>
+<p>The manifest schema was designed when <code>liara-interfaces</code> was the only repository, and it shows: it asks every repository for an <code>abi_compatibility</code> list, including ones where that means nothing (the meta repository, <code>docs-shared</code>) and the launcher, which has an ABI requirement rather than an ABI compatibility. Reworking the schema to model repository kinds is on the documentation track.</p>
+<p>Because CI resolves the interfaces version from the manifests, a manifest that is wrong produces a build that is wrong. The failure is a compiler error against an unexpected header rather than a message saying the manifest is stale.</p>
+<h2 id="revisit-if-5"><a class="header" href="#revisit-if-5">Revisit If</a></h2>
+<ul>
+<li>Meta-versions become a real need — in which case the answer is generation from artifacts, not a maintained file.</li>
+<li>The manifests start being edited only to satisfy CI rather than to describe reality, which would mean they have become the thing I rejected <code>compatibility.toml</code> for being.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="adr-0007--cmake-with-presets-and-vcpkg-in-manifest-mode"><a class="header" href="#adr-0007--cmake-with-presets-and-vcpkg-in-manifest-mode">ADR 0007 — CMake with Presets, and vcpkg in Manifest Mode</a></h1>
+<ul>
+<li><strong>Status</strong>: Accepted</li>
+<li><strong>Date</strong>: 2026-08-26</li>
+<li><strong>Deciders</strong>: Antoine</li>
+</ul>
+<blockquote>
+<p>Retrospective.</p>
+</blockquote>
+<h2 id="context-6"><a class="header" href="#context-6">Context</a></h2>
+<p>Six repositories, two platforms, three compilers, two linkages and two build types have to produce the same result on my machine and in CI, including on a machine where none of it has ever been built before. Two questions: what drives the build, and where dependencies come from.</p>
+<p>They are less separable than they look. vcpkg’s manifest mode is driven by a CMake toolchain file, and the toolchain file is set by a preset, so deciding one narrows the other. Recording them apart would misrepresent how it went.</p>
+<p>The Windows requirement shapes both. I develop on Arch and validate on Windows, and “works on my machine” has to mean something on a machine that is not mine.</p>
+<h2 id="decision-6"><a class="header" href="#decision-6">Decision</a></h2>
+<p>CMake 3.29 or newer, configured only through presets. The presets are the supported interface: there is no documented way to configure the project by passing options on a command line, and CI invokes presets unmodified rather than adding flags of its own.</p>
+<p>Dependencies come from vcpkg in manifest mode. Each repository declares its direct dependencies in <code>vcpkg.json</code> and pins the same registry baseline in <code>vcpkg-configuration.json</code>. Submodules and <code>FetchContent</code> are not used for external dependencies, with a narrow exception for header-only libraries missing from the registry, granted case by case through an ADR.</p>
+<h2 id="alternatives-considered-6"><a class="header" href="#alternatives-considered-6">Alternatives Considered</a></h2>
+<p><strong>Meson or Bazel instead of CMake.</strong> Both are better designed than CMake, and I do not think that is arguable. What settled it is the ecosystem: Vulkan, VMA, SDL, Dear ImGui and effectively every C++ dependency I will want ships CMake support first, vcpkg integrates as a CMake toolchain file, and IDE support for presets is now broad. Picking the better-designed tool would mean writing and maintaining the glue CMake gets for free, and that glue is not what I want to be spending this project on.</p>
+<p><strong>Configuring through command-line options, with presets as a convenience.</strong> This is how most projects work and it is what I moved away from. With options on the command line, the set of supported configurations is unbounded and nothing verifies any of it. With presets as the only interface, every CI leg is reproducible locally by name — which is why the CI matrix is expressed as preset names rather than as (OS, compiler, build type) tuples, and why a leg I cannot name is a leg I do not add.</p>
+<p><strong>Conan instead of vcpkg.</strong> A real contender, and better on some axes: Python recipes are more expressive than portfiles, version ranges more flexible. I went with vcpkg because MSVC support is first-class by construction (Microsoft maintains it), because manifest mode drops straight into <code>find_package</code> with no adapter, and because a triplet states target, linkage and build type in one place where Conan profiles spread the same information around.</p>
+<p><strong>Distribution packages</strong> — <code>pacman</code>, <code>apt</code>, <code>dnf</code>. Zero setup on Linux and always fastest. Rejected because Arch, Ubuntu and Fedora ship different versions of the same library, so the build reproduces the distribution rather than the project, and because there is no Windows equivalent, which would mean maintaining two dependency stories.</p>
+<p><strong>Submodules or <code>FetchContent</code>.</strong> Submodules are forgotten, break on detached HEADs and complicate every clone. <code>FetchContent</code> re-downloads and rebuilds sources on every fresh build, which is exactly the cost vcpkg’s binary cache exists to remove.</p>
+<h2 id="consequences-6"><a class="header" href="#consequences-6">Consequences</a></h2>
+<p>The first configuration on a fresh machine is slow, because vcpkg builds every dependency from source. The binary cache makes everything after that fast, but the first impression anyone gets of this project is a long wait. That is the largest cost of this decision and it lands at the worst moment.</p>
+<p>Presets are generated from one template in the meta repository rather than committed per repository. Four copies would drift, so the light CI tier fetches the template instead of duplicating it. The side effect is that a module repository has no <code>CMakePresets.json</code> in Git, which surprises anyone who clones one expecting to build it directly.</p>
+<p>Windows uses a multi-config generator and Ninja does not, so a build preset’s name does not always match its configure preset’s name and <code>CMAKE_BUILD_TYPE</code> means nothing on Windows. Everything that needs a build directory resolves it through the preset file.</p>
+<p>The baseline pin has to be identical across repositories, because the workspace merges the manifests and resolves once. Two repositories on different baselines would produce a build where one silently gets versions it never declared, so the bootstrap script compares them and refuses to continue rather than picking one.</p>
+<p>CMake is still CMake: a macro language with global state where a mistake in one directory can affect another. <code>liara_configure_target</code> concentrates the part most likely to diverge across modules, which reduces the exposure without removing it.</p>
+<h2 id="revisit-if-6"><a class="header" href="#revisit-if-6">Revisit If</a></h2>
+<ul>
+<li>vcpkg stops carrying a dependency I need and I have to maintain the port myself, which is where Conan’s recipe model would start being worth a migration.</li>
+<li>C++20 modules become worth adopting, since build-system support is where CMake’s lead over Meson is thinnest.</li>
+<li>First-build time becomes the real barrier to anyone contributing — which argues for publishing a prebuilt binary cache, not for changing tools.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="adr-0008--two-tier-ci-and-reusable-workflows-over-composite-actions"><a class="header" href="#adr-0008--two-tier-ci-and-reusable-workflows-over-composite-actions">ADR 0008 — Two-Tier CI, and Reusable Workflows Over Composite Actions</a></h1>
+<ul>
+<li><strong>Status</strong>: Accepted</li>
+<li><strong>Date</strong>: 2026-08-26</li>
+<li><strong>Deciders</strong>: Antoine</li>
+</ul>
+<h2 id="context-7"><a class="header" href="#context-7">Context</a></h2>
+<p>Six repositories need CI that answers two questions which are not the same question. “Does this compile and pass its tests” gets asked dozens of times a day on a branch that is nowhere near finished, and is only useful if the answer comes back in a couple of minutes. “Does this still compose with every other module, on both platforms, in both linkages” gets asked once per pull request and is worth waiting for.</p>
+<p>I designed the second one first: a single pipeline on pull requests and <code>main</code>, assembling the workspace and building the full matrix. Then I looked at what that means day to day and the answer is nothing at all — a branch gets no feedback until a pull request exists. Which leaves two options, both bad: open the pull request early just to see a build, and run the heavy matrix on work-in-progress; or work blind and hit a wall of failures at review time.</p>
+<p>Sizing the single pipeline down instead does not work either, because then nothing ever checks composition, which is the property the multi-repository layout of ADR 0001 exists to protect.</p>
+<p>There was also the question of where the YAML lives, since whatever the pipelines do, six repositories run substantially the same ones.</p>
+<h2 id="decision-7"><a class="header" href="#decision-7">Decision</a></h2>
+<p>Two tiers, with different build models.</p>
+<p>The <strong>branch tier</strong> runs on every push outside <code>main</code>. It builds the repository on its own, on one Linux preset, against the <code>liara-interfaces</code> version that repository’s own manifests declare, and runs clang-format. It fetches the preset template from the meta repository rather than carrying a copy. It is not a required check.</p>
+<p>The <strong>integration tier</strong> runs on pull requests, on <code>main</code> and on tags. It assembles the workspace superbuild with the repository under test substituted for its clone, and builds the full matrix: Linux under GCC and Clang, Windows under MSVC, both linkages, and the runtime-loading configuration. It runs clang-tidy against the workspace’s compilation database. This is what branch protection requires.</p>
+<p>Both tiers live in the organization’s <code>.github</code> repository as reusable workflows, called by a thin caller in each repository. Composite actions are used for step sequences shared between workflows, not for pipelines.</p>
+<p>Every step of both tiers emits a report fragment, and a final job renders them into one sticky pull request comment.</p>
+<h2 id="alternatives-considered-7"><a class="header" href="#alternatives-considered-7">Alternatives Considered</a></h2>
+<p><strong>One tier, pull-request triggered only.</strong> Where I started, and the reason this record exists. The failure mode is above: no feedback on a branch means premature pull requests or blind work, and both cost more than the second tier does.</p>
+<p><strong>One tier, full matrix on every push.</strong> Feedback everywhere and only one model to maintain. Rejected on cost and latency both: nine legs on every intermediate commit burns minutes for a signal that is mostly redundant, and a fifteen-minute answer to “does this compile” is not an answer anyone waits for.</p>
+<p><strong>Standalone builds in both tiers.</strong> Simpler, faster, and it is what the branch tier does. Rejected for the integration tier: a module built alone against an installed contract cannot notice it has broken a sibling, and inter-module breakage is the specific risk that comes with splitting a codebase across repositories. The workspace build is the only thing that answers that, and it costs a few minutes.</p>
+<p><strong>Copy-pasting the workflow YAML into each repository.</strong> A fix to one repository’s CI would not reach the other five, and the drift stays invisible until a pipeline that was supposed to be identical behaves differently.</p>
+<p><strong>Composite actions for the pipelines.</strong> They cannot express a matrix or multiple jobs, which is most of what these pipelines are. They are still the right tool for the workspace-assembly step sequence that build and lint both need, and that is where I use them.</p>
+<h2 id="consequences-7"><a class="header" href="#consequences-7">Consequences</a></h2>
+<p>Two build models have to stay coherent. A change to how the workspace is assembled has to be mirrored in the standalone path, and if they diverge I get the worst possible outcome: a green branch tier and a red integration tier for reasons unrelated to the change.</p>
+<p>The branch tier is deliberately incomplete and that has to stay explicit. No Windows, no shared libraries, no clang-tidy, no composition check. A green branch build means “this compiles”, not “this is ready”, and I need to keep reading it that way.</p>
+<p>Which <code>liara-interfaces</code> a module builds against comes from its own <code>manifest.json</code> rather than from <code>main</code>. That is what makes the branch tier meaningful when the contract moves ahead of its consumers, which is the normal direction of travel here. It also means a wrong manifest produces a wrong build, and the compiler cannot tell me the manifest is the problem.</p>
+<p>The reusable workflows are versioned by floating tags, so a fix reaches six repositories at once — and so does a mistake. Preview tags exist to test a workflow change before it floats.</p>
+<p>The sticky comment is the interface to a run, and its budget is finite: nine legs of build logs would overflow GitHub’s comment limit. A passing leg gets one line and only failures carry their output. A report that sends me back to the raw logs has failed at the one thing it is for.</p>
+<p>The Zig and Rust cross-language tests run on exactly one leg, and that leg fails configuration if the toolchains are missing. Without that, “installed nowhere” and “installed everywhere” would look identical from outside.</p>
+<h2 id="revisit-if-7"><a class="header" href="#revisit-if-7">Revisit If</a></h2>
+<ul>
+<li>The branch tier stops being fast enough to run on every push — which calls for narrowing it, not for widening the integration tier.</li>
+<li>Contributors other than me appear, which turns the branch tier’s incompleteness from a known limitation into a trap, and probably makes it a required check.</li>
+<li>The two build models diverge in practice rather than in theory. The first time a green branch build hides an integration failure is the signal.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="adr-0009--a-hand-written-ecs-rather-than-an-existing-library"><a class="header" href="#adr-0009--a-hand-written-ecs-rather-than-an-existing-library">ADR 0009 — A Hand-Written ECS Rather Than an Existing Library</a></h1>
+<ul>
+<li><strong>Status</strong>: Proposed</li>
+<li><strong>Date</strong>: 2026-08-26</li>
+<li><strong>Deciders</strong>: Antoine</li>
+</ul>
+<blockquote>
+<p>Proposed rather than Accepted: the ECS arrives in v0.2 and nothing has yet been built on it. This records the decision before the investment, which is the only point at which changing my mind is still cheap. It moves to Accepted when v0.2 closes.</p>
+</blockquote>
+<h2 id="context-8"><a class="header" href="#context-8">Context</a></h2>
+<p>The core needs a way to hold game state. I want an ECS: it separates data from behaviour, it suits data-oriented layouts, and it lets systems be written independently of each other, which fits an architecture where the renderer and a future physics module both operate on the same entities through different components without knowing about each other.</p>
+<p>EnTT and flecs exist, are excellent, are faster than what I will write, and would take an afternoon to integrate.</p>
+<h2 id="decision-8"><a class="header" href="#decision-8">Decision</a></h2>
+<p>The ECS is written by hand, in <code>liara-core</code>. The first implementation uses sparse sets: one sparse array indexed by entity ID and one packed array of component data per component type.</p>
+<h2 id="alternatives-considered-8"><a class="header" href="#alternatives-considered-8">Alternatives Considered</a></h2>
+<p><strong>EnTT.</strong> Header-only, mature, extremely fast, and the default answer for this problem in C++. Rejected, and I want to be honest about the reason, because “it wouldn’t have been fast enough” or “it wouldn’t have fit the architecture” would both be false. Neither is true. I rejected it because adopting it would remove the part of this project I am here for.</p>
+<p>The stated goal of Liara is learning: graphics programming, modern C++, and large-scale architecture. Writing an ECS teaches memory layout design, template metaprogramming and API design in a way that calling one does not. That is the version of this argument that belongs in a design document, and it is accurate as far as it goes.</p>
+<p>The fuller version is that I work on things I can see the bottom of. Assembling a project out of libraries whose internals I do not know is, for me, not the same activity as building something — it is a different task that happens to produce a similar artifact, and it is one I lose interest in quickly. On a project with no deadline and no client, sustained interest is the actual constraint, and a technically superior choice that I stop working on is worse than an adequate one I finish. This is a bad criterion for a team and a decisive one for me, so it is recorded here rather than left implicit and rediscovered later as inconsistency.</p>
+<p><strong>flecs.</strong> More featureful than EnTT, with relationships and queries I would not write myself. Rejected for the same reason, more so: the more it does, the less of it I would understand.</p>
+<p><strong>No ECS</strong> — plain object hierarchies, or arrays of structs with hand-written iteration. Simpler and sufficient for the scale Liara will reach before v1.0. Rejected because it does not compose with the module boundaries: the render packet pattern of <code>ARCHITECTURE.md</code> §6.3 depends on the core being able to iterate a specific component set cheaply, and an object hierarchy makes that a traversal rather than a scan.</p>
+<p><strong>Archetype storage</strong> (Bevy, Unity DOTS) instead of sparse sets. Better for multi-component queries, which is most of them, and worse in every other way to implement: fragment management, archetype graph transitions, and structural change deferral. Rejected for v0.x as a first implementation, not on principle. If iteration performance becomes the bottleneck, this is where to go, and switching is an internal change since the ECS is not exposed across the ABI.</p>
+<h2 id="consequences-8"><a class="header" href="#consequences-8">Consequences</a></h2>
+<p>It will be slower than EnTT, and probably by a lot at first. This is accepted, with a caveat: the ECS is benchmarked in CI from v0.2 onward, so “slower” stays a number I am looking at rather than a thing I assume is fine.</p>
+<p>Bugs in it are mine, including the ones EnTT solved years ago and I have not thought of yet. Entity ID recycling with generation counters, iteration stability under structural change, and lifetime of component references are the three I expect to get wrong at least once each.</p>
+<p>It is small enough to hold in my head, which is the point. When something behaves oddly, the explanation is in code I wrote, not in a template instantiation four layers into someone else’s header.</p>
+<p>The API is mine, so it can change to fit what the engine turns out to need instead of what a library author anticipated. The corresponding cost is that there is no upgrade path and no community answering questions about it.</p>
+<p>Sparse arrays grow with the maximum entity ID rather than with the entity count, so a workload that creates and destroys many entities pays memory for the high-water mark. Acceptable at v0.x scale, and a real problem at simulation scale.</p>
+<h2 id="revisit-if-8"><a class="header" href="#revisit-if-8">Revisit If</a></h2>
+<ul>
+<li>The benchmarks show the ECS is the frame-time bottleneck, and archetype storage is the fix — which is a change of storage strategy under the same API, not a change of this decision.</li>
+<li>I find myself maintaining it instead of building the engine with it. Writing it is the point; keeping it alive at the expense of everything else is not, and if that happens the honest move is to swap in EnTT and say so in a superseding ADR.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="adr-0010--vulkan-directly-without-a-rendering-abstraction-layer"><a class="header" href="#adr-0010--vulkan-directly-without-a-rendering-abstraction-layer">ADR 0010 — Vulkan Directly, Without a Rendering Abstraction Layer</a></h1>
+<ul>
+<li><strong>Status</strong>: Proposed</li>
+<li><strong>Date</strong>: 2026-08-26</li>
+<li><strong>Deciders</strong>: Antoine</li>
+</ul>
+<blockquote>
+<p>Proposed rather than Accepted: real Vulkan work starts in v0.1 and only a placeholder renderer exists today. Moves to Accepted when v0.1 closes.</p>
+</blockquote>
+<h2 id="context-9"><a class="header" href="#context-9">Context</a></h2>
+<p>This is the third engine project I have started, and the graphics API question has been answered three times.</p>
+<p>The first attempt, years ago, was on Windows, and I chose DirectX — partly following Arash Khatami’s Game Engine Series, mostly because on Windows it was the obvious choice. Cross-platform support was not a consideration. That project never got past a sketch.</p>
+<p>The second attempt came after I moved to Arch and discovered an operating system could adapt to me rather than the reverse. I wanted something that ran on Windows and Linux, was modern and actively maintained, performed well, and was actually used professionally. Vulkan met all four better than anything else. That project — Liara’s predecessor — went a long way on it.</p>
+<p>Liara is a reboot of that project, undertaken because the architecture had stopped fitting what I wanted, not because the rendering choice had. I had enjoyed Vulkan and had no reason to reopen the question, so I did not.</p>
+<p>One thing carried across all three attempts: I have little patience for backwards compatibility and legacy support. I find it usually costs more than it returns. It is why the engine targets Vulkan 1.3 and recent GPUs, and why I develop on Arch rather than Debian.</p>
+<h2 id="decision-9"><a class="header" href="#decision-9">Decision</a></h2>
+<p>Vulkan 1.3 directly, through Vulkan-Hpp and VMA, as the reference renderer. No abstraction layer over the graphics API and no second backend. A user whose hardware cannot run a modern Vulkan stack is not the target audience.</p>
+<h2 id="alternatives-considered-9"><a class="header" href="#alternatives-considered-9">Alternatives Considered</a></h2>
+<p><strong>A rendering abstraction layer</strong> — bgfx, sokol_gfx, wgpu — with Vulkan as one backend among several. I should be straightforward here: these were not weighed at the time. I did not know they existed when the choice was made, and I only learned about them while writing this record.</p>
+<p>Knowing about them now does not change the answer, for a reason worth stating plainly rather than reconstructing as an evaluation I never performed. I build things to understand them from the bottom, and an abstraction layer removes precisely the layer I want to be working in. It would let me draw a triangle in a fraction of the time and teach me nothing about how a triangle gets drawn. Since learning graphics programming is the first of the three reasons this project exists, that is disqualifying regardless of the library’s quality.</p>
+<p>The honest framing: for a project whose goal is to ship a renderer, an abstraction layer is very likely the correct choice. For this project, it defeats the purpose. That is a statement about the project, not about the libraries.</p>
+<p><strong>OpenGL</strong>, or a Vulkan renderer with an OpenGL fallback for older hardware. Rejected on the legacy point above. Supporting old hardware means two rendering paths, two sets of bugs, and design decisions constrained by the weaker one. <code>ARCHITECTURE.md</code> §2.2 already declares broad hardware support a non-goal; this is that non-goal applied.</p>
+<p><strong>DirectX 12</strong>, as in the first attempt. Rejected on portability: Linux is the primary development platform now, and a Windows-only renderer would make the platform I actually use the secondary one.</p>
+<p><strong>Deferring the choice</strong> behind the module’s C interface, and deciding later. Partially real — <code>liara-renderer</code> is a replaceable module, and someone could implement the same interface over another API without touching the rest of the engine. But the interface has to be designed against something, and designing it against Vulkan’s model (explicit synchronisation, command buffers, descriptor sets) is a choice that shapes it whether or not it is acknowledged. Better to say so.</p>
+<h2 id="consequences-9"><a class="header" href="#consequences-9">Consequences</a></h2>
+<p>Everything takes longer. Vulkan requires explicit synchronisation, memory management, descriptor handling and swapchain recreation before it draws anything, so the first triangle is weeks of work rather than an afternoon. This is the accepted cost and, for this project, part of the point — but it does mean v0.1 is a large milestone by any measure other than what it displays.</p>
+<p>There is a real risk of stalling in it. This is what happened to the previous project, in the architecture rather than in the rendering, and the mechanism is the same: a task that is harder than it should be is a task that does not get done. Vulkan is legitimately hard, so the milestone structure has to keep producing something visible rather than accumulating infrastructure. That is what <code>ARCHITECTURE.md</code> §3.5 is for.</p>
+<p>Vulkan-Hpp and VMA are themselves abstraction layers, which would sit oddly next to the reasoning above if I had not already done without them. The predecessor project — also called Liara; changing the name would have been more practical, but I like it and how it sounds — was written against raw Vulkan, following Brendan Galea’s series at the start. I have written the allocator, the descriptor handling and the boilerplate by hand, badly, and I know what these libraries are doing on my behalf.</p>
+<p>That is the rule I apply, and it is narrower than “no abstractions”: I allow a library that does better something I have already done myself and still understand. Vulkan-Hpp is the same API with C++ types over a model I know. VMA solves an allocation problem I have solved worse. The same test is why I use the standard library without hesitation — over the years I have reimplemented a fair amount of what it does, sometimes for coursework, sometimes because I did not know it was already there — and why bgfx fails: it would be the first time I used something whose model I had never built.</p>
+<p>Hardware support is narrow and stays narrow. No integrated GPU from before Vulkan 1.3, no fallback, no software path. Accepted.</p>
+<p>The renderer is the largest single module and the one most likely to need rewriting as I learn. The C boundary at least contains that: a rewrite behind the interface does not propagate.</p>
+<h2 id="revisit-if-9"><a class="header" href="#revisit-if-9">Revisit If</a></h2>
+<ul>
+<li>Hardware support becomes an actual barrier to someone shipping a game with the engine — which is a v0.6 or later question, not a v0.1 one.</li>
+<li>A second backend becomes necessary for a platform worth supporting, at which point the abstraction question genuinely reopens and should be answered with a new ADR rather than by retrofitting one onto the interface.</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="license-1"><a href="#license-1" class="header">License</a></h1>
 <p>MIT License</p>

@@ -4,22 +4,22 @@
 <html lang="en" class="sidebar-visible no-js light">
 <head>
 <meta charset="UTF-8">
-<title>License - Liara Engine — Meta Repository</title>
+<title>ADR-0008: Two-tier CI, and reusable workflows - Liara Engine — Meta Repository</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="theme-color" content="#FFFAFC">
 
 <link rel="icon" type="image/x-icon" href="/shared-content/assets/logo.svg">
-<link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/general.css">
-<link rel="stylesheet" href="css/chrome.css">
-<link rel="stylesheet" href="css/print.css" media="print">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/general.css">
+<link rel="stylesheet" href="../css/chrome.css">
+<link rel="stylesheet" href="../css/print.css" media="print">
 
-<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="../fonts/fonts.css">
 
-<link rel="stylesheet" id="mdbook-highlight-css" href="highlight.css">
-<link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night.css">
-<link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight.css">
+<link rel="stylesheet" id="mdbook-highlight-css" href="../highlight.css">
+<link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night.css">
+<link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight.css">
 
 <link rel="stylesheet" href="/shared-content/tokens/design-tokens.css">
 <link rel="stylesheet" href="/shared-content/navbar/navbar.css">
@@ -68,11 +68,11 @@
 <script defer src="/shared-content/navbar/version-banner.js"></script>
 
 
-<input type="hidden" id="MDBOOK_OUTPUT" value="">
+<input type="hidden" id="MDBOOK_OUTPUT" value="../">
 
 
 <script>
-    var path_to_root = "";
+    var path_to_root = "../";
     var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "navy" : "light";
 </script>
@@ -153,7 +153,7 @@
                 <a href="https://github.com/liara-engine/liara" title="Git repository" aria-label="Git repository">
                     <i id="git-repository-button" class="fa fa-github"></i>
                 </a>
-                <a href="https://github.com/liara/docs/edit/main/docs/docs/LICENSE.md" title="Suggest an edit" aria-label="Suggest an edit">
+                <a href="https://github.com/liara/docs/edit/main/docs/docs/adr/0008-two-tier-ci.md" title="Suggest an edit" aria-label="Suggest an edit">
                     <i id="git-edit-button" class="fa fa-edit"></i>
                 </a>
             </div>
@@ -187,31 +187,53 @@
 
         <div id="content" class="content">
             <main>
-                <p>MIT License</p>
-<p>Copyright (c) 2026 liara-engine</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the “Software”), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.</p>
+                <h1 id="adr-0008--two-tier-ci-and-reusable-workflows-over-composite-actions"><a class="header" href="#adr-0008--two-tier-ci-and-reusable-workflows-over-composite-actions">ADR 0008 — Two-Tier CI, and Reusable Workflows Over Composite Actions</a></h1>
+<ul>
+<li><strong>Status</strong>: Accepted</li>
+<li><strong>Date</strong>: 2026-08-26</li>
+<li><strong>Deciders</strong>: Antoine</li>
+</ul>
+<h2 id="context"><a class="header" href="#context">Context</a></h2>
+<p>Six repositories need CI that answers two questions which are not the same question. “Does this compile and pass its tests” gets asked dozens of times a day on a branch that is nowhere near finished, and is only useful if the answer comes back in a couple of minutes. “Does this still compose with every other module, on both platforms, in both linkages” gets asked once per pull request and is worth waiting for.</p>
+<p>I designed the second one first: a single pipeline on pull requests and <code>main</code>, assembling the workspace and building the full matrix. Then I looked at what that means day to day and the answer is nothing at all — a branch gets no feedback until a pull request exists. Which leaves two options, both bad: open the pull request early just to see a build, and run the heavy matrix on work-in-progress; or work blind and hit a wall of failures at review time.</p>
+<p>Sizing the single pipeline down instead does not work either, because then nothing ever checks composition, which is the property the multi-repository layout of ADR 0001 exists to protect.</p>
+<p>There was also the question of where the YAML lives, since whatever the pipelines do, six repositories run substantially the same ones.</p>
+<h2 id="decision"><a class="header" href="#decision">Decision</a></h2>
+<p>Two tiers, with different build models.</p>
+<p>The <strong>branch tier</strong> runs on every push outside <code>main</code>. It builds the repository on its own, on one Linux preset, against the <code>liara-interfaces</code> version that repository’s own manifests declare, and runs clang-format. It fetches the preset template from the meta repository rather than carrying a copy. It is not a required check.</p>
+<p>The <strong>integration tier</strong> runs on pull requests, on <code>main</code> and on tags. It assembles the workspace superbuild with the repository under test substituted for its clone, and builds the full matrix: Linux under GCC and Clang, Windows under MSVC, both linkages, and the runtime-loading configuration. It runs clang-tidy against the workspace’s compilation database. This is what branch protection requires.</p>
+<p>Both tiers live in the organization’s <code>.github</code> repository as reusable workflows, called by a thin caller in each repository. Composite actions are used for step sequences shared between workflows, not for pipelines.</p>
+<p>Every step of both tiers emits a report fragment, and a final job renders them into one sticky pull request comment.</p>
+<h2 id="alternatives-considered"><a class="header" href="#alternatives-considered">Alternatives Considered</a></h2>
+<p><strong>One tier, pull-request triggered only.</strong> Where I started, and the reason this record exists. The failure mode is above: no feedback on a branch means premature pull requests or blind work, and both cost more than the second tier does.</p>
+<p><strong>One tier, full matrix on every push.</strong> Feedback everywhere and only one model to maintain. Rejected on cost and latency both: nine legs on every intermediate commit burns minutes for a signal that is mostly redundant, and a fifteen-minute answer to “does this compile” is not an answer anyone waits for.</p>
+<p><strong>Standalone builds in both tiers.</strong> Simpler, faster, and it is what the branch tier does. Rejected for the integration tier: a module built alone against an installed contract cannot notice it has broken a sibling, and inter-module breakage is the specific risk that comes with splitting a codebase across repositories. The workspace build is the only thing that answers that, and it costs a few minutes.</p>
+<p><strong>Copy-pasting the workflow YAML into each repository.</strong> A fix to one repository’s CI would not reach the other five, and the drift stays invisible until a pipeline that was supposed to be identical behaves differently.</p>
+<p><strong>Composite actions for the pipelines.</strong> They cannot express a matrix or multiple jobs, which is most of what these pipelines are. They are still the right tool for the workspace-assembly step sequence that build and lint both need, and that is where I use them.</p>
+<h2 id="consequences"><a class="header" href="#consequences">Consequences</a></h2>
+<p>Two build models have to stay coherent. A change to how the workspace is assembled has to be mirrored in the standalone path, and if they diverge I get the worst possible outcome: a green branch tier and a red integration tier for reasons unrelated to the change.</p>
+<p>The branch tier is deliberately incomplete and that has to stay explicit. No Windows, no shared libraries, no clang-tidy, no composition check. A green branch build means “this compiles”, not “this is ready”, and I need to keep reading it that way.</p>
+<p>Which <code>liara-interfaces</code> a module builds against comes from its own <code>manifest.json</code> rather than from <code>main</code>. That is what makes the branch tier meaningful when the contract moves ahead of its consumers, which is the normal direction of travel here. It also means a wrong manifest produces a wrong build, and the compiler cannot tell me the manifest is the problem.</p>
+<p>The reusable workflows are versioned by floating tags, so a fix reaches six repositories at once — and so does a mistake. Preview tags exist to test a workflow change before it floats.</p>
+<p>The sticky comment is the interface to a run, and its budget is finite: nine legs of build logs would overflow GitHub’s comment limit. A passing leg gets one line and only failures carry their output. A report that sends me back to the raw logs has failed at the one thing it is for.</p>
+<p>The Zig and Rust cross-language tests run on exactly one leg, and that leg fails configuration if the toolchains are missing. Without that, “installed nowhere” and “installed everywhere” would look identical from outside.</p>
+<h2 id="revisit-if"><a class="header" href="#revisit-if">Revisit If</a></h2>
+<ul>
+<li>The branch tier stops being fast enough to run on every push — which calls for narrowing it, not for widening the integration tier.</li>
+<li>Contributors other than me appear, which turns the branch tier’s incompleteness from a known limitation into a trap, and probably makes it a required check.</li>
+<li>The two build models diverge in practice rather than in theory. The first time a green branch build hides an integration failure is the signal.</li>
+</ul>
 
             </main>
 
             <nav class="nav-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="adr/0010-vulkan-without-abstraction-layer.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../adr/0007-cmake-presets-and-vcpkg.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
+                    <a rel="next prefetch" href="../adr/0009-in-house-ecs.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
 
                 <div style="clear: both"></div>
             </nav>
@@ -219,10 +241,13 @@ SOFTWARE.</p>
     </div>
 
     <nav class="nav-wide-wrapper" aria-label="Page navigation">
-            <a rel="prev" href="adr/0010-vulkan-without-abstraction-layer.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+            <a rel="prev" href="../adr/0007-cmake-presets-and-vcpkg.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
             </a>
 
+            <a rel="next prefetch" href="../adr/0009-in-house-ecs.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+            </a>
     </nav>
 </div>
 
@@ -234,13 +259,13 @@ SOFTWARE.</p>
 </script>
 
 
-<script src="elasticlunr.min.js"></script>
-<script src="mark.min.js"></script>
-<script src="searcher.js"></script>
+<script src="../elasticlunr.min.js"></script>
+<script src="../mark.min.js"></script>
+<script src="../searcher.js"></script>
 
-<script src="clipboard.min.js"></script>
-<script src="highlight.js"></script>
-<script src="book.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../highlight.js"></script>
+<script src="../book.js"></script>
 
 <script defer src="/shared-content/mdbook/js/admonitions.js"></script>
 

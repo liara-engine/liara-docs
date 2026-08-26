@@ -4,22 +4,22 @@
 <html lang="en" class="sidebar-visible no-js light">
 <head>
 <meta charset="UTF-8">
-<title>License - Liara Engine — Meta Repository</title>
+<title>ADR-0007: CMake with presets, and vcpkg in manifest mode - Liara Engine — Meta Repository</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="theme-color" content="#FFFAFC">
 
 <link rel="icon" type="image/x-icon" href="/shared-content/assets/logo.svg">
-<link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/general.css">
-<link rel="stylesheet" href="css/chrome.css">
-<link rel="stylesheet" href="css/print.css" media="print">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/general.css">
+<link rel="stylesheet" href="../css/chrome.css">
+<link rel="stylesheet" href="../css/print.css" media="print">
 
-<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="../fonts/fonts.css">
 
-<link rel="stylesheet" id="mdbook-highlight-css" href="highlight.css">
-<link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night.css">
-<link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight.css">
+<link rel="stylesheet" id="mdbook-highlight-css" href="../highlight.css">
+<link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night.css">
+<link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight.css">
 
 <link rel="stylesheet" href="/shared-content/tokens/design-tokens.css">
 <link rel="stylesheet" href="/shared-content/navbar/navbar.css">
@@ -68,11 +68,11 @@
 <script defer src="/shared-content/navbar/version-banner.js"></script>
 
 
-<input type="hidden" id="MDBOOK_OUTPUT" value="">
+<input type="hidden" id="MDBOOK_OUTPUT" value="../">
 
 
 <script>
-    var path_to_root = "";
+    var path_to_root = "../";
     var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "navy" : "light";
 </script>
@@ -153,7 +153,7 @@
                 <a href="https://github.com/liara-engine/liara" title="Git repository" aria-label="Git repository">
                     <i id="git-repository-button" class="fa fa-github"></i>
                 </a>
-                <a href="https://github.com/liara/docs/edit/main/docs/docs/LICENSE.md" title="Suggest an edit" aria-label="Suggest an edit">
+                <a href="https://github.com/liara/docs/edit/main/docs/docs/adr/0007-cmake-presets-and-vcpkg.md" title="Suggest an edit" aria-label="Suggest an edit">
                     <i id="git-edit-button" class="fa fa-edit"></i>
                 </a>
             </div>
@@ -187,31 +187,51 @@
 
         <div id="content" class="content">
             <main>
-                <p>MIT License</p>
-<p>Copyright (c) 2026 liara-engine</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the “Software”), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.</p>
+                <h1 id="adr-0007--cmake-with-presets-and-vcpkg-in-manifest-mode"><a class="header" href="#adr-0007--cmake-with-presets-and-vcpkg-in-manifest-mode">ADR 0007 — CMake with Presets, and vcpkg in Manifest Mode</a></h1>
+<ul>
+<li><strong>Status</strong>: Accepted</li>
+<li><strong>Date</strong>: 2026-08-26</li>
+<li><strong>Deciders</strong>: Antoine</li>
+</ul>
+<blockquote>
+<p>Retrospective.</p>
+</blockquote>
+<h2 id="context"><a class="header" href="#context">Context</a></h2>
+<p>Six repositories, two platforms, three compilers, two linkages and two build types have to produce the same result on my machine and in CI, including on a machine where none of it has ever been built before. Two questions: what drives the build, and where dependencies come from.</p>
+<p>They are less separable than they look. vcpkg’s manifest mode is driven by a CMake toolchain file, and the toolchain file is set by a preset, so deciding one narrows the other. Recording them apart would misrepresent how it went.</p>
+<p>The Windows requirement shapes both. I develop on Arch and validate on Windows, and “works on my machine” has to mean something on a machine that is not mine.</p>
+<h2 id="decision"><a class="header" href="#decision">Decision</a></h2>
+<p>CMake 3.29 or newer, configured only through presets. The presets are the supported interface: there is no documented way to configure the project by passing options on a command line, and CI invokes presets unmodified rather than adding flags of its own.</p>
+<p>Dependencies come from vcpkg in manifest mode. Each repository declares its direct dependencies in <code>vcpkg.json</code> and pins the same registry baseline in <code>vcpkg-configuration.json</code>. Submodules and <code>FetchContent</code> are not used for external dependencies, with a narrow exception for header-only libraries missing from the registry, granted case by case through an ADR.</p>
+<h2 id="alternatives-considered"><a class="header" href="#alternatives-considered">Alternatives Considered</a></h2>
+<p><strong>Meson or Bazel instead of CMake.</strong> Both are better designed than CMake, and I do not think that is arguable. What settled it is the ecosystem: Vulkan, VMA, SDL, Dear ImGui and effectively every C++ dependency I will want ships CMake support first, vcpkg integrates as a CMake toolchain file, and IDE support for presets is now broad. Picking the better-designed tool would mean writing and maintaining the glue CMake gets for free, and that glue is not what I want to be spending this project on.</p>
+<p><strong>Configuring through command-line options, with presets as a convenience.</strong> This is how most projects work and it is what I moved away from. With options on the command line, the set of supported configurations is unbounded and nothing verifies any of it. With presets as the only interface, every CI leg is reproducible locally by name — which is why the CI matrix is expressed as preset names rather than as (OS, compiler, build type) tuples, and why a leg I cannot name is a leg I do not add.</p>
+<p><strong>Conan instead of vcpkg.</strong> A real contender, and better on some axes: Python recipes are more expressive than portfiles, version ranges more flexible. I went with vcpkg because MSVC support is first-class by construction (Microsoft maintains it), because manifest mode drops straight into <code>find_package</code> with no adapter, and because a triplet states target, linkage and build type in one place where Conan profiles spread the same information around.</p>
+<p><strong>Distribution packages</strong> — <code>pacman</code>, <code>apt</code>, <code>dnf</code>. Zero setup on Linux and always fastest. Rejected because Arch, Ubuntu and Fedora ship different versions of the same library, so the build reproduces the distribution rather than the project, and because there is no Windows equivalent, which would mean maintaining two dependency stories.</p>
+<p><strong>Submodules or <code>FetchContent</code>.</strong> Submodules are forgotten, break on detached HEADs and complicate every clone. <code>FetchContent</code> re-downloads and rebuilds sources on every fresh build, which is exactly the cost vcpkg’s binary cache exists to remove.</p>
+<h2 id="consequences"><a class="header" href="#consequences">Consequences</a></h2>
+<p>The first configuration on a fresh machine is slow, because vcpkg builds every dependency from source. The binary cache makes everything after that fast, but the first impression anyone gets of this project is a long wait. That is the largest cost of this decision and it lands at the worst moment.</p>
+<p>Presets are generated from one template in the meta repository rather than committed per repository. Four copies would drift, so the light CI tier fetches the template instead of duplicating it. The side effect is that a module repository has no <code>CMakePresets.json</code> in Git, which surprises anyone who clones one expecting to build it directly.</p>
+<p>Windows uses a multi-config generator and Ninja does not, so a build preset’s name does not always match its configure preset’s name and <code>CMAKE_BUILD_TYPE</code> means nothing on Windows. Everything that needs a build directory resolves it through the preset file.</p>
+<p>The baseline pin has to be identical across repositories, because the workspace merges the manifests and resolves once. Two repositories on different baselines would produce a build where one silently gets versions it never declared, so the bootstrap script compares them and refuses to continue rather than picking one.</p>
+<p>CMake is still CMake: a macro language with global state where a mistake in one directory can affect another. <code>liara_configure_target</code> concentrates the part most likely to diverge across modules, which reduces the exposure without removing it.</p>
+<h2 id="revisit-if"><a class="header" href="#revisit-if">Revisit If</a></h2>
+<ul>
+<li>vcpkg stops carrying a dependency I need and I have to maintain the port myself, which is where Conan’s recipe model would start being worth a migration.</li>
+<li>C++20 modules become worth adopting, since build-system support is where CMake’s lead over Meson is thinnest.</li>
+<li>First-build time becomes the real barrier to anyone contributing — which argues for publishing a prebuilt binary cache, not for changing tools.</li>
+</ul>
 
             </main>
 
             <nav class="nav-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="adr/0010-vulkan-without-abstraction-layer.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../adr/0006-manifest-as-compatibility-source-of-truth.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
+                    <a rel="next prefetch" href="../adr/0008-two-tier-ci.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
 
                 <div style="clear: both"></div>
             </nav>
@@ -219,10 +239,13 @@ SOFTWARE.</p>
     </div>
 
     <nav class="nav-wide-wrapper" aria-label="Page navigation">
-            <a rel="prev" href="adr/0010-vulkan-without-abstraction-layer.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+            <a rel="prev" href="../adr/0006-manifest-as-compatibility-source-of-truth.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
             </a>
 
+            <a rel="next prefetch" href="../adr/0008-two-tier-ci.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+            </a>
     </nav>
 </div>
 
@@ -234,13 +257,13 @@ SOFTWARE.</p>
 </script>
 
 
-<script src="elasticlunr.min.js"></script>
-<script src="mark.min.js"></script>
-<script src="searcher.js"></script>
+<script src="../elasticlunr.min.js"></script>
+<script src="../mark.min.js"></script>
+<script src="../searcher.js"></script>
 
-<script src="clipboard.min.js"></script>
-<script src="highlight.js"></script>
-<script src="book.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../highlight.js"></script>
+<script src="../book.js"></script>
 
 <script defer src="/shared-content/mdbook/js/admonitions.js"></script>
 

@@ -4,22 +4,22 @@
 <html lang="en" class="sidebar-visible no-js light">
 <head>
 <meta charset="UTF-8">
-<title>License - Liara Engine — Meta Repository</title>
+<title>ADR-0003: The host composes modules - Liara Engine — Meta Repository</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="theme-color" content="#FFFAFC">
 
 <link rel="icon" type="image/x-icon" href="/shared-content/assets/logo.svg">
-<link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/general.css">
-<link rel="stylesheet" href="css/chrome.css">
-<link rel="stylesheet" href="css/print.css" media="print">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/general.css">
+<link rel="stylesheet" href="../css/chrome.css">
+<link rel="stylesheet" href="../css/print.css" media="print">
 
-<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="../fonts/fonts.css">
 
-<link rel="stylesheet" id="mdbook-highlight-css" href="highlight.css">
-<link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night.css">
-<link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight.css">
+<link rel="stylesheet" id="mdbook-highlight-css" href="../highlight.css">
+<link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night.css">
+<link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight.css">
 
 <link rel="stylesheet" href="/shared-content/tokens/design-tokens.css">
 <link rel="stylesheet" href="/shared-content/navbar/navbar.css">
@@ -68,11 +68,11 @@
 <script defer src="/shared-content/navbar/version-banner.js"></script>
 
 
-<input type="hidden" id="MDBOOK_OUTPUT" value="">
+<input type="hidden" id="MDBOOK_OUTPUT" value="../">
 
 
 <script>
-    var path_to_root = "";
+    var path_to_root = "../";
     var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "navy" : "light";
 </script>
@@ -153,7 +153,7 @@
                 <a href="https://github.com/liara-engine/liara" title="Git repository" aria-label="Git repository">
                     <i id="git-repository-button" class="fa fa-github"></i>
                 </a>
-                <a href="https://github.com/liara/docs/edit/main/docs/docs/LICENSE.md" title="Suggest an edit" aria-label="Suggest an edit">
+                <a href="https://github.com/liara/docs/edit/main/docs/docs/adr/0003-the-host-composes-modules.md" title="Suggest an edit" aria-label="Suggest an edit">
                     <i id="git-edit-button" class="fa fa-edit"></i>
                 </a>
             </div>
@@ -187,31 +187,45 @@
 
         <div id="content" class="content">
             <main>
-                <p>MIT License</p>
-<p>Copyright (c) 2026 liara-engine</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the “Software”), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.</p>
+                <h1 id="adr-0003--the-host-composes-modules"><a class="header" href="#adr-0003--the-host-composes-modules">ADR 0003 — The Host Composes Modules</a></h1>
+<ul>
+<li><strong>Status</strong>: Accepted</li>
+<li><strong>Date</strong>: 2026-08-26</li>
+<li><strong>Deciders</strong>: Antoine</li>
+</ul>
+<h2 id="context"><a class="header" href="#context">Context</a></h2>
+<p>Liara is a set of modules that version independently and communicate through a C ABI. Something has to decide which modules exist in a given run, create them, and connect them. The obvious candidate is the core: it is the module every other one seems to revolve around, it is created first, and giving it the job requires no new component.</p>
+<p>That instinct had already been acted on before this was written down. The core held a reference to the renderer, drove the frame loop, and produced a render packet the renderer consumed. Nothing about that arrangement looked wrong from inside the core.</p>
+<p>It is wrong from outside it. A core that creates a renderer is a core that cannot be used without one, cannot be tested without one, and cannot be versioned independently of one — which removes the reason the modules were separated in the first place. The coupling is also invisible in a static build: the symbols resolve at link time and nothing complains, so the drift accumulates silently and is discovered only when someone tries to load a module at runtime, by which point the dependencies are everywhere.</p>
+<h2 id="decision"><a class="header" href="#decision">Decision</a></h2>
+<p>The host composes. The launcher — and later the editor — creates each module independently, negotiates ABI versions with each, wires them together, and owns the frame loop.</p>
+<p>A module never creates, loads, references, or links against a sibling module. Its only dependency is <code>liara-interfaces</code>. Where two modules must exchange data, they exchange it through a type declared in the contract, passed by the host; the renderer receives a render packet, it does not ask the core for one.</p>
+<h2 id="alternatives-considered"><a class="header" href="#alternatives-considered">Alternatives Considered</a></h2>
+<p><strong>The core orchestrates.</strong> Fewer moving parts, and the host becomes a thin <code>main()</code>. Rejected: it makes <code>liara-core</code> depend on every module it orchestrates, which is precisely the dependency graph the multi-repository layout (ADR 0001) exists to avoid. It also makes “core” mean two unrelated things — a set of foundational services, and an application framework — which is how a core becomes  a place things are put rather than a place things belong.</p>
+<p><strong>A dedicated orchestration module</strong>, sitting between the host and the modules. Rejected as premature: it is the core-orchestrates option with an extra name, and it would have to be composed by something anyway. If the launcher and the editor eventually share enough composition logic to justify extracting it, that extraction is a later, better-informed decision.</p>
+<p><strong>A plugin registry</strong> that modules register themselves into at load time. Rejected for now: it solves discovery, which is not yet a problem, at the cost of making the set of loaded modules a runtime property that no build-time check can verify. Revisit when a host needs to load a module it was not compiled to know about.</p>
+<h2 id="consequences"><a class="header" href="#consequences">Consequences</a></h2>
+<p>The host is the only component that knows the module graph, and it grows as modules are added. This is accepted: composition logic has to live somewhere, and concentrating it in one place that is allowed to know everything is better than distributing it among components that then all know a little too much.</p>
+<p>Two modules cannot call each other, even when it would be convenient. Data crosses through a type in the contract and through the host, which means adding an interaction between two modules is a change to <code>liara-interfaces</code> — deliberately more expensive than adding a function call, because it is a change to the contract everything depends on.</p>
+<p>Testing a module in isolation becomes possible and therefore expected. A module with no siblings to stand up is a module whose tests are cheap, which is the practical payoff of the whole arrangement.</p>
+<p>The <code>-runtime</code> build configuration exists to keep this decision honest. In it, the launcher links against <code>liara-interfaces</code> only and resolves modules through <code>dlopen</code>/<code>LoadLibrary</code>; a module that has acquired a link-time dependency on a sibling fails there and nowhere else. Without that configuration in CI, this ADR would describe an intention rather than a property.</p>
+<h2 id="revisit-if"><a class="header" href="#revisit-if">Revisit If</a></h2>
+<ul>
+<li>A host needs to load modules it was not compiled to know about, which turns composition into discovery and makes the plugin-registry alternative worth reopening.</li>
+<li>The launcher and the editor accumulate enough shared composition logic that duplicating it costs more than extracting it.</li>
+<li>Passing data through the contract becomes the bottleneck for an interaction that is genuinely hot — measured, not suspected.</li>
+</ul>
 
             </main>
 
             <nav class="nav-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="adr/0010-vulkan-without-abstraction-layer.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../adr/0002-c-abi-as-the-inter-module-contract.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
+                    <a rel="next prefetch" href="../adr/0004-module-boundaries.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
 
                 <div style="clear: both"></div>
             </nav>
@@ -219,10 +233,13 @@ SOFTWARE.</p>
     </div>
 
     <nav class="nav-wide-wrapper" aria-label="Page navigation">
-            <a rel="prev" href="adr/0010-vulkan-without-abstraction-layer.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+            <a rel="prev" href="../adr/0002-c-abi-as-the-inter-module-contract.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
             </a>
 
+            <a rel="next prefetch" href="../adr/0004-module-boundaries.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+            </a>
     </nav>
 </div>
 
@@ -234,13 +251,13 @@ SOFTWARE.</p>
 </script>
 
 
-<script src="elasticlunr.min.js"></script>
-<script src="mark.min.js"></script>
-<script src="searcher.js"></script>
+<script src="../elasticlunr.min.js"></script>
+<script src="../mark.min.js"></script>
+<script src="../searcher.js"></script>
 
-<script src="clipboard.min.js"></script>
-<script src="highlight.js"></script>
-<script src="book.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../highlight.js"></script>
+<script src="../book.js"></script>
 
 <script defer src="/shared-content/mdbook/js/admonitions.js"></script>
 

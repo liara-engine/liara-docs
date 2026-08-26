@@ -4,22 +4,22 @@
 <html lang="en" class="sidebar-visible no-js light">
 <head>
 <meta charset="UTF-8">
-<title>License - Liara Engine — Meta Repository</title>
+<title>ADR-0010: Vulkan directly, without a rendering abstraction layer - Liara Engine — Meta Repository</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="theme-color" content="#FFFAFC">
 
 <link rel="icon" type="image/x-icon" href="/shared-content/assets/logo.svg">
-<link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/general.css">
-<link rel="stylesheet" href="css/chrome.css">
-<link rel="stylesheet" href="css/print.css" media="print">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/general.css">
+<link rel="stylesheet" href="../css/chrome.css">
+<link rel="stylesheet" href="../css/print.css" media="print">
 
-<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="../fonts/fonts.css">
 
-<link rel="stylesheet" id="mdbook-highlight-css" href="highlight.css">
-<link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night.css">
-<link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight.css">
+<link rel="stylesheet" id="mdbook-highlight-css" href="../highlight.css">
+<link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night.css">
+<link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight.css">
 
 <link rel="stylesheet" href="/shared-content/tokens/design-tokens.css">
 <link rel="stylesheet" href="/shared-content/navbar/navbar.css">
@@ -68,11 +68,11 @@
 <script defer src="/shared-content/navbar/version-banner.js"></script>
 
 
-<input type="hidden" id="MDBOOK_OUTPUT" value="">
+<input type="hidden" id="MDBOOK_OUTPUT" value="../">
 
 
 <script>
-    var path_to_root = "";
+    var path_to_root = "../";
     var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "navy" : "light";
 </script>
@@ -153,7 +153,7 @@
                 <a href="https://github.com/liara-engine/liara" title="Git repository" aria-label="Git repository">
                     <i id="git-repository-button" class="fa fa-github"></i>
                 </a>
-                <a href="https://github.com/liara/docs/edit/main/docs/docs/LICENSE.md" title="Suggest an edit" aria-label="Suggest an edit">
+                <a href="https://github.com/liara/docs/edit/main/docs/docs/adr/0010-vulkan-without-abstraction-layer.md" title="Suggest an edit" aria-label="Suggest an edit">
                     <i id="git-edit-button" class="fa fa-edit"></i>
                 </a>
             </div>
@@ -187,31 +187,53 @@
 
         <div id="content" class="content">
             <main>
-                <p>MIT License</p>
-<p>Copyright (c) 2026 liara-engine</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the “Software”), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.</p>
+                <h1 id="adr-0010--vulkan-directly-without-a-rendering-abstraction-layer"><a class="header" href="#adr-0010--vulkan-directly-without-a-rendering-abstraction-layer">ADR 0010 — Vulkan Directly, Without a Rendering Abstraction Layer</a></h1>
+<ul>
+<li><strong>Status</strong>: Proposed</li>
+<li><strong>Date</strong>: 2026-08-26</li>
+<li><strong>Deciders</strong>: Antoine</li>
+</ul>
+<blockquote>
+<p>Proposed rather than Accepted: real Vulkan work starts in v0.1 and only a placeholder renderer exists today. Moves to Accepted when v0.1 closes.</p>
+</blockquote>
+<h2 id="context"><a class="header" href="#context">Context</a></h2>
+<p>This is the third engine project I have started, and the graphics API question has been answered three times.</p>
+<p>The first attempt, years ago, was on Windows, and I chose DirectX — partly following Arash Khatami’s Game Engine Series, mostly because on Windows it was the obvious choice. Cross-platform support was not a consideration. That project never got past a sketch.</p>
+<p>The second attempt came after I moved to Arch and discovered an operating system could adapt to me rather than the reverse. I wanted something that ran on Windows and Linux, was modern and actively maintained, performed well, and was actually used professionally. Vulkan met all four better than anything else. That project — Liara’s predecessor — went a long way on it.</p>
+<p>Liara is a reboot of that project, undertaken because the architecture had stopped fitting what I wanted, not because the rendering choice had. I had enjoyed Vulkan and had no reason to reopen the question, so I did not.</p>
+<p>One thing carried across all three attempts: I have little patience for backwards compatibility and legacy support. I find it usually costs more than it returns. It is why the engine targets Vulkan 1.3 and recent GPUs, and why I develop on Arch rather than Debian.</p>
+<h2 id="decision"><a class="header" href="#decision">Decision</a></h2>
+<p>Vulkan 1.3 directly, through Vulkan-Hpp and VMA, as the reference renderer. No abstraction layer over the graphics API and no second backend. A user whose hardware cannot run a modern Vulkan stack is not the target audience.</p>
+<h2 id="alternatives-considered"><a class="header" href="#alternatives-considered">Alternatives Considered</a></h2>
+<p><strong>A rendering abstraction layer</strong> — bgfx, sokol_gfx, wgpu — with Vulkan as one backend among several. I should be straightforward here: these were not weighed at the time. I did not know they existed when the choice was made, and I only learned about them while writing this record.</p>
+<p>Knowing about them now does not change the answer, for a reason worth stating plainly rather than reconstructing as an evaluation I never performed. I build things to understand them from the bottom, and an abstraction layer removes precisely the layer I want to be working in. It would let me draw a triangle in a fraction of the time and teach me nothing about how a triangle gets drawn. Since learning graphics programming is the first of the three reasons this project exists, that is disqualifying regardless of the library’s quality.</p>
+<p>The honest framing: for a project whose goal is to ship a renderer, an abstraction layer is very likely the correct choice. For this project, it defeats the purpose. That is a statement about the project, not about the libraries.</p>
+<p><strong>OpenGL</strong>, or a Vulkan renderer with an OpenGL fallback for older hardware. Rejected on the legacy point above. Supporting old hardware means two rendering paths, two sets of bugs, and design decisions constrained by the weaker one. <code>ARCHITECTURE.md</code> §2.2 already declares broad hardware support a non-goal; this is that non-goal applied.</p>
+<p><strong>DirectX 12</strong>, as in the first attempt. Rejected on portability: Linux is the primary development platform now, and a Windows-only renderer would make the platform I actually use the secondary one.</p>
+<p><strong>Deferring the choice</strong> behind the module’s C interface, and deciding later. Partially real — <code>liara-renderer</code> is a replaceable module, and someone could implement the same interface over another API without touching the rest of the engine. But the interface has to be designed against something, and designing it against Vulkan’s model (explicit synchronisation, command buffers, descriptor sets) is a choice that shapes it whether or not it is acknowledged. Better to say so.</p>
+<h2 id="consequences"><a class="header" href="#consequences">Consequences</a></h2>
+<p>Everything takes longer. Vulkan requires explicit synchronisation, memory management, descriptor handling and swapchain recreation before it draws anything, so the first triangle is weeks of work rather than an afternoon. This is the accepted cost and, for this project, part of the point — but it does mean v0.1 is a large milestone by any measure other than what it displays.</p>
+<p>There is a real risk of stalling in it. This is what happened to the previous project, in the architecture rather than in the rendering, and the mechanism is the same: a task that is harder than it should be is a task that does not get done. Vulkan is legitimately hard, so the milestone structure has to keep producing something visible rather than accumulating infrastructure. That is what <code>ARCHITECTURE.md</code> §3.5 is for.</p>
+<p>Vulkan-Hpp and VMA are themselves abstraction layers, which would sit oddly next to the reasoning above if I had not already done without them. The predecessor project — also called Liara; changing the name would have been more practical, but I like it and how it sounds — was written against raw Vulkan, following Brendan Galea’s series at the start. I have written the allocator, the descriptor handling and the boilerplate by hand, badly, and I know what these libraries are doing on my behalf.</p>
+<p>That is the rule I apply, and it is narrower than “no abstractions”: I allow a library that does better something I have already done myself and still understand. Vulkan-Hpp is the same API with C++ types over a model I know. VMA solves an allocation problem I have solved worse. The same test is why I use the standard library without hesitation — over the years I have reimplemented a fair amount of what it does, sometimes for coursework, sometimes because I did not know it was already there — and why bgfx fails: it would be the first time I used something whose model I had never built.</p>
+<p>Hardware support is narrow and stays narrow. No integrated GPU from before Vulkan 1.3, no fallback, no software path. Accepted.</p>
+<p>The renderer is the largest single module and the one most likely to need rewriting as I learn. The C boundary at least contains that: a rewrite behind the interface does not propagate.</p>
+<h2 id="revisit-if"><a class="header" href="#revisit-if">Revisit If</a></h2>
+<ul>
+<li>Hardware support becomes an actual barrier to someone shipping a game with the engine — which is a v0.6 or later question, not a v0.1 one.</li>
+<li>A second backend becomes necessary for a platform worth supporting, at which point the abstraction question genuinely reopens and should be answered with a new ADR rather than by retrofitting one onto the interface.</li>
+</ul>
 
             </main>
 
             <nav class="nav-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="adr/0010-vulkan-without-abstraction-layer.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../adr/0009-in-house-ecs.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
+                    <a rel="next prefetch" href="../LICENSE.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
 
                 <div style="clear: both"></div>
             </nav>
@@ -219,10 +241,13 @@ SOFTWARE.</p>
     </div>
 
     <nav class="nav-wide-wrapper" aria-label="Page navigation">
-            <a rel="prev" href="adr/0010-vulkan-without-abstraction-layer.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+            <a rel="prev" href="../adr/0009-in-house-ecs.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
             </a>
 
+            <a rel="next prefetch" href="../LICENSE.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+            </a>
     </nav>
 </div>
 
@@ -234,13 +259,13 @@ SOFTWARE.</p>
 </script>
 
 
-<script src="elasticlunr.min.js"></script>
-<script src="mark.min.js"></script>
-<script src="searcher.js"></script>
+<script src="../elasticlunr.min.js"></script>
+<script src="../mark.min.js"></script>
+<script src="../searcher.js"></script>
 
-<script src="clipboard.min.js"></script>
-<script src="highlight.js"></script>
-<script src="book.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../highlight.js"></script>
+<script src="../book.js"></script>
 
 <script defer src="/shared-content/mdbook/js/admonitions.js"></script>
 

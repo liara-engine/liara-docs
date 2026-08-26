@@ -96,7 +96,7 @@
 
 <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
     <div class="sidebar-scrollbox">
-        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html"><strong aria-hidden="true">1.</strong> Liara Engine</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ARCHITECTURE.html"><strong aria-hidden="true">2.</strong> Architecture</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="MODULES.html"><strong aria-hidden="true">3.</strong> Modules</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ROADMAP.html"><strong aria-hidden="true">4.</strong> Roadmap</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="BOOTSTRAP.html"><strong aria-hidden="true">5.</strong> Bootstrap</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="CONTRIBUTING.html"><strong aria-hidden="true">6.</strong> Contributing</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="CODE_STYLE.html"><strong aria-hidden="true">7.</strong> Code Style</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="TOOLING.html"><strong aria-hidden="true">8.</strong> Tooling</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="DOCUMENTATION_PIPELINE.html"><strong aria-hidden="true">9.</strong> Documentation Pipeline</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="LICENSE.html"><strong aria-hidden="true">10.</strong> License</a></span></li></ol>
+        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html"><strong aria-hidden="true">1.</strong> Liara Engine</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ARCHITECTURE.html"><strong aria-hidden="true">2.</strong> Architecture</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="MODULES.html"><strong aria-hidden="true">3.</strong> Modules</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ROADMAP.html"><strong aria-hidden="true">4.</strong> Roadmap</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="BOOTSTRAP.html"><strong aria-hidden="true">5.</strong> Bootstrap</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="CONTRIBUTING.html"><strong aria-hidden="true">6.</strong> Contributing</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="CODE_STYLE.html"><strong aria-hidden="true">7.</strong> Code Style</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="TOOLING.html"><strong aria-hidden="true">8.</strong> Tooling</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="DOCUMENTATION_PIPELINE.html"><strong aria-hidden="true">9.</strong> Documentation Pipeline</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="adr/index.html"><strong aria-hidden="true">10.</strong> Architecture Decision Records</a><a class="chapter-fold-toggle"><div>❱</div></a></span><ol class="section"><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0001-multi-repository-layout.html"><strong aria-hidden="true">10.1.</strong> ADR-0001: Multi-repository layout</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0002-c-abi-as-the-inter-module-contract.html"><strong aria-hidden="true">10.2.</strong> ADR-0002: A C ABI as the inter-module contract</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0003-the-host-composes-modules.html"><strong aria-hidden="true">10.3.</strong> ADR-0003: The host composes modules</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0004-module-boundaries.html"><strong aria-hidden="true">10.4.</strong> ADR-0004: Module boundaries: what stays in the core</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0005-version-encoding-and-compatibility.html"><strong aria-hidden="true">10.5.</strong> ADR-0005: Version encoding and compatibility semantics</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0006-manifest-as-compatibility-source-of-truth.html"><strong aria-hidden="true">10.6.</strong> ADR-0006: manifest.json as the single compatibility source of truth</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0007-cmake-presets-and-vcpkg.html"><strong aria-hidden="true">10.7.</strong> ADR-0007: CMake with presets, and vcpkg in manifest mode</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0008-two-tier-ci.html"><strong aria-hidden="true">10.8.</strong> ADR-0008: Two-tier CI, and reusable workflows</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0009-in-house-ecs.html"><strong aria-hidden="true">10.9.</strong> ADR-0009: An in-house ECS rather than an existing library</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0010-vulkan-without-abstraction-layer.html"><strong aria-hidden="true">10.10.</strong> ADR-0010: Vulkan directly, without a rendering abstraction layer</a></span></li></ol><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="LICENSE.html"><strong aria-hidden="true">11.</strong> License</a></span></li></ol>
     </div>
     <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
         <div class="sidebar-resize-indicator"></div>
@@ -286,24 +286,30 @@ focused on one aspect:</p>
 <p>Documentation of the whole project can be found at
 <a href="https://liara-engine.liara-engine-documentation.workers.dev/">liara-engine.liara-engine-documentation.workers.dev</a>.</p>
 <p>User-facing documentation (tutorials, guides) is hosted at
-TODO: add link when section is ready.</p>
+[TODO]: add link when section is ready.</p>
 <p>For newcomers, the recommended reading order is the sequence above,
 top to bottom.</p>
 <hr>
 <h2 id="project-structure"><a class="header" href="#project-structure">Project Structure</a></h2>
+<p>Liara is a set of independently versioned repositories rather than one tree. Each module owns one concern, exposes it through the shared C ABI, and knows nothing about its siblings.</p>
 <p>The repositories under <a href="https://github.com/liara-engine"><code>liara-engine</code></a>:</p>
 <pre><code>liara-engine/
 ├── liara                  # This repository: launcher, packaging,
 │                          # documentation, compatibility matrix.
-├── liara-interfaces       # C ABI headers shared by all modules.
-├── liara-core             # ECS, math, assets, logger, settings.
+├── liara-interfaces       # The C ABI contract. Header-only.
+│                          # Every module depends on it; it depends on nothing.
+├── liara-core             # ECS, math, logger, settings, event bus, loop primitives.
+├── liara-platform         # Window, input, OS signals, timing (v0.1).
 ├── liara-renderer         # Vulkan reference renderer.
+├── liara-assets           # Asset loading, decoding, lifetime (v0.3).
+├── liara-audio            # Playback and mixing (v0.5).
 ├── liara-editor           # Editor application (post-v1.0).
 ├── liara-physics          # Physics module (post-v1.0).
 ├── docs-shared            # Shared documentation templates.
 ├── liara-docs             # Documentation for the engine.
 └── .github                # Organization-level workflows and templates.
 </code></pre>
+<p>Modules do not compose themselves. The launcher creates each one, negotiates ABI versions, and wires them together; <code>liara-core</code> neither loads nor references any of the others. The consequence worth stating up front is that there is no dependency order to learn between modules — there is only each module’s dependency on the contract.</p>
 <p>The interfaces repository is the contract; everything else
 implements or consumes it. See <a href="https://liara-engine.liara-engine-documentation.workers.dev/liara/latest/book/MODULES"><code>MODULES.md</code></a>
 for the full picture.</p>
@@ -357,7 +363,7 @@ and
 <tr><td>Code formatting</td><td>clang-format</td></tr>
 <tr><td>Release automation</td><td>release-please</td></tr>
 <tr><td>Platforms</td><td>Linux (Arch primary, Ubuntu CI), Windows 11</td></tr>
-<tr><td>Compilers</td><td>GCC 14+, Clang 18+, MSVC 2022 17.6+</td></tr>
+<tr><td>Compilers</td><td>GCC 14+, Clang 20+, MSVC 2022 17.6+</td></tr>
 </tbody>
 </table>
 </div>
@@ -374,7 +380,7 @@ discussed before code is written.</li>
 be opened directly without prior discussion.</li>
 </ul>
 <p>The project follows the <a href="https://www.contributor-covenant.org/">Contributor Covenant</a>
-code of conduct (a copy lives in <code>CODE_OF_CONDUCT.md</code>) [TODO].</p>
+code of conduct (a copy lives in <a href="CODE_OF_CONDUCT.html">CODE_OF_CONDUCT.md</a>).</p>
 <hr>
 <h2 id="license"><a class="header" href="#license">License</a></h2>
 <p>Liara is released under the <strong>MIT License</strong>. See
