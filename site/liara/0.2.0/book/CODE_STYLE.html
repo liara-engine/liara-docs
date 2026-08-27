@@ -1,0 +1,997 @@
+<!DOCTYPE HTML>
+
+
+<html lang="en" class="sidebar-visible no-js light">
+<head>
+<meta charset="UTF-8">
+<title>Code Style - Liara Engine — Meta Repository</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="theme-color" content="#FFFAFC">
+
+<link rel="icon" type="image/x-icon" href="/shared-content/assets/logo.svg">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/general.css">
+<link rel="stylesheet" href="css/chrome.css">
+<link rel="stylesheet" href="css/print.css" media="print">
+
+<link rel="stylesheet" href="fonts/fonts.css">
+
+<link rel="stylesheet" id="mdbook-highlight-css" href="highlight.css">
+<link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night.css">
+<link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight.css">
+
+<link rel="stylesheet" href="/shared-content/tokens/design-tokens.css">
+<link rel="stylesheet" href="/shared-content/navbar/navbar.css">
+<link rel="stylesheet" href="/shared-content/mdbook/css/custom.css">
+
+
+
+<script src="/shared-content/mdbook/js/mermaid.min.js"></script>
+<script src="/shared-content/mdbook/js/mermaid-init.js"></script>
+
+</head>
+<body class="sidebar-visible">
+<div id="mdbook-body-container">
+
+<script>
+(function () {
+    try {
+        var t = localStorage.getItem("liara-theme");
+        if (t === "light" || t === "dark") {
+            document.documentElement.setAttribute("data-liara-theme", t);
+        }
+        if (localStorage.getItem("liara-a11y-dyslexia") === "true") {
+            document.documentElement.setAttribute("data-liara-a11y-dyslexia", "true");
+        }
+        // Bridge to mdBook's own theme system: align mdBook's `class` on <html>
+        // with our chosen theme, so its native styles also follow.
+        var mdbookTheme = (t === "dark") ? "navy"
+                       : (t === "light") ? "light"
+                       : null;
+        if (mdbookTheme) {
+            document.documentElement.classList.remove(
+                "light", "rust", "coal", "navy", "ayu");
+            document.documentElement.classList.add(mdbookTheme);
+        }
+    } catch (e) { /* localStorage unavailable, fall back to defaults */ }
+})();
+</script>
+
+<shared-navbar></shared-navbar>
+
+<script src="/shared-content/navbar/navbar.config.js"></script>
+<script src="/shared-content/mdbook/shared-navbar.js"></script>
+<script defer src="/shared-content/navbar/navbar.js"></script>
+
+<link rel="stylesheet" href="/shared-content/navbar/version-banner.css">
+<script defer src="/shared-content/navbar/version-banner.js"></script>
+
+
+<input type="hidden" id="MDBOOK_OUTPUT" value="">
+
+
+<script>
+    var path_to_root = "";
+    var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "navy" : "light";
+</script>
+
+<script>
+    try {
+        var theme = localStorage.getItem('mdbook-theme');
+        var sidebar = localStorage.getItem('mdbook-sidebar');
+
+        if (theme.startsWith('"') && theme.endsWith('"')) {
+            localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+        }
+
+        if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+            localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+        }
+    } catch (e) { }
+</script>
+
+<input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+<nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+    <div class="sidebar-scrollbox">
+        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html">Liara Engine</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ARCHITECTURE.html"><strong aria-hidden="true">1.</strong> Architecture</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="MODULES.html"><strong aria-hidden="true">2.</strong> Modules</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ROADMAP.html"><strong aria-hidden="true">3.</strong> Roadmap</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="BOOTSTRAP.html"><strong aria-hidden="true">4.</strong> Bootstrap</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="CONTRIBUTING.html"><strong aria-hidden="true">5.</strong> Contributing</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="CODE_STYLE.html"><strong aria-hidden="true">6.</strong> Code Style</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="TOOLING.html"><strong aria-hidden="true">7.</strong> Tooling</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="adr/index.html"><strong aria-hidden="true">8.</strong> Architecture Decision Records</a><a class="chapter-fold-toggle"><div>❱</div></a></span><ol class="section"><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0001-multi-repository-layout.html"><strong aria-hidden="true">8.1.</strong> ADR-0001: Multi-repository layout</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0002-c-abi-as-the-inter-module-contract.html"><strong aria-hidden="true">8.2.</strong> ADR-0002: A C ABI as the inter-module contract</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0003-the-host-composes-modules.html"><strong aria-hidden="true">8.3.</strong> ADR-0003: The host composes modules</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0004-module-boundaries.html"><strong aria-hidden="true">8.4.</strong> ADR-0004: Module boundaries: what stays in the core</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0005-version-encoding-and-compatibility.html"><strong aria-hidden="true">8.5.</strong> ADR-0005: Version encoding and compatibility semantics</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0006-manifest-as-compatibility-source-of-truth.html"><strong aria-hidden="true">8.6.</strong> ADR-0006: manifest.json as the single compatibility source of truth</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0007-cmake-presets-and-vcpkg.html"><strong aria-hidden="true">8.7.</strong> ADR-0007: CMake with presets, and vcpkg in manifest mode</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0008-two-tier-ci.html"><strong aria-hidden="true">8.8.</strong> ADR-0008: Two-tier CI, and reusable workflows</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0009-in-house-ecs.html"><strong aria-hidden="true">8.9.</strong> ADR-0009: An in-house ECS rather than an existing library</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0010-vulkan-without-abstraction-layer.html"><strong aria-hidden="true">8.10.</strong> ADR-0010: Vulkan directly, without a rendering abstraction layer</a></span></li></ol><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="LICENSE.html">License</a></span></li></ol>
+    </div>
+    <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+        <div class="sidebar-resize-indicator"></div>
+    </div>
+</nav>
+
+<script>
+    var sidebarScrollbox = document.querySelector('#mdbook-sidebar .sidebar-scrollbox');
+    sidebarScrollbox.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') {
+            sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+        }
+    }, { passive: true });
+    var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+    sessionStorage.removeItem('sidebar-scroll');
+    if (sidebarScrollTop) {
+        sidebarScrollbox.scrollTop = sidebarScrollTop;
+    } else {
+        var activeSection = document.querySelector('#mdbook-sidebar .active');
+        if (activeSection) {
+            activeSection.scrollIntoView({ block: 'center' });
+        }
+    }
+</script>
+
+<div id="page-wrapper" class="page-wrapper">
+
+    <div class="page">
+        <div id="mdbook-menu-bar-hover-placeholder"></div>
+        <div id="mdbook-menu-bar" class="menu-bar sticky">
+            <div class="left-buttons">
+                <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                    <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                </label>
+                <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list" style="display: none">
+                    <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                </button>
+                <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu" style="display: none">
+                    <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                    <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                    <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                    <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                    <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                    <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                </ul>
+                <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                    <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                </button>
+            </div>
+
+            <h1 class="menu-title">Liara Engine — Meta Repository</h1>
+
+            <div class="right-buttons">
+                <a href="https://github.com/liara-engine/liara" title="Git repository" aria-label="Git repository">
+                    <i id="git-repository-button" class="fa fa-github"></i>
+                </a>
+                <a href="https://github.com/liara/docs/edit/main/docs/docs/CODE_STYLE.md" title="Suggest an edit" aria-label="Suggest an edit">
+                    <i id="git-edit-button" class="fa fa-edit"></i>
+                </a>
+            </div>
+        </div>
+
+        <div id="mdbook-search-wrapper" class="hidden">
+            <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                <div class="search-wrapper">
+                    <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                    <div class="spinner-wrapper">
+                        <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                    </div>
+                </div>
+            </form>
+            <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                <ul id="mdbook-searchresults">
+                </ul>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById('mdbook-sidebar-toggle-anchor').addEventListener('change', function () {
+                document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', this.checked.toString());
+                document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', (!this.checked).toString());
+                Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function (link) {
+                    link.setAttribute('tabIndex', this.checked ? 0 : -1);
+                }.bind(this));
+            });
+        </script>
+
+        <div id="content" class="content">
+            <main>
+                <h1 id="code-style"><a class="header" href="#code-style">Code Style</a></h1>
+<blockquote>
+<p>The complete code style reference for Liara. Style rules for C interfaces are in <a href="../liara-interfaces/INTERFACES.html"><code>INTERFACES.md</code></a>; this document covers the <strong>C++ implementation</strong> behind those interfaces, plus the build-system rules that apply uniformly.</p>
+</blockquote>
+<hr>
+<h2 id="1-philosophy"><a class="header" href="#1-philosophy">1. Philosophy</a></h2>
+<p>Style rules exist to remove decisions that don’t matter, so that attention goes to decisions that do. Two developers arguing about brace placement are two developers not solving the problem.</p>
+<p>That goal has a consequence people usually skip: a rule that has to be <em>maintained</em> is itself a decision that keeps coming back. A style document that mirrors every line of every configuration file across every repository becomes a second source of truth that drifts from the first, and every drift is a small decision to re-make. So this document deliberately does not do that.</p>
+<p>It is organized in three tiers, and the tier tells you how binding a rule is:</p>
+<p><strong>Invariants</strong> — rules that hold in every repository, forever, because breaking them breaks something real: an ABI, a build, a consumer. They are stated here, they are argued for here, and a module does not opt out of them. There are few of them, and that is the point.</p>
+<p><strong>Baselines</strong> — the shared <code>.clang-format</code> and <code>.clang-tidy</code> files. They are the starting point every repository is created from and the default answer to “how should this look”. They are reproduced here in outline, with the reasoning behind the choices that are not obvious.</p>
+<p><strong>Local adaptations</strong> — a module’s deviations from its baseline. They are expected, they are legitimate, and <strong>they are not tracked in this document</strong>. A renderer that disables the magic-number check because <code>vec3(1, 0, 0)</code> is not a magic number is not violating the style: it is applying the reasoning behind the style to its own material.</p>
+<p>The practical test, when in doubt: <em>would another module have to know about his?</em> If yes, it is an invariant and belongs here. If no, it belongs in that module’s configuration file, with a comment saying why.</p>
+<p>Where this document and a tool’s default disagree, this document wins and the tool is configured accordingly. Where this document and a module’s configuration file disagree about a non-invariant, the file wins — and this document is where you look to find out which of the two situations you are in.</p>
+<hr>
+<h2 id="2-the-invariants"><a class="header" href="#2-the-invariants">2. The Invariants</a></h2>
+<p>Six rules that no module adapts.</p>
+<p><strong>1. The C boundary follows <code>INTERFACES.md</code>, not this document.</strong> Lowercase underscore-separated identifiers, module prefix, <code>_t</code> suffix on typedefs. Non-negotiable because those identifiers are the ABI: renaming one is a breaking change for every consumer, in every language.</p>
+<p><strong>2. The C++ implementation is invisible from outside.</strong> Whatever a module does internally — naming, layout, idioms — no other module sees it. This is what makes local adaptation safe in the first place.</p>
+<p><strong>3. Nothing that is not plain data crosses the boundary.</strong> No exception, no <code>std::</code> type, no C++ object, no ownership implied by a raw pointer without a documented <code>destroy</code>.</p>
+<p><strong>4. Formatting is mechanical, never manual.</strong> Every repository has a <code>.clang-format</code>, CI runs it with <code>--dry-run --Werror</code>, and a formatting discussion in a review is a bug in the configuration, not in the pull request. The rules a module chooses are its own; <em>having</em> them and enforcing them is not optional.</p>
+<p><strong>5. A disabled check carries its reason, in the file.</strong> Any check a module removes from its baseline gets a comment above it explaining what noise it produced. Not for bureaucracy: for the person who six months later wonders whether the check can be re-enabled. This is the mechanism that lets this document stop tracking the diffs.</p>
+<p><strong>6. Ownership is explicit, and raw ownership lives only at the boundary.</strong> Inside a module, ownership is expressed with smart pointers and RAII. The one exception is the <code>create</code>/<code>destroy</code> pair of the C shim, where the handle’s lifetime is the caller’s to manage and no smart pointer can cross. See section 9.</p>
+<h3 id="two-style-boundaries"><a class="header" href="#two-style-boundaries">Two Style Boundaries</a></h3>
+<p>The project uses two distinct style regimes, separated by the C interface boundary.</p>
+<p><strong>At the C interface boundary</strong>, the rules in <a href="../liara-interfaces/INTERFACES.html"><code>INTERFACES.md</code></a> apply: lowercase underscore-separated identifiers, prefixed by module, with the rules laid out in that document. This style is non-negotiable and is the convention of the broader C ecosystem (Vulkan, SDL, libcurl, POSIX).</p>
+<p><strong>Inside the C++ implementation of any module</strong>, this document’s rules apply: PascalCase for types and methods, m_-prefixed members, and the conventions detailed below. This style is internal to each module and other modules never see it.</p>
+<p>The transition between the two regimes happens at the wrapper layer where C++ implementation calls or implements the C interface. This layer typically looks like:</p>
+<pre><code class="language-cpp">// In renderer/src/c_api.cpp - the wrapper exposing the C interface
+extern "C" liara_result liara_renderer_create(
+    const liara_renderer_create_info_t* create_info,
+    const liara_allocator_t* allocator,
+    liara_renderer_handle** out_handle)
+{
+    try {
+        auto* renderer = new Liara::Renderer::Renderer(*create_info, allocator);
+        *out_handle = reinterpret_cast&lt;liara_renderer_handle*&gt;(renderer);
+        return LIARA_RESULT_SUCCESS;
+    }
+    catch (const std::bad_alloc&amp;) {
+        return LIARA_RESULT_OUT_OF_MEMORY;
+    }
+    catch (const std::exception&amp;) {
+        return LIARA_RESULT_INTERNAL_ERROR;
+    }
+}
+</code></pre>
+<p>Wrapper code is the only place where both styles coexist. Wrappers are kept thin: they translate types, catch exceptions, and forward. They contain no business logic.</p>
+<hr>
+<h2 id="3-clang-format-baseline"><a class="header" href="#3-clang-format-baseline">3. clang-format Baseline</a></h2>
+<p>A repository’s <code>.clang-format</code> is the authoritative statement of its formatting, and the file itself is short enough to read. What follows is the <strong>baseline</strong> every repository starts from, and the reasoning behind the choices that are not self-evident. Options whose value is obvious from the name are not discussed.</p>
+<p><code>liara-interfaces</code> starts from a variant of this baseline adapted to C: no C++-specific options, and include categories reflecting a header that must compile standalone.</p>
+<details>
+<summary>clang-format baseline</summary>
+<pre><code class="language-yaml">---
+# Liara Engine - clang-format configuration
+# See docs/CODE_STYLE.md for explanations of each section.
+
+BasedOnStyle: LLVM
+Language: Cpp
+Standard: c++20
+
+# === INDENTATION &amp; SPACING ===
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ContinuationIndentWidth: 4
+ConstructorInitializerIndentWidth: 4
+IndentCaseLabels: true
+IndentPPDirectives: BeforeHash
+AccessModifierOffset: -4
+
+# === LINE LENGTH ===
+ColumnLimit: 120
+ReflowComments: Always
+AlignTrailingComments: true
+SpacesBeforeTrailingComments: 2
+
+# === BRACES ===
+BreakBeforeBraces: Custom
+BraceWrapping:
+    AfterCaseLabel: false
+    AfterClass: true
+    AfterControlStatement: Never
+    AfterEnum: true
+    AfterFunction: false
+    AfterNamespace: true
+    AfterStruct: true
+    AfterUnion: true
+    AfterExternBlock: false
+    BeforeCatch: true
+    BeforeElse: true
+    BeforeWhile: true
+    IndentBraces: false
+    SplitEmptyFunction: false
+    SplitEmptyRecord: false
+    SplitEmptyNamespace: true
+
+# === SPACING ===
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: true
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: true
+SpacesInAngles: Never
+SpacesInContainerLiterals: false
+SpacesInSquareBrackets: false
+
+SpacesInParens: Custom
+SpacesInParensOptions:
+    InEmptyParentheses: false
+    InCStyleCasts: false
+
+# === POINTERS &amp; REFERENCES ===
+PointerAlignment: Left
+ReferenceAlignment: Left
+
+# === INCLUDES ===
+SortIncludes: CaseInsensitive
+IncludeBlocks: Regroup
+IncludeCategories:
+    # 0. Special headers that must come first
+    - Regex: '^&lt;SDL\.h&gt;$'
+      Priority: 0
+      SortPriority: 0
+    # 1. Module's own header (corresponding .h for a .cpp)
+    - Regex: '^"[^/]+\.h"$'
+      Priority: 1
+      SortPriority: 1
+    # 2. Other headers from the same module
+    - Regex: '^"[^"]+/[^"]+\.h"$'
+      Priority: 2
+      SortPriority: 2
+    # 3. Liara public interface headers
+    - Regex: '^&lt;liara/.*&gt;$'
+      Priority: 3
+      SortPriority: 3
+    # 4. Vulkan, SDL, ImGui, GLM and other third-party with C-style includes
+    - Regex: '^&lt;(vulkan|SDL|imgui|glm|cgltf)/.*&gt;$'
+      Priority: 4
+      SortPriority: 4
+    # 5. C++ standard library
+    - Regex: '^&lt;[a-z_]+&gt;$'
+      Priority: 5
+      SortPriority: 5
+    # 6. C standard library
+    - Regex: '^&lt;[a-z_]+\.h&gt;$'
+      Priority: 6
+      SortPriority: 6
+    # 7. Other (catch-all)
+    - Regex: '.*'
+      Priority: 7
+      SortPriority: 7
+
+# === ALIGNMENT ===
+AlignAfterOpenBracket: true
+AlignArrayOfStructures: Right
+AlignConsecutiveAssignments: false
+AlignConsecutiveBitFields: Consecutive
+AlignConsecutiveDeclarations: false
+AlignConsecutiveMacros: Consecutive
+AlignEscapedNewlines: Left
+AlignOperands: Align
+
+# === BREAK / WRAP ===
+BreakAfterReturnType: Automatic
+PenaltyReturnTypeOnItsOwnLine: 100000
+AlwaysBreakBeforeMultilineStrings: false
+AlwaysBreakTemplateDeclarations: Yes
+BinPackArguments: false
+BinPackParameters: false
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeConceptDeclarations: Always
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializers: BeforeComma
+BreakInheritanceList: BeforeComma
+BreakStringLiterals: true
+PackConstructorInitializers: Never
+
+# === LAMBDA ===
+AllowShortLambdasOnASingleLine: All
+LambdaBodyIndentation: Signature
+
+# === CONTROL FLOW ===
+AllowShortBlocksOnASingleLine: Always
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortEnumsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+AllowShortLoopsOnASingleLine: true
+
+# === EMPTY LINES ===
+EmptyLineAfterAccessModifier: Never
+EmptyLineBeforeAccessModifier: LogicalBlock
+KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep: 1
+SeparateDefinitionBlocks: Always
+
+# === MISC ===
+CompactNamespaces: false
+FixNamespaceComments: true
+NamespaceIndentation: All
+SortUsingDeclarations: true
+</code></pre>
+</details>
+<h3 id="rationale-for-the-notable-choices"><a class="header" href="#rationale-for-the-notable-choices">Rationale for the Notable Choices</a></h3>
+<p><strong><code>ColumnLimit: 120</code></strong> — long enough to avoid frequent wrapping in modern code (templates and namespaced types are verbose), short enough to allow side-by-side viewing on a typical monitor.</p>
+<p><strong><code>IndentWidth: 4</code>, <code>UseTab: Never</code></strong> — four-space indentation, spaces only. Tabs cause inconsistency across editors with different tab widths. Spaces always render the same.</p>
+<p><strong>Custom braces (Allman-ish for types, K&amp;R for functions/control)</strong> — classes, structs, enums, and namespaces get their opening brace on a new line; functions and control statements keep the opening brace on the same line. This matches the convention used by the previous engine and is consistent with widely-used styles like Microsoft’s.</p>
+<p><strong><code>PointerAlignment: Left</code>, <code>ReferenceAlignment: Left</code></strong> — <code>Type* var</code> and <code>Type&amp; var</code>, not <code>Type *var</code>. The <code>*</code> and <code>&amp;</code> are part of the type, not the variable.</p>
+<p><strong><code>IncludeBlocks: Regroup</code> with explicit categories</strong> — includes are sorted into well-defined groups, separated by blank lines. This prevents merge conflicts on includes and makes it obvious where each header comes from.</p>
+<p><strong><code>BinPackArguments: false</code>, <code>BinPackParameters: false</code></strong> — when arguments don’t fit on one line, each goes on its own line. This is slightly more verbose but produces clean, readable diffs when an argument is added or removed.</p>
+<h3 id="adapting-the-baseline"><a class="header" href="#adapting-the-baseline">Adapting the Baseline</a></h3>
+<p>A module may change any of this. The two changes most likely to be justified are <code>IncludeCategories</code>, which depends on which third-party libraries the module actually includes, and <code>ColumnLimit</code>, if a module’s material genuinely reads better wider or narrower. Everything else is more likely to be a preference than a need — which does not make it wrong, only worth a moment’s thought.</p>
+<hr>
+<h2 id="4-clang-tidy-baseline"><a class="header" href="#4-clang-tidy-baseline">4. clang-tidy Baseline</a></h2>
+<p>clang-tidy is where the difference between a baseline and a rule matters most, because the useful set of checks genuinely depends on what a module does.</p>
+<details>
+<summary>clang-tidy baseline</summary>
+<pre><code class="language-yaml">---
+Checks: &gt;
+    bugprone-*,
+    -bugprone-easily-swappable-parameters,
+    -bugprone-narrowing-conversions,
+    cert-*,
+    clang-analyzer-*,
+    concurrency-*,
+    cppcoreguidelines-*,
+    -cppcoreguidelines-avoid-magic-numbers,
+    -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+    -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+    -cppcoreguidelines-pro-type-reinterpret-cast,
+    -cppcoreguidelines-pro-type-union-access,
+    -cppcoreguidelines-non-private-member-variables-in-classes,
+    -cppcoreguidelines-avoid-non-const-global-variables,
+    misc-*,
+    -misc-non-private-member-variables-in-classes,
+    modernize-*,
+    -modernize-use-trailing-return-type,
+    -modernize-avoid-c-arrays,
+    performance-*,
+    portability-*,
+    readability-*,
+    -readability-magic-numbers,
+    -readability-identifier-length,
+    -clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling
+
+WarningsAsErrors: &gt;
+    *,
+    -readability-identifier-naming,
+    -clang-diagnostic-deprecated-declaration,
+    -readability-magic-numbers,
+
+HeaderFilterRegex: '^(src|include)/.*\.(h|hpp|tpp)$'
+
+CheckOptions:
+    -   key: readability-identifier-naming.ClassCase
+        value: CamelCase
+    -   key: readability-identifier-naming.StructCase
+        value: CamelCase
+    -   key: readability-identifier-naming.EnumCase
+        value: CamelCase
+    -   key: readability-identifier-naming.UnionCase
+        value: CamelCase
+    -   key: readability-identifier-naming.NamespaceCase
+        value: CamelCase
+    -   key: readability-identifier-naming.FunctionCase
+        value: CamelCase
+    -   key: readability-identifier-naming.MethodCase
+        value: CamelCase
+    -   key: readability-identifier-naming.MemberCase
+        value: CamelCase
+    -   key: readability-identifier-naming.MemberPrefix
+        value: 'm_'
+    -   key: readability-identifier-naming.PrivateMemberCase
+        value: CamelCase
+    -   key: readability-identifier-naming.PrivateMemberPrefix
+        value: 'm_'
+    -   key: readability-identifier-naming.ProtectedMemberCase
+        value: CamelCase
+    -   key: readability-identifier-naming.ProtectedMemberPrefix
+        value: 'm_'
+    -   key: readability-identifier-naming.PublicMemberCase
+        value: CamelCase
+    -   key: readability-identifier-naming.PublicMemberPrefix
+        value: 'm_'
+    -   key: readability-identifier-naming.VariableCase
+        value: camelBack
+    -   key: readability-identifier-naming.ParameterCase
+        value: camelBack
+    -   key: readability-identifier-naming.ConstantCase
+        value: UPPER_CASE
+    -   key: readability-identifier-naming.GlobalConstantCase
+        value: UPPER_CASE
+    -   key: readability-identifier-naming.LocalConstantCase
+        value: camelBack
+    -   key: readability-identifier-naming.ConstantParameterCase
+        value: camelBack
+    -   key: readability-identifier-naming.EnumConstantCase
+        value: CamelCase
+    -   key: readability-identifier-naming.StaticConstantCase
+        value: UPPER_CASE
+    -   key: readability-identifier-naming.MacroDefinitionCase
+        value: UPPER_CASE
+    -   key: readability-identifier-naming.TemplateParameterCase
+        value: CamelCase
+    -   key: readability-identifier-naming.TypeAliasCase
+        value: CamelCase
+    -   key: readability-identifier-naming.TypedefCase
+        value: CamelCase
+</code></pre>
+</details>
+<h3 id="two-baselines"><a class="header" href="#two-baselines">Two baselines</a></h3>
+<p><strong>The C++ baseline</strong>, used by every repository containing C++, enables broad families — <code>bugprone-*</code>, <code>cert-*</code>, <code>clang-analyzer-*</code>, <code>concurrency-*</code>, <code>cppcoreguidelines-*</code>, <code>misc-*</code>, <code>modernize-*</code>, <code>performance-*</code>, <code>portability-*</code>, <code>readability-*</code> — then subtracts the ones that produce noise in this project’s material. It carries a <code>CheckOptions</code> block encoding the naming table of section 5.</p>
+<p><strong>The C baseline</strong>, used by <code>liara-interfaces</code>, starts from <code>-*</code> and adds back the same families minus everything that assumes C++ (<code>modernize-use-using</code>, <code>use-nullptr</code>, <code>use-override</code>, <code>use-equals-default</code>, <code>concat-nested-namespaces</code>, and the <code>cppcoreguidelines-*</code> family as a whole). Its <code>CheckOptions</code> block encodes the C naming rules of <code>INTERFACES.md</code>: the <code>liara_</code> prefix, the <code>_t</code> suffix, <code>LIARA_</code> and <code>UPPER_CASE</code> for macros and enum constants.</p>
+<h3 id="naming-is-reported-not-enforced"><a class="header" href="#naming-is-reported-not-enforced">Naming is reported, not enforced</a></h3>
+<p>In both baselines, <code>readability-identifier-naming</code> is deliberately excluded from <code>WarningsAsErrors</code>. It runs and it reports, but it does not fail a build.</p>
+<p>This is a considered choice rather than an oversight. Naming violations are never silent corruption — you can see them in the diff — and the check has enough edge cases (the C shims being the obvious one: C-named functions defined in a C++ translation unit, which violate the C++ options by construction) that making it fatal would mean scattering <code>NOLINT</code> to satisfy a tool rather than a reader. Everything else in the baseline <em>is</em> fatal, because everything else catches something a reviewer plausibly misses.</p>
+<h3 id="why-these-checks-are-disabled"><a class="header" href="#why-these-checks-are-disabled">Why these checks are disabled</a></h3>
+<p><code>bugprone-easily-swappable-parameters</code> is disabled because it produces too many false positives in geometric code (e.g., <code>(x, y, z)</code> parameters where the order is inherent to the math).</p>
+<p><code>bugprone-narrowing-conversions</code> is disabled because narrowing conversions are common at the renderer/GPU boundary (uploading double-precision world coordinates as floats) and adding explicit casts everywhere produces noise without catching real bugs.</p>
+<p><code>cppcoreguidelines-avoid-magic-numbers</code> and the corresponding readability check are disabled because in graphics code, many constants are intrinsically meaningful (<code>vec3(1, 0, 0)</code> for the X axis) and naming them adds noise rather than clarity.</p>
+<p><code>modernize-use-trailing-return-type</code> is disabled because trailing return types (<code>auto foo() -&gt; int</code>) are a stylistic choice not universally agreed-on, and consistency with the broader C++ idiom is preferred.</p>
+<p><code>modernize-avoid-c-arrays</code> is disabled because C arrays are required in some interface contexts (POD structs that cross to C must use C arrays, not <code>std::array</code>).</p>
+<p><code>cppcoreguidelines-non-private-member-variables-in-classes</code> and the matching <code>misc</code> check are disabled because POD-style structs with public members are the right tool for plain data, and the check doesn’t distinguish them from real classes.</p>
+<p>The magic-number checks deserve a note of their own, because they are the clearest example of what this section is about. They are disabled in the baseline because graphics and math code is full of constants that are meaningful as written — <code>vec3(1, 0, 0)</code> is the X axis, and naming it <code>X_AXIS_UNIT_VECTOR</code> makes the line worse. That reasoning is <em>stronger</em> in the renderer than anywhere else, and weaker in, say, a settings parser, where an unexplained <code>4096</code> probably does deserve a name. A module that re-enables them is applying the same judgment to different material, not breaking a rule.</p>
+<h3 id="adapting-the-baseline-1"><a class="header" href="#adapting-the-baseline-1">Adapting the baseline</a></h3>
+<p>Three things are expected to differ between modules, and none of them requires a change to this document:</p>
+<ul>
+<li><strong><code>HeaderFilterRegex</code></strong>, which depends on the repository’s directory layout.</li>
+<li><strong>Checks subtracted</strong> because a module’s material makes them noisy. This is the common case, and invariant 5 applies: the removal carries its reason in the file.</li>
+<li><strong><code>CheckOptions</code> beyond naming</strong>, tuned to a module’s idioms.</li>
+</ul>
+<p>Two things are not adapted: the naming <code>CheckOptions</code> (they encode section 5 and <code>INTERFACES.md</code>, which are invariants), and the fact that <code>WarningsAsErrors</code> is <code>*</code> minus explicit exceptions rather than an opt-in list. A module that wants a check to be non-fatal names it, so the exception is visible.</p>
+<hr>
+<h2 id="5-c-naming-conventions"><a class="header" href="#5-c-naming-conventions">5. C++ Naming Conventions</a></h2>
+<p>The table below is the C++ naming convention, encoded in the <code>CheckOptions</code> block of the C++ clang-tidy baseline. clang-tidy reports deviations as warnings rather than errors, for the reasons given in section 4; the table is the reference, and review is the backstop.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Identifier kind</th><th>Convention</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Class, struct, enum, union</td><td>CamelCase</td><td><code>Renderer</code>, <code>Transform</code></td></tr>
+<tr><td>Namespace</td><td>CamelCase</td><td><code>Liara::Graphics</code></td></tr>
+<tr><td>Function, method</td><td>CamelCase</td><td><code>CreateInstance</code>, <code>GetSize</code></td></tr>
+<tr><td>Local variable</td><td>camelBack</td><td><code>frameCount</code>, <code>vertexBuffer</code></td></tr>
+<tr><td>Function parameter</td><td>camelBack</td><td><code>deltaTime</code>, <code>windowHandle</code></td></tr>
+<tr><td>Member variable</td><td>m_CamelCase</td><td><code>m_Device</code>, <code>m_Pipeline</code></td></tr>
+<tr><td>Static constant</td><td>UPPER_CASE</td><td><code>MAX_FRAMES_IN_FLIGHT</code></td></tr>
+<tr><td>Global constant</td><td>UPPER_CASE</td><td><code>DEFAULT_BUFFER_SIZE</code></td></tr>
+<tr><td>Local constant</td><td>camelBack</td><td><code>maxRetries</code>, <code>defaultColor</code></td></tr>
+<tr><td>Constant function parameter</td><td>camelBack</td><td><code>maxRetries</code>, <code>defaultColor</code></td></tr>
+<tr><td>Macro</td><td>UPPER_CASE</td><td><code>LIARA_ASSERT</code></td></tr>
+<tr><td>Enum value</td><td>CamelCase</td><td><code>LightType::Directional</code></td></tr>
+<tr><td>Template parameter</td><td>CamelCase</td><td><code>TComponent</code>, <code>TView</code></td></tr>
+<tr><td>Type alias / typedef</td><td>CamelCase</td><td><code>EntityHandle</code>, <code>MeshPtr</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>This style follows the Unreal Engine convention (PascalCase for types and methods, m_-prefix for members) and is consistent with the previous engine’s style. The choice over Google-style or STL-style is deliberate: when working with Vulkan-Hpp (which uses camelCase), having the engine’s own code visually distinct prevents mental context switches.</p>
+<h3 id="file-names"><a class="header" href="#file-names">File Names</a></h3>
+<p>Source files use the same name as their primary type, except for ABI shim files, which are named after the module (<code>renderer.cpp</code> for the C interface of the renderer). The extension is <code>.h</code> for headers, <code>.cpp</code> for implementation, and <code>.tpp</code> for template implementation files.</p>
+<pre><code>// Renderer class
+Renderer.h
+Renderer.cpp
+
+// Core ABI shim
+core.cpp
+
+// Logger template implementation
+Logger.h
+Logger.tpp
+</code></pre>
+<h3 id="namespaces"><a class="header" href="#namespaces">Namespaces</a></h3>
+<p>The top-level namespace is <code>Liara</code>. Each module nests under its own sub-namespace:</p>
+<pre><code class="language-cpp">namespace Liara::Core { /* ECS, math, settings, etc. */ }
+namespace Liara::Graphics { /* renderer internals */ }
+namespace Liara::Physics { /* (post-v1.0) */ }
+</code></pre>
+<p>Within a module, sub-namespaces group related code:</p>
+<pre><code class="language-cpp">namespace Liara::Core::Ecs { /* Entity, Component, World */ }
+namespace Liara::Core::Math { /* Vector, Matrix, Quaternion */ }
+namespace Liara::Graphics::Vulkan { /* Vulkan-specific helpers */ }
+</code></pre>
+<p>The <code>using namespace</code> directive is forbidden at file scope and at namespace scope; it is allowed inside function bodies for short, local readability gains.</p>
+<hr>
+<h2 id="6-file-organization"><a class="header" href="#6-file-organization">6. File Organization</a></h2>
+<h3 id="header-structure"><a class="header" href="#header-structure">Header Structure</a></h3>
+<p>Every header follows this template:</p>
+<pre><code class="language-cpp">/**
+ * @file Renderer.h
+ * @brief One-line description of the file's purpose.
+ *
+ * Optional longer description providing context, design notes, or
+ * usage examples.
+ */
+#pragma once
+
+// === System and standard library includes ===
+#include &lt;cstdint&gt;
+#include &lt;memory&gt;
+
+// === Third-party includes ===
+#include &lt;vulkan/vulkan.hpp&gt;
+
+// === Liara interface includes ===
+#include &lt;liara/renderer/renderer.h&gt;
+
+// === Module-internal includes ===
+#include "Device.h"
+#include "Pipeline.h"
+
+namespace Liara::Graphics
+{
+    /**
+     * @class Renderer
+     * @brief Brief description.
+     *
+     * Detailed description.
+     */
+    class Renderer
+    {
+    public:
+        // Public interface here.
+
+    private:
+        // Private members here.
+    };
+}
+</code></pre>
+<p>The order is: file-level docstring, <code>#pragma once</code>, includes (in the configured groups), namespace, type declarations.</p>
+<h3 id="implementation-structure"><a class="header" href="#implementation-structure">Implementation Structure</a></h3>
+<p>The ABI shim is the only place in a module where C and C++ meet. It lives in a file named after the module — <code>src/renderer.cpp</code> for <code>liara-renderer</code> — and contains nothing but the translation between the two:</p>
+<pre><code class="language-cpp">#include &lt;liara/renderer/renderer.h&gt;
+
+#include "renderer/Renderer.hpp"
+
+extern "C" {
+
+liara_result_t liara_renderer_create(const liara_renderer_create_info_t* createInfo,
+                                     liara_renderer_handle_t* outHandle) {
+    if (createInfo == nullptr || outHandle == nullptr) { return LIARA_RESULT_INVALID_ARGUMENT; }
+
+    // No exception crosses this boundary: the C caller has no way to catch one, and unwinding
+    // through a foreign frame is undefined. Everything becomes a result code here or nowhere.
+    try {
+        auto* renderer = new liara::renderer::Renderer(*createInfo);
+        *outHandle = reinterpret_cast&lt;liara_renderer_handle_t&gt;(renderer);
+        return LIARA_RESULT_SUCCESS;
+    } catch (const std::bad_alloc&amp;) {
+        return LIARA_RESULT_OUT_OF_MEMORY;
+    } catch (...) {
+        return LIARA_RESULT_UNKNOWN_ERROR;
+    }
+}
+
+}  // extern "C"
+</code></pre>
+<p>Every name that crosses the boundary carries the <code>_t</code> suffix its declaration gives it. The shim is thin by construction: if it starts containing logic, that logic belongs on the C++ side where it can be tested without going through the ABI.</p>
+<p>The <code>catch (...)</code> is not defensive padding: an exception escaping through a C boundary is undefined behaviour, so the shim catches everything, including what it cannot name.</p>
+<h3 id="one-type-per-file-mostly"><a class="header" href="#one-type-per-file-mostly">One Type Per File (Mostly)</a></h3>
+<p>Each non-trivial type lives in its own pair of files. Small helper types (POD structs, simple enums) that exist purely in the service of a larger type may be co-located in the same file as that type.</p>
+<p>Bundling unrelated types in one file is forbidden; each “concept” gets its own file.</p>
+<hr>
+<h2 id="7-include-discipline"><a class="header" href="#7-include-discipline">7. Include Discipline</a></h2>
+<h3 id="self-sufficient-headers"><a class="header" href="#self-sufficient-headers">Self-Sufficient Headers</a></h3>
+<p>Every header includes exactly the headers it needs to be parseable on its own. A consumer should be able to include any single header from <code>include/</code> without getting compile errors due to missing includes.</p>
+<h3 id="include-what-you-use"><a class="header" href="#include-what-you-use">Include What You Use</a></h3>
+<p>Every name used in a file is provided by a header explicitly included by that file. Indirect inclusion (relying on a transitively-included header) is forbidden, even when convenient. This is verified by clangd warnings during development and by a CI check that strips and re-resolves includes.</p>
+<h3 id="forward-declarations"><a class="header" href="#forward-declarations">Forward Declarations</a></h3>
+<p>When a header only needs to know that a type <strong>exists</strong> (because it uses pointers or references to it, not the type itself), the declaration uses a forward declaration rather than including the type’s header:</p>
+<pre><code class="language-cpp">// In Renderer.h
+namespace Liara::Graphics
+{
+    class Device;       // Forward declaration, header not included.
+    class Pipeline;
+
+    class Renderer
+    {
+    public:
+        explicit Renderer(Device&amp; device);
+    private:
+        Device&amp;    m_Device;     // Reference: forward decl is enough.
+        Pipeline*  m_Pipeline;   // Pointer: forward decl is enough.
+    };
+}
+</code></pre>
+<p>The corresponding <code>.cpp</code> includes the full headers for <code>Device</code> and <code>Pipeline</code>. This pattern reduces compile times and eliminates spurious recompilations.</p>
+<h3 id="pragma-once"><a class="header" href="#pragma-once">Pragma Once</a></h3>
+<p>All headers use <code>#pragma once</code>, not include guards. Modern compilers (MSVC, Clang, GCC) all support <code>#pragma once</code> reliably, and it is shorter and less error-prone than guards. Liara’s previous engine used <code>#pragma once</code> and never had a single issue.</p>
+<hr>
+<h2 id="8-class-design"><a class="header" href="#8-class-design">8. Class Design</a></h2>
+<h3 id="order-within-a-class"><a class="header" href="#order-within-a-class">Order Within a Class</a></h3>
+<p>Members within a class appear in this order:</p>
+<pre><code class="language-cpp">class Foo
+{
+public:
+    // 1. Type aliases and nested types.
+    using Handle = uint32_t;
+
+    // 2. Static constants.
+    static constexpr size_t MAX_SIZE = 1024;
+
+    // 3. Constructors, destructor, assignment operators.
+    explicit Foo(int x);
+    ~Foo();
+    Foo(const Foo&amp;) = delete;
+    Foo&amp; operator=(const Foo&amp;) = delete;
+    Foo(Foo&amp;&amp;) noexcept;
+    Foo&amp; operator=(Foo&amp;&amp;) noexcept;
+
+    // 4. Public methods, grouped by purpose.
+    void DoSomething();
+    [[nodiscard]] int GetSomething() const;
+
+protected:
+    // Same order as public, applied to protected.
+
+private:
+    // 5. Private methods.
+    void HelperMethod();
+
+    // 6. Private members.
+    int m_X;
+    std::unique_ptr&lt;Bar&gt; m_Bar;
+};
+</code></pre>
+<p>Public comes first because it is the interface; private comes last because it is the implementation detail. Reading a class top-down gives the reader the information they need in order of importance.</p>
+<h3 id="rule-of-five-or-zero"><a class="header" href="#rule-of-five-or-zero">Rule of Five (or Zero)</a></h3>
+<p>A class either:</p>
+<ul>
+<li>Defines all five special member functions explicitly (destructor, copy constructor, copy assignment, move constructor, move assignment), or</li>
+<li>Defines none of them (the rule of zero), letting the compiler generate them.</li>
+</ul>
+<p>Defining one or two but not the rest is a bug pattern (the compiler generates the rest with surprising semantics).</p>
+<h3 id="nodiscard-on-pure-functions"><a class="header" href="#nodiscard-on-pure-functions"><code>[[nodiscard]]</code> on Pure Functions</a></h3>
+<p>Functions whose return value should be used (queries, factory methods, fallible operations) are marked <code>[[nodiscard]]</code>. The compiler warns if the result is discarded.</p>
+<pre><code class="language-cpp">[[nodiscard]] bool IsValid() const;
+[[nodiscard]] std::optional&lt;Mesh&gt; LoadMesh(const std::string&amp; path);
+</code></pre>
+<p>Functions where discarding is acceptable (logging, side-effect-only operations) are not marked.</p>
+<h3 id="explicit-constructors"><a class="header" href="#explicit-constructors"><code>explicit</code> Constructors</a></h3>
+<p>Single-argument constructors are <code>explicit</code> unless implicit conversion is intentional and well-justified.</p>
+<pre><code class="language-cpp">class Buffer
+{
+public:
+    explicit Buffer(size_t size);   // No implicit conversion from size_t.
+};
+</code></pre>
+<p>The exception: copy and move constructors are not marked <code>explicit</code> (they are not user-visible conversions in the usual sense).</p>
+<h3 id="deleted-vs-defaulted"><a class="header" href="#deleted-vs-defaulted">Deleted vs Defaulted</a></h3>
+<p>Special members that should not be available are explicitly <code>= delete</code>d, not made private:</p>
+<pre><code class="language-cpp">class NonCopyable
+{
+public:
+    NonCopyable(const NonCopyable&amp;) = delete;
+    NonCopyable&amp; operator=(const NonCopyable&amp;) = delete;
+};
+</code></pre>
+<p>Special members that should be the compiler-generated version are explicitly <code>= default</code>ed when the class also defines one of the others:</p>
+<pre><code class="language-cpp">class Resource
+{
+public:
+    Resource() = default;
+    ~Resource() noexcept;            // Custom destructor.
+    Resource(Resource&amp;&amp;) = default;  // Default move.
+};
+</code></pre>
+<hr>
+<h2 id="9-memory-management"><a class="header" href="#9-memory-management">9. Memory Management</a></h2>
+<h3 id="smart-pointers-not-raw-new--delete"><a class="header" href="#smart-pointers-not-raw-new--delete">Smart Pointers, Not Raw <code>new</code> / <code>delete</code></a></h3>
+<p><code>new</code> and <code>delete</code> are forbidden at the call site. Memory ownership is expressed through smart pointers:</p>
+<ul>
+<li><code>std::unique_ptr&lt;T&gt;</code> for unique ownership.</li>
+<li><code>std::shared_ptr&lt;T&gt;</code> for shared ownership (used sparingly).</li>
+<li>Raw <code>T*</code> for non-owning references.</li>
+</ul>
+<p>Factory functions return <code>std::unique_ptr&lt;T&gt;</code> by default; the caller chooses to convert to <code>std::shared_ptr&lt;T&gt;</code> if shared semantics are needed.</p>
+<p>The one exception is the C ABI boundary. A module’s <code>create</code> entry point has to hand back an opaque handle whose lifetime the caller controls explicitly through the matching <code>destroy</code>, which is a raw <code>new</code> / <code>delete</code> pair by construction: no smart pointer can cross a C interface. Those two functions, in each module’s shim, are the only place raw ownership is allowed; they are wrapped in <code>// NOLINT(cppcoreguidelines-owning-memory)</code>. Everything behind the handle uses smart pointers as usual.</p>
+<h3 id="stdmake_unique-and-stdmake_shared"><a class="header" href="#stdmake_unique-and-stdmake_shared"><code>std::make_unique</code> and <code>std::make_shared</code></a></h3>
+<p>Smart pointers are constructed with <code>std::make_unique</code> and <code>std::make_shared</code>, never with raw <code>new</code>:</p>
+<pre><code class="language-cpp">// Good
+auto buffer = std::make_unique&lt;Buffer&gt;(size);
+
+// Bad
+std::unique_ptr&lt;Buffer&gt; buffer{new Buffer(size)};
+</code></pre>
+<p><code>make_unique</code>/<code>make_shared</code> are exception-safe and (for shared) more efficient than constructing the smart pointer from a raw pointer.</p>
+<h3 id="custom-allocators"><a class="header" href="#custom-allocators">Custom Allocators</a></h3>
+<p>For performance-critical paths (per-frame data, ECS storage), custom allocators are used. The standard library’s allocator framework (<code>std::allocator_traits</code>, <code>std::pmr</code>) is preferred over hand-rolled allocators, except where measurement shows the standard interface adds overhead.</p>
+<h3 id="raw-pointers-are-non-owning"><a class="header" href="#raw-pointers-are-non-owning">Raw Pointers Are Non-Owning</a></h3>
+<p>A raw pointer in the codebase signals non-ownership. It points to something that lives elsewhere; it does not need to be deleted. Functions that take a raw pointer do not take ownership; functions that return a raw pointer do not transfer ownership.</p>
+<p>When a raw pointer can be null, it is documented; when it cannot, prefer a reference.</p>
+<hr>
+<h2 id="10-error-handling"><a class="header" href="#10-error-handling">10. Error Handling</a></h2>
+<p>The C++ implementation uses exceptions for <strong>exceptional</strong> errors (out of memory, file not found, GPU error). Returns codes are <strong>not</strong> used inside the C++ side; they appear only at the C interface boundary, where exceptions cannot cross.</p>
+<h3 id="exception-discipline"><a class="header" href="#exception-discipline">Exception Discipline</a></h3>
+<p>Exceptions are thrown for:</p>
+<ul>
+<li>Failure to acquire a resource (allocation, file, GPU object).</li>
+<li>Programmer errors detected at runtime (broken invariants).</li>
+<li>Errors from third-party libraries that throw.</li>
+</ul>
+<p>Exceptions are <strong>not</strong> thrown for:</p>
+<ul>
+<li>Expected control flow (use <code>std::optional</code> or return values).</li>
+<li>Recoverable conditions in the hot path (use a return code).</li>
+</ul>
+<p>Each module has a small hierarchy of exception types deriving from <code>std::runtime_error</code> or <code>std::logic_error</code>. Custom exception types include enough context (a message, a code) to be diagnostic.</p>
+<h3 id="stdexpected-for-recoverable-failures"><a class="header" href="#stdexpected-for-recoverable-failures"><code>std::expected</code> for Recoverable Failures</a></h3>
+<p>For functions where failure is part of normal operation, <code>std::expected&lt;T, E&gt;</code> is preferred over exceptions:</p>
+<pre><code class="language-cpp">std::expected&lt;Mesh, AssetError&gt; LoadMesh(const std::string&amp; path);
+</code></pre>
+<p>The caller pattern-matches on the result. This is more efficient than exceptions in the common case and makes the failure mode explicit in the type.</p>
+<h3 id="assertions"><a class="header" href="#assertions">Assertions</a></h3>
+<p>Pre-conditions, post-conditions, and invariants are enforced by <code>LIARA_ASSERT</code> macros that compile to nothing in release builds:</p>
+<pre><code class="language-cpp">void Renderer::DrawMesh(const Mesh&amp; mesh)
+{
+    LIARA_ASSERT(mesh.IsValid(), "Drawing an invalid mesh");
+    // ...
+}
+</code></pre>
+<p>Assertion failures in debug builds log the location and abort. Production code does not depend on assertion side effects.</p>
+<hr>
+<h2 id="11-concurrency"><a class="header" href="#11-concurrency">11. Concurrency</a></h2>
+<h3 id="threading-primitives"><a class="header" href="#threading-primitives">Threading Primitives</a></h3>
+<p><code>std::thread</code>, <code>std::mutex</code>, <code>std::condition_variable</code>, and <code>std::atomic</code> from the standard library are used. Higher-level abstractions (<code>std::async</code>, <code>std::future</code>) are used where they fit; they are not avoided dogmatically.</p>
+<h3 id="shared-state"><a class="header" href="#shared-state">Shared State</a></h3>
+<p>Shared mutable state is the exception, not the rule. The architecture favors message-passing and per-thread state where possible. When shared state is necessary, it is protected by a mutex held for the shortest possible time.</p>
+<h3 id="lock-free-code"><a class="header" href="#lock-free-code">Lock-Free Code</a></h3>
+<p>Lock-free code is allowed but discouraged unless measurement shows it is necessary. The complexity of getting lock-free code correct exceeds the cost of a <code>std::mutex</code> in the common case.</p>
+<h3 id="thread-safety-documentation"><a class="header" href="#thread-safety-documentation">Thread Safety Documentation</a></h3>
+<p>Every public method of a class documents its thread safety:</p>
+<pre><code class="language-cpp">class World
+{
+public:
+    /** @threadsafety Not thread-safe. Caller must serialize calls. */
+    Entity CreateEntity();
+
+    /** @threadsafety Thread-safe. Multiple threads may call concurrently. */
+    [[nodiscard]] bool IsValid(Entity e) const;
+};
+</code></pre>
+<p>If thread safety is not documented, the conservative assumption is “not thread-safe”.</p>
+<hr>
+<h2 id="12-comments"><a class="header" href="#12-comments">12. Comments</a></h2>
+<h3 id="doxygen-for-public-apis"><a class="header" href="#doxygen-for-public-apis">Doxygen for Public APIs</a></h3>
+<p>Every public symbol (class, method, function, type) of a module’s internal C++ API has a Doxygen-style comment:</p>
+<pre><code class="language-cpp">/**
+ * @brief Brief summary of what this does.
+ *
+ * Detailed description, including non-obvious behavior, complexity,
+ * or important context.
+ *
+ * @param x Description of x.
+ * @param y Description of y.
+ * @return Description of the return value.
+ *
+ * @pre Pre-conditions.
+ * @post Post-conditions.
+ * @throws ExceptionType When this is thrown.
+ *
+ * @threadsafety Thread safety guarantee.
+ */
+[[nodiscard]] Result DoSomething(int x, int y);
+</code></pre>
+<p>Internal helper functions (those in anonymous namespaces or <code>static</code> file-scope) don’t require Doxygen, but should still have a comment if the purpose is not obvious from the name.</p>
+<h3 id="comments-explain-why-not-what"><a class="header" href="#comments-explain-why-not-what">Comments Explain Why, Not What</a></h3>
+<p>Code shows what is happening; comments should explain why. A comment that paraphrases the next line of code is noise:</p>
+<pre><code class="language-cpp">// Bad: comment restates the code.
+i++;  // Increment i.
+
+// Good: comment explains intent.
+i++;  // Skip the sentinel element at position 0.
+</code></pre>
+<h3 id="todo-comments"><a class="header" href="#todo-comments">TODO Comments</a></h3>
+<p><code>TODO</code>, <code>FIXME</code>, and <code>HACK</code> comments are allowed and encouraged for known issues. Each comment includes the author’s identifier, a date or version reference, and optionally a tracking issue:</p>
+<pre><code class="language-cpp">// TODO(darkbriks, v0.4): Replace with proper material system.
+// FIXME(darkbriks, #42): Race condition under heavy load.
+// HACK(darkbriks): Working around Vulkan validation bug.
+</code></pre>
+<p>CI scans for <code>TODO</code> and <code>FIXME</code> and reports counts; growth in either is visible but not gated.</p>
+<hr>
+<h2 id="13-templates"><a class="header" href="#13-templates">13. Templates</a></h2>
+<h3 id="templates-are-not-banned"><a class="header" href="#templates-are-not-banned">Templates Are Not Banned</a></h3>
+<p>Modern C++ uses templates extensively (containers, algorithms, type-safe APIs). They are not avoided as a matter of style, but they are kept inside modules; templates do not cross the C interface boundary.</p>
+<h3 id="concepts-c20-for-constraints"><a class="header" href="#concepts-c20-for-constraints">Concepts (C++20) for Constraints</a></h3>
+<p>Where a template parameter has expectations, those expectations are expressed with a concept:</p>
+<pre><code class="language-cpp">template &lt;typename T&gt;
+concept Component = std::is_trivially_copyable_v&lt;T&gt; &amp;&amp; requires
+{
+    { T::TypeId() } -&gt; std::same_as&lt;TypeId&gt;;
+};
+
+template &lt;Component C&gt;
+class ComponentStorage
+{
+    // ...
+};
+</code></pre>
+<p>Concepts produce better error messages than SFINAE and document the requirements at the point of use.</p>
+<h3 id="implementation-files-for-templates"><a class="header" href="#implementation-files-for-templates">Implementation Files for Templates</a></h3>
+<p>Template implementations that are too large for the header live in <code>.tpp</code> files included at the bottom of the corresponding <code>.h</code>:</p>
+<pre><code class="language-cpp">// In ComponentStorage.h, at the bottom:
+#include "ComponentStorage.tpp"
+</code></pre>
+<p>This keeps the header readable while still making the template visible at the point of instantiation.</p>
+<hr>
+<h2 id="14-c20-features"><a class="header" href="#14-c20-features">14. C++20 Features</a></h2>
+<p>The project uses C++20 freely. Notable features in regular use:</p>
+<ul>
+<li><strong>Concepts</strong> for template constraints (see above).</li>
+<li><strong>Ranges</strong> (<code>std::ranges::sort</code>, <code>std::views::filter</code>) where they improve readability.</li>
+<li><strong><code>&lt;format&gt;</code> and <code>std::format</code></strong> for string formatting.</li>
+<li><strong><code>&lt;span&gt;</code></strong> for non-owning array views.</li>
+<li><strong><code>&lt;bit&gt;</code></strong> for portable bit manipulation.</li>
+<li><strong>Designated initializers</strong> for struct construction.</li>
+<li><strong><code>consteval</code> and <code>constexpr</code> improvements</strong>.</li>
+</ul>
+<p>C++23 features are not yet used. They will be evaluated when toolchain support is uniform across all supported compilers (typically 2-3 years after the standard).</p>
+<hr>
+<h2 id="15-anti-patterns"><a class="header" href="#15-anti-patterns">15. Anti-Patterns</a></h2>
+<p>The following are considered anti-patterns and will be flagged in code review even if clang-tidy does not catch them.</p>
+<h3 id="using-namespace-at-header-scope"><a class="header" href="#using-namespace-at-header-scope"><code>using namespace</code> at Header Scope</a></h3>
+<p>Using <code>using namespace</code> in a header pollutes the namespace of every consumer. Forbidden.</p>
+<h3 id="singleton"><a class="header" href="#singleton">Singleton</a></h3>
+<p>The Singleton pattern is forbidden. It hides dependencies, is hostile to testing, and creates lifetime issues. Where a “single instance” is needed, an explicit instance is created at startup and passed to consumers.</p>
+<h3 id="macros-for-logic"><a class="header" href="#macros-for-logic">Macros for Logic</a></h3>
+<p>Macros are used for include guards (<code>#pragma once</code> instead) and for conditional compilation. They are <strong>not</strong> used to define functions, constants, or control flow. C++20’s <code>consteval</code>, <code>constexpr</code>, and templates make function-like macros nearly always avoidable.</p>
+<h3 id="hungarian-notation"><a class="header" href="#hungarian-notation">Hungarian Notation</a></h3>
+<p>Type prefixes on variable names (<code>iCount</code>, <code>pBuffer</code>, <code>szName</code>) are forbidden. The type system already tracks the type; the variable name describes the purpose.</p>
+<p>The exception: the <code>m_</code> prefix on member variables, which describes the storage class (member of a class), not the type. This is a deliberate exception, kept because it provides genuine information that the type system does not.</p>
+<h3 id="out-parameters"><a class="header" href="#out-parameters">Out Parameters</a></h3>
+<p>Out parameters (passing a non-const reference to be filled) are discouraged in favor of return values, <code>std::tuple</code>, or <code>std::optional</code>. They appear in the C interface (because C requires them) but not in the C++ implementation.</p>
+<p>The exception: when filling a large struct that the caller already owns, an out parameter is acceptable as a performance optimization.</p>
+<h3 id="global-variables"><a class="header" href="#global-variables">Global Variables</a></h3>
+<p>Mutable global variables are forbidden. Const global constants (named <code>UPPER_CASE</code>, declared <code>inline constexpr</code>) are allowed.</p>
+<h3 id="abbreviations"><a class="header" href="#abbreviations">Abbreviations</a></h3>
+<p>Identifiers do not abbreviate words: <code>buffer</code>, not <code>buf</code>; <code>device</code>, not <code>dev</code>; <code>position</code>, not <code>pos</code>. The exceptions are universally understood (<code>CPU</code>, <code>GPU</code>, <code>RGB</code>, <code>XYZ</code>, <code>id</code>) and standard math shortcuts (<code>x</code>, <code>y</code>, <code>z</code>, <code>i</code>, <code>j</code>).</p>
+<h3 id="output-operators-on-public-types"><a class="header" href="#output-operators-on-public-types">Output Operators on Public Types</a></h3>
+<p><code>operator&lt;&lt;</code> for <code>std::ostream</code> is not defined for public types. If debug printing is needed, a free function <code>Debug(const T&amp;)</code> returns a string, which is then logged. This avoids dragging <code>&lt;iostream&gt;</code> into headers (it’s expensive to compile).</p>
+<hr>
+<h2 id="16-exceptions-to-these-rules"><a class="header" href="#16-exceptions-to-these-rules">16. Exceptions to These Rules</a></h2>
+<p>These rules are not absolute. A specific situation may justify deviating from a rule, in which case:</p>
+<ol>
+<li>The deviation is documented in a comment at the point of deviation, explaining why.</li>
+<li>If the deviation should apply project-wide, it is proposed as a change to this document, supported by an ADR.</li>
+</ol>
+<p>The goal of having style rules is to remove friction; a rule that creates more friction than it removes is a wrong rule.</p>
+<hr>
+<p><a href="#code-style">Back to top</a></p>
+
+            </main>
+
+            <nav class="nav-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="CONTRIBUTING.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="TOOLING.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+
+                <div style="clear: both"></div>
+            </nav>
+        </div>
+    </div>
+
+    <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            <a rel="prev" href="CONTRIBUTING.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+            </a>
+
+            <a rel="next prefetch" href="TOOLING.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+            </a>
+    </nav>
+</div>
+
+
+
+
+<script>
+    window.playground_copyable = true;
+</script>
+
+
+<script src="elasticlunr.min.js"></script>
+<script src="mark.min.js"></script>
+<script src="searcher.js"></script>
+
+<script src="clipboard.min.js"></script>
+<script src="highlight.js"></script>
+<script src="book.js"></script>
+
+<script defer src="/shared-content/mdbook/js/admonitions.js"></script>
+
+
+</div>
+</body>
+</html>
