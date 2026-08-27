@@ -1,0 +1,738 @@
+<!DOCTYPE HTML>
+
+
+<html lang="en" class="sidebar-visible no-js light">
+<head>
+<meta charset="UTF-8">
+<title> - Liara Docs-Shared — Developer Guide</title>
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="theme-color" content="#FFFAFC">
+
+<link rel="icon" type="image/x-icon" href="/shared-content/assets/logo.svg">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/general.css">
+<link rel="stylesheet" href="css/chrome.css">
+<link rel="stylesheet" href="css/print.css" media="print">
+
+<link rel="stylesheet" href="fonts/fonts.css">
+
+<link rel="stylesheet" id="mdbook-highlight-css" href="highlight.css">
+<link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night.css">
+<link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight.css">
+
+<link rel="stylesheet" href="/shared-content/tokens/design-tokens.css">
+<link rel="stylesheet" href="/shared-content/navbar/navbar.css">
+<link rel="stylesheet" href="/shared-content/mdbook/css/custom.css">
+
+
+
+<script src="/shared-content/mdbook/js/mermaid.min.js"></script>
+<script src="/shared-content/mdbook/js/mermaid-init.js"></script>
+
+</head>
+<body class="sidebar-visible">
+<div id="mdbook-body-container">
+
+<script>
+(function () {
+    try {
+        var t = localStorage.getItem("liara-theme");
+        if (t === "light" || t === "dark") {
+            document.documentElement.setAttribute("data-liara-theme", t);
+        }
+        if (localStorage.getItem("liara-a11y-dyslexia") === "true") {
+            document.documentElement.setAttribute("data-liara-a11y-dyslexia", "true");
+        }
+        // Bridge to mdBook's own theme system: align mdBook's `class` on <html>
+        // with our chosen theme, so its native styles also follow.
+        var mdbookTheme = (t === "dark") ? "navy"
+                       : (t === "light") ? "light"
+                       : null;
+        if (mdbookTheme) {
+            document.documentElement.classList.remove(
+                "light", "rust", "coal", "navy", "ayu");
+            document.documentElement.classList.add(mdbookTheme);
+        }
+    } catch (e) { /* localStorage unavailable, fall back to defaults */ }
+})();
+</script>
+
+<shared-navbar></shared-navbar>
+
+<script src="/shared-content/navbar/navbar.config.js"></script>
+<script src="/shared-content/mdbook/shared-navbar.js"></script>
+<script defer src="/shared-content/navbar/navbar.js"></script>
+
+<link rel="stylesheet" href="/shared-content/navbar/version-banner.css">
+<script defer src="/shared-content/navbar/version-banner.js"></script>
+
+
+<input type="hidden" id="MDBOOK_OUTPUT" value="">
+
+
+<script>
+    var path_to_root = "";
+    var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "navy" : "light";
+</script>
+
+<script>
+    try {
+        var theme = localStorage.getItem('mdbook-theme');
+        var sidebar = localStorage.getItem('mdbook-sidebar');
+
+        if (theme.startsWith('"') && theme.endsWith('"')) {
+            localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+        }
+
+        if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+            localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+        }
+    } catch (e) { }
+</script>
+
+<input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+<nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+    <div class="sidebar-scrollbox">
+        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html"><strong aria-hidden="true">1.</strong> Docs</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="DOCUMENTATION_PIPELINE.html"><strong aria-hidden="true">2.</strong> DOCUMENTATION PIPELINE</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="authoring-a-module.html"><strong aria-hidden="true">3.</strong> Authoring A Module</a></span></li></ol>
+    </div>
+    <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+        <div class="sidebar-resize-indicator"></div>
+    </div>
+</nav>
+
+<script>
+    var sidebarScrollbox = document.querySelector('#mdbook-sidebar .sidebar-scrollbox');
+    sidebarScrollbox.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') {
+            sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+        }
+    }, { passive: true });
+    var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+    sessionStorage.removeItem('sidebar-scroll');
+    if (sidebarScrollTop) {
+        sidebarScrollbox.scrollTop = sidebarScrollTop;
+    } else {
+        var activeSection = document.querySelector('#mdbook-sidebar .active');
+        if (activeSection) {
+            activeSection.scrollIntoView({ block: 'center' });
+        }
+    }
+</script>
+
+<div id="page-wrapper" class="page-wrapper">
+
+    <div class="page">
+        <div id="mdbook-menu-bar-hover-placeholder"></div>
+        <div id="mdbook-menu-bar" class="menu-bar sticky">
+            <div class="left-buttons">
+                <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                    <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                </label>
+                <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list" style="display: none">
+                    <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                </button>
+                <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu" style="display: none">
+                    <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                    <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                    <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                    <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                    <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                    <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                </ul>
+                <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                    <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                </button>
+            </div>
+
+            <h1 class="menu-title">Liara Docs-Shared — Developer Guide</h1>
+
+            <div class="right-buttons">
+                <a href="https://github.com/liara-engine/docs-shared" title="Git repository" aria-label="Git repository">
+                    <i id="git-repository-button" class="fa fa-github"></i>
+                </a>
+            </div>
+        </div>
+
+        <div id="mdbook-search-wrapper" class="hidden">
+            <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                <div class="search-wrapper">
+                    <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                    <div class="spinner-wrapper">
+                        <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                    </div>
+                </div>
+            </form>
+            <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                <ul id="mdbook-searchresults">
+                </ul>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById('mdbook-sidebar-toggle-anchor').addEventListener('change', function () {
+                document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', this.checked.toString());
+                document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', (!this.checked).toString());
+                Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function (link) {
+                    link.setAttribute('tabIndex', this.checked ? 0 : -1);
+                }.bind(this));
+            });
+        </script>
+
+        <div id="content" class="content">
+            <main>
+                <h1 id="docs-shared"><a class="header" href="#docs-shared">docs-shared</a></h1>
+<blockquote>
+<p>Shared design system, navbar, and templates consumed by every Liara
+Engine documentation site.</p>
+</blockquote>
+<p><code>docs-shared</code> is the visual and structural backbone of every documentation
+property in the Liara Engine project. It contains the design tokens, the
+shared navbar, the Doxygen and mdBook templates, and the source of the
+central hub page. Every module’s documentation pulls from this repository
+at build time so all sites look and behave consistently.</p>
+<h2 id="license"><a class="header" href="#license">License</a></h2>
+<p>MIT. See <code>LICENSE</code> at the root of this repository.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="the-documentation-pipeline"><a class="header" href="#the-documentation-pipeline">The documentation pipeline</a></h1>
+<blockquote>
+<p>The documentation of the documentation. Yes, it is a little meta.</p>
+</blockquote>
+<p>This page explains how Liara Engine’s documentation is produced, versioned, and served — every repository, tool, and moving part involved, and how they fit together. If you are touching templates, CI, or the hosting layer, start here.</p>
+<hr>
+<h2 id="table-of-contents"><a class="header" href="#table-of-contents">Table of contents</a></h2>
+<ul>
+<li><a href="#1-the-big-picture">1. The big picture</a></li>
+<li><a href="#2-the-repositories-and-their-roles">2. The repositories and their roles</a></li>
+<li><a href="#31-baked-vs-runtime">3. Baked vs runtime</a>
+<ul>
+<li><a href="#31-baked-vs-runtime">3.1 Baked vs runtime</a></li>
+<li><a href="#32-the-design-system">3.2 The design system</a></li>
+<li><a href="#33-the-navbar">3.3 The navbar</a></li>
+<li><a href="#34-the-liaradoc-resourcereplacement-system">3.4 The liaradoc resource/replacement system</a></li>
+</ul>
+</li>
+<li><a href="#4-the-builder-image">4. The builder image</a>
+<ul>
+<li><a href="#41-where-the-schemas-come-from">4.1 Where the schemas come from</a></li>
+<li><a href="#42-building-and-publishing-the-image">4.2 Building and publishing the image</a></li>
+</ul>
+</li>
+<li><a href="#5-authoring-a-modules-docs">5. Authoring a module’s docs</a></li>
+<li><a href="#6-building-and-publishing">6. Building and publishing</a>
+<ul>
+<li><a href="#61-versioning">6.1 Versioning</a></li>
+</ul>
+</li>
+<li><a href="#7-hosting">7. Hosting</a>
+<ul>
+<li><a href="#71-url-surface-quick-reference">7.1 URL surface (quick reference)</a></li>
+</ul>
+</li>
+<li><a href="#8-pr-previews">8. PR previews</a></li>
+</ul>
+<hr>
+<h2 id="1-the-big-picture"><a class="header" href="#1-the-big-picture">1. The big picture</a></h2>
+<p>The documentation is <strong>not</strong> built in one place. Shared look-and-feel lives in one repository, the build logic lives in a container image, each module builds its own docs from its own sources, and everything is published to a single hosting repository served at the edge.</p>
+<pre class="mermaid">flowchart TB
+
+    subgraph Shared["docs-shared"]
+        DS["templates + assets&lt;br/&gt;(theme, navbar, tokens, doxygen)"]
+        DK["docker/liara-documentation-builder/Dockerfile&lt;br/&gt;+ docker/scripts/ (build-docs.sh, processor.py...)"]
+        IMG["ghcr.io/liara-engine/&lt;br/&gt;liara-documentation-builder"]
+
+        DK --&gt;|"COPYs mdbook/, doxygen/,&lt;br/&gt;shared-content/assets/ from this&lt;br/&gt;same checkout — builds &amp; publishes"| IMG
+    end
+
+    LIARA["liara (meta)&lt;br/&gt;schemas/ (served via GitHub Pages)"]
+
+    subgraph Repos["Repositories generating documentation"]
+        LI["liara-interfaces&lt;br/&gt;(classic module)"]
+        LC["liara-core&lt;br/&gt;(classic module)"]
+        DST["docs-shared&lt;br/&gt;(builds test fixtures)"]
+
+        HTML["Generated HTML"]
+
+        LI --&gt;|"build-docs"| HTML
+        LC --&gt;|"build-docs"| HTML
+        DST --&gt; HTML
+    end
+
+    IMG --&gt;|"used by CI"| LI
+    IMG --&gt;|"used by CI"| LC
+    IMG --&gt;|"used by CI"| DST
+
+    subgraph Publishing["Documentation Publishing"]
+        DOCS["liara-docs&lt;br/&gt;(branch: cloudflare-pages)&lt;br/&gt;site/&amp;lt;repo&amp;gt;/&amp;lt;version&amp;gt;/{book,doxygen}/..."]
+    end
+
+    HTML --&gt;|"push generated HTML"| DOCS
+
+    subgraph Delivery["Public Delivery"]
+        CF["Cloudflare Worker&lt;br/&gt;(Static Assets + edge router)"]
+        URL["liara-engine.liara-engine-documentation.workers.dev"]
+    end
+
+    DOCS --&gt;|"Git integration → wrangler deploy"| CF
+    CF --&gt; URL
+
+    classDef repo fill:#e8f5e9,stroke:#2e7d32;
+    classDef infra fill:#e3f2fd,stroke:#1565c0;
+    classDef publish fill:#fff3e0,stroke:#ef6c00;
+    classDef delivery fill:#f3e5f5,stroke:#7b1fa2;
+
+    class LI,LC,DST repo;
+    class DS,DK,IMG,LIARA infra;
+    class DOCS publish;
+    class CF,URL delivery;
+</pre>
+
+<p>The mental model that makes everything else click: <strong>docs-shared content is split in two.</strong> Some of it is <em>baked</em> into the builder image and used at build time; the rest is <em>served at runtime</em> from a central <code>/shared-content/</code> path. Knowing which is which explains the whole repository layout (see §3). The builder image itself is now also built and published <em>from</em> docs-shared (§4.2) — it used to be built by a separate <code>liara</code> clone-and-bake step, but that indirection is gone.</p>
+<h2 id="2-the-repositories-and-their-roles"><a class="header" href="#2-the-repositories-and-their-roles">2. The repositories and their roles</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Repository</th><th>Role</th></tr>
+</thead>
+<tbody>
+<tr><td><code>docs-shared</code></td><td>The visual identity and templates: design tokens, navbar, the mdBook theme, the Doxygen HTML template, the central hub page — <strong>and the documentation builder itself</strong>: <code>docker/</code> builds and publishes <code>ghcr.io/liara-engine/liara-documentation-builder</code> from this same checkout. Changing how docs <em>look</em> or are <em>built</em> happens here.</td></tr>
+<tr><td><code>liara</code> (meta)</td><td>Hosts the JSON <code>schemas/</code>, served via GitHub Pages (§4.1). No longer hosts the builder — that moved into <code>docs-shared</code> (§4.2).</td></tr>
+<tr><td><code>.github</code></td><td>Org-level <strong>reusable workflows</strong>: build, versioned deploy, PR previews, preview cleanup, docker image build/cleanup. Module repos call these.</td></tr>
+<tr><td><code>liara-docs</code></td><td>The hosting repo. Generated HTML for every module and version lives on its <code>cloudflare-pages</code> branch under <code>site/</code>. Also holds the Cloudflare Worker (<code>wrangler.jsonc</code> + <code>src/index.js</code>) and the scheduled preview sweep.</td></tr>
+<tr><td>Module repos (<code>liara-interfaces</code>, <code>liara-core</code>, …)</td><td>Each owns its own sources (<code>book.toml</code>, <code>docs/</code>, <code>Doxyfile</code>, headers, <code>manifest.json</code>) and a thin CI caller. Building a module’s docs happens here.</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="3-anatomy-of-docs-shared"><a class="header" href="#3-anatomy-of-docs-shared">3. Anatomy of docs-shared</a></h2>
+<pre><code>docs-shared/
+├── book.toml              # docs-shared's own developer guide (this book)
+├── manifest.json          # module manifest: name, description, latest, versions
+├── docs/                  # source of the guide you are reading
+│
+├── docker/                # the documentation builder image (§4)
+│   ├── liara-documentation-builder/Dockerfile
+│   └── scripts/            # build-docs.sh, processor.py, resource_processor.py, replacement_processor.py
+│
+├── mdbook/theme/          # BAKED — mdBook theme override
+│   ├── index.hbs          #   template that injects the navbar + theme bridge
+│   ├── css/variables.css  #   maps mdBook's CSS vars onto Liara design tokens
+│   └── highlight.js       #   custom Highlight.js bundle (GLSL, Dockerfile, …)
+│
+├── doxygen/               # BAKED — Doxygen HTML template
+│   ├── header.html        #   injects &lt;shared-navbar&gt; + /shared-content scripts
+│   └── footer.html
+│
+├── shared-content/        # RUNTIME — served from /shared-content/ on the site
+│   ├── tokens/design-tokens.css     # single source of truth for the palette
+│   ├── navbar/                      # navbar.html, .css, .js, .config.js, shared-navbar.js
+│   ├── mdbook/                      # custom.css + generated shared-navbar.js + liaradoc
+│   ├── doxygen/                     # doxygen-custom.css + generated shared-navbar.js + liaradoc
+│   ├── hub/                         # generated shared-navbar.js + liaradoc
+│   └── assets/logo.svg              # also BAKED (see below) — Doxyfiles reference it at build time
+│
+└── hub/                   # the central landing page (deployed to the site root)
+    ├── index.html
+    ├── css/style.css
+    ├── js/liara-hub.js
+    └── 404.html           # custom not-found page (served at the site root)
+</code></pre>
+<h3 id="31-baked-vs-runtime"><a class="header" href="#31-baked-vs-runtime">3.1 Baked vs runtime</a></h3>
+<ul>
+<li><strong>Baked</strong> (<code>mdbook/theme/</code>, <code>doxygen/</code>, and <code>shared-content/assets/</code> for the logo/favicon referenced by Doxyfiles at build time): <code>COPY</code>’d directly into the builder image by <code>docker/liara-documentation-builder/Dockerfile</code>, from this same checkout — no separate download or version pin (§4.2). These templates run during <em>every</em> module build and decide the structure of the generated pages. A change here takes effect once the builder image is rebuilt, which now happens automatically on every push to <code>main</code> and on every release tag (§4.2).</li>
+<li><strong>Runtime</strong> (<code>shared-content/</code>): never baked. It is deployed once to the site root at <code>/shared-content/</code>, and every generated page references it by absolute URL (<code>/shared-content/tokens/design-tokens.css</code>, etc.). A change here takes effect on the live site as soon as the shared-content is redeployed — no module rebuild needed.</li>
+</ul>
+<p>This split is why a CSS tweak can go live without rebuilding every module, but a template change requires a new image — automatically rebuilt for you, but still a rebuild.</p>
+<h3 id="32-the-design-system"><a class="header" href="#32-the-design-system">3.2 The design system</a></h3>
+<p><code>shared-content/tokens/design-tokens.css</code> is the single source of truth for colours, typography, spacing, radii, and shadows. The mdBook theme (<code>variables.css</code>) and the Doxygen CSS (<code>doxygen-custom.css</code>) both consume those tokens, so the three surfaces — hub, mdBook, Doxygen — stay visually identical. Light/dark/dyslexia modes are all driven from this one file.</p>
+<h3 id="33-the-navbar"><a class="header" href="#33-the-navbar">3.3 The navbar</a></h3>
+<p><code>shared-content/navbar/</code> holds the shared navigation. <code>navbar.js</code> reads the <strong>modules registry</strong> and each module’s <strong>manifest</strong> at runtime to build the per-module dropdowns and version selectors; <code>navbar.config.js</code> tells it where the docs are hosted (<code>docsBaseUrl</code>) and where the registry lives. The <code>&lt;shared-navbar&gt;</code> web component is registered per context by the generated <code>shared-navbar.js</code> files (mdBook / Doxygen / hub), produced from a single template via the <code>{{{MODULE}}}</code> replacement.</p>
+<p><code>navbar.js</code> reads both manifest schema versions transparently (detected via <code>manifest_version</code>, absent = v1). A v2 manifest’s <code>kind</code> (<code>contract</code>/<code>module</code>/<code>host</code>/<code>infrastructure</code>) takes over the module’s ABI role from the registry’s <code>is_abi</code>/<code>meta</code> flags once that module has migrated, and a version’s optional <code>note</code> (v2 only) is shown under it in the dropdown. See §5 and <code>docs/authoring-a-module.md</code> for the manifest formats themselves.</p>
+<h3 id="34-the-liaradoc-resourcereplacement-system"><a class="header" href="#34-the-liaradoc-resourcereplacement-system">3.4 The liaradoc resource/replacement system</a></h3>
+<p>Files named <code>*.liaradoc.json</code> declare, per context, which static <strong>resources</strong> to copy into the output and which <strong>replacements</strong> to perform in the generated HTML (for example <code>{{{LOGO}}}</code>, <code>{{{MODULE}}}</code>, or <code>&lt;DOCS_SHARED_BASE&gt;</code>). The builder’s processor (see §4) reads these and rewrites the pages accordingly. They conform to the <code>documentation-module.schema.json</code> schema.</p>
+<h2 id="4-the-builder-image"><a class="header" href="#4-the-builder-image">4. The builder image</a></h2>
+<p><code>ghcr.io/liara-engine/liara-documentation-builder</code> is an ultra-light Debian image that bakes in:</p>
+<ul>
+<li><strong>Doxygen</strong> and <strong>mdBook</strong> binaries,</li>
+<li>the docs-shared <strong>baked templates</strong> (<code>/opt/docs-shared</code>) — <code>COPY</code>’d straight from this checkout’s <code>mdbook/</code>, <code>doxygen/</code>, and <code>shared-content/assets/</code> (§3.1),</li>
+<li>the build scripts: <code>build-docs</code> plus the <code>processor.py</code> family, from <code>docker/scripts/</code>,</li>
+<li><code>ajv</code> for JSON-schema validation.</li>
+</ul>
+<p>It expects the module’s sources mounted at <code>/src</code> and writes generated HTML to <code>/docs</code>. <code>build-docs</code> runs roughly:</p>
+<ol>
+<li><strong>Validate</strong> <code>manifest.json</code> (required) and any <code>*.liaradoc.json</code> against  their schemas; fail fast on error.</li>
+<li><strong>Stage shared assets</strong>: copy <code>/opt/docs-shared/*</code> into <code>/src/docs-shared/</code> so the mdBook theme path (<code>docs-shared/mdbook/theme</code>) and the Doxygen header resolve locally.</li>
+<li><strong>Process</strong> resources and replacements (<code>processor.py</code>): copy declared resources, substitute placeholders in the HTML.</li>
+<li><strong>Doxygen</strong>: if a <code>Doxyfile</code> exists, run it (output forced to <code>/src/build/doxygen</code>), then copy the HTML to <code>/docs/doxygen</code>.</li>
+<li><strong>mdBook</strong>: if a <code>book.toml</code> exists, auto-generate <code>SUMMARY.md</code> when missing (from <code>README.md</code> + the other pages), then build to <code>/docs/book</code>.</li>
+<li><strong>Extra</strong>: copy any <code>ADDITIONAL_DIRECTORIES_TO_OUTPUT</code> through verbatim.</li>
+</ol>
+<p>The Dockerfile lives inside docs-shared itself and <code>COPY</code>s the baked templates from the same build context — there is no version pin to keep in sync by hand (no more <code>DOCS_SHARED_VERSION</code>, no clone of a separately-tagged release). The image built from a given commit always bakes in <em>that commit’s</em> templates.</p>
+<h3 id="41-where-the-schemas-come-from"><a class="header" href="#41-where-the-schemas-come-from">4.1 Where the schemas come from</a></h3>
+<p>Validation resolves the URL declared in each file’s <code>$schema</code> and fetches it over HTTP — the builder and the <code>validate-manifest</code> workflow both do this. The schemas therefore have to be published somewhere reachable, and they are served from GitHub Pages on the <code>liara</code> repository (https://liara-engine.github.io/liara/schemas/…). It is the one piece of the documentation infrastructure that did not move to Cloudflare, because the URL is pinned as a <code>const</code> inside the schemas themselves and moving it would invalidate every existing <code>manifest.json</code> at once. This is also the one part of the builder that <code>liara</code> still hosts — the Dockerfile and scripts moved to docs-shared, but the schemas didn’t.</p>
+<p>Two consequences: a change to a schema takes effect only once Pages has redeployed, not at the next build, and a build without network access cannot validate.</p>
+<h3 id="42-building-and-publishing-the-image"><a class="header" href="#42-building-and-publishing-the-image">4.2 Building and publishing the image</a></h3>
+<p><code>.github/workflows/generate-and-push-docker.yml</code> builds and pushes the image, using the same trigger/tagging scheme as the doc-deploy workflows in §6 — one version number now drives both:</p>
+<ul>
+<li><strong>Push to <code>main</code></strong> (touching <code>docker/**</code>, <code>mdbook/**</code>, <code>doxygen/**</code>, or <code>shared-content/assets/**</code>): builds and pushes <code>dev</code>, and updates <code>:latest</code>.</li>
+<li><strong>Release tag <code>vX.Y.Z</code></strong> — the same tag <code>release-please</code> creates for docs-shared itself (§6.1): builds and pushes that exact version tag, and updates <code>:latest</code>. There is no separate <code>docker-vX.Y.Z</code> tag or release cycle anymore; one tag drives both the docs-shared release and the image that bakes in its templates.</li>
+<li><strong>Pull request</strong> touching those paths: builds and pushes a <code>pr-&lt;n&gt;</code> preview tag, so a Dockerfile/template change can be validated end-to-end before merging (§8).</li>
+<li><strong><code>workflow_dispatch</code></strong>: manual rebuild.</li>
+</ul>
+<p><code>:latest</code> — what <code>docs.yml</code>, <code>deploy-shared.yml</code>, <code>deploy-hub.yml</code>, and <code>deploy-preview.yml</code> all pull — is updated on every push to <code>main</code> or release tag, so it can no longer go stale relative to a merged template change. A weekly <code>clean-ghcr.yml</code> sweep prunes old image versions from the registry, keeping the last 3.</p>
+<h2 id="5-authoring-a-modules-docs"><a class="header" href="#5-authoring-a-modules-docs">5. Authoring a module’s docs</a></h2>
+<p>A module repository provides:</p>
+<ul>
+<li><code>manifest.json</code> — required. Declares <code>metadata.name</code>, <code>metadata.description</code>, <code>metadata.latest</code>, and a <code>versions</code> map with ABI compatibility. <code>latest</code> drives the <code>/&lt;repo&gt;/latest/</code> redirect (see §7). Two schema versions are supported side by side — v1 (<code>module-manifest.schema.json</code>) and v2 (<code>module-manifest-v2.schema.json</code>, which adds <code>manifest_version</code>, <code>kind</code>, <code>metadata.repo</code>, and per-version <code>note</code>) — see <code>docs/authoring-a-module.md</code> §1 for the full shape of each and how the navbar picks between them.</li>
+<li><code>book.toml</code> + <code>docs/</code> — optional mdBook guide. <code>theme = "docs-shared/mdbook/theme"</code>. If there is no <code>SUMMARY.md</code>, one is generated from <code>README.md</code> first, then the remaining pages.</li>
+<li><code>Doxyfile</code> + headers — optional API reference. <code>HTML_HEADER</code>/<code>HTML_FOOTER</code> point at <code>docs-shared/doxygen/</code>.</li>
+<li><code>*.liaradoc.json</code> — optional per-module resources and replacements.</li>
+</ul>
+<p>In practice every module has a book; some also have a Doxygen reference. The worker’s fallback (§7) tolerates a module that has only one of the two.</p>
+<h2 id="6-building-and-publishing"><a class="header" href="#6-building-and-publishing">6. Building and publishing</a></h2>
+<p>This section covers how <em>module documentation</em> (including docs-shared’s own guide) is built using the image described in §4 — see §4.2 for how the image itself is built and published.</p>
+<p>CI lives as <strong>reusable workflows</strong> in <code>.github</code>, called by a thin caller in each module repo:</p>
+<ul>
+<li><strong>Build</strong> runs the builder image against the checkout and uploads the generated <code>docs</code> and <code>manifest</code> as artifacts.</li>
+<li><strong>Deploy</strong> checks out <code>liara-docs</code>, places the build under <code>site/&lt;repo&gt;/&lt;version&gt;/</code>, copies <code>manifest.json</code> to the canonical <code>site/&lt;repo&gt;/manifest.json</code>, and pushes to the <code>cloudflare-pages</code> branch. Old versions are left in place, so previous docs stay reachable.</li>
+</ul>
+<h3 id="61-versioning"><a class="header" href="#61-versioning">6.1 Versioning</a></h3>
+<ul>
+<li><code>dev</code> tracks the development branch; <code>x.y.z</code> are releases.</li>
+<li>Each version is a directory under <code>site/&lt;repo&gt;/</code>, so nothing is overwritten on release — <code>/&lt;repo&gt;/1.0.0/</code> and <code>/&lt;repo&gt;/dev/</code> coexist.</li>
+<li><code>manifest.metadata.latest</code> records the newest version; the hub’s <code>version.json</code> and the <code>modules-registry.json</code> (both at the site root) drive the navbar’s version selector and module list.</li>
+</ul>
+<h2 id="7-hosting"><a class="header" href="#7-hosting">7. Hosting</a></h2>
+<p><code>liara-docs</code> is deployed via Cloudflare’s Git integration as a <strong>Workers Static Assets</strong> project. The <code>site/</code> directory is served directly; a small Worker (<code>src/index.js</code>) runs only when no static asset matches a request. The Worker handles three things:</p>
+<ul>
+<li><strong><code>latest</code></strong> — <code>/&lt;repo&gt;/latest/…</code> reads <code>metadata.latest</code> from the module’s manifest and 302-redirects to the concrete version. <code>/&lt;repo&gt;</code> alone resolves to latest too. These redirects are <code>no-cache</code> because latest moves.</li>
+<li><strong>View fallback</strong> — <code>/&lt;repo&gt;/&lt;version&gt;/</code> with no view 301/302-redirects to <code>book/</code> if it exists, else <code>doxygen/</code>.</li>
+<li><strong>Custom 404</strong> — anything unresolved is served <code>/404.html</code> with a 404 status.</li>
+</ul>
+<h3 id="71-url-surface-quick-reference"><a class="header" href="#71-url-surface-quick-reference">7.1 URL surface (quick reference)</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>URL</th><th>Result</th></tr>
+</thead>
+<tbody>
+<tr><td><code>/</code></td><td>The hub landing page</td></tr>
+<tr><td><code>/&lt;repo&gt;/&lt;version&gt;/book/…</code></td><td>mdBook page (static)</td></tr>
+<tr><td><code>/&lt;repo&gt;/&lt;version&gt;/doxygen/…</code></td><td>Doxygen page (static)</td></tr>
+<tr><td><code>/&lt;repo&gt;/&lt;version&gt;/</code></td><td>→ <code>book/</code> (or <code>doxygen/</code>)</td></tr>
+<tr><td><code>/&lt;repo&gt;/latest/…</code></td><td>→ resolved version from the manifest</td></tr>
+<tr><td><code>/&lt;repo&gt;</code> or <code>/&lt;repo&gt;/</code></td><td>→ latest → <code>book/</code></td></tr>
+<tr><td><code>/&lt;repo&gt;/pr-&lt;n&gt;/…</code></td><td>A PR preview (see §8)</td></tr>
+<tr><td><code>/shared-content/…</code></td><td>Runtime shared assets</td></tr>
+<tr><td><code>/modules-registry.json</code>, <code>/version.json</code>, <code>/&lt;repo&gt;/manifest.json</code></td><td>Metadata consumed by the navbar</td></tr>
+<tr><td>anything else</td><td>The custom 404 page</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="8-pr-previews"><a class="header" href="#8-pr-previews">8. PR previews</a></h2>
+<p>To test changes before merging, each PR can publish a throwaway build to a hidden path, reachable only by direct URL (the navbar never lists it).</p>
+<ul>
+<li><strong>Classic modules</strong> publish to <code>site/&lt;repo&gt;/pr-&lt;n&gt;/</code>, built by the same toolchain as a real version but <strong>without</strong> touching the canonical <code>manifest.json</code>. Triggered automatically when documentation files change (path filter), or on demand via the <code>docs-preview</code> label. The preview URL is posted as a sticky comment on the PR.</li>
+<li><strong>docs-shared</strong> is special: a PR there changes the templates and shared assets everyone uses, so its preview builds the <strong>test fixtures</strong> (<code>tests/fixtures/</code>) with <em>the PR’s</em> versions of both — the baked templates are mounted over <code>/opt/docs-shared</code>, and the PR’s <code>shared-content/</code> is bundled into the preview with <code>/shared-content/</code> references re-pointed at it. Output lands at <code>site/docs-shared/pr-&lt;n&gt;/</code>.</li>
+</ul>
+<p>A related but separate preview exists for the <strong>builder image itself</strong> (§4.2): a PR touching <code>docker/</code>, <code>mdbook/</code>, <code>doxygen/</code>, or <code>shared-content/assets/</code> gets a <code>pr-&lt;n&gt;</code>-tagged image pushed to GHCR — not to GitHub Pages — letting a Dockerfile or template change be validated against the real toolchain before merging, independently of whether it also happens to touch the docs preview above.</p>
+<p>Cleanup: docs previews are removed when the PR closes, and a daily <strong>sweep</strong> prunes anything whose PR is closed or has been idle for more than 30 days. Docker image previews are removed on PR close too (the <code>docker</code> job in <code>preview-cleanup.yml</code>, alongside the docs-preview cleanup job); there is no separate idle sweep for them, but the weekly <code>clean-ghcr.yml</code> retention policy (keep the last 3 versions) acts as a backstop.</p>
+<p>These previews are the supported way to validate documentation changes — there is intentionally no separate local-only path, because reproducing the full toolchain locally is more error-prone than running the real thing on a hidden URL.</p>
+<h2 id="9-where-to-change-what"><a class="header" href="#9-where-to-change-what">9. Where to change what</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>You want to change…</th><th>Edit…</th><th>Takes effect after…</th></tr>
+</thead>
+<tbody>
+<tr><td>Colours, typography, spacing</td><td><code>docs-shared/shared-content/tokens/</code></td><td>shared-content redeploy</td></tr>
+<tr><td>Navbar behaviour or markup</td><td><code>docs-shared/shared-content/navbar/</code></td><td>shared-content redeploy</td></tr>
+<tr><td>mdBook page structure</td><td><code>docs-shared/mdbook/theme/</code></td><td>builder image rebuild (automatic, §4.2) + module rebuild</td></tr>
+<tr><td>Doxygen page structure</td><td><code>docs-shared/doxygen/</code></td><td>builder image rebuild (automatic, §4.2) + module rebuild</td></tr>
+<tr><td>Build steps / processors</td><td><code>docs-shared/docker/</code></td><td>builder image rebuild (automatic, §4.2)</td></tr>
+<tr><td>Validation rules</td><td><code>liara/schemas/</code></td><td>next build, once GitHub Pages has redeployed</td></tr>
+<tr><td>Redirects, 404, hosting</td><td><code>liara-docs/src/index.js</code>, <code>wrangler.jsonc</code></td><td><code>wrangler deploy</code> (Git push)</td></tr>
+<tr><td>CI behaviour</td><td><code>.github</code> reusable workflows</td><td>next workflow run</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<p><a href="#the-documentation-pipeline">Back to top</a></p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="authoring-a-modules-documentation"><a class="header" href="#authoring-a-modules-documentation">Authoring a module’s documentation</a></h1>
+<p>This is the practical companion to <a href="documentation-pipeline.html">The documentation pipeline</a>:
+how to wire up documentation for a module so the shared toolchain picks it up.
+A module can ship a user guide (mdBook), an API reference (Doxygen), or both.</p>
+<h2 id="what-the-builder-looks-for"><a class="header" href="#what-the-builder-looks-for">What the builder looks for</a></h2>
+<p>When the builder image runs against your repository, it reacts to a handful of
+files at the repo root:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>File</th><th>Purpose</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td><code>manifest.json</code></td><td>Declares the module, its versions, and <code>latest</code></td><td><strong>Yes</strong></td></tr>
+<tr><td><code>book.toml</code> + <code>docs/</code></td><td>mdBook user guide</td><td>Optional</td></tr>
+<tr><td><code>Doxyfile</code> + headers</td><td>Doxygen API reference</td><td>Optional</td></tr>
+<tr><td><code>*.liaradoc.json</code></td><td>Extra resources / placeholder replacements</td><td>Optional</td></tr>
+</tbody>
+</table>
+</div>
+<p>Most modules ship both a book and a Doxygen reference; the hosting layer
+tolerates a module that has only one of the two.</p>
+<h2 id="1-the-manifest-required"><a class="header" href="#1-the-manifest-required">1. The manifest (required)</a></h2>
+<p><code>manifest.json</code> drives the version selector and the <code>/&lt;repo&gt;/latest/</code>
+redirect. Two schema versions are supported; the navbar detects which one
+it’s reading from the presence of <code>manifest_version</code>. <strong>New modules should
+use v2</strong> — v1 remains fully supported for modules that haven’t migrated yet,
+and there is no deadline to do so.</p>
+<h3 id="v2-recommended"><a class="header" href="#v2-recommended">v2 (recommended)</a></h3>
+<p>Validated against <code>module-manifest-v2.schema.json</code>. Strict
+(<code>additionalProperties</code> is off everywhere):</p>
+<pre><code class="language-json">{
+  "$schema": "https://liara-engine.github.io/liara/schemas/module-manifest-v2.schema.json",
+  "manifest_version": 2,
+  "kind": "contract",
+  "metadata": {
+    "name": "Liara Interfaces",
+    "description": "The C ABI contracts shared by every module.",
+    "repo": "liara-interfaces",
+    "latest": "1.0.0"
+  },
+  "versions": {
+    "dev":   {},
+    "1.0.0": { "note": "First stable ABI" }
+  }
+}
+</code></pre>
+<ul>
+<li><code>manifest_version</code> must be <code>2</code> — this is what distinguishes it from v1.</li>
+<li><code>kind</code> says what the repository <em>is</em>, and determines how its versions
+relate to the ABI:
+<ul>
+<li><code>contract</code> — this repo’s versions <strong>are</strong> ABI versions (e.g.
+<code>liara-interfaces</code>). Its <code>versions</code> entries carry no <code>abi</code>, only an
+optional <code>note</code>.</li>
+<li><code>module</code> / <code>host</code> — this repo targets one or more ABI versions. Each
+<code>versions</code> entry requires <code>abi</code>: either a bare version
+(<code>"abi": "1.0.0"</code>) or an array of anchors (<code>"abi": ["1.0.0", "2.0.0"]</code>)
+when the version is deliberately built against more than one ABI major.</li>
+<li><code>infrastructure</code> — no ABI relation at all (e.g. this repository,
+<code>docs-shared</code>). Like <code>contract</code>, its <code>versions</code> entries carry no <code>abi</code>.</li>
+</ul>
+</li>
+<li><code>metadata.repo</code> is the GitHub repository name (matches the module’s entry
+in the central <code>modules-registry.json</code>).</li>
+<li><code>metadata.latest</code> is the version the <code>latest</code> alias resolves to. Update it
+when you cut a release.</li>
+<li>Each <code>versions</code> entry may carry a short <code>note</code> (e.g. <code>"LTS"</code>,
+<code>"security fixes only"</code>) — the navbar shows it under the version in the
+dropdown and in its tooltip.</li>
+<li>A v2 manifest’s <code>kind</code> takes precedence over the module’s <code>is_abi</code>/<code>meta</code>
+flags in <code>modules-registry.json</code>, so once a module ships a v2 manifest
+those registry flags become informational only for it.</li>
+<li>Optional <code>artifacts</code> — for a repository that publishes something with its
+own, independent version line (different from the repo’s own releases).
+Most modules don’t need this; see the schema for the shape.</li>
+</ul>
+<h3 id="v1-still-supported"><a class="header" href="#v1-still-supported">v1 (still supported)</a></h3>
+<p>Validated against <code>module-manifest.schema.json</code>. No <code>manifest_version</code> or
+<code>kind</code> field — the module’s ABI role instead comes from
+<code>modules-registry.json</code>’s <code>is_abi</code>/<code>meta</code> flags.</p>
+<pre><code class="language-json">{
+  "$schema": "https://liara-engine.github.io/liara/schemas/module-manifest.schema.json",
+  "metadata": {
+    "name": "Liara Interfaces",
+    "description": "The C ABI contracts shared by every module.",
+    "latest": "1.0.0"
+  },
+  "versions": {
+    "dev":   { "abi_compatibility": ["dev"] },
+    "1.0.0": { "abi_compatibility": ["dev"] }
+  }
+}
+</code></pre>
+<ul>
+<li><code>metadata.latest</code> is the version the <code>latest</code> alias resolves to.</li>
+<li><code>abi_compatibility</code> lists the ABI versions it is compatible with — the
+navbar uses this to show compatibility badges across modules.</li>
+</ul>
+<p>In both versions, each key in <code>versions</code> must be <code>dev</code> or a <code>x.y.z</code> string.</p>
+<h2 id="2-the-user-guide-mdbook"><a class="header" href="#2-the-user-guide-mdbook">2. The user guide (mdBook)</a></h2>
+<p>Add a <code>book.toml</code> and a <code>docs/</code> folder. The standard configuration — point the
+theme at the shared one and leave the rest as below:</p>
+<pre><code class="language-toml">[book]
+title = "Liara Interfaces"
+authors = ["Liara Engine contributors"]
+language = "en"
+src = "docs"
+
+[output.html]
+hash-files = false
+default-theme = "light"
+preferred-dark-theme = "navy"
+git-repository-url = "https://github.com/liara-engine/liara-interfaces"
+git-repository-icon = "fa-github"
+
+theme = "docs-shared/mdbook/theme"
+
+[output.html.fold]
+enable = true
+level = 1
+
+[output.html.search]
+enable = true
+limit-results = 30
+use-boolean-and = true
+boost-title = 2
+boost-hierarchy = 2
+boost-paragraph = 1
+expand = true
+heading-split-level = 2
+
+# Optional: if you want to use Mermaid diagrams, add the preprocessor
+[preprocessor.mermaid]
+command = "mdbook-mermaid"
+</code></pre>
+<p>The <code>theme = "docs-shared/mdbook/theme"</code> line is the important one: the builder
+stages the shared theme there before running mdBook, so your pages get the
+Liara navbar, design tokens, and syntax highlighting automatically.</p>
+<h3 id="pages-and-the-table-of-contents"><a class="header" href="#pages-and-the-table-of-contents">Pages and the table of contents</a></h3>
+<p>You do <strong>not</strong> need to write a <code>SUMMARY.md</code>. If one is absent, the builder
+generates it from your <code>docs/</code> tree: <code>README.md</code> becomes the section landing
+page, and the remaining files follow. So a minimal guide is just:</p>
+<pre><code>docs/
+├── README.md          # the section's front page
+├── getting-started.md
+└── concepts/
+    ├── README.md      # "Concepts" landing page
+    └── ecs.md
+</code></pre>
+<p>If you want full control over ordering, commit your own <code>SUMMARY.md</code> and it will
+be used as-is.</p>
+<h3 id="what-you-can-write"><a class="header" href="#what-you-can-write">What you can write</a></h3>
+<p>Standard CommonMark plus mdBook extensions: headings, tables, footnotes, task
+lists, callouts via blockquotes, and fenced code blocks. The theme bundles
+custom Highlight.js grammars, so <strong>C++</strong>, <strong>GLSL</strong>, and <strong>Dockerfile</strong> all
+colour correctly — prefer them over plain blocks.</p>
+<p>Diagrams are available through the Mermaid preprocessor: use a fenced block with
+the <code>mermaid</code> language and it renders as an SVG that follows the light/dark
+theme. Prefer this over ASCII art for anything non-trivial.</p>
+<pre><code class="language-markdown">```mermaid
+flowchart LR
+    A[Source] --&gt; B[Builder image]
+    B --&gt; C[liara-docs]
+    C --&gt; D((Edge))
+```
+</code></pre>
+<h2 id="3-the-api-reference-doxygen"><a class="header" href="#3-the-api-reference-doxygen">3. The API reference (Doxygen)</a></h2>
+<p>Add a <code>Doxyfile</code> and point <code>INPUT</code> at your headers. The standard configuration
+wires the shared Doxygen template via <code>HTML_HEADER</code> / <code>HTML_FOOTER</code>:</p>
+<pre><code class="language-ini">PROJECT_NAME           = "Liara Interfaces"
+PROJECT_BRIEF          = "The C ABI contracts shared by every module"
+PROJECT_ICON           = docs-shared/shared-content/assets/logo.svg
+OUTPUT_DIRECTORY       = build/doxygen
+
+INPUT                  = include
+RECURSIVE              = YES
+
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+BUILTIN_STL_SUPPORT    = YES
+MARKDOWN_SUPPORT       = YES
+
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+GENERATE_TREEVIEW      = YES
+FULL_SIDEBAR           = YES
+
+HTML_HEADER            = docs-shared/doxygen/header.html
+HTML_FOOTER            = docs-shared/doxygen/footer.html
+
+# Project-specific aliases live here. For example, a thread-safety section:
+ALIASES               += "threadsafety=&lt;dl class='section threadsafety'&gt;&lt;dt&gt;Thread Safety&lt;/dt&gt;&lt;dd&gt;"
+ALIASES               += "endthreadsafety=&lt;/dd&gt;&lt;/dl&gt;"
+</code></pre>
+<p><code>OUTPUT_DIRECTORY</code> is overridden by the builder at runtime, and the generated
+HTML is published under <code>/&lt;repo&gt;/&lt;version&gt;/doxygen/</code>. Keep <code>HTML_HEADER</code> and
+<code>HTML_FOOTER</code> pointed at <code>docs-shared/doxygen/</code> — that is what injects the shared
+navbar and styling into every API page.</p>
+<h3 id="documenting-headers"><a class="header" href="#documenting-headers">Documenting headers</a></h3>
+<p>Use Javadoc-style comments. The template renders groups, classes, templates,
+enums, parameter tables, and the standard admonitions (<code>@note</code>, <code>@warning</code>,
+<code>@deprecated</code>). A small example:</p>
+<pre><code class="language-cpp">/**
+ * @brief Appends an element, overwriting the oldest if full.
+ * @param value The element to store.
+ * @return @c true if an element was overwritten.
+ * @threadsafety Not safe for concurrent writers.@endthreadsafety
+ */
+bool push(const T&amp; value) noexcept;
+</code></pre>
+<p>Custom aliases like <code>@threadsafety</code> (defined in your <code>Doxyfile</code>) let you add
+project-specific sections without touching the shared template.</p>
+<h2 id="4-extra-resources-and-replacements-optional"><a class="header" href="#4-extra-resources-and-replacements-optional">4. Extra resources and replacements (optional)</a></h2>
+<p>If a page needs extra CSS/JS, a favicon, or build-time text substitutions,
+declare a <code>*.liaradoc.json</code> (validated against <code>documentation-module.schema.json</code>).
+Each entry either copies a <strong>resource</strong> into the output or performs a
+<strong>replacement</strong> of a placeholder in the generated HTML. Most modules never need
+this — it exists for the hub and the shared content themselves.</p>
+<h2 id="5-testing-before-you-merge"><a class="header" href="#5-testing-before-you-merge">5. Testing before you merge</a></h2>
+<p>There is no separate local build to babysit. Open a pull request and, when your
+documentation files change, a preview is published to a hidden URL
+(<code>/&lt;repo&gt;/pr-&lt;n&gt;/</code>) and posted as a comment on the PR. Add the <code>docs-preview</code>
+label to force a build if the path filter didn’t catch your change. The preview
+is rebuilt on every push and removed when the PR closes — see
+<a href="documentation-pipeline.html#8-pr-previews">The documentation pipeline</a>.</p>
+<h2 id="checklist-for-a-new-module"><a class="header" href="#checklist-for-a-new-module">Checklist for a new module</a></h2>
+<ol>
+<li>Add <code>manifest.json</code> with <code>metadata.latest</code> and at least a <code>dev</code> version.</li>
+<li>Add <code>book.toml</code> + <code>docs/README.md</code> for the guide (theme pointed at
+<code>docs-shared/mdbook/theme</code>).</li>
+<li>Optionally add <code>Doxyfile</code> + <code>include/</code> for the API reference.</li>
+<li>Add the module to the central <code>modules-registry.json</code> so the navbar lists it.</li>
+<li>Open a PR and check the preview.</li>
+</ol>
+
+            </main>
+
+            <nav class="nav-wrapper" aria-label="Page navigation">
+
+
+                <div style="clear: both"></div>
+            </nav>
+        </div>
+    </div>
+
+    <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+    </nav>
+</div>
+
+
+
+
+<script>
+    window.playground_copyable = true;
+</script>
+
+
+<script src="elasticlunr.min.js"></script>
+<script src="mark.min.js"></script>
+<script src="searcher.js"></script>
+
+<script src="clipboard.min.js"></script>
+<script src="highlight.js"></script>
+<script src="book.js"></script>
+
+<script defer src="/shared-content/mdbook/js/admonitions.js"></script>
+
+
+</div>
+</body>
+</html>
