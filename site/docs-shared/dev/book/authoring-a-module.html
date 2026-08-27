@@ -281,7 +281,14 @@ Most modules don’t need this; see the schema for the shape.</li>
 <ul>
 <li><code>metadata.latest</code> is the version the <code>latest</code> alias resolves to.</li>
 <li><code>abi_compatibility</code> lists the ABI versions it is compatible with — the
-navbar uses this to show compatibility badges across modules.</li>
+navbar uses this to show compatibility badges across modules, computed
+with the exact same rule as the ABI’s own <code>liara_version_provides()</code>:
+same major.minor is “Compatible”, an older minor is “Degraded”, a
+different major is a mismatch. Only major- (or, for a 0.x ABI, minor-)
+level precision is meaningful here — declaring <code>"0.2.0"</code> means every
+<code>0.2.x</code> release is compatible. Declaring a specific patch (<code>"0.2.1"</code>)
+additionally marks older patches of that same minor (<code>0.2.0</code>) as
+“Degraded” rather than fully compatible.</li>
 </ul>
 <p>In both versions, each key in <code>versions</code> must be <code>dev</code> or a <code>x.y.z</code> string.</p>
 <h2 id="2-the-user-guide-mdbook"><a class="header" href="#2-the-user-guide-mdbook">2. The user guide (mdBook)</a></h2>
