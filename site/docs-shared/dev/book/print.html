@@ -221,9 +221,64 @@ files at the repo root:</p>
 <p>Most modules ship both a book and a Doxygen reference; the hosting layer
 tolerates a module that has only one of the two.</p>
 <h2 id="1-the-manifest-required"><a class="header" href="#1-the-manifest-required">1. The manifest (required)</a></h2>
-<p><code>manifest.json</code> is validated against <code>module-manifest.schema.json</code> and drives
-the version selector and the <code>/&lt;repo&gt;/latest/</code> redirect. It is small and strict
+<p><code>manifest.json</code> drives the version selector and the <code>/&lt;repo&gt;/latest/</code>
+redirect. Two schema versions are supported; the navbar detects which one
+it’s reading from the presence of <code>manifest_version</code>. <strong>New modules should
+use v2</strong> — v1 remains fully supported for modules that haven’t migrated yet,
+and there is no deadline to do so.</p>
+<h3 id="v2-recommended"><a class="header" href="#v2-recommended">v2 (recommended)</a></h3>
+<p>Validated against <code>module-manifest-v2.schema.json</code>. Strict
 (<code>additionalProperties</code> is off everywhere):</p>
+<pre><code class="language-json">{
+  "$schema": "https://liara-engine.github.io/liara/schemas/module-manifest-v2.schema.json",
+  "manifest_version": 2,
+  "kind": "contract",
+  "metadata": {
+    "name": "Liara Interfaces",
+    "description": "The C ABI contracts shared by every module.",
+    "repo": "liara-interfaces",
+    "latest": "1.0.0"
+  },
+  "versions": {
+    "dev":   {},
+    "1.0.0": { "note": "First stable ABI" }
+  }
+}
+</code></pre>
+<ul>
+<li><code>manifest_version</code> must be <code>2</code> — this is what distinguishes it from v1.</li>
+<li><code>kind</code> says what the repository <em>is</em>, and determines how its versions
+relate to the ABI:
+<ul>
+<li><code>contract</code> — this repo’s versions <strong>are</strong> ABI versions (e.g.
+<code>liara-interfaces</code>). Its <code>versions</code> entries carry no <code>abi</code>, only an
+optional <code>note</code>.</li>
+<li><code>module</code> / <code>host</code> — this repo targets one or more ABI versions. Each
+<code>versions</code> entry requires <code>abi</code>: either a bare version
+(<code>"abi": "1.0.0"</code>) or an array of anchors (<code>"abi": ["1.0.0", "2.0.0"]</code>)
+when the version is deliberately built against more than one ABI major.</li>
+<li><code>infrastructure</code> — no ABI relation at all (e.g. this repository,
+<code>docs-shared</code>). Like <code>contract</code>, its <code>versions</code> entries carry no <code>abi</code>.</li>
+</ul>
+</li>
+<li><code>metadata.repo</code> is the GitHub repository name (matches the module’s entry
+in the central <code>modules-registry.json</code>).</li>
+<li><code>metadata.latest</code> is the version the <code>latest</code> alias resolves to. Update it
+when you cut a release.</li>
+<li>Each <code>versions</code> entry may carry a short <code>note</code> (e.g. <code>"LTS"</code>,
+<code>"security fixes only"</code>) — the navbar shows it under the version in the
+dropdown and in its tooltip.</li>
+<li>A v2 manifest’s <code>kind</code> takes precedence over the module’s <code>is_abi</code>/<code>meta</code>
+flags in <code>modules-registry.json</code>, so once a module ships a v2 manifest
+those registry flags become informational only for it.</li>
+<li>Optional <code>artifacts</code> — for a repository that publishes something with its
+own, independent version line (different from the repo’s own releases).
+Most modules don’t need this; see the schema for the shape.</li>
+</ul>
+<h3 id="v1-still-supported"><a class="header" href="#v1-still-supported">v1 (still supported)</a></h3>
+<p>Validated against <code>module-manifest.schema.json</code>. No <code>manifest_version</code> or
+<code>kind</code> field — the module’s ABI role instead comes from
+<code>modules-registry.json</code>’s <code>is_abi</code>/<code>meta</code> flags.</p>
 <pre><code class="language-json">{
   "$schema": "https://liara-engine.github.io/liara/schemas/module-manifest.schema.json",
   "metadata": {
@@ -238,12 +293,11 @@ the version selector and the <code>/&lt;repo&gt;/latest/</code> redirect. It is 
 }
 </code></pre>
 <ul>
-<li><code>metadata.latest</code> is the version the <code>latest</code> alias resolves to. Update it
-when you cut a release.</li>
-<li>Each key in <code>versions</code> must be <code>dev</code> or a <code>x.y.z</code> string, and lists the ABI
-versions it is compatible with — the navbar uses this to show compatibility
-badges across modules.</li>
+<li><code>metadata.latest</code> is the version the <code>latest</code> alias resolves to.</li>
+<li><code>abi_compatibility</code> lists the ABI versions it is compatible with — the
+navbar uses this to show compatibility badges across modules.</li>
 </ul>
+<p>In both versions, each key in <code>versions</code> must be <code>dev</code> or a <code>x.y.z</code> string.</p>
 <h2 id="2-the-user-guide-mdbook"><a class="header" href="#2-the-user-guide-mdbook">2. The user guide (mdBook)</a></h2>
 <p>Add a <code>book.toml</code> and a <code>docs/</code> folder. The standard configuration — point the
 theme at the shared one and leave the rest as below:</p>
