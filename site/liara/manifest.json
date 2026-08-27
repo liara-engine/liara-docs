@@ -6,10 +6,17 @@
     "name": "Liara Engine Meta Repo",
     "description": "Meta documentation about the Liara Engine project, including tooling, contribution guidelines, and other non-module-specific information.",
     "repo": "liara",
-    "latest": "0.1.0"
+    "latest": "0.2.0"
   },
   "versions": {
-    "dev": {}, "0.0.1": {}, "0.0.2": {}, "0.0.3": {}, "0.1.0": {}, "0.2.0": { "note": "Dockerfile moved" }
+    "dev": {},
+    "0.0.1": {},
+    "0.0.2": {},
+    "0.0.3": {},
+    "0.1.0": {},
+    "0.2.0": {
+      "note": "Dockerfile moved"
+    }
   },
   "artifacts": {
     "launcher": {
