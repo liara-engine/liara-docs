@@ -1,0 +1,262 @@
+<!DOCTYPE HTML>
+
+
+<html lang="en" class="sidebar-visible no-js light">
+<head>
+<meta charset="UTF-8">
+<title>Architecture Decision Records - Liara Engine — Meta Repository</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="theme-color" content="#FFFAFC">
+
+<link rel="icon" type="image/x-icon" href="/shared-content/assets/logo.svg">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/general.css">
+<link rel="stylesheet" href="../css/chrome.css">
+<link rel="stylesheet" href="../css/print.css" media="print">
+
+<link rel="stylesheet" href="../fonts/fonts.css">
+
+<link rel="stylesheet" id="mdbook-highlight-css" href="../highlight.css">
+<link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night.css">
+<link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight.css">
+
+<link rel="stylesheet" href="/shared-content/tokens/design-tokens.css">
+<link rel="stylesheet" href="/shared-content/navbar/navbar.css">
+<link rel="stylesheet" href="/shared-content/mdbook/css/custom.css">
+
+
+
+<script src="/shared-content/mdbook/js/mermaid.min.js"></script>
+<script src="/shared-content/mdbook/js/mermaid-init.js"></script>
+
+</head>
+<body class="sidebar-visible">
+<div id="mdbook-body-container">
+
+<script>
+(function () {
+    try {
+        var t = localStorage.getItem("liara-theme");
+        if (t === "light" || t === "dark") {
+            document.documentElement.setAttribute("data-liara-theme", t);
+        }
+        if (localStorage.getItem("liara-a11y-dyslexia") === "true") {
+            document.documentElement.setAttribute("data-liara-a11y-dyslexia", "true");
+        }
+        // Bridge to mdBook's own theme system: align mdBook's `class` on <html>
+        // with our chosen theme, so its native styles also follow.
+        var mdbookTheme = (t === "dark") ? "navy"
+                       : (t === "light") ? "light"
+                       : null;
+        if (mdbookTheme) {
+            document.documentElement.classList.remove(
+                "light", "rust", "coal", "navy", "ayu");
+            document.documentElement.classList.add(mdbookTheme);
+        }
+    } catch (e) { /* localStorage unavailable, fall back to defaults */ }
+})();
+</script>
+
+<shared-navbar></shared-navbar>
+
+<script src="/shared-content/navbar/navbar.config.js"></script>
+<script src="/shared-content/mdbook/shared-navbar.js"></script>
+<script defer src="/shared-content/navbar/navbar.js"></script>
+
+<link rel="stylesheet" href="/shared-content/navbar/version-banner.css">
+<script defer src="/shared-content/navbar/version-banner.js"></script>
+
+
+<input type="hidden" id="MDBOOK_OUTPUT" value="../">
+
+
+<script>
+    var path_to_root = "../";
+    var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "navy" : "light";
+</script>
+
+<script>
+    try {
+        var theme = localStorage.getItem('mdbook-theme');
+        var sidebar = localStorage.getItem('mdbook-sidebar');
+
+        if (theme.startsWith('"') && theme.endsWith('"')) {
+            localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+        }
+
+        if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+            localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+        }
+    } catch (e) { }
+</script>
+
+<input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+<nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+    <div class="sidebar-scrollbox">
+        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html">Liara Engine</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ARCHITECTURE.html"><strong aria-hidden="true">1.</strong> Architecture</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="MODULES.html"><strong aria-hidden="true">2.</strong> Modules</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ROADMAP.html"><strong aria-hidden="true">3.</strong> Roadmap</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="BOOTSTRAP.html"><strong aria-hidden="true">4.</strong> Bootstrap</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="CONTRIBUTING.html"><strong aria-hidden="true">5.</strong> Contributing</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="CODE_STYLE.html"><strong aria-hidden="true">6.</strong> Code Style</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="TOOLING.html"><strong aria-hidden="true">7.</strong> Tooling</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="adr/index.html"><strong aria-hidden="true">8.</strong> Architecture Decision Records</a><a class="chapter-fold-toggle"><div>❱</div></a></span><ol class="section"><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0001-multi-repository-layout.html"><strong aria-hidden="true">8.1.</strong> ADR-0001: Multi-repository layout</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0002-c-abi-as-the-inter-module-contract.html"><strong aria-hidden="true">8.2.</strong> ADR-0002: A C ABI as the inter-module contract</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0003-the-host-composes-modules.html"><strong aria-hidden="true">8.3.</strong> ADR-0003: The host composes modules</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0004-module-boundaries.html"><strong aria-hidden="true">8.4.</strong> ADR-0004: Module boundaries: what stays in the core</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0005-version-encoding-and-compatibility.html"><strong aria-hidden="true">8.5.</strong> ADR-0005: Version encoding and compatibility semantics</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0006-manifest-as-compatibility-source-of-truth.html"><strong aria-hidden="true">8.6.</strong> ADR-0006: manifest.json as the single compatibility source of truth</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0007-cmake-presets-and-vcpkg.html"><strong aria-hidden="true">8.7.</strong> ADR-0007: CMake with presets, and vcpkg in manifest mode</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0008-two-tier-ci.html"><strong aria-hidden="true">8.8.</strong> ADR-0008: Two-tier CI, and reusable workflows</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0009-in-house-ecs.html"><strong aria-hidden="true">8.9.</strong> ADR-0009: An in-house ECS rather than an existing library</a></span></li><li class="chapter-item "><span class="chapter-link-wrapper"><a href="adr/0010-vulkan-without-abstraction-layer.html"><strong aria-hidden="true">8.10.</strong> ADR-0010: Vulkan directly, without a rendering abstraction layer</a></span></li></ol><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="LICENSE.html">License</a></span></li></ol>
+    </div>
+    <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+        <div class="sidebar-resize-indicator"></div>
+    </div>
+</nav>
+
+<script>
+    var sidebarScrollbox = document.querySelector('#mdbook-sidebar .sidebar-scrollbox');
+    sidebarScrollbox.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') {
+            sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+        }
+    }, { passive: true });
+    var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+    sessionStorage.removeItem('sidebar-scroll');
+    if (sidebarScrollTop) {
+        sidebarScrollbox.scrollTop = sidebarScrollTop;
+    } else {
+        var activeSection = document.querySelector('#mdbook-sidebar .active');
+        if (activeSection) {
+            activeSection.scrollIntoView({ block: 'center' });
+        }
+    }
+</script>
+
+<div id="page-wrapper" class="page-wrapper">
+
+    <div class="page">
+        <div id="mdbook-menu-bar-hover-placeholder"></div>
+        <div id="mdbook-menu-bar" class="menu-bar sticky">
+            <div class="left-buttons">
+                <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                    <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                </label>
+                <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list" style="display: none">
+                    <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                </button>
+                <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu" style="display: none">
+                    <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                    <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                    <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                    <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                    <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                    <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                </ul>
+                <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                    <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                </button>
+            </div>
+
+            <h1 class="menu-title">Liara Engine — Meta Repository</h1>
+
+            <div class="right-buttons">
+                <a href="https://github.com/liara-engine/liara" title="Git repository" aria-label="Git repository">
+                    <i id="git-repository-button" class="fa fa-github"></i>
+                </a>
+                <a href="https://github.com/liara/docs/edit/main/docs/docs/adr/README.md" title="Suggest an edit" aria-label="Suggest an edit">
+                    <i id="git-edit-button" class="fa fa-edit"></i>
+                </a>
+            </div>
+        </div>
+
+        <div id="mdbook-search-wrapper" class="hidden">
+            <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                <div class="search-wrapper">
+                    <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                    <div class="spinner-wrapper">
+                        <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                    </div>
+                </div>
+            </form>
+            <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                <ul id="mdbook-searchresults">
+                </ul>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById('mdbook-sidebar-toggle-anchor').addEventListener('change', function () {
+                document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', this.checked.toString());
+                document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', (!this.checked).toString());
+                Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function (link) {
+                    link.setAttribute('tabIndex', this.checked ? 0 : -1);
+                }.bind(this));
+            });
+        </script>
+
+        <div id="content" class="content">
+            <main>
+                <h1 id="architecture-decision-records"><a class="header" href="#architecture-decision-records">Architecture Decision Records</a></h1>
+<p>Each file here records one decision: what was decided, what else was on the table, and what the decision costs. They are append-only. A decision that no longer holds is not edited or deleted — a new ADR supersedes it, and the old one is marked as superseded, because the reasoning that turned out to be wrong is often more useful than the reasoning that turned out to be right.</p>
+<p>Most of the Phase 0 records are retrospective: the decision was made while bootstrapping and written down afterward. That is stated rather than hidden. A retrospective ADR records why a decision still holds, which is a different and more honest claim than a reconstruction of why it was made.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>ADR</th><th>Title</th><th>Status</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="0001-multi-repository-layout.html">0001</a></td><td>Multi-repository layout</td><td>Accepted</td></tr>
+<tr><td><a href="0002-c-abi-as-the-inter-module-contract.html">0002</a></td><td>A C ABI as the inter-module contract</td><td>Accepted</td></tr>
+<tr><td><a href="0003-the-host-composes-modules.html">0003</a></td><td>The host composes modules</td><td>Accepted</td></tr>
+<tr><td><a href="0004-module-boundaries.html">0004</a></td><td>Module boundaries: what stays in the core</td><td>Accepted</td></tr>
+<tr><td><a href="0005-version-encoding-and-compatibility.html">0005</a></td><td>Version encoding and compatibility semantics</td><td>Accepted</td></tr>
+<tr><td><a href="0006-manifest-as-compatibility-source-of-truth.html">0006</a></td><td><code>manifest.json</code> as the single compatibility source of truth</td><td>Accepted</td></tr>
+<tr><td><a href="0007-cmake-presets-and-vcpkg.html">0007</a></td><td>CMake with presets, and vcpkg in manifest mode</td><td>Accepted</td></tr>
+<tr><td><a href="0008-two-tier-ci.html">0008</a></td><td>Two-tier CI, and reusable workflows</td><td>Accepted</td></tr>
+<tr><td><a href="0009-in-house-ecs.html">0009</a></td><td>An in-house ECS rather than an existing library</td><td>Proposed</td></tr>
+<tr><td><a href="0010-vulkan-without-abstraction-layer.html">0010</a></td><td>Vulkan directly, without a rendering abstraction layer</td><td>Proposed</td></tr>
+</tbody>
+</table>
+</div>
+<p>New tooling requires an ADR (<code>TOOLING.md</code> section 1), with one exception: the bootstrapping phase, whose policy is in <code>ROADMAP.md</code> section 4.</p>
+
+            </main>
+
+            <nav class="nav-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../TOOLING.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../adr/0001-multi-repository-layout.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+
+                <div style="clear: both"></div>
+            </nav>
+        </div>
+    </div>
+
+    <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            <a rel="prev" href="../TOOLING.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+            </a>
+
+            <a rel="next prefetch" href="../adr/0001-multi-repository-layout.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+            </a>
+    </nav>
+</div>
+
+
+
+
+<script>
+    window.playground_copyable = true;
+</script>
+
+
+<script src="../elasticlunr.min.js"></script>
+<script src="../mark.min.js"></script>
+<script src="../searcher.js"></script>
+
+<script src="../clipboard.min.js"></script>
+<script src="../highlight.js"></script>
+<script src="../book.js"></script>
+
+<script defer src="/shared-content/mdbook/js/admonitions.js"></script>
+
+
+</div>
+</body>
+</html>
