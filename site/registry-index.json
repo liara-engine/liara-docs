@@ -75,7 +75,7 @@
         "0.2.0": {
           "abi": null,
           "note": "Dockerfile moved",
-          "deployed": false
+          "deployed": true
         }
       },
       "order": [
