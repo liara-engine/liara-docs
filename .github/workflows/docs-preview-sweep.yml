@@ -27,9 +27,19 @@ jobs:
         with:
           ref: cloudflare-pages
           token: ${{ secrets.DOCS_PUSH_TOKEN }}
+          path: output-repository
           fetch-depth: '0'
 
+      - uses: actions/checkout@v7
+        with:
+          repository: '${{ github.repository_owner }}/.github'
+          sparse-checkout: |
+            scripts
+            .github/actions
+          path: '.github-shared-core'
+
       - name: Prune closed / stale previews
+        working-directory: output-repository
         run: |
           set -euo pipefail
           now=$(date -u +%s)
@@ -58,7 +68,7 @@ jobs:
             fi
 
             if [ "$remove" = true ]; then
-              git rm -r --quiet "$dir"
+              rm -rf "$dir"
               removed=$((removed + 1))
             else
               echo "::notice::${repo}#${pr} open and fresh -> keep"
@@ -67,15 +77,17 @@ jobs:
 
           echo "Removed ${removed} preview(s)."
 
+      - uses: ./.github-shared-core/.github/actions/site-refresh
+        with:
+          site: output-repository/site
+          collect-garbage: 'true'
+          token: ${{ secrets.ORG_READ_TOKEN }}
+
       - name: Commit
         run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          if git diff --cached --quiet; then
-            echo "Nothing to prune."
-            exit 0
-          fi
-          git commit -m "Sweep closed/stale docs previews"
-          git pull --rebase origin "${OUTPUT_BRANCH}" || echo "Nothing to rebase"
-          git push origin HEAD:"${OUTPUT_BRANCH}"
+          bash .github-shared-core/scripts/git-publish.sh \
+            --repo-dir output-repository \
+            --branch "${OUTPUT_BRANCH}" \
+            --message "docs: sweep closed/stale previews and collect the asset store" \
+            --generated site/registry-index.json \
+            --regenerate "$LIARA_INDEX_COMMAND"
