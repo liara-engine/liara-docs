@@ -3,13 +3,54 @@
   "modules": [
     {
       "key": "meta-repo",
-      "name": "Liara Engine",
+      "name": "Liara Engine Meta Repo",
       "repo": "liara",
       "only_mdbook": true,
       "meta": true,
-      "deployed": false,
-      "latest": null,
-      "versions": {}
+      "deployed": true,
+      "description": "Meta documentation about the Liara Engine project, including tooling, contribution guidelines, and other non-module-specific information.",
+      "kind": "infrastructure",
+      "latest": "0.2.0",
+      "versions": {
+        "dev": {
+          "abi": null,
+          "note": null,
+          "deployed": true
+        },
+        "0.0.1": {
+          "abi": null,
+          "note": null,
+          "deployed": false
+        },
+        "0.0.2": {
+          "abi": null,
+          "note": null,
+          "deployed": false
+        },
+        "0.0.3": {
+          "abi": null,
+          "note": null,
+          "deployed": false
+        },
+        "0.1.0": {
+          "abi": null,
+          "note": null,
+          "deployed": false
+        },
+        "0.2.0": {
+          "abi": null,
+          "note": "Dockerfile moved",
+          "deployed": false
+        }
+      },
+      "order": [
+        "dev",
+        "0.2.0",
+        "0.1.0",
+        "0.0.3",
+        "0.0.2",
+        "0.0.1"
+      ]
     },
     {
       "key": "interfaces",
