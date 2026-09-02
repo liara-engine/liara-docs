@@ -1,0 +1,477 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-vdxcvpsm"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>documentation-pipeline | Liara Engine Documentation Hub</title><link rel="canonical" href="https://liara-engine.liara-engine-documentation.workers.dev/docs-shared/0.1.1/guides/documentation-pipeline/"/><link rel="sitemap" href="/docs-shared/0.1.1/sitemap-index.xml"/><link rel="shortcut icon" href="/_cas/dd/ddd9a3e022dd9d39.svg" type="image/svg+xml"/><meta name="generator" content="Astro v7.2.9"/><meta name="generator" content="Starlight v0.41.10"/><meta property="og:title" content="documentation-pipeline"/><meta property="og:type" content="article"/><meta property="og:url" content="https://liara-engine.liara-engine-documentation.workers.dev/docs-shared/0.1.1/guides/documentation-pipeline/"/><meta property="og:locale" content="en"/><meta property="og:description" content="The central hub for all documentation related to the Liara Engine, providing a unified interface and shared resources for all modules."/><meta property="og:site_name" content="Liara Engine Documentation Hub"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="The central hub for all documentation related to the Liara Engine, providing a unified interface and shared resources for all modules."/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/_cas/_astro/print.ehPL0gv-.css" media="print"><link rel="stylesheet" href="/_cas/_astro/middleware.CJ3qlzbh.css"><script type="module" src="/_cas/_astro/page.DJLhOWm1.js"></script></head><body class="astro-vdxcvpsm"><a class="sl-skip-link astro-vxeigawq" href="#_top">Skip to content</a><div class="page sl-flex astro-gqpr5s5a"><header class="header astro-gqpr5s5a"><div class="header astro-nczgtkxc"><div class="title-wrapper sl-flex astro-nczgtkxc"><div class="liara-title astro-v7nfscyj"><div class="liara-title__name astro-v7nfscyj"><a href="/docs-shared/0.1.1/" class="site-title sl-flex astro-clw6ags5"><span class="astro-clw6ags5" translate="no">Liara Engine Documentation Hub</span></a></div><script type="module" src="/_cas/_astro/LiaraSelect.astro_astro_type_script_index_0_lang.l6_X345O.js"></script><liara-switchers data-index="/registry-index.json" data-repo="docs-shared" data-version="0.1.1" class="liara-switchers liara-switchers--header"><liara-select data-name="module" data-value="docs-shared" data-align="start" style="--liara-select-value-width: var(--liara-switcher-module-width, 16rem)" class="liara-select"><button type="button" class="liara-select__trigger" data-liara-trigger aria-haspopup="listbox" aria-expanded="false"><span class="liara-select__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5 12 3.5l8 4v9L12 20.5l-8-4z"/><path d="m4 7.5 8 4 8-4M12 11.5v9"/></svg></span><span class="liara-select__sr">Module</span><span class="liara-select__value" data-liara-value>Shared Documentation</span><span class="liara-select__badge" data-liara-badge hidden></span><svg class="liara-select__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="liara-select__panel" data-liara-panel role="listbox" aria-label="Module" hidden><a role="option" tabindex="-1" aria-selected="false" data-value="liara" href="/liara/latest/" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">Liara Engine</span></span></a><a role="option" tabindex="-1" aria-selected="false" data-value="liara-interfaces" href="/liara-interfaces/latest/" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">Interfaces</span></span></a><a role="option" tabindex="-1" aria-selected="false" data-value="liara-core" href="/liara-core/latest/" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">Core</span></span></a><a role="option" tabindex="-1" aria-selected="false" data-value="liara-renderer" href="/liara-renderer/latest/" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">Renderer</span></span></a><a role="option" tabindex="-1" aria-selected="true" data-value="docs-shared" href="/docs-shared/latest/" class="liara-select__option is-selected"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">Shared Documentation</span></span></a></div></liara-select><liara-select data-name="version" data-value="0.1.1" data-align="start" style="--liara-select-value-width: var(--liara-switcher-version-width, 7.5rem)" class="liara-select"><button type="button" class="liara-select__trigger" data-liara-trigger aria-haspopup="listbox" aria-expanded="false"><span class="liara-select__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5v9"/><circle cx="6" cy="16.5" r="2.5"/><circle cx="6" cy="4" r="2"/><path d="M18 10v-.5A2.5 2.5 0 0 0 15.5 7H9"/><circle cx="18" cy="12" r="2.5"/></svg></span><span class="liara-select__sr">Version</span><span class="liara-select__value" data-liara-value>0.1.1</span><span class="liara-select__badge" data-liara-badge>latest</span><svg class="liara-select__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="liara-select__panel" data-liara-panel role="listbox" aria-label="Version" hidden><a role="option" tabindex="-1" aria-selected="false" data-value="dev" href="/docs-shared/dev/" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">dev</span><span class="liara-select__option-note">continuous build</span></span></a><a role="option" tabindex="-1" aria-selected="true" data-value="0.1.1" href="/docs-shared/0.1.1/" class="liara-select__option is-selected"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">0.1.1</span></span><span class="liara-select__badge">latest</span></a><a role="option" tabindex="-1" aria-selected="false" data-value="0.1.0" href="/docs-shared/0.1.0/" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">0.1.0</span></span></a><a role="option" tabindex="-1" aria-selected="false" data-value="0.0.6" href="/docs-shared/0.0.6/" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">0.0.6</span></span></a><a role="option" tabindex="-1" aria-selected="false" data-value="0.0.5" href="/docs-shared/0.0.5/" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">0.0.5</span></span></a></div></liara-select></liara-switchers><script type="module">var e=null,t=t=>e??=fetch(t,{cache:`no-cache`}).then(e=>e.ok?e.json():null),n=class extends HTMLElement{connectedCallback(){this.ready||(this.ready=!0,this.repo=this.dataset.repo??``,this.version=this.dataset.version??``,this.modules=this.querySelector(`[data-name="module"]`),this.versions=this.querySelector(`[data-name="version"]`),this.refresh().catch(()=>{}))}async refresh(){await customElements.whenDefined(`liara-select`);let e=await t(this.dataset.index??`/registry-index.json`);Array.isArray(e?.modules)&&(this.syncModules(e.modules),this.syncVersions(e.modules.find(e=>e.repo===this.repo)))}syncModules(e){let t=e.filter(e=>e.deployed!==!1);!this.modules||t.length===0||this.modules.setOptions(t.map(e=>({value:e.repo,label:e.name??e.repo,href:`/${e.repo}/latest/`})),this.repo)}syncVersions(e){if(!this.versions||!e?.order?.length)return;let t=e.order.map(t=>{let n=e.versions?.[t]??{};return{value:t,label:t,note:n.note||(t===`dev`?`continuous build`:void 0),badge:n.removed?`retired`:t===e.latest?`latest`:void 0,href:`/${this.repo}/${t}/`}});this.version&&!e.order.includes(this.version)&&t.unshift({value:this.version,label:this.version,badge:/^pr-\d+$/i.test(this.version)?`preview`:void 0,href:`/${this.repo}/${this.version}/`}),this.versions.setOptions(t,this.version)}};customElements.define(`liara-switchers`,n);</script></div></div><div class="sl-flex print:hidden astro-nczgtkxc"><site-search class="astro-nczgtkxc astro-w3yjicvk" data-translations="{&quot;placeholder&quot;:&quot;Search&quot;}" data-pagefind-bundle-path="/pagefind/" data-pagefind-base-url="/" data-pagefind-scope="global"><button data-open-modal disabled aria-label="Search" aria-keyshortcuts="Control+K" class="astro-w3yjicvk"><svg aria-hidden="true" class="astro-w3yjicvk astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg><span class="sl-hidden md:sl-block astro-w3yjicvk" aria-hidden="true">Search</span><kbd class="sl-hidden md:sl-flex astro-w3yjicvk" style="display: none;"><kbd class="astro-w3yjicvk">Ctrl</kbd><kbd class="astro-w3yjicvk">K</kbd></kbd></button><dialog style="padding:0" aria-label="Search" class="astro-w3yjicvk"><div class="dialog-frame sl-flex astro-w3yjicvk"><button data-close-modal class="sl-flex md:sl-hidden astro-w3yjicvk">Cancel</button><p class="liara-search-scope astro-w3yjicvk" data-liara-search-scope><span class="liara-search-scope__label astro-w3yjicvk">Searching dev and latest of every module.</span><span class="liara-search-scope__quip astro-w3yjicvk" data-liara-search-quip></span><span class="liara-search-scope__help astro-w3yjicvk"><button type="button" class="liara-search-scope__info astro-w3yjicvk" aria-label="What does this search cover?">ⓘ</button><span class="liara-search-scope__tooltip astro-w3yjicvk" role="tooltip">The whole site shares one search index, rebuilt on every deploy over the development build and the newest release of every module. Searching from an older release therefore answers with the current documentation rather than with that release: its pages stay online and keep their URLs, but they are not indexed. Keeping one index instead of one per published version is what stops search from growing every time a release is cut.</span></span></p><div class="search-container astro-w3yjicvk"><div id="starlight__search" class="astro-w3yjicvk"></div></div></div></dialog></site-search><script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script><script type="module" src="/_cas/_astro/Search.astro_astro_type_script_index_0_lang.DXySpxIn.js"></script><!--
+	LIARA: the scope notice, kept in its own block so that the Starlight
+	<style> above stays a verbatim copy and can be replaced wholesale on an
+	upgrade. Tokens only — this has to hold up in light, dark and dyslexia
+	modes like everything else.
+--></div><div class="sl-hidden md:sl-flex print:hidden right-group astro-nczgtkxc"><div class="sl-flex social-icons astro-nczgtkxc"><a href="https://github.com/liara-engine/docs-shared" rel="me" class="sl-flex astro-cg55etiy"><span class="sr-only astro-cg55etiy">GitHub</span><svg aria-hidden="true" class="astro-cg55etiy astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><liara-select data-name="theme" data-value="auto" data-align="end" style="--liara-select-value-width: 6rem" class="liara-select liara-theme-select"><button type="button" class="liara-select__trigger" data-liara-trigger aria-haspopup="listbox" aria-expanded="false"><span class="liara-select__icon" aria-hidden="true"><svg class="liara-theme-icon liara-theme-icon--auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="13" rx="2"></rect><path d="M8 21h8M12 18v3"></path></svg><svg class="liara-theme-icon liara-theme-icon--light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4l1.4-1.4M17 7l1.4-1.4"></path></svg><svg class="liara-theme-icon liara-theme-icon--dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></span><span class="liara-select__sr">Colour theme</span><span class="liara-select__value" data-liara-value>Auto</span><span class="liara-select__badge" data-liara-badge hidden></span><svg class="liara-select__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="liara-select__panel" data-liara-panel role="listbox" aria-label="Colour theme" hidden><button role="option" tabindex="-1" aria-selected="true" data-value="auto" type="button" class="liara-select__option is-selected"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">Auto</span><span class="liara-select__option-note">follows your system</span></span></button><button role="option" tabindex="-1" aria-selected="false" data-value="light" type="button" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">Light</span></span></button><button role="option" tabindex="-1" aria-selected="false" data-value="dark" type="button" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">Dark</span></span></button></div></liara-select><script>
+    window.liaraSyncThemeSelects = function () {
+        var stored = null;
+        try { stored = localStorage.getItem('starlight-theme'); } catch (error) { /* private mode */ }
+        var theme = stored === 'light' || stored === 'dark' ? stored : 'auto';
+
+        document.querySelectorAll('.liara-theme-select').forEach(function (select) {
+            select.dataset.value = theme;
+            select.querySelectorAll('.liara-select__option').forEach(function (option) {
+                var selected = option.dataset.value === theme;
+                option.classList.toggle('is-selected', selected);
+                option.setAttribute('aria-selected', String(selected));
+                if (!selected) return;
+                var label = option.querySelector('.liara-select__option-label');
+                var value = select.querySelector('[data-liara-value]');
+                if (label && value) value.textContent = label.textContent;
+            });
+        });
+    };
+
+    window.liaraSyncThemeSelects();
+</script><script type="module">var e=`starlight-theme`,t=e=>e===`light`||e===`dark`?e:`auto`,n=()=>{try{return t(localStorage.getItem(e))}catch{return`auto`}},r=t=>{try{localStorage.setItem(e,t===`auto`?``:t)}catch{}},i=()=>matchMedia(`(prefers-color-scheme: light)`).matches?`light`:`dark`;async function a(e){document.documentElement.dataset.theme=e===`auto`?i():e,await customElements.whenDefined(`liara-select`);for(let t of document.querySelectorAll(`.liara-theme-select`))t.value=e}a(n()),document.addEventListener(`liara-select:change`,e=>{if(e.detail?.name!==`theme`)return;let n=t(e.detail.value);r(n),a(n)}),matchMedia(`(prefers-color-scheme: light)`).addEventListener(`change`,()=>{n()===`auto`&&a(`auto`)});</script><script type="module">var e=class extends HTMLElement{constructor(){super();let e=this.querySelector(`select`);e&&(e.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=e.currentTarget.value)}),window.addEventListener(`pageshow`,t=>{if(!t.persisted)return;let n=e.querySelector(`option[selected]`)?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}};customElements.define(`starlight-lang-select`,e);</script></div></div></header><nav class="sidebar print:hidden astro-gqpr5s5a" aria-label="Main"><starlight-menu-button class="print:hidden astro-vvx7mffu"><button aria-expanded="false" aria-label="Menu" aria-controls="starlight__sidebar" class="sl-flex md:sl-hidden astro-vvx7mffu"><svg aria-hidden="true" class="open-menu astro-vvx7mffu astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg><svg aria-hidden="true" class="close-menu astro-vvx7mffu astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg></button></starlight-menu-button><script type="module">var e=class extends HTMLElement{btn=this.querySelector(`button`);constructor(){super(),this.btn.addEventListener(`click`,()=>this.toggleExpanded());let e=this.closest(`nav`);e&&e.addEventListener(`keyup`,e=>this.closeOnEscape(e)),matchMedia(`(min-width: 50em)`).addEventListener(`change`,()=>this.setExpanded(!1))}setExpanded(e){this.setAttribute(`aria-expanded`,String(e)),document.body.toggleAttribute(`data-mobile-menu-expanded`,e),document.querySelectorAll(`.main-frame, .sl-skip-link`).forEach(t=>{t.toggleAttribute(`inert`,e)})}toggleExpanded(){this.setExpanded(this.getAttribute(`aria-expanded`)!==`true`)}closeOnEscape(e){e.code===`Escape`&&(this.setExpanded(!1),this.btn.focus())}};customElements.define(`starlight-menu-button`,e);</script><div id="starlight__sidebar" class="sidebar-pane astro-gqpr5s5a"><div class="sidebar-content sl-flex astro-gqpr5s5a"><sl-sidebar-state-persist data-hash="1xjjh5x" class="astro-f5yvicm7"><script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script><ul class="top-level astro-ojxuodky"><li class="astro-ojxuodky"><details open class="astro-ojxuodky"><summary class="astro-ojxuodky"><span class="group-label astro-ojxuodky"><span class="large astro-ojxuodky">About</span></span><svg aria-hidden="true" class="caret astro-ojxuodky astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="0"></sl-sidebar-restore><ul class="astro-ojxuodky"><li class="astro-ojxuodky"><a href="/docs-shared/0.1.1/about/license/" class="astro-ojxuodky"><span class="astro-ojxuodky">LICENSE</span></a></li><li class="astro-ojxuodky"><a href="/docs-shared/0.1.1/about/readme/" class="astro-ojxuodky"><span class="astro-ojxuodky">README</span></a></li></ul></details></li><li class="astro-ojxuodky"><details open class="astro-ojxuodky"><summary class="astro-ojxuodky"><span class="group-label astro-ojxuodky"><span class="large astro-ojxuodky">Guide</span></span><svg aria-hidden="true" class="caret astro-ojxuodky astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="1"></sl-sidebar-restore><ul class="astro-ojxuodky"><li class="astro-ojxuodky"><a href="/docs-shared/0.1.1/guides/authoring-a-module/" class="astro-ojxuodky"><span class="astro-ojxuodky">authoring-a-module</span></a></li><li class="astro-ojxuodky"><a href="/docs-shared/0.1.1/guides/documentation-pipeline/" aria-current="page" class="astro-ojxuodky"><span class="astro-ojxuodky">documentation-pipeline</span></a></li></ul></details></li></ul><script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script></sl-sidebar-state-persist><div class="md:sl-hidden"><div class="liara-mobile-switchers astro-s2vygv2j"><liara-switchers data-index="/registry-index.json" data-repo="docs-shared" data-version="0.1.1" class="liara-switchers liara-switchers--menu"><liara-select data-name="module" data-value="docs-shared" data-align="start" style="--liara-select-value-width: 14rem" class="liara-select"><button type="button" class="liara-select__trigger" data-liara-trigger aria-haspopup="listbox" aria-expanded="false"><span class="liara-select__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5 12 3.5l8 4v9L12 20.5l-8-4z"/><path d="m4 7.5 8 4 8-4M12 11.5v9"/></svg></span><span class="liara-select__sr">Module</span><span class="liara-select__value" data-liara-value>Shared Documentation</span><span class="liara-select__badge" data-liara-badge hidden></span><svg class="liara-select__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="liara-select__panel" data-liara-panel role="listbox" aria-label="Module" hidden><a role="option" tabindex="-1" aria-selected="false" data-value="liara" href="/liara/latest/" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">Liara Engine</span></span></a><a role="option" tabindex="-1" aria-selected="false" data-value="liara-interfaces" href="/liara-interfaces/latest/" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">Interfaces</span></span></a><a role="option" tabindex="-1" aria-selected="false" data-value="liara-core" href="/liara-core/latest/" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">Core</span></span></a><a role="option" tabindex="-1" aria-selected="false" data-value="liara-renderer" href="/liara-renderer/latest/" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">Renderer</span></span></a><a role="option" tabindex="-1" aria-selected="true" data-value="docs-shared" href="/docs-shared/latest/" class="liara-select__option is-selected"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">Shared Documentation</span></span></a></div></liara-select><liara-select data-name="version" data-value="0.1.1" data-align="start" style="--liara-select-value-width: 10rem" class="liara-select"><button type="button" class="liara-select__trigger" data-liara-trigger aria-haspopup="listbox" aria-expanded="false"><span class="liara-select__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5v9"/><circle cx="6" cy="16.5" r="2.5"/><circle cx="6" cy="4" r="2"/><path d="M18 10v-.5A2.5 2.5 0 0 0 15.5 7H9"/><circle cx="18" cy="12" r="2.5"/></svg></span><span class="liara-select__sr">Version</span><span class="liara-select__value" data-liara-value>0.1.1</span><span class="liara-select__badge" data-liara-badge>latest</span><svg class="liara-select__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="liara-select__panel" data-liara-panel role="listbox" aria-label="Version" hidden><a role="option" tabindex="-1" aria-selected="false" data-value="dev" href="/docs-shared/dev/" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">dev</span><span class="liara-select__option-note">continuous build</span></span></a><a role="option" tabindex="-1" aria-selected="true" data-value="0.1.1" href="/docs-shared/0.1.1/" class="liara-select__option is-selected"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">0.1.1</span></span><span class="liara-select__badge">latest</span></a><a role="option" tabindex="-1" aria-selected="false" data-value="0.1.0" href="/docs-shared/0.1.0/" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">0.1.0</span></span></a><a role="option" tabindex="-1" aria-selected="false" data-value="0.0.6" href="/docs-shared/0.0.6/" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">0.0.6</span></span></a><a role="option" tabindex="-1" aria-selected="false" data-value="0.0.5" href="/docs-shared/0.0.5/" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">0.0.5</span></span></a></div></liara-select></liara-switchers></div><div class="mobile-preferences sl-flex astro-s2vygv2j"><div class="social-icons astro-s2vygv2j"><a href="https://github.com/liara-engine/docs-shared" rel="me" class="sl-flex astro-cg55etiy"><span class="sr-only astro-cg55etiy">GitHub</span><svg aria-hidden="true" class="astro-cg55etiy astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><liara-select data-name="theme" data-value="auto" data-align="end" style="--liara-select-value-width: 6rem" class="liara-select liara-theme-select"><button type="button" class="liara-select__trigger" data-liara-trigger aria-haspopup="listbox" aria-expanded="false"><span class="liara-select__icon" aria-hidden="true"><svg class="liara-theme-icon liara-theme-icon--auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="13" rx="2"></rect><path d="M8 21h8M12 18v3"></path></svg><svg class="liara-theme-icon liara-theme-icon--light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4l1.4-1.4M17 7l1.4-1.4"></path></svg><svg class="liara-theme-icon liara-theme-icon--dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></span><span class="liara-select__sr">Colour theme</span><span class="liara-select__value" data-liara-value>Auto</span><span class="liara-select__badge" data-liara-badge hidden></span><svg class="liara-select__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="liara-select__panel" data-liara-panel role="listbox" aria-label="Colour theme" hidden><button role="option" tabindex="-1" aria-selected="true" data-value="auto" type="button" class="liara-select__option is-selected"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">Auto</span><span class="liara-select__option-note">follows your system</span></span></button><button role="option" tabindex="-1" aria-selected="false" data-value="light" type="button" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">Light</span></span></button><button role="option" tabindex="-1" aria-selected="false" data-value="dark" type="button" class="liara-select__option"><svg class="liara-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"></polyline></svg><span class="liara-select__option-text"><span class="liara-select__option-label">Dark</span></span></button></div></liara-select><script>
+    window.liaraSyncThemeSelects = function () {
+        var stored = null;
+        try { stored = localStorage.getItem('starlight-theme'); } catch (error) { /* private mode */ }
+        var theme = stored === 'light' || stored === 'dark' ? stored : 'auto';
+
+        document.querySelectorAll('.liara-theme-select').forEach(function (select) {
+            select.dataset.value = theme;
+            select.querySelectorAll('.liara-select__option').forEach(function (option) {
+                var selected = option.dataset.value === theme;
+                option.classList.toggle('is-selected', selected);
+                option.setAttribute('aria-selected', String(selected));
+                if (!selected) return;
+                var label = option.querySelector('.liara-select__option-label');
+                var value = select.querySelector('[data-liara-value]');
+                if (label && value) value.textContent = label.textContent;
+            });
+        });
+    };
+
+    window.liaraSyncThemeSelects();
+</script></div></div></div></div></nav><div class="main-frame astro-gqpr5s5a"><script type="module">var e=document.getElementById(`starlight__sidebar`),t=e?.querySelector(`sl-sidebar-state-persist`),n=`sl-sidebar-state`,r=()=>{let r=[],i=t?.dataset.hash||``;try{let e=sessionStorage.getItem(n),t=JSON.parse(e||`{}`);Array.isArray(t.open)&&t.hash===i&&(r=t.open)}catch{}return{hash:i,open:r,scroll:e?.scrollTop||0}},i=e=>{try{sessionStorage.setItem(n,JSON.stringify(e))}catch{}},a=()=>i(r()),o=(e,t)=>{let n=r();n.open[t]=e,i(n)};t?.addEventListener(`click`,e=>{if(!(e.target instanceof Element))return;let t=e.target.closest(`summary`)?.closest(`details`);if(!t)return;let n=t.querySelector(`sl-sidebar-restore`),r=parseInt(n?.dataset.index||``);isNaN(r)||o(!t.open,r)}),addEventListener(`visibilitychange`,()=>{document.visibilityState===`hidden`&&a()});</script><div class="lg:sl-flex astro-abfeecmu"><aside class="right-sidebar-container print:hidden astro-abfeecmu"><div class="right-sidebar astro-abfeecmu"><div class="lg:sl-hidden astro-q5mffni3"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-5ulgm6bh"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-5ulgm6bh"><details id="starlight__mobile-toc" class="astro-5ulgm6bh"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-5ulgm6bh"><span class="toggle sl-flex astro-5ulgm6bh">On this page<svg aria-hidden="true" class="caret astro-5ulgm6bh astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></span><span class="display-current astro-5ulgm6bh"></span></summary><div class="dropdown astro-5ulgm6bh"><ul class="isMobile astro-cxyftcne" style="--depth: 0;"><li style="--depth: 0;" class="astro-cxyftcne"><a href="#_top" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">Overview</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#1-the-big-picture" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">1. The big picture</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#2-the-repositories-and-their-roles" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">2. The repositories and their roles</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#3-anatomy-of-docs-shared" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">3. Anatomy of docs-shared</span></a><ul class="isMobile astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#baked-vs-runtime" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Baked vs runtime</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#the-design-system" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">The design system</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#the-navbar" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">The navbar</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#the-liaradoc-resourcereplacement-system" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">The liaradoc resource/replacement system</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#4-the-builder-image" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">4. The builder image</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#5-authoring-a-modules-docs" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">5. Authoring a module’s docs</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#6-building-and-publishing" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">6. Building and publishing</span></a><ul class="isMobile astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#versioning" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Versioning</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#7-hosting" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">7. Hosting</span></a><ul class="isMobile astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#url-surface-quick-reference" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">URL surface (quick reference)</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#8-pr-previews" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">8. PR previews</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#9-where-to-change-what" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">9. Where to change what</span></a></li></ul></div></details></nav></mobile-starlight-toc><script type="module" src="/_cas/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.BcSo_yiZ.js"></script></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-q5mffni3"><div class="sl-container astro-q5mffni3"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">On this page</h2><ul class="astro-cxyftcne" style="--depth: 0;"><li style="--depth: 0;" class="astro-cxyftcne"><a href="#_top" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">Overview</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#1-the-big-picture" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">1. The big picture</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#2-the-repositories-and-their-roles" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">2. The repositories and their roles</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#3-anatomy-of-docs-shared" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">3. Anatomy of docs-shared</span></a><ul class="astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#baked-vs-runtime" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Baked vs runtime</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#the-design-system" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">The design system</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#the-navbar" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">The navbar</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#the-liaradoc-resourcereplacement-system" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">The liaradoc resource/replacement system</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#4-the-builder-image" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">4. The builder image</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#5-authoring-a-modules-docs" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">5. Authoring a module’s docs</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#6-building-and-publishing" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">6. Building and publishing</span></a><ul class="astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#versioning" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Versioning</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#7-hosting" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">7. Hosting</span></a><ul class="astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#url-surface-quick-reference" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">URL surface (quick reference)</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#8-pr-previews" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">8. PR previews</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#9-where-to-change-what" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">9. Where to change what</span></a></li></ul></nav></starlight-toc><script type="module" src="/_cas/_astro/TableOfContents.astro_astro_type_script_index_0_lang.Csloo1VZ.js"></script></div></div></div></aside><div class="main-pane astro-abfeecmu"><main data-pagefind-body class="astro-vdxcvpsm" lang="en" dir="ltr"><script>(function(){const messages = [];
+
+    (function () {
+        'use strict';
+        const bar = document.querySelector('[data-liara-version-banner]');
+        if (!bar) return;
+
+        const message = bar.querySelector('[data-liara-vb-message]');
+        if (message && messages.length > 0) {
+            message.textContent = messages[Math.floor(Math.random() * messages.length)];
+        }
+
+        bar.querySelector('.liara-version-banner__info')?.addEventListener('click', (event) => {
+            event.preventDefault();
+            bar.querySelector('.liara-version-banner__help')?.classList.toggle('is-open');
+        });
+
+        bar.querySelector('.liara-version-banner__dismiss')?.addEventListener('click', () => bar.remove());
+
+        fetch('/registry-index.json', { cache: 'no-cache' })
+            .then((response) => (response.ok ? response.json() : null))
+            .then((index) => {
+                const module = index?.modules?.find?.((m) => m.repo === bar.dataset.liaraRepo);
+                if (module?.latest && module.latest === bar.dataset.liaraVersion) bar.remove();
+            })
+            .catch(() => { /* keep the build-time banner */ });
+    })();
+})();</script><div class="content-panel astro-oil7k7jf"><div class="sl-container astro-oil7k7jf"><h1 id="_top" class="astro-2sm4b3ln">documentation-pipeline</h1></div></div><div class="content-panel astro-oil7k7jf"><div class="sl-container astro-oil7k7jf"><div class="sl-markdown-content"><div class="sl-heading-wrapper level-h1"><h1 id="the-documentation-pipeline">The documentation pipeline</h1><a class="sl-anchor-link" href="#the-documentation-pipeline"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The documentation pipeline”</span></a></div>
+<blockquote>
+<p>The documentation of the documentation. Yes, it is a little meta.</p>
+</blockquote>
+<p>This page explains how Liara Engine’s documentation is produced, versioned, and served — every repository, tool, and moving part involved, and how they fit together.
+If you are touching templates, CI, or the hosting layer, start here.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="1-the-big-picture">1. The big picture</h2><a class="sl-anchor-link" href="#1-the-big-picture"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “1. The big picture”</span></a></div>
+<p>The documentation is <strong>not</strong> built in one place.
+Shared look-and-feel lives in one repository, the build logic lives in a container image, each module builds its own docs from its own sources, and everything is published to a single hosting repository served at the edge.</p>
+<pre dir="ltr" class="mermaid">flowchart TB
+
+    subgraph Shared[&quot;Shared Documentation Assets&quot;]
+        DS[&quot;docs-shared&lt;br/&gt;templates + assets&lt;br/&gt;(theme, navbar, tokens, doxygen)&quot;]
+    end
+
+    subgraph Builder[&quot;Documentation Builder Infrastructure&quot;]
+        LM[&quot;liara (meta)&lt;br/&gt;docker/.../Dockerfile&lt;br/&gt;scripts/ (build-docs.py...)&lt;br/&gt;schemas/&quot;]
+        IMG[&quot;ghcr.io/liara-engine/&lt;br/&gt;liara-documentation-builder:latest&quot;]
+
+        LM --&gt;|&quot;builds &amp; publishes&quot;| IMG
+    end
+
+    DS --&gt;|&quot;cloned at build&quot;| LM
+
+    subgraph Repos[&quot;Repositories generating documentation&quot;]
+        LI[&quot;liara-interfaces&lt;br/&gt;(classic module)&quot;]
+        LC[&quot;liara-core&lt;br/&gt;(classic module)&quot;]
+        DST[&quot;docs-shared&lt;br/&gt;(builds test fixtures)&quot;]
+
+        HTML[&quot;Generated HTML&quot;]
+
+        LI --&gt;|&quot;build-docs&quot;| HTML
+        LC --&gt;|&quot;build-docs&quot;| HTML
+        DST --&gt; HTML
+    end
+
+    IMG --&gt;|&quot;used by CI&quot;| LI
+    IMG --&gt;|&quot;used by CI&quot;| LC
+    IMG --&gt;|&quot;used by CI&quot;| DST
+
+    subgraph Publishing[&quot;Documentation Publishing&quot;]
+        DOCS[&quot;liara-docs&lt;br/&gt;(branch: cloudflare-pages)&lt;br/&gt;site/&amp;lt;repo&amp;gt;/&amp;lt;version&amp;gt;/{book,doxygen}/...&quot;]
+    end
+
+    HTML --&gt;|&quot;push generated HTML&quot;| DOCS
+
+    subgraph Delivery[&quot;Public Delivery&quot;]
+        CF[&quot;Cloudflare Worker&lt;br/&gt;(Static Assets + edge router)&quot;]
+        URL[&quot;liara-engine.liara-engine-documentation.workers.dev&quot;]
+    end
+
+    DOCS --&gt;|&quot;Git integration → wrangler deploy&quot;| CF
+    CF --&gt; URL
+
+    classDef repo fill:#e8f5e9,stroke:#2e7d32;
+    classDef infra fill:#e3f2fd,stroke:#1565c0;
+    classDef publish fill:#fff3e0,stroke:#ef6c00;
+    classDef delivery fill:#f3e5f5,stroke:#7b1fa2;
+
+    class LI,LC,DST repo;
+    class LM,IMG,DS infra;
+    class DOCS publish;
+    class CF,URL delivery;</pre>
+<p>The mental model that makes everything else click: <strong>docs-shared content is split in two.</strong> Some of it is <em>baked</em> into the builder image and used at build time; the rest is <em>served at runtime</em> from a central <code dir="auto">/shared-content/</code> path.
+Knowing which is which explains the whole repository layout (see §3).</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="2-the-repositories-and-their-roles">2. The repositories and their roles</h2><a class="sl-anchor-link" href="#2-the-repositories-and-their-roles"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “2. The repositories and their roles”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Repository</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">docs-shared</code></td>
+<td>The visual identity and templates: design tokens, navbar, the mdBook theme, the Doxygen HTML template, the central hub page. Changing how docs <em>look</em> happens here.</td>
+</tr>
+<tr>
+<td><code dir="auto">liara</code> (meta)</td>
+<td>Hosts the builder: the <code dir="auto">Dockerfile</code>, the build/processor <code dir="auto">scripts/</code>, and the JSON <code dir="auto">schemas/</code>. Changing how docs are <em>built</em> happens here.</td>
+</tr>
+<tr>
+<td><code dir="auto">.github</code></td>
+<td>Org-level <strong>reusable workflows</strong>: build, versioned deploy, PR previews, preview cleanup. Module repos call these.</td>
+</tr>
+<tr>
+<td><code dir="auto">liara-docs</code></td>
+<td>The hosting repo. Generated HTML for every module and version lives on its <code dir="auto">cloudflare-pages</code> branch under <code dir="auto">site/</code>. Also holds the Cloudflare Worker (<code dir="auto">wrangler.jsonc</code> + <code dir="auto">src/index.js</code>) and the scheduled preview sweep.</td>
+</tr>
+<tr>
+<td>Module repos (<code dir="auto">liara-interfaces</code>, <code dir="auto">liara-core</code>, …)</td>
+<td>Each owns its own sources (<code dir="auto">book.toml</code>, <code dir="auto">docs/</code>, <code dir="auto">Doxyfile</code>, headers, <code dir="auto">manifest.json</code>) and a thin CI caller. Building a module’s docs happens here.</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="3-anatomy-of-docs-shared">3. Anatomy of docs-shared</h2><a class="sl-anchor-link" href="#3-anatomy-of-docs-shared"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “3. Anatomy of docs-shared”</span></a></div>
+<div class="expressive-code"><link rel="stylesheet" href="/_cas/_astro/ec.w36nc.css"><script type="module" src="/_cas/_astro/ec.0vx5m.js"></script><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">docs-shared/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── book.toml              # docs-shared's own developer guide (this book)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── manifest.json          # module manifest: name, description, latest, versions</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── docs/                  # source of the guide you are reading</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── mdbook/theme/          # BAKED — mdBook theme override</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── index.hbs          #   template that injects the navbar + theme bridge</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── css/variables.css  #   maps mdBook's CSS vars onto Liara design tokens</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   └── highlight.js       #   custom Highlight.js bundle (GLSL, Dockerfile, …)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── doxygen/               # BAKED — Doxygen HTML template</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── header.html        #   injects &lt;shared-navbar&gt; + /shared-content scripts</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   └── footer.html</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── shared-content/        # RUNTIME — served from /shared-content/ on the site</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── tokens/design-tokens.css     # single source of truth for the palette</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── navbar/                      # navbar.html, .css, .js, .config.js, shared-navbar.js</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── mdbook/                      # custom.css + generated shared-navbar.js + liaradoc</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── doxygen/                     # doxygen-custom.css + generated shared-navbar.js + liaradoc</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── hub/                         # generated shared-navbar.js + liaradoc</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   └── assets/logo.svg</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">└── hub/                   # the central landing page (deployed to the site root)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">    </span></span><span style="--0:#d6deeb;--1:#403f53">├── index.html</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">    </span></span><span style="--0:#d6deeb;--1:#403f53">├── css/style.css</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">    </span></span><span style="--0:#d6deeb;--1:#403f53">├── js/liara-hub.js</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">    </span></span><span style="--0:#d6deeb;--1:#403f53">└── 404.html           # custom not-found page (served at the site root)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="docs-shared/├── book.toml              # docs-shared&#x27;s own developer guide (this book)├── manifest.json          # module manifest: name, description, latest, versions├── docs/                  # source of the guide you are reading│├── mdbook/theme/          # BAKED — mdBook theme override│   ├── index.hbs          #   template that injects the navbar + theme bridge│   ├── css/variables.css  #   maps mdBook&#x27;s CSS vars onto Liara design tokens│   └── highlight.js       #   custom Highlight.js bundle (GLSL, Dockerfile, …)│├── doxygen/               # BAKED — Doxygen HTML template│   ├── header.html        #   injects <shared-navbar> + /shared-content scripts│   └── footer.html│├── shared-content/        # RUNTIME — served from /shared-content/ on the site│   ├── tokens/design-tokens.css     # single source of truth for the palette│   ├── navbar/                      # navbar.html, .css, .js, .config.js, shared-navbar.js│   ├── mdbook/                      # custom.css + generated shared-navbar.js + liaradoc│   ├── doxygen/                     # doxygen-custom.css + generated shared-navbar.js + liaradoc│   ├── hub/                         # generated shared-navbar.js + liaradoc│   └── assets/logo.svg│└── hub/                   # the central landing page (deployed to the site root)    ├── index.html    ├── css/style.css    ├── js/liara-hub.js    └── 404.html           # custom not-found page (served at the site root)"><div></div></button></div></figure></div>
+<div class="sl-heading-wrapper level-h3"><h3 id="baked-vs-runtime">Baked vs runtime</h3><a class="sl-anchor-link" href="#baked-vs-runtime"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Baked vs runtime”</span></a></div>
+<ul>
+<li><strong>Baked</strong> (<code dir="auto">mdbook/theme/</code>, <code dir="auto">doxygen/</code>): copied into the builder image at
+image-build time. The image strips everything else from its docs-shared
+clone. These templates run during <em>every</em> module build and decide the
+structure of the generated pages. A change here only takes effect once the
+builder image is rebuilt.</li>
+<li><strong>Runtime</strong> (<code dir="auto">shared-content/</code>): never baked. It is deployed once to the
+site root at <code dir="auto">/shared-content/</code>, and every generated page references it by
+absolute URL (<code dir="auto">/shared-content/tokens/design-tokens.css</code>, etc.). A change
+here takes effect on the live site as soon as the shared-content is
+redeployed — no module rebuild needed.</li>
+</ul>
+<p>This split is why a CSS tweak can go live without rebuilding every module, but a
+template change requires a new image.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="the-design-system">The design system</h3><a class="sl-anchor-link" href="#the-design-system"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The design system”</span></a></div>
+<p><code dir="auto">shared-content/tokens/design-tokens.css</code> is the single source of truth for
+colours, typography, spacing, radii, and shadows. The mdBook theme
+(<code dir="auto">variables.css</code>) and the Doxygen CSS (<code dir="auto">doxygen-custom.css</code>) both consume those
+tokens, so the three surfaces — hub, mdBook, Doxygen — stay visually identical.
+Light/dark/dyslexia modes are all driven from this one file.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="the-navbar">The navbar</h3><a class="sl-anchor-link" href="#the-navbar"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The navbar”</span></a></div>
+<p><code dir="auto">shared-content/navbar/</code> holds the shared navigation. <code dir="auto">navbar.js</code> reads the
+<strong>modules registry</strong> and each module’s <strong>manifest</strong> at runtime to build the
+per-module dropdowns and version selectors; <code dir="auto">navbar.config.js</code> tells it where
+the docs are hosted (<code dir="auto">docsBaseUrl</code>) and where the registry lives. The
+<code dir="auto">&lt;shared-navbar&gt;</code> web component is registered per context by the generated
+<code dir="auto">shared-navbar.js</code> files (mdBook / Doxygen / hub), produced from a single
+template via the <code dir="auto">{{{MODULE}}}</code> replacement.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="the-liaradoc-resourcereplacement-system">The liaradoc resource/replacement system</h3><a class="sl-anchor-link" href="#the-liaradoc-resourcereplacement-system"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The liaradoc resource/replacement system”</span></a></div>
+<p>Files named <code dir="auto">*.liaradoc.json</code> declare, per context, which static <strong>resources</strong>
+to copy into the output and which <strong>replacements</strong> to perform in the generated
+HTML (for example <code dir="auto">{{{LOGO}}}</code>, <code dir="auto">{{{MODULE}}}</code>, or <code dir="auto">&lt;DOCS_SHARED_BASE&gt;</code>). The
+builder’s processor (see §4) reads these and rewrites the pages accordingly.
+They conform to the <code dir="auto">documentation-module.schema.json</code> schema.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="4-the-builder-image">4. The builder image</h2><a class="sl-anchor-link" href="#4-the-builder-image"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “4. The builder image”</span></a></div>
+<p><code dir="auto">ghcr.io/liara-engine/liara-documentation-builder</code> is an ultra-light Debian
+image that bakes in:</p>
+<ul>
+<li><strong>Doxygen</strong> and <strong>mdBook</strong> binaries,</li>
+<li>the docs-shared <strong>baked templates</strong> (<code dir="auto">/opt/docs-shared</code>),</li>
+<li>the build scripts: <code dir="auto">build-docs</code> plus the <code dir="auto">processor.py</code> family,</li>
+<li><code dir="auto">ajv</code> for JSON-schema validation.</li>
+</ul>
+<p>It expects the module’s sources mounted at <code dir="auto">/src</code> and writes generated HTML to
+<code dir="auto">/docs</code>. <code dir="auto">build-docs</code> runs roughly:</p>
+<ol>
+<li><strong>Validate</strong> <code dir="auto">manifest.json</code> (required) and any <code dir="auto">*.liaradoc.json</code> against
+their schemas; fail fast on error.</li>
+<li><strong>Stage shared assets</strong>: copy <code dir="auto">/opt/docs-shared/*</code> into <code dir="auto">/src/docs-shared/</code>
+so the mdBook theme path (<code dir="auto">docs-shared/mdbook/theme</code>) and the Doxygen header
+resolve locally.</li>
+<li><strong>Process</strong> resources and replacements (<code dir="auto">processor.py</code>): copy declared
+resources, substitute placeholders in the HTML.</li>
+<li><strong>Doxygen</strong>: if a <code dir="auto">Doxyfile</code> exists, run it (output forced to
+<code dir="auto">/src/build/doxygen</code>), then copy the HTML to <code dir="auto">/docs/doxygen</code>.</li>
+<li><strong>mdBook</strong>: if a <code dir="auto">book.toml</code> exists, auto-generate <code dir="auto">SUMMARY.md</code> when missing
+(from <code dir="auto">README.md</code> + the other pages), then build to <code dir="auto">/docs/book</code>.</li>
+<li><strong>Extra</strong>: copy any <code dir="auto">ADDITIONAL_DIRECTORIES_TO_OUTPUT</code> through verbatim.</li>
+</ol>
+<p>The image version pins a specific docs-shared tag (<code dir="auto">DOCS_SHARED_VERSION</code>), so
+the baked templates are reproducible. Bumping templates means bumping that tag
+and rebuilding.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="5-authoring-a-modules-docs">5. Authoring a module’s docs</h2><a class="sl-anchor-link" href="#5-authoring-a-modules-docs"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “5. Authoring a module’s docs”</span></a></div>
+<p>A module repository provides:</p>
+<ul>
+<li><code dir="auto">manifest.json</code> — required. Declares <code dir="auto">metadata.name</code>, <code dir="auto">metadata.description</code>,
+<code dir="auto">metadata.latest</code>, and a <code dir="auto">versions</code> map with ABI compatibility. <code dir="auto">latest</code>
+drives the <code dir="auto">/&lt;repo&gt;/latest/</code> redirect (see §7).</li>
+<li><code dir="auto">book.toml</code> + <code dir="auto">docs/</code> — optional mdBook guide. <code dir="auto">theme = "docs-shared/mdbook/theme"</code>.
+If there is no <code dir="auto">SUMMARY.md</code>, one is generated from <code dir="auto">README.md</code> first, then the
+remaining pages.</li>
+<li><code dir="auto">Doxyfile</code> + headers — optional API reference. <code dir="auto">HTML_HEADER</code>/<code dir="auto">HTML_FOOTER</code>
+point at <code dir="auto">docs-shared/doxygen/</code>.</li>
+<li><code dir="auto">*.liaradoc.json</code> — optional per-module resources and replacements.</li>
+</ul>
+<p>In practice every module has a book; some also have a Doxygen reference. The
+worker’s fallback (§7) tolerates a module that has only one of the two.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="6-building-and-publishing">6. Building and publishing</h2><a class="sl-anchor-link" href="#6-building-and-publishing"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “6. Building and publishing”</span></a></div>
+<p>CI lives as <strong>reusable workflows</strong> in <code dir="auto">.github</code>, called by a thin caller in each
+module repo:</p>
+<ul>
+<li><strong>Build</strong> runs the builder image against the checkout and uploads the
+generated <code dir="auto">docs</code> and <code dir="auto">manifest</code> as artifacts.</li>
+<li><strong>Deploy</strong> checks out <code dir="auto">liara-docs</code>, places the build under
+<code dir="auto">site/&lt;repo&gt;/&lt;version&gt;/</code>, copies <code dir="auto">manifest.json</code> to the canonical
+<code dir="auto">site/&lt;repo&gt;/manifest.json</code>, and pushes to the <code dir="auto">cloudflare-pages</code> branch.
+Old versions are left in place, so previous docs stay reachable.</li>
+</ul>
+<div class="sl-heading-wrapper level-h3"><h3 id="versioning">Versioning</h3><a class="sl-anchor-link" href="#versioning"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Versioning”</span></a></div>
+<ul>
+<li><code dir="auto">dev</code> tracks the development branch; <code dir="auto">x.y.z</code> are releases.</li>
+<li>Each version is a directory under <code dir="auto">site/&lt;repo&gt;/</code>, so nothing is overwritten
+on release — <code dir="auto">/&lt;repo&gt;/1.0.0/</code> and <code dir="auto">/&lt;repo&gt;/dev/</code> coexist.</li>
+<li><code dir="auto">manifest.metadata.latest</code> records the newest version; the hub’s
+<code dir="auto">version.json</code> and the <code dir="auto">modules-registry.json</code> (both at the site root) drive
+the navbar’s version selector and module list.</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="7-hosting">7. Hosting</h2><a class="sl-anchor-link" href="#7-hosting"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “7. Hosting”</span></a></div>
+<p><code dir="auto">liara-docs</code> is deployed via Cloudflare’s Git integration as a <strong>Workers Static
+Assets</strong> project. The <code dir="auto">site/</code>
+directory is served directly; a small Worker (<code dir="auto">src/index.js</code>) runs only when no
+static asset matches a request. The Worker handles three things:</p>
+<ul>
+<li><strong><code dir="auto">latest</code></strong> — <code dir="auto">/&lt;repo&gt;/latest/…</code> reads <code dir="auto">metadata.latest</code> from the module’s
+manifest and 302-redirects to the concrete version. <code dir="auto">/&lt;repo&gt;</code> alone resolves
+to latest too. These redirects are <code dir="auto">no-cache</code> because latest moves.</li>
+<li><strong>View fallback</strong> — <code dir="auto">/&lt;repo&gt;/&lt;version&gt;/</code> with no view 301/302-redirects to
+<code dir="auto">book/</code> if it exists, else <code dir="auto">doxygen/</code>.</li>
+<li><strong>Custom 404</strong> — anything unresolved is served <code dir="auto">/404.html</code> with a 404 status.</li>
+</ul>
+<div class="sl-heading-wrapper level-h3"><h3 id="url-surface-quick-reference">URL surface (quick reference)</h3><a class="sl-anchor-link" href="#url-surface-quick-reference"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “URL surface (quick reference)”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">/</code></td>
+<td>The hub landing page</td>
+</tr>
+<tr>
+<td><code dir="auto">/&lt;repo&gt;/&lt;version&gt;/book/…</code></td>
+<td>mdBook page (static)</td>
+</tr>
+<tr>
+<td><code dir="auto">/&lt;repo&gt;/&lt;version&gt;/doxygen/…</code></td>
+<td>Doxygen page (static)</td>
+</tr>
+<tr>
+<td><code dir="auto">/&lt;repo&gt;/&lt;version&gt;/</code></td>
+<td>→ <code dir="auto">book/</code> (or <code dir="auto">doxygen/</code>)</td>
+</tr>
+<tr>
+<td><code dir="auto">/&lt;repo&gt;/latest/…</code></td>
+<td>→ resolved version from the manifest</td>
+</tr>
+<tr>
+<td><code dir="auto">/&lt;repo&gt;</code> or <code dir="auto">/&lt;repo&gt;/</code></td>
+<td>→ latest → <code dir="auto">book/</code></td>
+</tr>
+<tr>
+<td><code dir="auto">/&lt;repo&gt;/pr-&lt;n&gt;/…</code></td>
+<td>A PR preview (see §8)</td>
+</tr>
+<tr>
+<td><code dir="auto">/shared-content/…</code></td>
+<td>Runtime shared assets</td>
+</tr>
+<tr>
+<td><code dir="auto">/modules-registry.json</code>, <code dir="auto">/version.json</code>, <code dir="auto">/&lt;repo&gt;/manifest.json</code></td>
+<td>Metadata consumed by the navbar</td>
+</tr>
+<tr>
+<td>anything else</td>
+<td>The custom 404 page</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="8-pr-previews">8. PR previews</h2><a class="sl-anchor-link" href="#8-pr-previews"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “8. PR previews”</span></a></div>
+<p>To test changes before merging, each PR can publish a throwaway build to a
+hidden path, reachable only by direct URL (the navbar never lists it).</p>
+<ul>
+<li><strong>Classic modules</strong> publish to <code dir="auto">site/&lt;repo&gt;/pr-&lt;n&gt;/</code>, built by the same
+toolchain as a real version but <strong>without</strong> touching the canonical
+<code dir="auto">manifest.json</code>. Triggered automatically when documentation files change
+(path filter), or on demand via the <code dir="auto">docs-preview</code> label. The preview URL is
+posted as a sticky comment on the PR.</li>
+<li><strong>docs-shared</strong> is special: a PR there changes the templates and shared assets
+everyone uses, so its preview builds the <strong>test fixtures</strong> (<code dir="auto">tests/fixtures/</code>)
+with <em>the PR’s</em> versions of both — the baked templates are mounted over
+<code dir="auto">/opt/docs-shared</code>, and the PR’s <code dir="auto">shared-content/</code> is bundled into the preview
+with <code dir="auto">/shared-content/</code> references re-pointed at it. Output lands at
+<code dir="auto">site/docs-shared/pr-&lt;n&gt;/</code>.</li>
+</ul>
+<p>Cleanup: previews are removed when the PR closes, and a daily <strong>sweep</strong> prunes
+anything whose PR is closed or has been idle for more than 30 days.</p>
+<p>These previews are the supported way to validate documentation changes — there
+is intentionally no separate local-only path, because reproducing the full
+toolchain locally is more error-prone than running the real thing on a hidden
+URL.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="9-where-to-change-what">9. Where to change what</h2><a class="sl-anchor-link" href="#9-where-to-change-what"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “9. Where to change what”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>You want to change…</th>
+<th>Edit…</th>
+<th>Takes effect after…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Colours, typography, spacing</td>
+<td><code dir="auto">docs-shared/shared-content/tokens/</code></td>
+<td>shared-content redeploy</td>
+</tr>
+<tr>
+<td>Navbar behaviour or markup</td>
+<td><code dir="auto">docs-shared/shared-content/navbar/</code></td>
+<td>shared-content redeploy</td>
+</tr>
+<tr>
+<td>mdBook page structure</td>
+<td><code dir="auto">docs-shared/mdbook/theme/</code></td>
+<td>builder image rebuild + module rebuild</td>
+</tr>
+<tr>
+<td>Doxygen page structure</td>
+<td><code dir="auto">docs-shared/doxygen/</code></td>
+<td>builder image rebuild + module rebuild</td>
+</tr>
+<tr>
+<td>Build steps / processors</td>
+<td><code dir="auto">liara/scripts/</code> + <code dir="auto">Dockerfile</code></td>
+<td>builder image rebuild</td>
+</tr>
+<tr>
+<td>Validation rules</td>
+<td><code dir="auto">liara/schemas/</code></td>
+<td>next build</td>
+</tr>
+<tr>
+<td>Redirects, 404, hosting</td>
+<td><code dir="auto">liara-docs/src/index.js</code>, <code dir="auto">wrangler.jsonc</code></td>
+<td><code dir="auto">wrangler deploy</code> (Git push)</td>
+</tr>
+<tr>
+<td>CI behaviour</td>
+<td><code dir="auto">.github</code> reusable workflows</td>
+<td>next workflow run</td>
+</tr>
+</tbody>
+</table>
+</div><footer class="sl-flex astro-xhxjzfa7"><div class="meta sl-flex astro-xhxjzfa7"><a href="https://github.com/liara-engine/docs-shared/edit/main/docs/src/content/docs/guides/documentation-pipeline.md" class="sl-flex print:hidden astro-xk5gmzsg"><svg aria-hidden="true" class="astro-xk5gmzsg astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.2em;"><path d="M22 7.24a1 1 0 0 0-.29-.71l-4.24-4.24a1 1 0 0 0-1.1-.22 1 1 0 0 0-.32.22l-2.83 2.83L2.29 16.05a1 1 0 0 0-.29.71V21a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .76-.29l10.87-10.93L21.71 8c.1-.1.17-.2.22-.33a1 1 0 0 0 0-.24v-.14l.07-.05ZM6.83 20H4v-2.83l9.93-9.93 2.83 2.83L6.83 20ZM18.17 8.66l-2.83-2.83 1.42-1.41 2.82 2.82-1.41 1.42Z"/></svg>Edit page</a></div><div class="pagination-links print:hidden astro-jgq3vlii" dir="ltr"><a href="/docs-shared/0.1.1/guides/authoring-a-module/" rel="prev" class="astro-jgq3vlii"><svg aria-hidden="true" class="astro-jgq3vlii astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg><span class="astro-jgq3vlii">Previous<br class="astro-jgq3vlii"><span class="link-title astro-jgq3vlii">authoring-a-module</span></span></a></div></footer></div></div></main></div></div></div></div></body></html>
