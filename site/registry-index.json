@@ -452,92 +452,43 @@
       "meta": true,
       "deployed": true,
       "description": "The central hub for all documentation related to the Liara Engine, providing a unified interface and shared resources for all modules.",
-      "kind": null,
-      "latest": "0.1.1",
+      "kind": "infrastructure",
+      "latest": "0.2.0",
       "versions": {
         "dev": {
-          "abi": [
-            "dev"
-          ],
+          "abi": null,
           "note": null,
-          "deployed": true,
-          "compat": {
-            "0.2.3": [],
-            "0.2.2": [],
-            "0.2.1": [],
-            "0.2.0": [],
-            "0.1.1": [],
-            "0.1.0": [],
-            "0.0.1": []
-          }
+          "deployed": true
         },
         "0.0.5": {
-          "abi": [
-            "dev"
-          ],
+          "abi": null,
           "note": null,
-          "deployed": true,
-          "compat": {
-            "0.2.3": [],
-            "0.2.2": [],
-            "0.2.1": [],
-            "0.2.0": [],
-            "0.1.1": [],
-            "0.1.0": [],
-            "0.0.1": []
-          }
+          "deployed": true
         },
         "0.0.6": {
-          "abi": [
-            "dev"
-          ],
+          "abi": null,
           "note": null,
-          "deployed": true,
-          "compat": {
-            "0.2.3": [],
-            "0.2.2": [],
-            "0.2.1": [],
-            "0.2.0": [],
-            "0.1.1": [],
-            "0.1.0": [],
-            "0.0.1": []
-          }
+          "deployed": true
         },
         "0.1.0": {
-          "abi": [
-            "dev"
-          ],
+          "abi": null,
           "note": null,
-          "deployed": true,
-          "compat": {
-            "0.2.3": [],
-            "0.2.2": [],
-            "0.2.1": [],
-            "0.2.0": [],
-            "0.1.1": [],
-            "0.1.0": [],
-            "0.0.1": []
-          }
+          "deployed": true
         },
         "0.1.1": {
-          "abi": [
-            "dev"
-          ],
+          "abi": null,
           "note": null,
-          "deployed": true,
-          "compat": {
-            "0.2.3": [],
-            "0.2.2": [],
-            "0.2.1": [],
-            "0.2.0": [],
-            "0.1.1": [],
-            "0.1.0": [],
-            "0.0.1": []
-          }
+          "deployed": true
+        },
+        "0.2.0": {
+          "abi": null,
+          "note": "Dockerfile moved",
+          "deployed": true
         }
       },
       "order": [
         "dev",
+        "0.2.0",
         "0.1.1",
         "0.1.0",
         "0.0.6",
