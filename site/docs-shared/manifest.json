@@ -1,0 +1,19 @@
+{
+  "$schema": "https://liara-engine.github.io/liara/schemas/module-manifest-v2.schema.json",
+  "manifest_version": 2,
+  "kind": "infrastructure",
+  "metadata": {
+    "name": "Liara Engine Documentation Hub",
+    "description": "The central hub for all documentation related to the Liara Engine, providing a unified interface and shared resources for all modules.",
+    "repo": "docs-shared",
+    "latest": "0.2.0"
+  },
+  "versions": {
+    "dev": {},
+    "0.0.5": {},
+    "0.0.6": {},
+    "0.1.0": {},
+    "0.1.1": {},
+    "0.2.0": { "note": "Dockerfile moved" }
+  }
+}

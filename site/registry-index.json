@@ -1,0 +1,91 @@
+{
+  "generated_from": "modules-registry.json",
+  "modules": [
+    {
+      "key": "meta-repo",
+      "name": "Liara Engine",
+      "repo": "liara",
+      "only_mdbook": true,
+      "meta": true,
+      "deployed": false,
+      "latest": null,
+      "versions": {}
+    },
+    {
+      "key": "interfaces",
+      "name": "Interfaces",
+      "repo": "liara-interfaces",
+      "is_abi": true,
+      "deployed": false,
+      "latest": null,
+      "versions": {}
+    },
+    {
+      "key": "core",
+      "name": "Core",
+      "repo": "liara-core",
+      "deployed": false,
+      "latest": null,
+      "versions": {}
+    },
+    {
+      "key": "renderer",
+      "name": "Renderer",
+      "repo": "liara-renderer",
+      "deployed": false,
+      "latest": null,
+      "versions": {}
+    },
+    {
+      "key": "docs-shared",
+      "name": "Liara Engine Documentation Hub",
+      "repo": "docs-shared",
+      "only_mdbook": true,
+      "meta": true,
+      "deployed": true,
+      "description": "The central hub for all documentation related to the Liara Engine, providing a unified interface and shared resources for all modules.",
+      "kind": "infrastructure",
+      "latest": "0.2.0",
+      "versions": {
+        "dev": {
+          "abi": null,
+          "note": null,
+          "deployed": true
+        },
+        "0.0.5": {
+          "abi": null,
+          "note": null,
+          "deployed": false
+        },
+        "0.0.6": {
+          "abi": null,
+          "note": null,
+          "deployed": false
+        },
+        "0.1.0": {
+          "abi": null,
+          "note": null,
+          "deployed": false
+        },
+        "0.1.1": {
+          "abi": null,
+          "note": null,
+          "deployed": false
+        },
+        "0.2.0": {
+          "abi": null,
+          "note": "Dockerfile moved",
+          "deployed": false
+        }
+      },
+      "order": [
+        "dev",
+        "0.2.0",
+        "0.1.1",
+        "0.1.0",
+        "0.0.6",
+        "0.0.5"
+      ]
+    }
+  ]
+}
