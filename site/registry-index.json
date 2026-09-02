@@ -9,46 +9,44 @@
       "meta": true,
       "deployed": true,
       "description": "Meta documentation about the Liara Engine project, including tooling, contribution guidelines, and other non-module-specific information.",
-      "kind": "infrastructure",
-      "latest": "0.2.0",
+      "kind": null,
+      "latest": "0.0.1",
       "versions": {
         "dev": {
-          "abi": null,
+          "abi": [
+            "dev"
+          ],
           "note": null,
-          "deployed": true
+          "deployed": true,
+          "compat": {
+            "0.2.3": [],
+            "0.2.2": [],
+            "0.2.1": [],
+            "0.2.0": [],
+            "0.1.1": [],
+            "0.1.0": [],
+            "0.0.1": []
+          }
         },
         "0.0.1": {
-          "abi": null,
+          "abi": [
+            "dev"
+          ],
           "note": null,
-          "deployed": true
-        },
-        "0.0.2": {
-          "abi": null,
-          "note": null,
-          "deployed": true
-        },
-        "0.0.3": {
-          "abi": null,
-          "note": null,
-          "deployed": true
-        },
-        "0.1.0": {
-          "abi": null,
-          "note": null,
-          "deployed": true
-        },
-        "0.2.0": {
-          "abi": null,
-          "note": "Dockerfile moved",
-          "deployed": true
+          "deployed": true,
+          "compat": {
+            "0.2.3": [],
+            "0.2.2": [],
+            "0.2.1": [],
+            "0.2.0": [],
+            "0.1.1": [],
+            "0.1.0": [],
+            "0.0.1": []
+          }
         }
       },
       "order": [
         "dev",
-        "0.2.0",
-        "0.1.0",
-        "0.0.3",
-        "0.0.2",
         "0.0.1"
       ]
     },
