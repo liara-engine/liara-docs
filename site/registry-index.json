@@ -60,7 +60,7 @@
         "0.0.6": {
           "abi": null,
           "note": null,
-          "deployed": false
+          "deployed": true
         },
         "0.1.0": {
           "abi": null,
