@@ -54,12 +54,65 @@
     },
     {
       "key": "interfaces",
-      "name": "Interfaces",
+      "name": "Liara Engine C ABI",
       "repo": "liara-interfaces",
       "is_abi": true,
-      "deployed": false,
-      "latest": null,
-      "versions": {}
+      "deployed": true,
+      "description": "The C ABI contracts shared by every module.",
+      "kind": "contract",
+      "latest": "0.2.3",
+      "versions": {
+        "dev": {
+          "abi": null,
+          "note": null,
+          "deployed": true
+        },
+        "0.0.1": {
+          "abi": null,
+          "note": null,
+          "deployed": false
+        },
+        "0.1.0": {
+          "abi": null,
+          "note": null,
+          "deployed": false
+        },
+        "0.1.1": {
+          "abi": null,
+          "note": null,
+          "deployed": false
+        },
+        "0.2.0": {
+          "abi": null,
+          "note": null,
+          "deployed": false
+        },
+        "0.2.1": {
+          "abi": null,
+          "note": null,
+          "deployed": false
+        },
+        "0.2.2": {
+          "abi": null,
+          "note": "Manifest moved to v2",
+          "deployed": false
+        },
+        "0.2.3": {
+          "abi": null,
+          "note": null,
+          "deployed": false
+        }
+      },
+      "order": [
+        "dev",
+        "0.2.3",
+        "0.2.2",
+        "0.2.1",
+        "0.2.0",
+        "0.1.1",
+        "0.1.0",
+        "0.0.1"
+      ]
     },
     {
       "key": "core",
