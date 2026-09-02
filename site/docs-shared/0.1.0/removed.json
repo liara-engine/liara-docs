@@ -1,0 +1,15 @@
+{
+  "repo": "docs-shared",
+  "version": "0.1.0",
+  "removed": true,
+  "removed_at": "2026-09-02T18:39:10+00:00",
+  "reason": "Superseded by 0.2.x",
+  "successor": "0.1.1",
+  "alternatives": [
+    "dev",
+    "0.2.0",
+    "0.1.1",
+    "0.0.6",
+    "0.0.5"
+  ]
+}

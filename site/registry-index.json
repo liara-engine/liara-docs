@@ -65,7 +65,11 @@
         "0.1.0": {
           "abi": null,
           "note": null,
-          "deployed": true
+          "deployed": true,
+          "removed": true,
+          "removed_at": "2026-09-02T18:39:10+00:00",
+          "successor": "0.1.1",
+          "reason": "Superseded by 0.2.x"
         },
         "0.1.1": {
           "abi": null,
