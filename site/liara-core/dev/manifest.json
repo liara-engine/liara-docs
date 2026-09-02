@@ -1,0 +1,20 @@
+{
+  "$schema": "https://liara-engine.github.io/liara/schemas/module-manifest-v2.schema.json",
+  "manifest_version": 2,
+  "kind": "module",
+  "metadata": {
+    "name": "Liara Engine Core",
+    "description": "The core library for the Liara Engine.",
+    "repo": "liara-core",
+    "latest": "0.2.3"
+  },
+  "versions": {
+    "dev":   "0.2.0",
+    "0.0.1": "0.1.0",
+    "0.1.0": "0.1.1",
+    "0.2.0": "0.2.0",
+    "0.2.1": "0.2.0",
+    "0.2.2": "0.2.0",
+    "0.2.3": "0.2.0"
+  }
+}
