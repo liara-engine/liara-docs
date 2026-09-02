@@ -10,7 +10,7 @@
       "deployed": true,
       "description": "Meta documentation about the Liara Engine project, including tooling, contribution guidelines, and other non-module-specific information.",
       "kind": null,
-      "latest": "0.0.2",
+      "latest": "0.0.3",
       "versions": {
         "dev": {
           "abi": [
@@ -59,10 +59,27 @@
             "0.1.0": [],
             "0.0.1": []
           }
+        },
+        "0.0.3": {
+          "abi": [
+            "dev"
+          ],
+          "note": null,
+          "deployed": true,
+          "compat": {
+            "0.2.3": [],
+            "0.2.2": [],
+            "0.2.1": [],
+            "0.2.0": [],
+            "0.1.1": [],
+            "0.1.0": [],
+            "0.0.1": []
+          }
         }
       },
       "order": [
         "dev",
+        "0.0.3",
         "0.0.2",
         "0.0.1"
       ]

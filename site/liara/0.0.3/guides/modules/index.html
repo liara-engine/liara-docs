@@ -1,0 +1,761 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-vdxcvpsm"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>MODULES | Liara Engine Meta Repo</title><link rel="canonical" href="https://liara-engine.liara-engine-documentation.workers.dev/liara/0.0.3/guides/modules/"/><link rel="sitemap" href="/liara/0.0.3/sitemap-index.xml"/><link rel="shortcut icon" href="/liara/0.0.3/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v7.2.9"/><meta name="generator" content="Starlight v0.41.10"/><meta property="og:title" content="MODULES"/><meta property="og:type" content="article"/><meta property="og:url" content="https://liara-engine.liara-engine-documentation.workers.dev/liara/0.0.3/guides/modules/"/><meta property="og:locale" content="en"/><meta property="og:description" content="Meta documentation about the Liara Engine project, including tooling, contribution guidelines, and other non-module-specific information."/><meta property="og:site_name" content="Liara Engine Meta Repo"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="Meta documentation about the Liara Engine project, including tooling, contribution guidelines, and other non-module-specific information."/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/_cas/_astro/print.ehPL0gv-.css" media="print"><link rel="stylesheet" href="/_cas/_astro/middleware.CNX8q5SF.css"><script type="module" src="/_cas/_astro/page.DJLhOWm1.js"></script></head><body class="astro-vdxcvpsm"><a class="sl-skip-link astro-vxeigawq" href="#_top">Skip to content</a><div class="page sl-flex astro-gqpr5s5a"><header class="header astro-gqpr5s5a"><div class="header astro-nczgtkxc"><div class="title-wrapper sl-flex astro-nczgtkxc"><div class="liara-title astro-v7nfscyj"><a href="/liara/0.0.3/" class="site-title sl-flex astro-clw6ags5"><span class="astro-clw6ags5" translate="no">Liara Engine Meta Repo</span></a><liara-nav data-index="/registry-index.json" data-repo="liara" data-version="0.0.3" class="astro-v7nfscyj"><label class="liara-switch astro-v7nfscyj"><span class="sr-only astro-v7nfscyj">Module</span><select data-liara-modules class="astro-v7nfscyj"><option value="liara" selected class="astro-v7nfscyj">Liara Engine</option><option value="liara-interfaces" class="astro-v7nfscyj">Interfaces</option><option value="liara-core" class="astro-v7nfscyj">Core</option><option value="liara-renderer" class="astro-v7nfscyj">Renderer</option><option value="docs-shared" class="astro-v7nfscyj">Shared Documentation</option></select></label><label class="liara-switch astro-v7nfscyj"><span class="sr-only astro-v7nfscyj">Version</span><select data-liara-versions class="astro-v7nfscyj"><option value="dev" class="astro-v7nfscyj">dev</option><option value="0.0.3" selected class="astro-v7nfscyj">0.0.3 (latest)</option><option value="0.0.2" class="astro-v7nfscyj">0.0.2</option><option value="0.0.1" class="astro-v7nfscyj">0.0.1</option></select></label></liara-nav></div><script type="module">var e=class extends HTMLElement{connectedCallback(){this.repo=this.dataset.repo??``,this.version=this.dataset.version??``,this.modules=this.querySelector(`[data-liara-modules]`),this.versions=this.querySelector(`[data-liara-versions]`),this.modules?.addEventListener(`change`,e=>{location.href=`/${e.target.value}/latest/`}),this.versions?.addEventListener(`change`,e=>{location.href=`/${this.repo}/${e.target.value}/`}),this.refresh().catch(()=>{})}async refresh(){let e=await fetch(this.dataset.index??`/registry-index.json`,{cache:`no-cache`});if(!e.ok)return;let t=await e.json();Array.isArray(t?.modules)&&(this.syncModules(t.modules),this.syncVersions(t.modules.find(e=>e.repo===this.repo)))}syncModules(e){if(!this.modules)return;let t=e.filter(e=>e.deployed!==!1);t.length!==0&&this.modules.replaceChildren(...t.map(e=>{let t=new Option(e.name??e.repo,e.repo);return t.selected=e.repo===this.repo,t}))}syncVersions(e){if(!(!this.versions||!e?.order?.length)&&(this.versions.replaceChildren(...e.order.map(t=>{let n=(e.versions?.[t]??{}).removed?` (retired)`:t===e.latest?` (latest)`:``,r=new Option(`${t}${n}`,t);return r.selected=t===this.version,r})),!e.order.includes(this.version)&&this.version)){let e=new Option(this.version,this.version);e.selected=!0,this.versions.prepend(e)}}};customElements.define(`liara-nav`,e);</script></div><div class="sl-flex print:hidden astro-nczgtkxc"><site-search class="astro-nczgtkxc astro-r5ar4xm7" data-translations="{&quot;placeholder&quot;:&quot;Search&quot;}"><button data-open-modal disabled aria-label="Search" aria-keyshortcuts="Control+K" class="astro-r5ar4xm7"><svg aria-hidden="true" class="astro-r5ar4xm7 astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg><span class="sl-hidden md:sl-block astro-r5ar4xm7" aria-hidden="true">Search</span><kbd class="sl-hidden md:sl-flex astro-r5ar4xm7" style="display: none;"><kbd class="astro-r5ar4xm7">Ctrl</kbd><kbd class="astro-r5ar4xm7">K</kbd></kbd></button><dialog style="padding:0" aria-label="Search" class="astro-r5ar4xm7"><div class="dialog-frame sl-flex astro-r5ar4xm7"><button data-close-modal class="sl-flex md:sl-hidden astro-r5ar4xm7">Cancel</button><div class="search-container astro-r5ar4xm7"><div id="starlight__search" class="astro-r5ar4xm7"></div></div></div></dialog></site-search><script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script><script type="module" src="/_cas/_astro/Search.astro_astro_type_script_index_0_lang.CLtkfzm5.js"></script></div><div class="sl-hidden md:sl-flex print:hidden right-group astro-nczgtkxc"><div class="sl-flex social-icons astro-nczgtkxc"><a href="https://github.com/liara-engine/liara" rel="me" class="sl-flex astro-cg55etiy"><span class="sr-only astro-cg55etiy">GitHub</span><svg aria-hidden="true" class="astro-cg55etiy astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-r2p65idu"><span class="sr-only astro-r2p65idu">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-r2p65idu astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-r2p65idu"><option value="dark" class="astro-r2p65idu">Dark</option><option value="light" class="astro-r2p65idu">Light</option><option value="auto" selected class="astro-r2p65idu">Auto</option></select><svg aria-hidden="true" class="icon caret astro-r2p65idu astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script><script type="module">var e=`starlight-theme`,t=e=>e===`auto`||e===`dark`||e===`light`?e:`auto`,n=()=>t(typeof localStorage<`u`&&localStorage.getItem(e));function r(t){typeof localStorage<`u`&&localStorage.setItem(e,t===`light`||t===`dark`?t:``)}var i=()=>matchMedia(`(prefers-color-scheme: light)`).matches?`light`:`dark`;function a(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e===`auto`?i():e,r(e)}matchMedia(`(prefers-color-scheme: light)`).addEventListener(`change`,()=>{n()===`auto`&&a(`auto`)});var o=class extends HTMLElement{constructor(){super(),a(n()),this.querySelector(`select`)?.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&a(t(e.currentTarget.value))})}};customElements.define(`starlight-theme-select`,o);</script><script type="module">var e=class extends HTMLElement{constructor(){super();let e=this.querySelector(`select`);e&&(e.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=e.currentTarget.value)}),window.addEventListener(`pageshow`,t=>{if(!t.persisted)return;let n=e.querySelector(`option[selected]`)?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}};customElements.define(`starlight-lang-select`,e);</script></div></div></header><nav class="sidebar print:hidden astro-gqpr5s5a" aria-label="Main"><starlight-menu-button class="print:hidden astro-vvx7mffu"><button aria-expanded="false" aria-label="Menu" aria-controls="starlight__sidebar" class="sl-flex md:sl-hidden astro-vvx7mffu"><svg aria-hidden="true" class="open-menu astro-vvx7mffu astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg><svg aria-hidden="true" class="close-menu astro-vvx7mffu astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg></button></starlight-menu-button><script type="module">var e=class extends HTMLElement{btn=this.querySelector(`button`);constructor(){super(),this.btn.addEventListener(`click`,()=>this.toggleExpanded());let e=this.closest(`nav`);e&&e.addEventListener(`keyup`,e=>this.closeOnEscape(e)),matchMedia(`(min-width: 50em)`).addEventListener(`change`,()=>this.setExpanded(!1))}setExpanded(e){this.setAttribute(`aria-expanded`,String(e)),document.body.toggleAttribute(`data-mobile-menu-expanded`,e),document.querySelectorAll(`.main-frame, .sl-skip-link`).forEach(t=>{t.toggleAttribute(`inert`,e)})}toggleExpanded(){this.setExpanded(this.getAttribute(`aria-expanded`)!==`true`)}closeOnEscape(e){e.code===`Escape`&&(this.setExpanded(!1),this.btn.focus())}};customElements.define(`starlight-menu-button`,e);</script><div id="starlight__sidebar" class="sidebar-pane astro-gqpr5s5a"><div class="sidebar-content sl-flex astro-gqpr5s5a"><sl-sidebar-state-persist data-hash="0898db5" class="astro-f5yvicm7"><script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script><ul class="top-level astro-ojxuodky"><li class="astro-ojxuodky"><details open class="astro-ojxuodky"><summary class="astro-ojxuodky"><span class="group-label astro-ojxuodky"><span class="large astro-ojxuodky">About</span></span><svg aria-hidden="true" class="caret astro-ojxuodky astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="0"></sl-sidebar-restore><ul class="astro-ojxuodky"><li class="astro-ojxuodky"><a href="/liara/0.0.3/about/changelog/" class="astro-ojxuodky"><span class="astro-ojxuodky">CHANGELOG</span></a></li><li class="astro-ojxuodky"><a href="/liara/0.0.3/about/license/" class="astro-ojxuodky"><span class="astro-ojxuodky">LICENSE</span></a></li><li class="astro-ojxuodky"><a href="/liara/0.0.3/about/readme/" class="astro-ojxuodky"><span class="astro-ojxuodky">README</span></a></li></ul></details></li><li class="astro-ojxuodky"><details open class="astro-ojxuodky"><summary class="astro-ojxuodky"><span class="group-label astro-ojxuodky"><span class="large astro-ojxuodky">Guide</span></span><svg aria-hidden="true" class="caret astro-ojxuodky astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="1"></sl-sidebar-restore><ul class="astro-ojxuodky"><li class="astro-ojxuodky"><a href="/liara/0.0.3/guides/architecture/" class="astro-ojxuodky"><span class="astro-ojxuodky">ARCHITECTURE</span></a></li><li class="astro-ojxuodky"><a href="/liara/0.0.3/guides/bootstrap/" class="astro-ojxuodky"><span class="astro-ojxuodky">BOOTSTRAP</span></a></li><li class="astro-ojxuodky"><a href="/liara/0.0.3/guides/code_style/" class="astro-ojxuodky"><span class="astro-ojxuodky">CODE_STYLE</span></a></li><li class="astro-ojxuodky"><a href="/liara/0.0.3/guides/contributing/" class="astro-ojxuodky"><span class="astro-ojxuodky">CONTRIBUTING</span></a></li><li class="astro-ojxuodky"><a href="/liara/0.0.3/guides/modules/" aria-current="page" class="astro-ojxuodky"><span class="astro-ojxuodky">MODULES</span></a></li><li class="astro-ojxuodky"><a href="/liara/0.0.3/guides/roadmap/" class="astro-ojxuodky"><span class="astro-ojxuodky">ROADMAP</span></a></li><li class="astro-ojxuodky"><a href="/liara/0.0.3/guides/summary/" class="astro-ojxuodky"><span class="astro-ojxuodky">SUMMARY</span></a></li><li class="astro-ojxuodky"><a href="/liara/0.0.3/guides/tooling/" class="astro-ojxuodky"><span class="astro-ojxuodky">TOOLING</span></a></li></ul></details></li></ul><script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script></sl-sidebar-state-persist><div class="md:sl-hidden"><div class="mobile-preferences sl-flex astro-b5gddk54"><div class="social-icons astro-b5gddk54"><a href="https://github.com/liara-engine/liara" rel="me" class="sl-flex astro-cg55etiy"><span class="sr-only astro-cg55etiy">GitHub</span><svg aria-hidden="true" class="astro-cg55etiy astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-r2p65idu"><span class="sr-only astro-r2p65idu">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-r2p65idu astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-r2p65idu"><option value="dark" class="astro-r2p65idu">Dark</option><option value="light" class="astro-r2p65idu">Light</option><option value="auto" selected class="astro-r2p65idu">Auto</option></select><svg aria-hidden="true" class="icon caret astro-r2p65idu astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script></div></div></div></div></nav><div class="main-frame astro-gqpr5s5a"><script type="module">var e=document.getElementById(`starlight__sidebar`),t=e?.querySelector(`sl-sidebar-state-persist`),n=`sl-sidebar-state`,r=()=>{let r=[],i=t?.dataset.hash||``;try{let e=sessionStorage.getItem(n),t=JSON.parse(e||`{}`);Array.isArray(t.open)&&t.hash===i&&(r=t.open)}catch{}return{hash:i,open:r,scroll:e?.scrollTop||0}},i=e=>{try{sessionStorage.setItem(n,JSON.stringify(e))}catch{}},a=()=>i(r()),o=(e,t)=>{let n=r();n.open[t]=e,i(n)};t?.addEventListener(`click`,e=>{if(!(e.target instanceof Element))return;let t=e.target.closest(`summary`)?.closest(`details`);if(!t)return;let n=t.querySelector(`sl-sidebar-restore`),r=parseInt(n?.dataset.index||``);isNaN(r)||o(!t.open,r)}),addEventListener(`visibilitychange`,()=>{document.visibilityState===`hidden`&&a()});</script><div class="lg:sl-flex astro-abfeecmu"><aside class="right-sidebar-container print:hidden astro-abfeecmu"><div class="right-sidebar astro-abfeecmu"><div class="lg:sl-hidden astro-q5mffni3"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-5ulgm6bh"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-5ulgm6bh"><details id="starlight__mobile-toc" class="astro-5ulgm6bh"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-5ulgm6bh"><span class="toggle sl-flex astro-5ulgm6bh">On this page<svg aria-hidden="true" class="caret astro-5ulgm6bh astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></span><span class="display-current astro-5ulgm6bh"></span></summary><div class="dropdown astro-5ulgm6bh"><ul class="isMobile astro-cxyftcne" style="--depth: 0;"><li style="--depth: 0;" class="astro-cxyftcne"><a href="#_top" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">Overview</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#1-repository-map" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">1. Repository Map</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#2-the-meta-repository-liara" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">2. The Meta Repository: liara</span></a><ul class="isMobile astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#purpose" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Purpose</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#contents" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Contents</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#what-it-does-not-contain" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">What It Does Not Contain</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#versioning-policy" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Versioning Policy</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#3-the-interface-repository-liara-interfaces" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">3. The Interface Repository: liara-interfaces</span></a><ul class="isMobile astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#purpose-1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Purpose</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#contents-1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Contents</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#what-it-does-not-contain-1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">What It Does Not Contain</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#versioning-policy-1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Versioning Policy</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#4-the-core-repository-liara-core" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">4. The Core Repository: liara-core</span></a><ul class="isMobile astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#purpose-2" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Purpose</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#contents-2" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Contents</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#what-it-does-not-contain-2" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">What It Does Not Contain</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#internal-organization" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Internal Organization</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#versioning-policy-2" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Versioning Policy</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#5-the-renderer-repository-liara-renderer" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">5. The Renderer Repository: liara-renderer</span></a><ul class="isMobile astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#purpose-3" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Purpose</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#contents-3" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Contents</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#what-it-does-not-contain-3" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">What It Does Not Contain</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#internal-organization-1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Internal Organization</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#versioning-policy-3" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Versioning Policy</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#6-the-editor-repository-liara-editor" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">6. The Editor Repository: liara-editor</span></a><ul class="isMobile astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#purpose-4" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Purpose</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#status-in-v0x" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Status in v0.x</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#contents-anticipated" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Contents (Anticipated)</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#replaceability" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Replaceability</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#7-the-physics-repository-liara-physics" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">7. The Physics Repository: liara-physics</span></a><ul class="isMobile astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#status-in-v0x-1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Status in v0.x</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#contents-anticipated-1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Contents (Anticipated)</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#replaceability-1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Replaceability</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#8-auxiliary-repositories" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">8. Auxiliary Repositories</span></a><ul class="isMobile astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#docs-shared" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">docs-shared</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#liara-docs" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">liara-docs</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#github-organization-level" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">.github (Organization-Level)</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#9-dependency-graph" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">9. Dependency Graph</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#10-module-boundaries-what-crosses-what-doesnt" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">10. Module Boundaries: What Crosses, What Doesn’t</span></a><ul class="isMobile astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#core--renderer-per-frame" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Core → Renderer (per frame)</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#core--renderer-lifecycle" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Core → Renderer (lifecycle)</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#core--renderer-resources" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Core → Renderer (resources)</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#renderer--core-callbacks" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Renderer → Core (callbacks)</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#core--editor-post-v1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Core → Editor (post-v1)</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#editor--renderer-post-v1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Editor → Renderer (post-v1)</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#11-where-things-live-a-cross-reference" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">11. Where Things Live: A Cross-Reference</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#12-adding-a-new-module" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">12. Adding a New Module</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#13-removing-or-renaming-a-module" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">13. Removing or Renaming a Module</span></a></li></ul></div></details></nav></mobile-starlight-toc><script type="module" src="/_cas/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.BcSo_yiZ.js"></script></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-q5mffni3"><div class="sl-container astro-q5mffni3"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">On this page</h2><ul class="astro-cxyftcne" style="--depth: 0;"><li style="--depth: 0;" class="astro-cxyftcne"><a href="#_top" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">Overview</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#1-repository-map" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">1. Repository Map</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#2-the-meta-repository-liara" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">2. The Meta Repository: liara</span></a><ul class="astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#purpose" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Purpose</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#contents" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Contents</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#what-it-does-not-contain" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">What It Does Not Contain</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#versioning-policy" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Versioning Policy</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#3-the-interface-repository-liara-interfaces" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">3. The Interface Repository: liara-interfaces</span></a><ul class="astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#purpose-1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Purpose</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#contents-1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Contents</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#what-it-does-not-contain-1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">What It Does Not Contain</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#versioning-policy-1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Versioning Policy</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#4-the-core-repository-liara-core" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">4. The Core Repository: liara-core</span></a><ul class="astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#purpose-2" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Purpose</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#contents-2" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Contents</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#what-it-does-not-contain-2" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">What It Does Not Contain</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#internal-organization" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Internal Organization</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#versioning-policy-2" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Versioning Policy</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#5-the-renderer-repository-liara-renderer" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">5. The Renderer Repository: liara-renderer</span></a><ul class="astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#purpose-3" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Purpose</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#contents-3" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Contents</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#what-it-does-not-contain-3" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">What It Does Not Contain</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#internal-organization-1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Internal Organization</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#versioning-policy-3" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Versioning Policy</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#6-the-editor-repository-liara-editor" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">6. The Editor Repository: liara-editor</span></a><ul class="astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#purpose-4" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Purpose</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#status-in-v0x" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Status in v0.x</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#contents-anticipated" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Contents (Anticipated)</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#replaceability" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Replaceability</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#7-the-physics-repository-liara-physics" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">7. The Physics Repository: liara-physics</span></a><ul class="astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#status-in-v0x-1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Status in v0.x</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#contents-anticipated-1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Contents (Anticipated)</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#replaceability-1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Replaceability</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#8-auxiliary-repositories" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">8. Auxiliary Repositories</span></a><ul class="astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#docs-shared" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">docs-shared</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#liara-docs" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">liara-docs</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#github-organization-level" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">.github (Organization-Level)</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#9-dependency-graph" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">9. Dependency Graph</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#10-module-boundaries-what-crosses-what-doesnt" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">10. Module Boundaries: What Crosses, What Doesn’t</span></a><ul class="astro-cxyftcne" style="--depth: 1;"><li style="--depth: 1;" class="astro-cxyftcne"><a href="#core--renderer-per-frame" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Core → Renderer (per frame)</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#core--renderer-lifecycle" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Core → Renderer (lifecycle)</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#core--renderer-resources" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Core → Renderer (resources)</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#renderer--core-callbacks" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Renderer → Core (callbacks)</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#core--editor-post-v1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Core → Editor (post-v1)</span></a></li><li style="--depth: 1;" class="astro-cxyftcne"><a href="#editor--renderer-post-v1" style="--depth: 1;" class="astro-cxyftcne"><span style="--depth: 1;" class="astro-cxyftcne">Editor → Renderer (post-v1)</span></a></li></ul></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#11-where-things-live-a-cross-reference" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">11. Where Things Live: A Cross-Reference</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#12-adding-a-new-module" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">12. Adding a New Module</span></a></li><li style="--depth: 0;" class="astro-cxyftcne"><a href="#13-removing-or-renaming-a-module" style="--depth: 0;" class="astro-cxyftcne"><span style="--depth: 0;" class="astro-cxyftcne">13. Removing or Renaming a Module</span></a></li></ul></nav></starlight-toc><script type="module" src="/_cas/_astro/TableOfContents.astro_astro_type_script_index_0_lang.Csloo1VZ.js"></script></div></div></div></aside><div class="main-pane astro-abfeecmu"><main data-pagefind-body class="astro-vdxcvpsm" lang="en" dir="ltr"><script>(function(){const messages = [];
+
+    (function () {
+        'use strict';
+        const bar = document.querySelector('[data-liara-version-banner]');
+        if (!bar) return;
+
+        const message = bar.querySelector('[data-liara-vb-message]');
+        if (message && messages.length > 0) {
+            message.textContent = messages[Math.floor(Math.random() * messages.length)];
+        }
+
+        bar.querySelector('.liara-version-banner__info')?.addEventListener('click', (event) => {
+            event.preventDefault();
+            bar.querySelector('.liara-version-banner__help')?.classList.toggle('is-open');
+        });
+
+        bar.querySelector('.liara-version-banner__dismiss')?.addEventListener('click', () => bar.remove());
+
+        fetch('/registry-index.json', { cache: 'no-cache' })
+            .then((response) => (response.ok ? response.json() : null))
+            .then((index) => {
+                const module = index?.modules?.find?.((m) => m.repo === bar.dataset.liaraRepo);
+                if (module?.latest && module.latest === bar.dataset.liaraVersion) bar.remove();
+            })
+            .catch(() => { /* keep the build-time banner */ });
+    })();
+})();</script><div class="content-panel astro-oil7k7jf"><div class="sl-container astro-oil7k7jf"><h1 id="_top" class="astro-2sm4b3ln">MODULES</h1></div></div><div class="content-panel astro-oil7k7jf"><div class="sl-container astro-oil7k7jf"><div class="sl-markdown-content"><div class="sl-heading-wrapper level-h1"><h1 id="modules">Modules</h1><a class="sl-anchor-link" href="#modules"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Modules”</span></a></div>
+<blockquote>
+<p>Concrete decomposition of the Liara Engine project into repositories,
+modules, and the boundaries between them. This document is the
+companion to <a href="ARCHITECTURE.md"><code dir="auto">ARCHITECTURE.md</code></a>: where
+<code dir="auto">ARCHITECTURE.md</code> explains the philosophy of modularity, this
+document specifies what is actually built and where it lives.</p>
+</blockquote>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="1-repository-map">1. Repository Map</h2><a class="sl-anchor-link" href="#1-repository-map"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “1. Repository Map”</span></a></div>
+<p>The project is composed of the following repositories, all hosted under
+the <code dir="auto">liara-engine</code> GitHub organization:</p>
+<table>
+<thead>
+<tr>
+<th>Repository</th>
+<th>Role</th>
+<th>Replaceable</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">liara</code></td>
+<td>Meta repository, launcher, distribution</td>
+<td>No</td>
+<td>Phase 0</td>
+</tr>
+<tr>
+<td><code dir="auto">liara-interfaces</code></td>
+<td>C ABI headers shared by all modules</td>
+<td>No</td>
+<td>Phase 0</td>
+</tr>
+<tr>
+<td><code dir="auto">liara-core</code></td>
+<td>Engine foundation (ECS, math, assets, …)</td>
+<td>No</td>
+<td>Phase 0</td>
+</tr>
+<tr>
+<td><code dir="auto">liara-renderer</code></td>
+<td>Reference Vulkan renderer</td>
+<td>Yes</td>
+<td>Phase 0</td>
+</tr>
+<tr>
+<td><code dir="auto">liara-editor</code></td>
+<td>Editor application (post-v1.0)</td>
+<td>Yes</td>
+<td>Deferred</td>
+</tr>
+<tr>
+<td><code dir="auto">liara-physics</code></td>
+<td>Physics module (post-v1.0)</td>
+<td>Yes</td>
+<td>Deferred</td>
+</tr>
+<tr>
+<td><code dir="auto">docs-shared</code></td>
+<td>Shared navigation and doc templates</td>
+<td>No</td>
+<td>Phase 0</td>
+</tr>
+<tr>
+<td><code dir="auto">liara-docs</code></td>
+<td>Host the full projet’s documentation and deployment to cloudflare</td>
+<td>No</td>
+<td>Phase 0</td>
+</tr>
+<tr>
+<td><code dir="auto">.github</code></td>
+<td>Org-wide templates and shared actions</td>
+<td>No</td>
+<td>Phase 0</td>
+</tr>
+</tbody>
+</table>
+<p>The “Replaceable” column indicates whether the module is designed to be
+substitutable by an alternative implementation. Replaceable modules
+expose their entire functionality through <code dir="auto">liara-interfaces</code>;
+non-replaceable modules may use richer C++ APIs internally.</p>
+<p>The “Status” column indicates the planned introduction. “Phase 0” means
+the repository must exist before v0.1. “Deferred” means the repository
+is created when its first code is written, not before.</p>
+<p>A visual representation of the dependency graph appears in section 9.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="2-the-meta-repository-liara">2. The Meta Repository: <code dir="auto">liara</code></h2><a class="sl-anchor-link" href="#2-the-meta-repository-liara"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “2. The Meta Repository: liara”</span></a></div>
+<p>The <code dir="auto">liara</code> repository is the public face of the project and the
+orchestrator of everything else. It does not contain engine code; it
+contains the things that need to know about all modules at once.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="purpose">Purpose</h3><a class="sl-anchor-link" href="#purpose"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Purpose”</span></a></div>
+<p>The meta repository serves four functions. It is the <strong>landing page</strong> for
+the project on GitHub: the README that a visitor reads first, the issue
+tracker that catches general questions, the discussions board for
+project-wide topics. It is the <strong>launcher and distribution</strong> point: the
+small executable that loads the core, the AUR <code dir="auto">PKGBUILD</code>, the Windows
+installer or portable archive script. It is the <strong>workspace orchestrator</strong>:
+the bootstrap script that clones and configures all other repositories
+for local development. And it is the <strong>compatibility matrix</strong>: the
+authoritative record of which versions of which modules work together.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="contents">Contents</h3><a class="sl-anchor-link" href="#contents"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Contents”</span></a></div>
+<p>The repository contains, at minimum:</p>
+<ul>
+<li>A top-level README with project description, build status badges, and
+links to documentation.</li>
+<li>This entire <code dir="auto">docs/</code> directory: the foundational documents
+(<code dir="auto">ARCHITECTURE.md</code>, <code dir="auto">MODULES.md</code>, <code dir="auto">ROADMAP.md</code>, etc.) and the ADRs.</li>
+<li>A <code dir="auto">launcher/</code> source directory containing the small standalone
+application that initializes the core and runs the standalone game
+loop. This is the executable that ships in the AUR package.</li>
+<li>A <code dir="auto">scripts/</code> directory containing the workspace bootstrap script,
+release coordination scripts, and any other tooling that operates
+across repositories.</li>
+<li>A <code dir="auto">compatibility.toml</code> file that lists, for each release of the
+meta repository, which versions of which modules are bundled together.</li>
+<li>A <code dir="auto">packaging/</code> directory containing the Linux <code dir="auto">PKGBUILD</code>, the Windows
+packaging script, and any other distribution artifacts.</li>
+<li>A <code dir="auto">schemas/</code> directory containing JSON schemas for any file formats defined
+at the meta level.</li>
+<li>A <code dir="auto">docker/</code> directory containing any Dockerfiles for development or CI.</li>
+</ul>
+<div class="sl-heading-wrapper level-h3"><h3 id="what-it-does-not-contain">What It Does Not Contain</h3><a class="sl-anchor-link" href="#what-it-does-not-contain"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “What It Does Not Contain”</span></a></div>
+<p>The meta repository does not contain engine logic, rendering code, ECS
+implementation, or any other functionality that belongs in a module. It
+also does not contain documentation generated from source code (Doxygen
+output) — that documentation is generated by each module’s and published
+in the <code dir="auto">liara-docs</code> repository.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="versioning-policy">Versioning Policy</h3><a class="sl-anchor-link" href="#versioning-policy"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Versioning Policy”</span></a></div>
+<p>The meta repository uses its own version number, distinct from the
+versions of the modules it bundles. A release of <code dir="auto">liara</code> 1.0.0 corresponds
+to a specific combination of <code dir="auto">liara-core</code>, <code dir="auto">liara-renderer</code>, etc.,
+specified in <code dir="auto">compatibility.toml</code>. The user-visible “Liara Engine 1.0.0”
+refers to a release of this repository.</p>
+<p>The meta repository’s versioning follows the engine’s milestone roadmap.
+Module repositories version independently, on their own cadence.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="3-the-interface-repository-liara-interfaces">3. The Interface Repository: <code dir="auto">liara-interfaces</code></h2><a class="sl-anchor-link" href="#3-the-interface-repository-liara-interfaces"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “3. The Interface Repository: liara-interfaces”</span></a></div>
+<p>The <code dir="auto">liara-interfaces</code> repository is the most version-sensitive piece of
+the project. Every other module declares which version of
+<code dir="auto">liara-interfaces</code> it requires, and a breaking change to interfaces
+ripples through every consumer.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="purpose-1">Purpose</h3><a class="sl-anchor-link" href="#purpose-1"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Purpose”</span></a></div>
+<p>This repository defines the C ABI contracts between modules. Nothing in
+the project may communicate across a module boundary without going through
+a header defined here. Modules that internally use richer C++ types
+must wrap them at their public surface to expose only the C interface.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="contents-1">Contents</h3><a class="sl-anchor-link" href="#contents-1"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Contents”</span></a></div>
+<p>The repository contains exclusively C headers, organized by module:</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_cas/_astro/ec.w36nc.css"><script type="module" src="/_cas/_astro/ec.0vx5m.js"></script><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">include/liara/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── version.h           # Version macros and ABI version negotiation</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── types.h             # Common POD types (vec3, mat4, handles, etc.)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── result.h            # Error reporting convention</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── allocator.h         # Memory allocator interface (caller-supplied)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── core/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── module.h        # Generic module lifecycle (init, shutdown, version)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── world.h         # ECS-side opaque handles (entity, world)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   └── events.h        # Input and lifecycle events</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── renderer/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── renderer.h      # Renderer module entry point and lifecycle</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── render_target.h # Abstract render target type</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── view.h          # View / camera structures</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── packet.h        # Render packet structures</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   └── debug.h         # Debug primitive submission</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── physics/            # (post-v1.0)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">└── scripting/          # (post-v1.0)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="include/liara/├── version.h           # Version macros and ABI version negotiation├── types.h             # Common POD types (vec3, mat4, handles, etc.)├── result.h            # Error reporting convention├── allocator.h         # Memory allocator interface (caller-supplied)├── core/│   ├── module.h        # Generic module lifecycle (init, shutdown, version)│   ├── world.h         # ECS-side opaque handles (entity, world)│   └── events.h        # Input and lifecycle events├── renderer/│   ├── renderer.h      # Renderer module entry point and lifecycle│   ├── render_target.h # Abstract render target type│   ├── view.h          # View / camera structures│   ├── packet.h        # Render packet structures│   └── debug.h         # Debug primitive submission├── physics/            # (post-v1.0)└── scripting/          # (post-v1.0)"><div></div></button></div></figure></div>
+<p>In addition to headers, the repository contains:</p>
+<ul>
+<li>A <code dir="auto">CMakeLists.txt</code> exposing the headers as an <code dir="auto">INTERFACE</code> library that
+consumers link against to gain include paths.</li>
+<li>A <code dir="auto">vcpkg.json</code> stub (no external dependencies, but present for
+consistency with other modules).</li>
+<li>Tests that verify each header compiles standalone and is C-callable
+(compiled with both a C compiler and a C++ compiler in CI).</li>
+<li>The <code dir="auto">INTERFACES.md</code> document specifying the rules for designing,
+evolving, and versioning interfaces.</li>
+</ul>
+<div class="sl-heading-wrapper level-h3"><h3 id="what-it-does-not-contain-1">What It Does Not Contain</h3><a class="sl-anchor-link" href="#what-it-does-not-contain-1"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “What It Does Not Contain”</span></a></div>
+<p>No implementation. No <code dir="auto">.c</code> or <code dir="auto">.cpp</code> files (other than the test files,
+which are minimal and verify properties of the headers themselves). No
+external dependencies (the headers may use only fixed-width integer
+types from <code dir="auto">&lt;stdint.h&gt;</code> and <code dir="auto">&lt;stddef.h&gt;</code>).</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="versioning-policy-1">Versioning Policy</h3><a class="sl-anchor-link" href="#versioning-policy-1"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Versioning Policy”</span></a></div>
+<p>This repository follows <strong>strict semantic versioning</strong>, with the rules
+spelled out in <code dir="auto">INTERFACES.md</code>. The headline:</p>
+<ul>
+<li><strong>MAJOR</strong> version bumps for any change that breaks ABI or source
+compatibility for consumers.</li>
+<li><strong>MINOR</strong> version bumps for purely additive changes that do not affect
+existing consumers.</li>
+<li><strong>PATCH</strong> version bumps for documentation, comments, or whitespace.</li>
+</ul>
+<p>The version is encoded in <code dir="auto">version.h</code> as preprocessor macros and is
+checked at module load time via the function each module exports to
+report its interface version.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="4-the-core-repository-liara-core">4. The Core Repository: <code dir="auto">liara-core</code></h2><a class="sl-anchor-link" href="#4-the-core-repository-liara-core"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “4. The Core Repository: liara-core”</span></a></div>
+<p>The core is the foundation that every other module depends on. It owns
+the data and the schedule; modules transform data on a schedule the
+core dictates.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="purpose-2">Purpose</h3><a class="sl-anchor-link" href="#purpose-2"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Purpose”</span></a></div>
+<p>The core implements everything that is shared, mandatory, and not
+replaceable. It is the answer to “what is always there, no matter what
+modules are loaded?”.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="contents-2">Contents</h3><a class="sl-anchor-link" href="#contents-2"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Contents”</span></a></div>
+<p>The core repository implements:</p>
+<p><strong>The ECS.</strong> Entity allocation with generational handles, sparse-set
+component storage, world container, query API, system scheduling. This
+is hand-written from scratch (see <code dir="auto">ARCHITECTURE.md</code> section 6 for
+rationale).</p>
+<p><strong>The math layer.</strong> Vector, matrix, and quaternion types as plain C
+structs (defined in <code dir="auto">liara-interfaces</code>), with implementation functions
+that operate on them. Internal computation may use a vendored copy of
+GLM where convenient, but no GLM type ever crosses the module boundary.</p>
+<p><strong>The asset manager.</strong> Loading, lifetime management, and handle
+allocation for engine-known asset types (meshes, textures, shaders,
+audio). Asset format support is initially limited to glTF for models,
+common formats via stb_image for textures, SPIR-V for shaders, and
+common formats via miniaudio for audio. The asset manager does not
+upload data to the GPU; that is the renderer’s job. The asset manager
+provides the renderer with CPU-side data and a stable handle.</p>
+<p><strong>The logger.</strong> A multi-threaded logging system with structured log
+entries, multiple sinks (stdout, file, in-memory ring buffer for the
+ImGui console), and runtime log level control. The architecture
+follows what was prototyped in the previous engine, simplified.</p>
+<p><strong>The settings system.</strong> Type-safe key-value storage with serialization
+to TOML, runtime change notifications, and category-based organization.
+This carries forward the design from the previous engine, with the
+file format changed from custom to TOML.</p>
+<p><strong>The signal handler.</strong> Cross-platform graceful shutdown handling for
+SIGINT, SIGTERM, and Windows console events. Translates platform
+signals into engine-internal shutdown events.</p>
+<p><strong>The event system.</strong> Internal pub-sub for engine events (entity
+created, component added, asset loaded, etc.) and external input events
+(keyboard, mouse, gamepad, window). Decoupled from rendering: input
+events flow through the core and may be consumed by scripting, editor,
+or game logic, not just by the renderer.</p>
+<p><strong>The application loop primitives.</strong> The <code dir="auto">liara_core_step(dt)</code> function
+that advances the simulation by one tick, along with the helper
+functions that the launcher (or the editor, in editor mode) uses to
+build a complete loop.</p>
+<p><strong>The module loader.</strong> The code that, at static-link time, registers
+each compiled-in module’s entry points and verifies their interface
+versions. This is the seed for what will become a runtime dynamic
+loader if the project ever moves to DSO modules.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="what-it-does-not-contain-2">What It Does Not Contain</h3><a class="sl-anchor-link" href="#what-it-does-not-contain-2"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “What It Does Not Contain”</span></a></div>
+<p>No rendering code. No platform-specific window creation (the windowing
+abstraction is in core, but the actual SDL3 calls happen in a small
+platform layer that is private to core). No editor-specific code. No
+gameplay code. No tools.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="internal-organization">Internal Organization</h3><a class="sl-anchor-link" href="#internal-organization"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Internal Organization”</span></a></div>
+<p>The core’s internal directory layout follows the categories above:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">src/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── ecs/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── math/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── assets/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── logger/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── settings/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── signal/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── events/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── loop/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── modules/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">└── platform/</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">    </span></span><span style="--0:#d6deeb;--1:#403f53">├── linux/</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">    </span></span><span style="--0:#d6deeb;--1:#403f53">└── windows/</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="src/├── ecs/├── math/├── assets/├── logger/├── settings/├── signal/├── events/├── loop/├── modules/└── platform/    ├── linux/    └── windows/"><div></div></button></div></figure></div>
+<p>This layout is internal to the core and may evolve. It is not part of
+any contract.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="versioning-policy-2">Versioning Policy</h3><a class="sl-anchor-link" href="#versioning-policy-2"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Versioning Policy”</span></a></div>
+<p>The core follows semantic versioning, but its compatibility constraints
+are looser than <code dir="auto">liara-interfaces</code>. A patch or minor change to the core
+that does not affect any interface is invisible to other modules. A
+major version bump of the core is rare and significant.</p>
+<p>The core’s version is independent of the meta repository’s version.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="5-the-renderer-repository-liara-renderer">5. The Renderer Repository: <code dir="auto">liara-renderer</code></h2><a class="sl-anchor-link" href="#5-the-renderer-repository-liara-renderer"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “5. The Renderer Repository: liara-renderer”</span></a></div>
+<p>The renderer is the reference implementation of the renderer interface.
+It is the most complex module and the one whose replaceability matters
+most.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="purpose-3">Purpose</h3><a class="sl-anchor-link" href="#purpose-3"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Purpose”</span></a></div>
+<p>The renderer takes render packets produced by the core and produces
+pixels. It manages the GPU, the swapchain, render targets, pipelines,
+and shaders. It does not know about the ECS, about gameplay, or about
+the editor; it only knows about the data the core hands it each frame.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="contents-3">Contents</h3><a class="sl-anchor-link" href="#contents-3"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Contents”</span></a></div>
+<p>The renderer repository implements:</p>
+<p><strong>The Vulkan device layer.</strong> Instance creation, physical device
+selection, logical device creation, queue management, command pool
+management. Built on <code dir="auto">Vulkan-Hpp</code> and <code dir="auto">VMA</code>.</p>
+<p><strong>The swapchain manager.</strong> Surface creation (delegating to the
+windowing layer in core for the native handle), swapchain creation,
+recreation on resize, image acquisition, and presentation.</p>
+<p><strong>The render target abstraction.</strong> Both swapchain-backed targets and
+offscreen-texture-backed targets, exposed through the same opaque
+handle to consumers. Image transitions, format negotiation, and
+allocation strategy are encapsulated here.</p>
+<p><strong>The pipeline cache.</strong> Shader module loading, pipeline state
+description, pipeline creation, caching of pipelines keyed by their
+state. SPIR-V is consumed; the renderer does not compile GLSL itself
+(that is done at build time by <code dir="auto">glslc</code> invoked from CMake).</p>
+<p><strong>The render passes.</strong> The actual frame logic: receiving a render
+packet, sorting by material/pipeline, issuing draw calls, handling
+transparency, presenting to the swapchain.</p>
+<p><strong>The debug rendering subsystem.</strong> Lines, wireframes, AABBs, frustums,
+and other primitives submitted by the core (or, post-v1.0, by the
+editor for gizmos). Implemented as a separate pass with its own simple
+pipeline.</p>
+<p><strong>The ImGui integration.</strong> ImGui is rendered by the renderer because
+it is fundamentally a rendering operation. The integration is
+designed so that the editor (post-v1.0) submits its UI through the
+editor interface, and the renderer draws it. In v0.x, ImGui is used
+only for the developer console and stats overlays.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="what-it-does-not-contain-3">What It Does Not Contain</h3><a class="sl-anchor-link" href="#what-it-does-not-contain-3"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “What It Does Not Contain”</span></a></div>
+<p>No ECS code. No gameplay logic. No window creation (the window is
+created by the core’s platform layer; the renderer receives a native
+handle). No asset loading from disk (the renderer receives prepared
+asset data from the core’s asset manager). No input handling.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="internal-organization-1">Internal Organization</h3><a class="sl-anchor-link" href="#internal-organization-1"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Internal Organization”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">src/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── device/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── swapchain/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── targets/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── pipelines/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── passes/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── debug/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── imgui/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">└── platform/</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">shaders/</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="src/├── device/├── swapchain/├── targets/├── pipelines/├── passes/├── debug/├── imgui/└── platform/shaders/"><div></div></button></div></figure></div>
+<p>The <code dir="auto">shaders/</code> directory contains GLSL source for the engine’s built-in
+shaders, compiled to SPIR-V at build time and either embedded in the
+binary or shipped alongside it (controlled by a CMake option).</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="versioning-policy-3">Versioning Policy</h3><a class="sl-anchor-link" href="#versioning-policy-3"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Versioning Policy”</span></a></div>
+<p>The renderer follows semantic versioning. Its public contract is
+defined entirely by <code dir="auto">liara-interfaces</code>, so most changes (bug fixes,
+performance improvements, internal refactoring) are invisible to
+consumers and result in patch or minor bumps. Major bumps are rare and
+correspond to changes in resource consumption, behavior in edge cases,
+or removal of optional features.</p>
+<p>The renderer’s version is independent of both the core’s version and
+the meta repository’s version. The compatibility matrix in the meta
+repository tracks which combinations are tested.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="6-the-editor-repository-liara-editor">6. The Editor Repository: <code dir="auto">liara-editor</code></h2><a class="sl-anchor-link" href="#6-the-editor-repository-liara-editor"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “6. The Editor Repository: liara-editor”</span></a></div>
+<p>The editor is the in-engine authoring tool that, post-v1.0, allows
+scenes to be built without writing code. It is <strong>not introduced until
+the v1.x cycle</strong>; the repository is created when the first editor code
+is written.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="purpose-4">Purpose</h3><a class="sl-anchor-link" href="#purpose-4"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Purpose”</span></a></div>
+<p>The editor is the application a developer launches to build a game.
+It hosts the engine, lets the developer place entities in the scene
+visually, edit their components through an inspector, and save and
+load scenes. It is the analog of the Unity Editor or the Unreal Editor.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="status-in-v0x">Status in v0.x</h3><a class="sl-anchor-link" href="#status-in-v0x"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Status in v0.x”</span></a></div>
+<p>The editor does not exist in v0.x. Scenes are constructed in code or
+loaded from JSON files written by hand. This is acknowledged as a
+limitation; it is not a permanent state of affairs. The interfaces in
+v0.x are designed so that introducing the editor in v1.x does not
+require interface changes — see <code dir="auto">ARCHITECTURE.md</code> section 7 and
+section 11 for the specific design choices that enable this.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="contents-anticipated">Contents (Anticipated)</h3><a class="sl-anchor-link" href="#contents-anticipated"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Contents (Anticipated)”</span></a></div>
+<p>When the editor is built, the repository will contain:</p>
+<ul>
+<li>An application that owns its own window and swapchain, embeds the
+engine as a library, and drives the engine’s tick manually.</li>
+<li>An ImGui-based UI: scene hierarchy, component inspector, asset
+browser, scene viewport (rendering the scene to a texture and
+displaying it in an ImGui panel), play/pause/step controls.</li>
+<li>Gizmo rendering for entity manipulation, integrated with the
+renderer’s debug rendering subsystem.</li>
+<li>Scene serialization (load/save scenes as JSON or a custom format).</li>
+<li>Project management (create new project, set up directory structure,
+manage assets).</li>
+</ul>
+<div class="sl-heading-wrapper level-h3"><h3 id="replaceability">Replaceability</h3><a class="sl-anchor-link" href="#replaceability"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Replaceability”</span></a></div>
+<p>Although the editor is, in principle, a swappable module like the
+renderer, the practical question of someone writing an alternative
+editor is unlikely. Editors are large pieces of software with
+complex UI requirements, and the value of having an alternative
+editor is questionable for a project of this scale. The editor
+therefore is <strong>not designed for replaceability</strong>; it consumes the
+engine through richer C++ APIs where convenient.</p>
+<p>This is a deliberate exception to the modularity principle, made
+because the cost of treating the editor as replaceable would be
+high and the benefit nil.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="7-the-physics-repository-liara-physics">7. The Physics Repository: <code dir="auto">liara-physics</code></h2><a class="sl-anchor-link" href="#7-the-physics-repository-liara-physics"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “7. The Physics Repository: liara-physics”</span></a></div>
+<p>The physics module provides collision detection and rigid body
+dynamics. It is <strong>not introduced until the v1.x cycle</strong>.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="status-in-v0x-1">Status in v0.x</h3><a class="sl-anchor-link" href="#status-in-v0x-1"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Status in v0.x”</span></a></div>
+<p>Physics does not exist in v0.x. Entities have transforms, but nothing
+moves except by direct ECS manipulation. This is acknowledged as a
+limitation.</p>
+<p>When the physics module is introduced, its design will be informed by
+experience using the engine to build a game without it. The interface
+for physics is <strong>not</strong> designed in v0.x precisely because that design
+would be premature.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="contents-anticipated-1">Contents (Anticipated)</h3><a class="sl-anchor-link" href="#contents-anticipated-1"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Contents (Anticipated)”</span></a></div>
+<p>When introduced, the physics module will likely include:</p>
+<ul>
+<li>A choice of integration: a custom implementation, or a wrapper around
+Bullet, PhysX, or Jolt. This decision is deferred until the milestone.</li>
+<li>Collision shapes (box, sphere, capsule, mesh, heightfield).</li>
+<li>Rigid body dynamics with constraints and joints.</li>
+<li>Raycasts and queries.</li>
+<li>Debug visualization integrated with the renderer’s debug rendering
+subsystem.</li>
+</ul>
+<div class="sl-heading-wrapper level-h3"><h3 id="replaceability-1">Replaceability</h3><a class="sl-anchor-link" href="#replaceability-1"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Replaceability”</span></a></div>
+<p>Physics is designed as a replaceable module. The interface in
+<code dir="auto">liara-interfaces/physics.h</code> will be the contract.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="8-auxiliary-repositories">8. Auxiliary Repositories</h2><a class="sl-anchor-link" href="#8-auxiliary-repositories"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “8. Auxiliary Repositories”</span></a></div>
+<div class="sl-heading-wrapper level-h3"><h3 id="docs-shared"><code dir="auto">docs-shared</code></h3><a class="sl-anchor-link" href="#docs-shared"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “docs-shared”</span></a></div>
+<p>A small repository containing the shared navigation bar and
+documentation templates that every module’s published documentation
+includes. The shared assets are:</p>
+<ul>
+<li><code dir="auto">navbar.html</code>, <code dir="auto">navbar.css</code>, <code dir="auto">navbar.js</code> — the navigation bar that
+appears at the top of every documentation page across all modules.</li>
+<li><code dir="auto">version.json</code> — list of available versions, consumed by the navbar’s
+JavaScript to populate the version dropdown.</li>
+<li><code dir="auto">doxygen-header.html</code>, <code dir="auto">doxygen-footer.html</code>, <code dir="auto">doxygen-stylesheet.css</code>
+— Doxygen template files that integrate the navbar.</li>
+<li><code dir="auto">mdbook-theme/</code> — mdBook theme files that integrate the navbar.</li>
+</ul>
+<p>Each module’s documentation CI job downloads this repository at build
+time and uses its templates when generating documentation. Updates to
+the navbar are made here and propagate on the next documentation
+generation in each module.</p>
+<p>This repository is small, rarely changes, and follows simple
+versioning: each release tag corresponds to a snapshot that is referenced
+by module CI jobs. Modules pin a specific version to avoid surprise
+breakage.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="liara-docs"><code dir="auto">liara-docs</code></h3><a class="sl-anchor-link" href="#liara-docs"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “liara-docs”</span></a></div>
+<p>The repository that hosts the full project’s documentation, including
+the user guide, the API reference (Doxygen output from all modules), and
+the ADRs. This is the repository that is published to Cloudflare Pages and
+linked from the meta repository’s README.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="github-organization-level"><code dir="auto">.github</code> (Organization-Level)</h3><a class="sl-anchor-link" href="#github-organization-level"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “.github (Organization-Level)”</span></a></div>
+<p>A special repository that GitHub recognizes as the source of
+organization-wide defaults. It contains:</p>
+<ul>
+<li><code dir="auto">profile/README.md</code> — the organization’s public landing page.</li>
+<li><code dir="auto">ISSUE_TEMPLATE/</code> — issue templates that apply to repositories
+without their own.</li>
+<li><code dir="auto">pull_request_template.md</code> — the default PR template.</li>
+<li><code dir="auto">workflows/</code> — reusable GitHub Actions workflows that other
+repositories invoke (build, lint, generate docs, deploy gh-pages).</li>
+</ul>
+<p>Each module’s CI consumes the reusable workflows from this repository,
+so that updates to CI logic happen in one place. This is the same
+discipline as <code dir="auto">docs-shared</code>, applied to CI.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="9-dependency-graph">9. Dependency Graph</h2><a class="sl-anchor-link" href="#9-dependency-graph"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “9. Dependency Graph”</span></a></div>
+<p>The static dependency graph between repositories is:</p>
+<pre dir="ltr" class="mermaid">flowchart TB
+
+    interfaces[&quot;liara-interfaces&lt;br/&gt;(C headers only)&quot;]
+
+    core[&quot;liara-core&quot;]
+    renderer[&quot;liara-renderer&quot;]
+    physics[&quot;liara-physics&lt;br/&gt;(post-v1)&quot;]
+
+    launcher[&quot;liara&lt;br/&gt;(launcher)&quot;]
+    editor[&quot;liara-editor&lt;br/&gt;(post-v1)&quot;]
+
+    interfaces --&gt; core
+    interfaces --&gt; renderer
+    interfaces --&gt; physics
+
+    merge1((.))
+
+    core --&gt; merge1
+    renderer --&gt; merge1
+    physics --&gt; merge1
+
+    merge1 --&gt; launcher
+    merge1 --&gt; editor</pre>
+<p>Reading the graph:</p>
+<ul>
+<li><code dir="auto">liara-interfaces</code> depends on nothing.</li>
+<li><code dir="auto">liara-core</code>, <code dir="auto">liara-renderer</code>, and <code dir="auto">liara-physics</code> each depend only
+on <code dir="auto">liara-interfaces</code>. They do <strong>not</strong> depend on each other.</li>
+<li>The <code dir="auto">liara</code> meta repository (specifically the launcher) depends on
+<code dir="auto">liara-core</code> and <code dir="auto">liara-renderer</code> (and later, <code dir="auto">liara-physics</code>),
+composing them into a runnable application.</li>
+<li>The <code dir="auto">liara-editor</code> repository (post-v1.0) depends on the same set,
+composing them into the editor application.</li>
+</ul>
+<p>The crucial property is that the renderer does <strong>not</strong> depend on the
+core, and the core does <strong>not</strong> depend on the renderer. They are
+siblings, communicating only through interfaces. This is what makes
+either of them replaceable. If the core had a <code dir="auto">#include</code> of a
+renderer header, the architecture would be broken.</p>
+<p>The auxiliary repositories (<code dir="auto">docs-shared</code>, <code dir="auto">liara-docs</code>, <code dir="auto">.github</code>) are not in the
+dependency graph because their consumption is at the CI level, not the
+build level. They are pulled in by GitHub Actions, not by CMake.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="10-module-boundaries-what-crosses-what-doesnt">10. Module Boundaries: What Crosses, What Doesn’t</h2><a class="sl-anchor-link" href="#10-module-boundaries-what-crosses-what-doesnt"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “10. Module Boundaries: What Crosses, What Doesn’t”</span></a></div>
+<p>This section enumerates the data flows that cross module boundaries.
+Anything not listed here should not cross.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="core--renderer-per-frame">Core → Renderer (per frame)</h3><a class="sl-anchor-link" href="#core--renderer-per-frame"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Core → Renderer (per frame)”</span></a></div>
+<p>The core sends the renderer a render packet describing what to draw
+this frame. The packet contains, at minimum:</p>
+<ul>
+<li>A list of views, each with a camera, viewport, and target.</li>
+<li>A list of drawables per view, each with a transform, mesh handle,
+and material handle.</li>
+<li>A list of lights affecting the scene.</li>
+<li>A list of debug primitives to draw this frame.</li>
+<li>A list of UI draw commands (ImGui draw data, in v0.x).</li>
+</ul>
+<p>This data is plain-old-data and does not retain ownership: once the
+renderer has consumed the packet, it may discard it.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="core--renderer-lifecycle">Core → Renderer (lifecycle)</h3><a class="sl-anchor-link" href="#core--renderer-lifecycle"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Core → Renderer (lifecycle)”</span></a></div>
+<p>At startup, the core hands the renderer a native window handle (HWND,
+Wayland surface, X11 window) and configuration parameters (preferred
+GPU, validation layer enable, etc.). The renderer initializes itself
+and reports success or failure.</p>
+<p>At shutdown, the core requests the renderer to flush in-flight work and
+release resources.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="core--renderer-resources">Core → Renderer (resources)</h3><a class="sl-anchor-link" href="#core--renderer-resources"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Core → Renderer (resources)”</span></a></div>
+<p>When an asset is loaded by the core, it is uploaded to the GPU via a
+renderer call. The core hands the renderer the CPU-side data and a
+stable handle; the renderer associates the GPU-side resource with the
+handle. Subsequent draw calls reference the asset by handle.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="renderer--core-callbacks">Renderer → Core (callbacks)</h3><a class="sl-anchor-link" href="#renderer--core-callbacks"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Renderer → Core (callbacks)”</span></a></div>
+<p>The renderer reports events back to the core: surface lost, swapchain
+resized, GPU error. These are reported through callback functions
+registered by the core at renderer init.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="core--editor-post-v1">Core → Editor (post-v1)</h3><a class="sl-anchor-link" href="#core--editor-post-v1"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Core → Editor (post-v1)”</span></a></div>
+<p>The editor reads ECS state to populate the scene hierarchy and
+inspector. The interface for this is <strong>read-mostly</strong>: the editor can
+inspect any entity but mutates entities only through specific edit
+commands that the core executes (so that undo/redo is possible).</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="editor--renderer-post-v1">Editor → Renderer (post-v1)</h3><a class="sl-anchor-link" href="#editor--renderer-post-v1"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Editor → Renderer (post-v1)”</span></a></div>
+<p>The editor submits gizmo geometry through the debug rendering
+interface, on top of the scene render. The editor also requests render
+targets for its scene viewport panels.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="11-where-things-live-a-cross-reference">11. Where Things Live: A Cross-Reference</h2><a class="sl-anchor-link" href="#11-where-things-live-a-cross-reference"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “11. Where Things Live: A Cross-Reference”</span></a></div>
+<p>For specific topics, the canonical location is:</p>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Repository</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ECS implementation</td>
+<td><code dir="auto">liara-core</code></td>
+</tr>
+<tr>
+<td>ECS handle types (in API)</td>
+<td><code dir="auto">liara-interfaces</code></td>
+</tr>
+<tr>
+<td>Math types (in API)</td>
+<td><code dir="auto">liara-interfaces</code></td>
+</tr>
+<tr>
+<td>Math implementation</td>
+<td><code dir="auto">liara-core</code></td>
+</tr>
+<tr>
+<td>Asset loading</td>
+<td><code dir="auto">liara-core</code></td>
+</tr>
+<tr>
+<td>GPU upload</td>
+<td><code dir="auto">liara-renderer</code></td>
+</tr>
+<tr>
+<td>Window creation</td>
+<td><code dir="auto">liara-core</code></td>
+</tr>
+<tr>
+<td>Vulkan device</td>
+<td><code dir="auto">liara-renderer</code></td>
+</tr>
+<tr>
+<td>Render packet structure</td>
+<td><code dir="auto">liara-interfaces</code></td>
+</tr>
+<tr>
+<td>Render packet construction</td>
+<td><code dir="auto">liara-core</code></td>
+</tr>
+<tr>
+<td>Render packet consumption</td>
+<td><code dir="auto">liara-renderer</code></td>
+</tr>
+<tr>
+<td>ImGui setup</td>
+<td><code dir="auto">liara-renderer</code></td>
+</tr>
+<tr>
+<td>Debug primitives API</td>
+<td><code dir="auto">liara-interfaces</code></td>
+</tr>
+<tr>
+<td>Debug primitives drawing</td>
+<td><code dir="auto">liara-renderer</code></td>
+</tr>
+<tr>
+<td>Logger</td>
+<td><code dir="auto">liara-core</code></td>
+</tr>
+<tr>
+<td>Settings (TOML)</td>
+<td><code dir="auto">liara-core</code></td>
+</tr>
+<tr>
+<td>Standalone game loop</td>
+<td><code dir="auto">liara</code> (launcher)</td>
+</tr>
+<tr>
+<td>Editor loop</td>
+<td><code dir="auto">liara-editor</code> (post-v1)</td>
+</tr>
+<tr>
+<td>AUR PKGBUILD</td>
+<td><code dir="auto">liara</code></td>
+</tr>
+<tr>
+<td>Doxygen config per module</td>
+<td>each module repo</td>
+</tr>
+<tr>
+<td>User documentation (mdBook)</td>
+<td><code dir="auto">liara</code> (<code dir="auto">docs/user/</code>)</td>
+</tr>
+<tr>
+<td>ADRs</td>
+<td><code dir="auto">liara</code> (<code dir="auto">docs/adr/</code>)</td>
+</tr>
+<tr>
+<td>Shared navbar</td>
+<td><code dir="auto">docs-shared</code></td>
+</tr>
+<tr>
+<td>Shared CI workflows</td>
+<td><code dir="auto">.github</code> (org-level)</td>
+</tr>
+</tbody>
+</table>
+<p>When a topic is added to the project, this table is updated.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="12-adding-a-new-module">12. Adding a New Module</h2><a class="sl-anchor-link" href="#12-adding-a-new-module"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “12. Adding a New Module”</span></a></div>
+<p>The process for introducing a new module to the project is:</p>
+<ol>
+<li>
+<p><strong>Justify the module’s existence.</strong> A new module is added when
+functionality cannot reasonably fit in an existing module without
+bloating it, and when the new functionality has a clear boundary
+that can be expressed as a C interface.</p>
+</li>
+<li>
+<p><strong>Design the interface first.</strong> Add headers to <code dir="auto">liara-interfaces</code>
+defining the module’s public surface. This is the most expensive
+step and should not be skipped.</p>
+</li>
+<li>
+<p><strong>Bump <code dir="auto">liara-interfaces</code>.</strong> Adding a new module is a minor version
+bump (additive). Update the version macros and tag a release.</p>
+</li>
+<li>
+<p><strong>Create the module repository.</strong> Follow the conventions for
+repository setup (see <code dir="auto">CONTRIBUTING.md</code>).</p>
+</li>
+<li>
+<p><strong>Update this document.</strong> The new module appears in the repository
+map (section 1), the dependency graph (section 9), and the
+cross-reference (section 11).</p>
+</li>
+<li>
+<p><strong>Update the compatibility matrix.</strong> The meta repository’s
+<code dir="auto">compatibility.toml</code> learns about the new module.</p>
+</li>
+<li>
+<p><strong>Update the launcher (if applicable).</strong> If the new module is part
+of the standalone runtime, the launcher composes it into the loop.</p>
+</li>
+</ol>
+<p>The cost of adding a module is intentionally non-trivial. Modules
+should be added because they earn their place, not because the project
+is in a phase where adding modules feels productive.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="13-removing-or-renaming-a-module">13. Removing or Renaming a Module</h2><a class="sl-anchor-link" href="#13-removing-or-renaming-a-module"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “13. Removing or Renaming a Module”</span></a></div>
+<p>Modules are not removed or renamed lightly. When a module’s
+responsibilities shrink to nothing, or when its name becomes
+misleading, the change is treated as a major version event for the
+meta repository. The old repository is archived (not deleted), the new
+repository is created, and the migration path is documented in an ADR.</p>
+<p>This conservatism reflects the reality that external links to
+repositories accumulate over time and that breaking them is a real
+cost, even for a project at this scale.</p>
+</div><footer class="sl-flex astro-xhxjzfa7"><div class="meta sl-flex astro-xhxjzfa7"><a href="https://github.com/liara-engine/liara/edit/main/docs/src/content/docs/guides/MODULES.md" class="sl-flex print:hidden astro-xk5gmzsg"><svg aria-hidden="true" class="astro-xk5gmzsg astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.2em;"><path d="M22 7.24a1 1 0 0 0-.29-.71l-4.24-4.24a1 1 0 0 0-1.1-.22 1 1 0 0 0-.32.22l-2.83 2.83L2.29 16.05a1 1 0 0 0-.29.71V21a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .76-.29l10.87-10.93L21.71 8c.1-.1.17-.2.22-.33a1 1 0 0 0 0-.24v-.14l.07-.05ZM6.83 20H4v-2.83l9.93-9.93 2.83 2.83L6.83 20ZM18.17 8.66l-2.83-2.83 1.42-1.41 2.82 2.82-1.41 1.42Z"/></svg>Edit page</a></div><div class="pagination-links print:hidden astro-jgq3vlii" dir="ltr"><a href="/liara/0.0.3/guides/contributing/" rel="prev" class="astro-jgq3vlii"><svg aria-hidden="true" class="astro-jgq3vlii astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg><span class="astro-jgq3vlii">Previous<br class="astro-jgq3vlii"><span class="link-title astro-jgq3vlii">CONTRIBUTING</span></span></a><a href="/liara/0.0.3/guides/roadmap/" rel="next" class="astro-jgq3vlii"><svg aria-hidden="true" class="astro-jgq3vlii astro-n5k4ipy7" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg><span class="astro-jgq3vlii">Next<br class="astro-jgq3vlii"><span class="link-title astro-jgq3vlii">ROADMAP</span></span></a></div></footer></div></div></main></div></div></div></div></body></html>
