@@ -188,7 +188,7 @@
             "0.1.1"
           ],
           "note": null,
-          "deployed": false,
+          "deployed": true,
           "compat": {
             "0.2.3": [
               "DEGRADED"
