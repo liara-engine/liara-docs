@@ -35,7 +35,7 @@
         "0.1.0": {
           "abi": null,
           "note": null,
-          "deployed": false
+          "deployed": true
         },
         "0.2.0": {
           "abi": null,
