@@ -41,10 +41,16 @@
           "abi": null,
           "note": "Dockerfile moved",
           "deployed": true
+        },
+        "0.2.1": {
+          "abi": null,
+          "note": "Reworked all documentation to use new astro-based docs site",
+          "deployed": false
         }
       },
       "order": [
         "dev",
+        "0.2.1",
         "0.2.0",
         "0.1.0",
         "0.0.3",
