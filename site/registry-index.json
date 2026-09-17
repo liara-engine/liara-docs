@@ -290,7 +290,7 @@
         "1.0.0": {
           "abi": null,
           "note": "Total rework with Astro for html generation",
-          "deployed": false
+          "deployed": true
         }
       },
       "order": [
