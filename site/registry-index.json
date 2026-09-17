@@ -251,7 +251,7 @@
       "deployed": true,
       "description": "The central hub for all documentation related to the Liara Engine, providing a unified interface and shared resources for all modules.",
       "kind": "infrastructure",
-      "latest": "0.2.0",
+      "latest": "1.0.0",
       "versions": {
         "dev": {
           "abi": null,
@@ -286,10 +286,16 @@
           "abi": null,
           "note": "Dockerfile moved",
           "deployed": true
+        },
+        "1.0.0": {
+          "abi": null,
+          "note": "Total rework with Astro for html generation",
+          "deployed": false
         }
       },
       "order": [
         "dev",
+        "1.0.0",
         "0.2.0",
         "0.1.1",
         "0.1.0",
