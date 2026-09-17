@@ -170,7 +170,7 @@
             })
             .catch(() => { /* keep the build-time banner */ });
     })();
-})();</script><div class="content-panel astro-oil7k7jf"><div class="sl-container astro-oil7k7jf"><nav class="liara-crumbs astro-7ki4trph" aria-label="Breadcrumb" data-pagefind-ignore><ol class="liara-crumbs__list astro-7ki4trph"><li class="liara-crumbs__item astro-7ki4trph"><a class="liara-crumbs__link astro-7ki4trph" href="/"><svg class="liara-crumbs__icon astro-7ki4trph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5" class="astro-7ki4trph"></path><path d="M5 9.5V21h14V9.5" class="astro-7ki4trph"></path></svg><span class="astro-7ki4trph">Documentation hub</span></a></li><li class="liara-crumbs__item astro-7ki4trph"><a class="liara-crumbs__link astro-7ki4trph" href="/liara/pr-34/"><span class="astro-7ki4trph">Liara Engine Meta Repo</span></a><span class="liara-crumbs__badge astro-7ki4trph">pr-34</span></li><li class="liara-crumbs__item astro-7ki4trph"><a class="liara-crumbs__link astro-7ki4trph" href="/liara/pr-34/guides/"><span class="astro-7ki4trph">Guide</span></a></li></ol></nav><h1 id="_top" class="astro-7ki4trph">Tooling</h1></div></div><div class="content-panel astro-oil7k7jf"><div class="sl-container astro-oil7k7jf"><div class="sl-markdown-content"><p>These pages describe the mechanics: how Liara is built, tested, validated, packaged and published. For the reasoning behind the choices, the records in <a href="../adr/">Architecture decision records</a> carry it. For what a working day looks like, <a href="../contributing/"><code dir="auto">contributing.md</code></a> does.</p>
+})();</script><div class="content-panel astro-oil7k7jf"><div class="sl-container astro-oil7k7jf"><nav class="liara-crumbs astro-7ki4trph" aria-label="Breadcrumb" data-pagefind-ignore><ol class="liara-crumbs__list astro-7ki4trph"><li class="liara-crumbs__item astro-7ki4trph"><a class="liara-crumbs__link astro-7ki4trph" href="/"><svg class="liara-crumbs__icon astro-7ki4trph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5" class="astro-7ki4trph"></path><path d="M5 9.5V21h14V9.5" class="astro-7ki4trph"></path></svg><span class="astro-7ki4trph">Documentation hub</span></a></li><li class="liara-crumbs__item astro-7ki4trph"><a class="liara-crumbs__link astro-7ki4trph" href="/liara/pr-34/"><span class="astro-7ki4trph">Liara Engine Meta Repo</span></a><span class="liara-crumbs__badge astro-7ki4trph">pr-34</span></li><li class="liara-crumbs__item astro-7ki4trph"><a class="liara-crumbs__link astro-7ki4trph" href="/liara/pr-34/guides/"><span class="astro-7ki4trph">Guide</span></a></li></ol></nav><h1 id="_top" class="astro-7ki4trph">Tooling</h1></div></div><div class="content-panel astro-oil7k7jf"><div class="sl-container astro-oil7k7jf"><div class="sl-markdown-content"><p>These pages describe the mechanics: how Liara is built, tested, validated, packaged and published. For the reasoning behind the choices, the records in <a href="../adr/">Architecture decision records</a> carry it. For what a working day looks like, <a href="../contributing/">Contributing</a> does.</p>
 <div class="sl-heading-wrapper level-h2"><h2 id="the-inventory">The inventory</h2><a class="sl-anchor-link" href="#the-inventory"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The inventory”</span></a></div>
 <p>Every tool the project uses, with the page that covers it.</p>
 <table>
@@ -265,22 +265,22 @@
 <tr>
 <td>Documentation site</td>
 <td>Astro with Starlight, through the shared preset</td>
-<td><code dir="auto">docs-shared</code><!-- TODO link → the documentation-pipeline page of docs-shared, once the cross-repository link form is settled --></td>
+<td><a href="https://liara-engine.liara-engine-documentation.workers.dev/docs-shared/latest/guides/documentation-pipeline/">The documentation pipeline</a></td>
 </tr>
 <tr>
 <td>API reference</td>
 <td>Doxygen 1.16+, XML output only</td>
-<td><code dir="auto">docs-shared</code><!-- TODO link → the documentation-pipeline page of docs-shared --></td>
+<td><a href="https://liara-engine.liara-engine-documentation.workers.dev/docs-shared/latest/guides/documentation-pipeline/">The documentation pipeline</a></td>
 </tr>
 <tr>
 <td>Documentation search</td>
 <td>Pagefind, one index for the whole site</td>
-<td><code dir="auto">docs-shared</code><!-- TODO link → the search page of docs-shared --></td>
+<td><a href="https://liara-engine.liara-engine-documentation.workers.dev/docs-shared/latest/guides/search/">Search</a></td>
 </tr>
 <tr>
 <td>Documentation hosting</td>
 <td>Cloudflare Workers with Static Assets</td>
-<td><code dir="auto">docs-shared</code><!-- TODO link → the ci-and-deployment page of docs-shared --></td>
+<td><a href="https://liara-engine.liara-engine-documentation.workers.dev/docs-shared/latest/guides/ci-and-deployment/">CI and deployment</a></td>
 </tr>
 <tr>
 <td>Scripts</td>
@@ -301,7 +301,7 @@
 </table>
 <p>The documentation rows point out of this repository because the pipeline is owned by <code dir="auto">docs-shared</code> and documented there. Doxygen’s own HTML generator is switched off: <code dir="auto">build-docs</code> runs it with <code dir="auto">GENERATE_XML=YES</code> and <code dir="auto">GENERATE_HTML=NO</code>, and a loader in the Astro preset turns the XML into Starlight pages.</p>
 <div class="sl-heading-wrapper level-h2"><h2 id="adding-a-tool">Adding a tool</h2><a class="sl-anchor-link" href="#adding-a-tool"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Adding a tool”</span></a></div>
-<p>The tools listed above are the only ones in use, and introducing another one requires a record in <a href="../adr/">Architecture decision records</a>. The single exception is the bootstrapping phase, whose policy is in <a href="../roadmap/"><code dir="auto">roadmap.md</code></a> §4.</p>
+<p>The tools listed above are the only ones in use, and introducing another one requires a record in <a href="../adr/">Architecture decision records</a>. The single exception is the bootstrapping phase, whose policy is in <a href="../roadmap/phase-0/">Phase 0</a>.</p>
 <p>Zig and Rust are optional on a developer machine, since the cross-language tests are registered only when <code dir="auto">find_program</code> locates a toolchain and are silently absent otherwise. They are not optional in CI, where one matrix leg fails configuration without them.</p>
 <div class="sl-heading-wrapper level-h2"><h2 id="what-is-deliberately-absent">What is deliberately absent</h2><a class="sl-anchor-link" href="#what-is-deliberately-absent"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “What is deliberately absent”</span></a></div>
 <p>Each of these is a decision rather than an oversight.</p>
