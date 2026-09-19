@@ -523,7 +523,7 @@
             "0.2.1"
           ],
           "note": null,
-          "deployed": false,
+          "deployed": true,
           "compat": {
             "0.2.4": [
               "COMPATIBLE"
