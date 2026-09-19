@@ -384,7 +384,7 @@
       "deployed": true,
       "description": "A Vulkan renderer for the Liara Engine.",
       "kind": "module",
-      "latest": "0.1.0",
+      "latest": "0.1.1",
       "versions": {
         "dev": {
           "abi": [
