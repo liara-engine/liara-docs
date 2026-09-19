@@ -383,24 +383,40 @@
       "repo": "liara-renderer",
       "deployed": true,
       "description": "A Vulkan renderer for the Liara Engine.",
-      "kind": null,
+      "kind": "module",
       "latest": "0.1.0",
       "versions": {
         "dev": {
           "abi": [
-            "dev"
+            "0.2.1"
           ],
           "note": null,
           "deployed": true,
           "compat": {
-            "0.2.4": [],
-            "0.2.3": [],
-            "0.2.2": [],
-            "0.2.1": [],
-            "0.2.0": [],
-            "0.1.1": [],
-            "0.1.0": [],
-            "0.0.1": []
+            "0.2.4": [
+              "COMPATIBLE"
+            ],
+            "0.2.3": [
+              "COMPATIBLE"
+            ],
+            "0.2.2": [
+              "COMPATIBLE"
+            ],
+            "0.2.1": [
+              "EXACT"
+            ],
+            "0.2.0": [
+              "COMPATIBLE"
+            ],
+            "0.1.1": [
+              "COMPATIBLE"
+            ],
+            "0.1.0": [
+              "COMPATIBLE"
+            ],
+            "0.0.1": [
+              "INCOMPATIBLE"
+            ]
           }
         },
         "0.0.1": {
@@ -438,42 +454,66 @@
         },
         "0.0.2": {
           "abi": [
-            "0.1.0",
-            "0.1.1"
+            "0.1.0"
           ],
           "note": null,
           "deployed": false,
           "compat": {
             "0.2.4": [
-              "DEGRADED",
               "DEGRADED"
             ],
             "0.2.3": [
-              "DEGRADED",
               "DEGRADED"
             ],
             "0.2.2": [
-              "DEGRADED",
               "DEGRADED"
             ],
             "0.2.1": [
-              "DEGRADED",
               "DEGRADED"
             ],
             "0.2.0": [
-              "DEGRADED",
               "DEGRADED"
             ],
             "0.1.1": [
-              "COMPATIBLE",
-              "EXACT"
+              "COMPATIBLE"
             ],
             "0.1.0": [
-              "EXACT",
+              "EXACT"
+            ],
+            "0.0.1": [
+              "INCOMPATIBLE"
+            ]
+          }
+        },
+        "0.1.0": {
+          "abi": [
+            "0.2.1"
+          ],
+          "note": null,
+          "deployed": false,
+          "compat": {
+            "0.2.4": [
+              "COMPATIBLE"
+            ],
+            "0.2.3": [
+              "COMPATIBLE"
+            ],
+            "0.2.2": [
+              "COMPATIBLE"
+            ],
+            "0.2.1": [
+              "EXACT"
+            ],
+            "0.2.0": [
+              "COMPATIBLE"
+            ],
+            "0.1.1": [
+              "COMPATIBLE"
+            ],
+            "0.1.0": [
               "COMPATIBLE"
             ],
             "0.0.1": [
-              "INCOMPATIBLE",
               "INCOMPATIBLE"
             ]
           }
@@ -481,6 +521,7 @@
       },
       "order": [
         "dev",
+        "0.1.0",
         "0.0.2",
         "0.0.1"
       ]
