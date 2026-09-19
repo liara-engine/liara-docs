@@ -128,11 +128,58 @@
     },
     {
       "key": "core",
-      "name": "Core",
+      "name": "Liara Engine Meta Repo",
       "repo": "liara-core",
-      "deployed": false,
-      "latest": null,
-      "versions": {}
+      "deployed": true,
+      "description": "Meta documentation about the Liara Engine project, including tooling, contribution guidelines, and other non-module-specific information.",
+      "kind": "infrastructure",
+      "latest": "0.2.1",
+      "versions": {
+        "dev": {
+          "abi": null,
+          "note": null,
+          "deployed": true
+        },
+        "0.0.1": {
+          "abi": null,
+          "note": null,
+          "deployed": false
+        },
+        "0.0.2": {
+          "abi": null,
+          "note": null,
+          "deployed": false
+        },
+        "0.0.3": {
+          "abi": null,
+          "note": null,
+          "deployed": false
+        },
+        "0.1.0": {
+          "abi": null,
+          "note": null,
+          "deployed": false
+        },
+        "0.2.0": {
+          "abi": null,
+          "note": "Dockerfile moved",
+          "deployed": false
+        },
+        "0.2.1": {
+          "abi": null,
+          "note": "Reworked all documentation to use new astro-based docs site",
+          "deployed": false
+        }
+      },
+      "order": [
+        "dev",
+        "0.2.1",
+        "0.2.0",
+        "0.1.0",
+        "0.0.3",
+        "0.0.2",
+        "0.0.1"
+      ]
     },
     {
       "key": "renderer",
