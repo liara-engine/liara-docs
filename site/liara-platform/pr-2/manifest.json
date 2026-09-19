@@ -1,0 +1,18 @@
+{
+  "$schema": "https://liara-engine.github.io/liara/schemas/module-manifest-v2.schema.json",
+  "manifest_version": 2,
+  "kind": "module",
+  "metadata": {
+    "name": "Liara Engine Platform",
+    "description": "Window, input devices, OS signals and timing for the Liara Engine.",
+    "repo": "liara-platform",
+    "latest": "0.0.0"
+  },
+  "versions": {
+    "dev": "0.2.1",
+    "0.0.0": {
+      "abi": "0.2.1",
+      "note": "Skeleton: the module reports itself and nothing else"
+    }
+  }
+}
