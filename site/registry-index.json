@@ -128,56 +128,252 @@
     },
     {
       "key": "core",
-      "name": "Liara Engine Meta Repo",
+      "name": "Liara Engine Core",
       "repo": "liara-core",
       "deployed": true,
-      "description": "Meta documentation about the Liara Engine project, including tooling, contribution guidelines, and other non-module-specific information.",
-      "kind": "infrastructure",
-      "latest": "0.2.1",
+      "description": "The core library for the Liara Engine.",
+      "kind": "module",
+      "latest": "0.2.3",
       "versions": {
         "dev": {
-          "abi": null,
+          "abi": [
+            "0.2.1"
+          ],
           "note": null,
-          "deployed": true
+          "deployed": true,
+          "compat": {
+            "0.2.4": [
+              "COMPATIBLE"
+            ],
+            "0.2.3": [
+              "COMPATIBLE"
+            ],
+            "0.2.2": [
+              "COMPATIBLE"
+            ],
+            "0.2.1": [
+              "EXACT"
+            ],
+            "0.2.0": [
+              "COMPATIBLE"
+            ],
+            "0.1.1": [
+              "COMPATIBLE"
+            ],
+            "0.1.0": [
+              "COMPATIBLE"
+            ],
+            "0.0.1": [
+              "INCOMPATIBLE"
+            ]
+          }
         },
         "0.0.1": {
-          "abi": null,
+          "abi": [
+            "0.1.0"
+          ],
           "note": null,
-          "deployed": false
-        },
-        "0.0.2": {
-          "abi": null,
-          "note": null,
-          "deployed": false
-        },
-        "0.0.3": {
-          "abi": null,
-          "note": null,
-          "deployed": false
+          "deployed": false,
+          "compat": {
+            "0.2.4": [
+              "DEGRADED"
+            ],
+            "0.2.3": [
+              "DEGRADED"
+            ],
+            "0.2.2": [
+              "DEGRADED"
+            ],
+            "0.2.1": [
+              "DEGRADED"
+            ],
+            "0.2.0": [
+              "DEGRADED"
+            ],
+            "0.1.1": [
+              "COMPATIBLE"
+            ],
+            "0.1.0": [
+              "EXACT"
+            ],
+            "0.0.1": [
+              "INCOMPATIBLE"
+            ]
+          }
         },
         "0.1.0": {
-          "abi": null,
+          "abi": [
+            "0.1.1"
+          ],
           "note": null,
-          "deployed": false
+          "deployed": false,
+          "compat": {
+            "0.2.4": [
+              "DEGRADED"
+            ],
+            "0.2.3": [
+              "DEGRADED"
+            ],
+            "0.2.2": [
+              "DEGRADED"
+            ],
+            "0.2.1": [
+              "DEGRADED"
+            ],
+            "0.2.0": [
+              "DEGRADED"
+            ],
+            "0.1.1": [
+              "EXACT"
+            ],
+            "0.1.0": [
+              "COMPATIBLE"
+            ],
+            "0.0.1": [
+              "INCOMPATIBLE"
+            ]
+          }
         },
         "0.2.0": {
-          "abi": null,
-          "note": "Dockerfile moved",
-          "deployed": false
+          "abi": [
+            "0.2.0"
+          ],
+          "note": null,
+          "deployed": false,
+          "compat": {
+            "0.2.4": [
+              "COMPATIBLE"
+            ],
+            "0.2.3": [
+              "COMPATIBLE"
+            ],
+            "0.2.2": [
+              "COMPATIBLE"
+            ],
+            "0.2.1": [
+              "COMPATIBLE"
+            ],
+            "0.2.0": [
+              "EXACT"
+            ],
+            "0.1.1": [
+              "COMPATIBLE"
+            ],
+            "0.1.0": [
+              "COMPATIBLE"
+            ],
+            "0.0.1": [
+              "INCOMPATIBLE"
+            ]
+          }
         },
         "0.2.1": {
-          "abi": null,
-          "note": "Reworked all documentation to use new astro-based docs site",
-          "deployed": false
+          "abi": [
+            "0.2.0"
+          ],
+          "note": null,
+          "deployed": false,
+          "compat": {
+            "0.2.4": [
+              "COMPATIBLE"
+            ],
+            "0.2.3": [
+              "COMPATIBLE"
+            ],
+            "0.2.2": [
+              "COMPATIBLE"
+            ],
+            "0.2.1": [
+              "COMPATIBLE"
+            ],
+            "0.2.0": [
+              "EXACT"
+            ],
+            "0.1.1": [
+              "COMPATIBLE"
+            ],
+            "0.1.0": [
+              "COMPATIBLE"
+            ],
+            "0.0.1": [
+              "INCOMPATIBLE"
+            ]
+          }
+        },
+        "0.2.2": {
+          "abi": [
+            "0.2.0"
+          ],
+          "note": null,
+          "deployed": false,
+          "compat": {
+            "0.2.4": [
+              "COMPATIBLE"
+            ],
+            "0.2.3": [
+              "COMPATIBLE"
+            ],
+            "0.2.2": [
+              "COMPATIBLE"
+            ],
+            "0.2.1": [
+              "COMPATIBLE"
+            ],
+            "0.2.0": [
+              "EXACT"
+            ],
+            "0.1.1": [
+              "COMPATIBLE"
+            ],
+            "0.1.0": [
+              "COMPATIBLE"
+            ],
+            "0.0.1": [
+              "INCOMPATIBLE"
+            ]
+          }
+        },
+        "0.2.3": {
+          "abi": [
+            "0.2.1"
+          ],
+          "note": null,
+          "deployed": false,
+          "compat": {
+            "0.2.4": [
+              "COMPATIBLE"
+            ],
+            "0.2.3": [
+              "COMPATIBLE"
+            ],
+            "0.2.2": [
+              "COMPATIBLE"
+            ],
+            "0.2.1": [
+              "EXACT"
+            ],
+            "0.2.0": [
+              "COMPATIBLE"
+            ],
+            "0.1.1": [
+              "COMPATIBLE"
+            ],
+            "0.1.0": [
+              "COMPATIBLE"
+            ],
+            "0.0.1": [
+              "INCOMPATIBLE"
+            ]
+          }
         }
       },
       "order": [
         "dev",
+        "0.2.3",
+        "0.2.2",
         "0.2.1",
         "0.2.0",
         "0.1.0",
-        "0.0.3",
-        "0.0.2",
         "0.0.1"
       ]
     },
