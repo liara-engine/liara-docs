@@ -50,7 +50,7 @@
         "0.2.2": {
           "abi": null,
           "note": null,
-          "deployed": false
+          "deployed": true
         }
       },
       "order": [
