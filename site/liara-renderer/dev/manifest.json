@@ -6,7 +6,7 @@
     "name": "Liara Engine Vulkan Renderer",
     "description": "A Vulkan renderer for the Liara Engine.",
     "repo": "liara-renderer",
-    "latest": "0.1.1"
+    "latest": "0.1.2"
   },
   "versions": {
     "dev": "0.2.1",
