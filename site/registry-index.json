@@ -133,7 +133,7 @@
       "deployed": true,
       "description": "The core library for the Liara Engine.",
       "kind": "module",
-      "latest": "0.2.3",
+      "latest": "0.2.4",
       "versions": {
         "dev": {
           "abi": [
@@ -365,10 +365,44 @@
               "INCOMPATIBLE"
             ]
           }
+        },
+        "0.2.4": {
+          "abi": [
+            "0.2.1"
+          ],
+          "note": null,
+          "deployed": true,
+          "compat": {
+            "0.2.4": [
+              "COMPATIBLE"
+            ],
+            "0.2.3": [
+              "COMPATIBLE"
+            ],
+            "0.2.2": [
+              "COMPATIBLE"
+            ],
+            "0.2.1": [
+              "EXACT"
+            ],
+            "0.2.0": [
+              "COMPATIBLE"
+            ],
+            "0.1.1": [
+              "COMPATIBLE"
+            ],
+            "0.1.0": [
+              "COMPATIBLE"
+            ],
+            "0.0.1": [
+              "INCOMPATIBLE"
+            ]
+          }
         }
       },
       "order": [
         "dev",
+        "0.2.4",
         "0.2.3",
         "0.2.2",
         "0.2.1",
