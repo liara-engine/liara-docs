@@ -140,264 +140,56 @@
             "0.2.1"
           ],
           "note": null,
-          "deployed": true,
-          "compat": {
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "EXACT"
-            ],
-            "0.2.0": [
-              "COMPATIBLE"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": true
         },
         "0.0.1": {
           "abi": [
             "0.1.0"
           ],
           "note": null,
-          "deployed": false,
-          "compat": {
-            "0.2.4": [
-              "DEGRADED"
-            ],
-            "0.2.3": [
-              "DEGRADED"
-            ],
-            "0.2.2": [
-              "DEGRADED"
-            ],
-            "0.2.1": [
-              "DEGRADED"
-            ],
-            "0.2.0": [
-              "DEGRADED"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "EXACT"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": false
         },
         "0.1.0": {
           "abi": [
             "0.1.1"
           ],
           "note": null,
-          "deployed": false,
-          "compat": {
-            "0.2.4": [
-              "DEGRADED"
-            ],
-            "0.2.3": [
-              "DEGRADED"
-            ],
-            "0.2.2": [
-              "DEGRADED"
-            ],
-            "0.2.1": [
-              "DEGRADED"
-            ],
-            "0.2.0": [
-              "DEGRADED"
-            ],
-            "0.1.1": [
-              "EXACT"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": false
         },
         "0.2.0": {
           "abi": [
             "0.2.0"
           ],
           "note": null,
-          "deployed": false,
-          "compat": {
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "COMPATIBLE"
-            ],
-            "0.2.0": [
-              "EXACT"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": false
         },
         "0.2.1": {
           "abi": [
             "0.2.0"
           ],
           "note": null,
-          "deployed": false,
-          "compat": {
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "COMPATIBLE"
-            ],
-            "0.2.0": [
-              "EXACT"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": false
         },
         "0.2.2": {
           "abi": [
             "0.2.0"
           ],
           "note": null,
-          "deployed": false,
-          "compat": {
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "COMPATIBLE"
-            ],
-            "0.2.0": [
-              "EXACT"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": false
         },
         "0.2.3": {
           "abi": [
             "0.2.1"
           ],
           "note": null,
-          "deployed": false,
-          "compat": {
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "EXACT"
-            ],
-            "0.2.0": [
-              "COMPATIBLE"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": false
         },
         "0.2.4": {
           "abi": [
             "0.2.1"
           ],
           "note": null,
-          "deployed": true,
-          "compat": {
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "EXACT"
-            ],
-            "0.2.0": [
-              "COMPATIBLE"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": true
         }
       },
       "order": [
@@ -425,198 +217,42 @@
             "0.2.1"
           ],
           "note": null,
-          "deployed": true,
-          "compat": {
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "EXACT"
-            ],
-            "0.2.0": [
-              "COMPATIBLE"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": true
         },
         "0.0.1": {
           "abi": [
             "0.1.0"
           ],
           "note": null,
-          "deployed": false,
-          "compat": {
-            "0.2.4": [
-              "DEGRADED"
-            ],
-            "0.2.3": [
-              "DEGRADED"
-            ],
-            "0.2.2": [
-              "DEGRADED"
-            ],
-            "0.2.1": [
-              "DEGRADED"
-            ],
-            "0.2.0": [
-              "DEGRADED"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "EXACT"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": false
         },
         "0.0.2": {
           "abi": [
             "0.1.0"
           ],
           "note": null,
-          "deployed": false,
-          "compat": {
-            "0.2.4": [
-              "DEGRADED"
-            ],
-            "0.2.3": [
-              "DEGRADED"
-            ],
-            "0.2.2": [
-              "DEGRADED"
-            ],
-            "0.2.1": [
-              "DEGRADED"
-            ],
-            "0.2.0": [
-              "DEGRADED"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "EXACT"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": false
         },
         "0.1.0": {
           "abi": [
             "0.2.1"
           ],
           "note": null,
-          "deployed": false,
-          "compat": {
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "EXACT"
-            ],
-            "0.2.0": [
-              "COMPATIBLE"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": false
         },
         "0.1.1": {
           "abi": [
             "0.2.1"
           ],
           "note": null,
-          "deployed": true,
-          "compat": {
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "EXACT"
-            ],
-            "0.2.0": [
-              "COMPATIBLE"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": true
         },
         "0.1.2": {
           "abi": [
             "0.2.1"
           ],
           "note": null,
-          "deployed": true,
-          "compat": {
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "EXACT"
-            ],
-            "0.2.0": [
-              "COMPATIBLE"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": true
         }
       },
       "order": [
