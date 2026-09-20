@@ -6,15 +6,16 @@
     "name": "Liara Engine Core",
     "description": "The core library for the Liara Engine.",
     "repo": "liara-core",
-    "latest": "0.2.3"
+    "latest": "0.2.4"
   },
   "versions": {
-    "dev":   "0.2.1",
+    "dev": "0.2.1",
     "0.0.1": "0.1.0",
     "0.1.0": "0.1.1",
     "0.2.0": "0.2.0",
     "0.2.1": "0.2.0",
     "0.2.2": "0.2.0",
-    "0.2.3": "0.2.1"
+    "0.2.3": "0.2.1",
+    "0.2.4": "0.2.1"
   }
 }
