@@ -6,7 +6,7 @@
     "name": "Liara Engine C ABI",
     "description": "The C ABI contracts shared by every module.",
     "repo": "liara-interfaces",
-    "latest": "0.2.4"
+    "latest": "0.2.5"
   },
   "versions": {
     "dev": {},
@@ -19,6 +19,7 @@
       "note": "Manifest moved to v2"
     },
     "0.2.3": {},
-    "0.2.4": {}
+    "0.2.4": {},
+    "0.2.5": {}
   }
 }
