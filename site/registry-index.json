@@ -550,10 +550,44 @@
               "INCOMPATIBLE"
             ]
           }
+        },
+        "0.1.2": {
+          "abi": [
+            "0.2.1"
+          ],
+          "note": null,
+          "deployed": false,
+          "compat": {
+            "0.2.4": [
+              "COMPATIBLE"
+            ],
+            "0.2.3": [
+              "COMPATIBLE"
+            ],
+            "0.2.2": [
+              "COMPATIBLE"
+            ],
+            "0.2.1": [
+              "EXACT"
+            ],
+            "0.2.0": [
+              "COMPATIBLE"
+            ],
+            "0.1.1": [
+              "COMPATIBLE"
+            ],
+            "0.1.0": [
+              "COMPATIBLE"
+            ],
+            "0.0.1": [
+              "INCOMPATIBLE"
+            ]
+          }
         }
       },
       "order": [
         "dev",
+        "0.1.2",
         "0.1.1",
         "0.1.0",
         "0.0.2",
