@@ -19,7 +19,8 @@
     },
     "0.2.1": {
       "note": "Reworked all documentation to use new astro-based docs site"
-    }
+    },
+    "0.2.2": {}
   },
   "artifacts": {
     "launcher": {

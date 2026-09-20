@@ -46,10 +46,16 @@
           "abi": null,
           "note": "Reworked all documentation to use new astro-based docs site",
           "deployed": true
+        },
+        "0.2.2": {
+          "abi": null,
+          "note": null,
+          "deployed": false
         }
       },
       "order": [
         "dev",
+        "0.2.2",
         "0.2.1",
         "0.2.0",
         "0.1.0",
