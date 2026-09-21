@@ -5,8 +5,6 @@
       "key": "meta-repo",
       "name": "Liara Engine Meta Repo",
       "repo": "liara",
-      "only_mdbook": true,
-      "meta": true,
       "deployed": true,
       "description": "Meta documentation about the Liara Engine project, including tooling, contribution guidelines, and other non-module-specific information.",
       "kind": "infrastructure",
@@ -68,7 +66,6 @@
       "key": "interfaces",
       "name": "Liara Engine C ABI",
       "repo": "liara-interfaces",
-      "is_abi": true,
       "deployed": true,
       "description": "The C ABI contracts shared by every module.",
       "kind": "contract",
@@ -152,288 +149,56 @@
             "0.2.1"
           ],
           "note": null,
-          "deployed": true,
-          "compat": {
-            "0.2.5": [
-              "COMPATIBLE"
-            ],
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "EXACT"
-            ],
-            "0.2.0": [
-              "COMPATIBLE"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": true
         },
         "0.0.1": {
           "abi": [
             "0.1.0"
           ],
           "note": null,
-          "deployed": false,
-          "compat": {
-            "0.2.5": [
-              "DEGRADED"
-            ],
-            "0.2.4": [
-              "DEGRADED"
-            ],
-            "0.2.3": [
-              "DEGRADED"
-            ],
-            "0.2.2": [
-              "DEGRADED"
-            ],
-            "0.2.1": [
-              "DEGRADED"
-            ],
-            "0.2.0": [
-              "DEGRADED"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "EXACT"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": false
         },
         "0.1.0": {
           "abi": [
             "0.1.1"
           ],
           "note": null,
-          "deployed": false,
-          "compat": {
-            "0.2.5": [
-              "DEGRADED"
-            ],
-            "0.2.4": [
-              "DEGRADED"
-            ],
-            "0.2.3": [
-              "DEGRADED"
-            ],
-            "0.2.2": [
-              "DEGRADED"
-            ],
-            "0.2.1": [
-              "DEGRADED"
-            ],
-            "0.2.0": [
-              "DEGRADED"
-            ],
-            "0.1.1": [
-              "EXACT"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": false
         },
         "0.2.0": {
           "abi": [
             "0.2.0"
           ],
           "note": null,
-          "deployed": false,
-          "compat": {
-            "0.2.5": [
-              "COMPATIBLE"
-            ],
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "COMPATIBLE"
-            ],
-            "0.2.0": [
-              "EXACT"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": false
         },
         "0.2.1": {
           "abi": [
             "0.2.0"
           ],
           "note": null,
-          "deployed": false,
-          "compat": {
-            "0.2.5": [
-              "COMPATIBLE"
-            ],
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "COMPATIBLE"
-            ],
-            "0.2.0": [
-              "EXACT"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": false
         },
         "0.2.2": {
           "abi": [
             "0.2.0"
           ],
           "note": null,
-          "deployed": false,
-          "compat": {
-            "0.2.5": [
-              "COMPATIBLE"
-            ],
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "COMPATIBLE"
-            ],
-            "0.2.0": [
-              "EXACT"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": false
         },
         "0.2.3": {
           "abi": [
             "0.2.1"
           ],
           "note": null,
-          "deployed": false,
-          "compat": {
-            "0.2.5": [
-              "COMPATIBLE"
-            ],
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "EXACT"
-            ],
-            "0.2.0": [
-              "COMPATIBLE"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": false
         },
         "0.2.4": {
           "abi": [
             "0.2.1"
           ],
           "note": null,
-          "deployed": true,
-          "compat": {
-            "0.2.5": [
-              "COMPATIBLE"
-            ],
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "EXACT"
-            ],
-            "0.2.0": [
-              "COMPATIBLE"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": true
         }
       },
       "order": [
@@ -461,216 +226,42 @@
             "0.2.1"
           ],
           "note": null,
-          "deployed": true,
-          "compat": {
-            "0.2.5": [
-              "COMPATIBLE"
-            ],
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "EXACT"
-            ],
-            "0.2.0": [
-              "COMPATIBLE"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": true
         },
         "0.0.1": {
           "abi": [
             "0.1.0"
           ],
           "note": null,
-          "deployed": false,
-          "compat": {
-            "0.2.5": [
-              "DEGRADED"
-            ],
-            "0.2.4": [
-              "DEGRADED"
-            ],
-            "0.2.3": [
-              "DEGRADED"
-            ],
-            "0.2.2": [
-              "DEGRADED"
-            ],
-            "0.2.1": [
-              "DEGRADED"
-            ],
-            "0.2.0": [
-              "DEGRADED"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "EXACT"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": false
         },
         "0.0.2": {
           "abi": [
             "0.1.0"
           ],
           "note": null,
-          "deployed": false,
-          "compat": {
-            "0.2.5": [
-              "DEGRADED"
-            ],
-            "0.2.4": [
-              "DEGRADED"
-            ],
-            "0.2.3": [
-              "DEGRADED"
-            ],
-            "0.2.2": [
-              "DEGRADED"
-            ],
-            "0.2.1": [
-              "DEGRADED"
-            ],
-            "0.2.0": [
-              "DEGRADED"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "EXACT"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": false
         },
         "0.1.0": {
           "abi": [
             "0.2.1"
           ],
           "note": null,
-          "deployed": false,
-          "compat": {
-            "0.2.5": [
-              "COMPATIBLE"
-            ],
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "EXACT"
-            ],
-            "0.2.0": [
-              "COMPATIBLE"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": false
         },
         "0.1.1": {
           "abi": [
             "0.2.1"
           ],
           "note": null,
-          "deployed": true,
-          "compat": {
-            "0.2.5": [
-              "COMPATIBLE"
-            ],
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "EXACT"
-            ],
-            "0.2.0": [
-              "COMPATIBLE"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": true
         },
         "0.1.2": {
           "abi": [
             "0.2.1"
           ],
           "note": null,
-          "deployed": true,
-          "compat": {
-            "0.2.5": [
-              "COMPATIBLE"
-            ],
-            "0.2.4": [
-              "COMPATIBLE"
-            ],
-            "0.2.3": [
-              "COMPATIBLE"
-            ],
-            "0.2.2": [
-              "COMPATIBLE"
-            ],
-            "0.2.1": [
-              "EXACT"
-            ],
-            "0.2.0": [
-              "COMPATIBLE"
-            ],
-            "0.1.1": [
-              "COMPATIBLE"
-            ],
-            "0.1.0": [
-              "COMPATIBLE"
-            ],
-            "0.0.1": [
-              "INCOMPATIBLE"
-            ]
-          }
+          "deployed": true
         }
       },
       "order": [
@@ -686,8 +277,6 @@
       "key": "docs-shared",
       "name": "Liara Engine Documentation Hub",
       "repo": "docs-shared",
-      "only_mdbook": true,
-      "meta": true,
       "deployed": true,
       "description": "The central hub for all documentation related to the Liara Engine, providing a unified interface and shared resources for all modules.",
       "kind": "infrastructure",
@@ -741,6 +330,35 @@
         "0.1.0",
         "0.0.6",
         "0.0.5"
+      ]
+    },
+    {
+      "key": "platform",
+      "name": "Liara Engine Platform",
+      "repo": "liara-platform",
+      "deployed": true,
+      "description": "Window, input devices, OS signals and timing for the Liara Engine.",
+      "kind": "module",
+      "latest": "0.0.0",
+      "versions": {
+        "dev": {
+          "abi": [
+            "0.2.1"
+          ],
+          "note": null,
+          "deployed": true
+        },
+        "0.0.0": {
+          "abi": [
+            "0.2.1"
+          ],
+          "note": "Skeleton: the module reports itself and nothing else",
+          "deployed": false
+        }
+      },
+      "order": [
+        "dev",
+        "0.0.0"
       ]
     }
   ]
