@@ -6,7 +6,7 @@
     "name": "Liara Engine Meta Repo",
     "description": "Meta documentation about the Liara Engine project, including tooling, contribution guidelines, and other non-module-specific information.",
     "repo": "liara",
-    "latest": "0.3.0"
+    "latest": "1.0.0"
   },
   "versions": {
     "dev": {},
@@ -35,6 +35,17 @@
         "0.1.0": "0.2.0",
         "0.1.1": "0.2.1",
         "0.1.2": "0.2.1"
+      }
+    },
+    "framework": {
+      "name": "Liara Framework",
+      "description": "The convenience layer above the C ABI: module loading, version negotiation, and the host machinery a game or an editor would otherwise rewrite.",
+      "release_please_package": "framework",
+      "versions": {
+        "dev": {
+          "abi": "0.2.1"
+        },
+        "0.1.0": "0.2.1"
       }
     }
   }
