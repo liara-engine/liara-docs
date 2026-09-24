@@ -146,7 +146,7 @@
       "versions": {
         "dev": {
           "abi": [
-            "0.2.1"
+            "dev"
           ],
           "note": null,
           "deployed": true
