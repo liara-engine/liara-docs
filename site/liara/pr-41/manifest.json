@@ -29,7 +29,7 @@
       "release_please_package": "launcher",
       "versions": {
         "dev": {
-          "abi": "0.2.1"
+          "abi": "dev"
         },
         "0.0.1": "0.1.1",
         "0.1.0": "0.2.0",
