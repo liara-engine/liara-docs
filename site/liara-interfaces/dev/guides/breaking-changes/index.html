@@ -244,14 +244,19 @@
 <td>MINOR</td>
 </tr>
 <tr>
+<td>Adding a failure code to a function that already returns <code dir="auto">liara_result_t</code></td>
+<td>MINOR</td>
+</tr>
+<tr>
 <td>Documentation, comments, whitespace</td>
 <td>PATCH</td>
 </tr>
 </tbody>
 </table>
-<p>Two of these rows deserve a note.</p>
+<p>Three of these rows deserve a note.</p>
 <p><strong>Changing the meaning of a parameter</strong> is a major bump that no tool detects. The signature is unchanged, so the ABI snapshot shows no diff and the layout freeze sees nothing, which leaves the conventional commit and the <code dir="auto">BREAKING CHANGE</code> footer as the entire mechanism. Nothing catches you forgetting.</p>
 <p><strong><code dir="auto">void</code> to <code dir="auto">liara_result_t</code></strong> is the one exemption in the table, and it is worth knowing why it is safe before relying on it: a caller compiled against the old signature ignores a return value that now arrives in a register it was already ignoring.</p>
+<p><strong>Adding a failure code</strong> is minor because of a rule on the caller’s side, stated in <a href="./errors/">Error handling</a>: any code other than <code dir="auto">LIARA_RESULT_SUCCESS</code> is a failure, including one the caller does not know. A caller that switches over the documented codes and treats everything else as success breaks that rule, and the change breaks that caller.</p>
 <div class="sl-heading-wrapper level-h2"><h2 id="versioned-structs">Versioned structs</h2><a class="sl-anchor-link" href="#versioned-structs"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Versioned structs”</span></a></div>
 <p>For a struct likely to grow, an explicit versioning pattern turns what would be a major bump into a minor one.</p>
 <div class="expressive-code"><link rel="stylesheet" href="/_cas/_astro/ec.w36nc.css"><script type="module" src="/_cas/_astro/ec.0vx5m.js"></script><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">typedef</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">struct</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">liara_renderer_create_info_t</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">uint32_t</span><span style="--0:#D6DEEB;--1:#403F53"> struct_version;</span><span style="--0:#919F9F;--1:#5D6376">  // Always set to LIARA_RENDERER_CREATE_INFO_VERSION_x</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#919F9F;--1:#5D6376">// ... fields ...</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C5E478;--1:#3B61B0">liara_renderer_create_info_t</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code">
