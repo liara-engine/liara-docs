@@ -223,7 +223,7 @@
       "versions": {
         "dev": {
           "abi": [
-            "dev"
+            "0.2.1"
           ],
           "note": null,
           "deployed": true
